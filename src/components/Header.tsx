@@ -12,7 +12,8 @@ const nav = [
   ["How it works", "/pages/how-it-works"],
   ["Sleep quiz", "/pages/sleep-quiz"],
   ["Reviews", "/pages/customer-reviews"],
-  ["Journal", "/blog"],
+  ["About", "/pages/about-us"],
+  ["Contact", "/pages/contact-us"],
 ] as const;
 
 export function Header() {

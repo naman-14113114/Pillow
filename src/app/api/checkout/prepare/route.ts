@@ -7,10 +7,19 @@ import {
   isSupabaseConfigured,
 } from "@/lib/supabase-server";
 
-const lineSchema = z.object({
+const pillowSchema = z.object({
   colour: z.enum(["white", "grey", "blue", "navy"]),
   height: z.enum(["regular", "high"]),
-  quantity: z.union([z.literal(1), z.literal(2), z.literal(4)]),
+});
+
+const lineSchema = z.object({
+  pillows: z
+    .array(pillowSchema)
+    .min(1)
+    .max(4)
+    .refine((pillows) => [1, 2, 4].includes(pillows.length), {
+      message: "Choose a one, two or four pillow bundle.",
+    }),
   includeCovers: z.boolean(),
 });
 
@@ -55,18 +64,31 @@ export async function POST(request: Request) {
   }
 
   const { line } = parsed.data;
-  const pillowVariant =
-    process.env[variantEnvironmentKeys[line.colour][line.height]];
-  const coverVariant = process.env[coverEnvironmentKeys[line.colour]];
   const productId = process.env.PLUSBASE_PILLOW_PRODUCT_ID;
   const coverProductId = process.env.PLUSBASE_COVER_PRODUCT_ID;
   const checkoutBase = process.env.PLUSBASE_CHECKOUT_BASE_URL;
+  const pillowItems = line.pillows.map((pillow) => ({
+    ...pillow,
+    productId,
+    variantId:
+      process.env[variantEnvironmentKeys[pillow.colour][pillow.height]],
+    quantity: 1,
+  }));
+  const coverItems = line.includeCovers
+    ? line.pillows.map((pillow) => ({
+        colour: pillow.colour,
+        productId: coverProductId,
+        variantId: process.env[coverEnvironmentKeys[pillow.colour]],
+        quantity: 1,
+      }))
+    : [];
 
   if (
     !checkoutBase ||
     !productId ||
-    !pillowVariant ||
-    (line.includeCovers && (!coverProductId || !coverVariant))
+    pillowItems.some((item) => !item.variantId) ||
+    (line.includeCovers &&
+      (!coverProductId || coverItems.some((item) => !item.variantId)))
   ) {
     return NextResponse.json(
       {
@@ -80,15 +102,23 @@ export async function POST(request: Request) {
 
   const target = new URL(checkoutBase);
   target.searchParams.set("product_id", productId);
-  target.searchParams.set("variant_id", pillowVariant);
-  target.searchParams.set("quantity", String(line.quantity));
-  target.searchParams.set("colour", line.colour);
-  target.searchParams.set("height", line.height);
+  target.searchParams.set("variant_id", pillowItems[0].variantId || "");
+  target.searchParams.set("quantity", String(line.pillows.length));
+  target.searchParams.set(
+    "items",
+    JSON.stringify(
+      [...pillowItems, ...coverItems].map((item) => ({
+        product_id: item.productId,
+        variant_id: item.variantId,
+        quantity: item.quantity,
+      })),
+    ),
+  );
 
-  if (line.includeCovers && coverProductId && coverVariant) {
+  if (line.includeCovers && coverProductId && coverItems[0]?.variantId) {
     target.searchParams.set("cover_product_id", coverProductId);
-    target.searchParams.set("cover_variant_id", coverVariant);
-    target.searchParams.set("cover_quantity", String(line.quantity));
+    target.searchParams.set("cover_variant_id", coverItems[0].variantId);
+    target.searchParams.set("cover_quantity", String(line.pillows.length));
   }
 
   const attribution = cleanAttribution(parsed.data.attribution);

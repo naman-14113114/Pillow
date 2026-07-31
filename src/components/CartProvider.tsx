@@ -1,18 +1,17 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import type {
-  BundleQuantity,
-  PillowColour,
-  PillowHeight,
-} from "@/data/store";
+import type { PillowColour, PillowHeight } from "@/data/store";
 import { getBundle } from "@/data/store";
+
+export type PillowChoice = {
+  colour: PillowColour;
+  height: PillowHeight;
+};
 
 export type CartLine = {
   id: string;
-  colour: PillowColour;
-  height: PillowHeight;
-  quantity: BundleQuantity;
+  pillows: PillowChoice[];
   includeCovers: boolean;
 };
 
@@ -29,7 +28,56 @@ type CartContextValue = {
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
-const storageKey = "juujo-cart-v1";
+const storageKey = "juujo-cart-v2";
+const previousStorageKey = "juujo-cart-v1";
+
+function isPillowChoice(value: unknown): value is PillowChoice {
+  if (!value || typeof value !== "object") return false;
+  const choice = value as Partial<PillowChoice>;
+  return (
+    ["white", "grey", "blue", "navy"].includes(choice.colour || "") &&
+    ["regular", "high"].includes(choice.height || "")
+  );
+}
+
+function normaliseStoredLine(value: unknown): CartLine | null {
+  if (!value || typeof value !== "object") return null;
+  const stored = value as Partial<CartLine> & {
+    colour?: PillowColour;
+    height?: PillowHeight;
+    quantity?: number;
+  };
+
+  if (
+    Array.isArray(stored.pillows) &&
+    [1, 2, 4].includes(stored.pillows.length) &&
+    stored.pillows.every(isPillowChoice)
+  ) {
+    return {
+      id: stored.id || crypto.randomUUID(),
+      pillows: stored.pillows,
+      includeCovers: Boolean(stored.includeCovers),
+    };
+  }
+
+  if (
+    stored.colour &&
+    stored.height &&
+    isPillowChoice({ colour: stored.colour, height: stored.height }) &&
+    [1, 2, 4].includes(stored.quantity || 0)
+  ) {
+    return {
+      id: stored.id || crypto.randomUUID(),
+      pillows: Array.from({ length: stored.quantity || 1 }, () => ({
+        colour: stored.colour as PillowColour,
+        height: stored.height as PillowHeight,
+      })),
+      includeCovers: Boolean(stored.includeCovers),
+    };
+  }
+
+  return null;
+}
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [line, setLine] = useState<CartLine | null>(null);
@@ -39,8 +87,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const frame = window.requestAnimationFrame(() => {
       try {
-        const stored = window.localStorage.getItem(storageKey);
-        if (stored) setLine(JSON.parse(stored) as CartLine);
+        const stored =
+          window.localStorage.getItem(storageKey) ||
+          window.localStorage.getItem(previousStorageKey);
+        if (stored) setLine(normaliseStoredLine(JSON.parse(stored)));
       } catch {
         // Browsing can continue when local storage is unavailable.
       } finally {
@@ -62,19 +112,24 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, [isHydrated, line]);
 
   const value = useMemo<CartContextValue>(() => {
-    const bundle = line ? getBundle(line.quantity) : null;
+    const quantity = line?.pillows.length ?? 0;
+    const bundle = line ? getBundle(quantity) : null;
     return {
       line,
       isOpen,
       isHydrated,
-      itemCount: line?.quantity ?? 0,
+      itemCount: quantity,
       totalCents:
         bundle == null
           ? 0
           : bundle.priceCents +
             (line?.includeCovers ? bundle.coverPriceCents : 0),
       addLine(next) {
-        setLine({ ...next, id: crypto.randomUUID() });
+        setLine({
+          ...next,
+          pillows: next.pillows.map((pillow) => ({ ...pillow })),
+          id: crypto.randomUUID(),
+        });
         setIsOpen(true);
       },
       clear() {

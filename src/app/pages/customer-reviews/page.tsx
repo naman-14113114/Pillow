@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, BadgeCheck } from "lucide-react";
 import { ReviewGrid } from "@/components/ReviewGrid";
+import { siteConfig } from "@/data/store";
 
 export const metadata: Metadata = {
   title: "Customer Reviews",
@@ -9,7 +12,29 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <main className="route-shell reviews-route">
+    <main className="reviews-page-full">
+      <section className="reviews-page-hero">
+        <div>
+          <BadgeCheck aria-hidden="true" />
+          <span className="route-kicker">Licensed product feedback</span>
+          <h1>See CloudAlign in real bedrooms.</h1>
+          <p>
+            Browse written feedback and customer media for the same CloudAlign
+            pillow design. Review provenance is retained internally and is not
+            presented as a verified Juujo purchase unless it maps to a Juujo
+            order.
+          </p>
+          <Link className="primary-button" href={siteConfig.productPath}>
+            Shop CloudAlign <ArrowRight aria-hidden="true" />
+          </Link>
+        </div>
+        <img
+          src="/assets/gallery-11-model-juujo.png"
+          alt="Woman holding a tag-free CloudAlign pillow"
+          width="1255"
+          height="1255"
+        />
+      </section>
       <ReviewGrid />
     </main>
   );

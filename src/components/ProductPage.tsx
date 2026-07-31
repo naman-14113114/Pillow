@@ -20,12 +20,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { useCart } from "@/components/CartProvider";
-import {
-  type BundleQuantity,
-  type PillowColour,
-  type PillowHeight,
-} from "@/data/store";
+import { useCart, type PillowChoice } from "@/components/CartProvider";
+import { type PillowColour, type PillowHeight } from "@/data/store";
 
 const gallery = [
   {
@@ -84,11 +80,28 @@ const productClaims = [
 ];
 
 const colours = [
-  { name: "White", colour: "#f8f8f6" },
-  { name: "Gray", colour: "#c4c7ca" },
-  { name: "Baby Blue", colour: "#a9cde9" },
-  { name: "Navy Blue", colour: "#172e59" },
-];
+  { id: "white", name: "White", colour: "#f8f8f6" },
+  { id: "grey", name: "Grey", colour: "#c4c7ca" },
+  { id: "blue", name: "Baby Blue", colour: "#a9cde9" },
+  { id: "navy", name: "Navy Blue", colour: "#172e59" },
+] satisfies Array<{ id: PillowColour; name: string; colour: string }>;
+
+const heights = [
+  { id: "regular", name: "Regular" },
+  { id: "high", name: "High" },
+] satisfies Array<{ id: PillowHeight; name: string }>;
+
+const colourHero: Record<PillowColour, string> = {
+  white: "/assets/gallery-01-hero-juujo.png",
+  grey: "/assets/gallery-colours/hero-grey.webp",
+  blue: "/assets/gallery-colours/hero-baby-blue.webp",
+  navy: "/assets/gallery-colours/hero-navy.webp",
+};
+
+const defaultPillows: PillowChoice[] = Array.from({ length: 4 }, () => ({
+  colour: "white",
+  height: "regular",
+}));
 
 const bundles = [
   {
@@ -129,17 +142,11 @@ const bundles = [
   },
 ];
 
-const colourIds: Record<string, PillowColour> = {
-  White: "white",
-  Gray: "grey",
-  "Baby Blue": "blue",
-  "Navy Blue": "navy",
-};
+const colourName = (colour: PillowColour) =>
+  colours.find((option) => option.id === colour)?.name || "White";
 
-const heightIds: Record<string, PillowHeight> = {
-  Regular: "regular",
-  High: "high",
-};
+const heightName = (height: PillowHeight) =>
+  heights.find((option) => option.id === height)?.name || "Regular";
 
 const overviewItems = [
   {
@@ -462,10 +469,14 @@ function AccordionList({
 
 export function ProductPage() {
   const [galleryIndex, setGalleryIndex] = useState(0);
-  const [selectedColour, setSelectedColour] = useState("White");
-  const [selectedSize, setSelectedSize] = useState("Regular");
-  const [selectedBundle, setSelectedBundle] = useState(2);
-  const [includeCovers, setIncludeCovers] = useState(true);
+  const [selectedColour, setSelectedColour] =
+    useState<PillowColour>("white");
+  const [selectedSize, setSelectedSize] =
+    useState<PillowHeight>("regular");
+  const [selectedBundle, setSelectedBundle] = useState<1 | 2 | 4>(2);
+  const [pillowChoices, setPillowChoices] =
+    useState<PillowChoice[]>(defaultPillows);
+  const [includeCovers, setIncludeCovers] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(true);
   const [reviewsExpanded, setReviewsExpanded] = useState(false);
@@ -475,15 +486,98 @@ export function ProductPage() {
   const cart = useCart();
   const selectedBundleDetails =
     bundles.find((bundle) => bundle.id === selectedBundle) ?? bundles[1];
+  const activeGallery = gallery.map((image, index) =>
+    index === 0
+      ? {
+          ...image,
+          src: colourHero[selectedColour],
+          alt: `${colourName(selectedColour)} CloudAlign pillow with award artwork`,
+        }
+      : image,
+  );
+
+  const chooseColour = (colour: PillowColour) => {
+    setSelectedColour(colour);
+    setPillowChoices((current) =>
+      current.map((pillow, index) =>
+        index < selectedBundle ? { ...pillow, colour } : pillow,
+      ),
+    );
+    setGalleryIndex(0);
+  };
+
+  const chooseHeight = (height: PillowHeight) => {
+    setSelectedSize(height);
+    setPillowChoices((current) =>
+      current.map((pillow, index) =>
+        index < selectedBundle ? { ...pillow, height } : pillow,
+      ),
+    );
+  };
+
+  const chooseBundle = (quantity: 1 | 2 | 4) => {
+    setPillowChoices((current) =>
+      current.map((pillow, index) =>
+        index >= selectedBundle && index < quantity
+          ? { colour: selectedColour, height: selectedSize }
+          : pillow,
+      ),
+    );
+    setSelectedBundle(quantity);
+  };
+
+  const updatePillow = (
+    index: number,
+    update: Partial<PillowChoice>,
+  ) => {
+    setPillowChoices((current) =>
+      current.map((pillow, pillowIndex) =>
+        pillowIndex === index ? { ...pillow, ...update } : pillow,
+      ),
+    );
+    if (index === 0 && update.colour) {
+      setSelectedColour(update.colour);
+      setGalleryIndex(0);
+    }
+    if (index === 0 && update.height) setSelectedSize(update.height);
+  };
 
   const addToCart = () => {
     cart.addLine({
-      colour: colourIds[selectedColour],
-      height: heightIds[selectedSize],
-      quantity: selectedBundle as BundleQuantity,
+      pillows: pillowChoices
+        .slice(0, selectedBundle)
+        .map((pillow) => ({ ...pillow })),
       includeCovers,
     });
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const height = params.get("height");
+    const colour = params.get("colour");
+    const nextHeight =
+      height === "high" || height === "regular" ? height : null;
+    const nextColour =
+      colour === "white" ||
+      colour === "grey" ||
+      colour === "blue" ||
+      colour === "navy"
+        ? colour
+        : null;
+
+    if (!nextHeight && !nextColour) return;
+    const frame = window.requestAnimationFrame(() => {
+      if (nextHeight) setSelectedSize(nextHeight);
+      if (nextColour) setSelectedColour(nextColour);
+      setPillowChoices((current) =>
+        current.map((pillow) => ({
+          colour: nextColour || pillow.colour,
+          height: nextHeight || pillow.height,
+        })),
+      );
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     const revealNodes = Array.from(
@@ -583,17 +677,30 @@ export function ProductPage() {
           {menuOpen ? <X /> : <Menu />}
         </button>
         <nav className={menuOpen ? "open" : ""} aria-label="Primary navigation">
-          <a href="#product">Shop</a>
-          <a href="#story">About</a>
-          <a href="#reviews">Ambassadors</a>
+          <Link href="/" onClick={() => setMenuOpen(false)}>
+            Home
+          </Link>
+          <Link href="/pages/about-us" onClick={() => setMenuOpen(false)}>
+            About
+          </Link>
+          <Link
+            href="/pages/customer-reviews"
+            onClick={() => setMenuOpen(false)}
+          >
+            Reviews
+          </Link>
         </nav>
-        <a className="wordmark" href="#product" aria-label="Juujo home">
+        <Link className="wordmark" href="/" aria-label="Juujo home">
           juujo
-        </a>
+        </Link>
         <div className="header-actions">
-          <button type="button" className="icon-button" aria-label="Search">
+          <Link
+            href="/blog"
+            className="icon-button"
+            aria-label="Browse sleep guides"
+          >
             <Search />
-          </button>
+          </Link>
           <button
             type="button"
             className="icon-button"
@@ -625,7 +732,7 @@ export function ProductPage() {
               gallerySwipeStart.current = null;
             }}
           >
-            {gallery.map((image, index) => (
+            {activeGallery.map((image, index) => (
               <img
                 key={image.src}
                 className={`gallery-main ${
@@ -658,7 +765,7 @@ export function ProductPage() {
             aria-label="Product images"
             ref={thumbnailStripRef}
           >
-            {gallery.map((image, index) => (
+            {activeGallery.map((image, index) => (
               <button
                 type="button"
                 key={image.src}
@@ -691,19 +798,19 @@ export function ProductPage() {
 
           <fieldset className="option-fieldset">
             <legend>
-              Select Color: <strong>{selectedColour}</strong>
+              Select Colour: <strong>{colourName(selectedColour)}</strong>
             </legend>
             <div className="swatches">
               {colours.map((swatch) => (
                 <button
                   type="button"
-                  key={swatch.name}
-                  className={selectedColour === swatch.name ? "selected" : ""}
+                  key={swatch.id}
+                  className={selectedColour === swatch.id ? "selected" : ""}
                   aria-label={swatch.name}
-                  aria-pressed={selectedColour === swatch.name}
+                  aria-pressed={selectedColour === swatch.id}
                   title={swatch.name}
                   style={{ "--swatch": swatch.colour } as React.CSSProperties}
-                  onClick={() => setSelectedColour(swatch.name)}
+                  onClick={() => chooseColour(swatch.id)}
                 />
               ))}
             </div>
@@ -712,15 +819,15 @@ export function ProductPage() {
           <fieldset className="option-fieldset">
             <legend>Select Size:</legend>
             <div className="segmented-control">
-              {["Regular", "High"].map((size) => (
+              {heights.map((size) => (
                 <button
                   type="button"
-                  key={size}
-                  className={selectedSize === size ? "selected" : ""}
-                  aria-pressed={selectedSize === size}
-                  onClick={() => setSelectedSize(size)}
+                  key={size.id}
+                  className={selectedSize === size.id ? "selected" : ""}
+                  aria-pressed={selectedSize === size.id}
+                  onClick={() => chooseHeight(size.id)}
                 >
-                  {size}
+                  {size.name}
                 </button>
               ))}
             </div>
@@ -767,7 +874,9 @@ export function ProductPage() {
                 <button
                   type="button"
                   className="bundle-choice"
-                  onClick={() => setSelectedBundle(bundle.id)}
+                  onClick={() =>
+                    chooseBundle(bundle.id as 1 | 2 | 4)
+                  }
                   aria-pressed={selectedBundle === bundle.id}
                 >
                   <span className="radio-dot" aria-hidden="true" />
@@ -783,34 +892,55 @@ export function ProductPage() {
                     <del>{bundle.compareAt}</del>
                   </span>
                 </button>
-                {selectedBundle === 2 && bundle.id === 2 ? (
+                {selectedBundle === bundle.id && selectedBundle > 1 ? (
                   <div className="bundle-config" aria-label="Bundle options">
-                    <p>Color, Size</p>
-                    {[1, 2].map((pillow) => (
-                      <div key={pillow}>
-                        <span>#{pillow}</span>
-                        <label className="bundle-select colour-select">
-                          <span className="sr-only">
-                            Pillow {pillow} colour
-                          </span>
-                          <select defaultValue="White">
-                            <option>White</option>
-                            <option>Baby Blue</option>
-                            <option>Gray</option>
-                            <option>Navy Blue</option>
-                          </select>
-                        </label>
-                        <label className="bundle-select">
-                          <span className="sr-only">
-                            Pillow {pillow} size
-                          </span>
-                          <select defaultValue="Regular">
-                            <option>Regular</option>
-                            <option>High</option>
-                          </select>
-                        </label>
-                      </div>
-                    ))}
+                    <p>Choose each pillow&apos;s colour and height</p>
+                    {Array.from(
+                      { length: selectedBundle },
+                      (_, pillowIndex) => (
+                        <div key={pillowIndex}>
+                          <span>#{pillowIndex + 1}</span>
+                          <label className="bundle-select colour-select">
+                            <span className="sr-only">
+                              Pillow {pillowIndex + 1} colour
+                            </span>
+                            <select
+                              value={pillowChoices[pillowIndex].colour}
+                              onChange={(event) =>
+                                updatePillow(pillowIndex, {
+                                  colour: event.target.value as PillowColour,
+                                })
+                              }
+                            >
+                              {colours.map((colour) => (
+                                <option key={colour.id} value={colour.id}>
+                                  {colour.name}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+                          <label className="bundle-select">
+                            <span className="sr-only">
+                              Pillow {pillowIndex + 1} height
+                            </span>
+                            <select
+                              value={pillowChoices[pillowIndex].height}
+                              onChange={(event) =>
+                                updatePillow(pillowIndex, {
+                                  height: event.target.value as PillowHeight,
+                                })
+                              }
+                            >
+                              {heights.map((height) => (
+                                <option key={height.id} value={height.id}>
+                                  {height.name}
+                                </option>
+                              ))}
+                            </select>
+                          </label>
+                        </div>
+                      ),
+                    )}
                   </div>
                 ) : null}
                 <label className="bundle-upsell">
@@ -818,7 +948,7 @@ export function ProductPage() {
                     type="checkbox"
                     checked={selectedBundle === bundle.id && includeCovers}
                     onChange={(event) => {
-                      setSelectedBundle(bundle.id);
+                      chooseBundle(bundle.id as 1 | 2 | 4);
                       setIncludeCovers(event.target.checked);
                     }}
                   />
@@ -830,6 +960,19 @@ export function ProductPage() {
                 </label>
               </div>
             ))}
+          </div>
+
+          <div className="selection-summary" aria-live="polite">
+            <span>Your selection</span>
+            {pillowChoices.slice(0, selectedBundle).map((pillow, index) => (
+              <strong key={`${pillow.colour}-${pillow.height}-${index}`}>
+                {selectedBundle > 1 ? `${index + 1}. ` : ""}
+                {colourName(pillow.colour)} / {heightName(pillow.height)}
+              </strong>
+            ))}
+            {includeCovers ? (
+              <small>Includes {selectedBundle} matching replacement cover{selectedBundle > 1 ? "s" : ""}</small>
+            ) : null}
           </div>
 
           <button type="button" className="add-to-cart" onClick={addToCart}>
@@ -1079,7 +1222,7 @@ export function ProductPage() {
         <section className="footer-cta">
           <div>
             <p>
-              <Stars /> 100,000+ Happy Sleepers
+              <Stars /> 42,093 licensed product reviews
             </p>
             <h2>Cloud-like comfort is just a click away. Try Juujo today.</h2>
           </div>
@@ -1114,10 +1257,11 @@ export function ProductPage() {
             <Link href="/policies/shipping-policy">Shipping Policy</Link>
           </div>
           <div>
-            <h3>Social</h3>
-            <a href="#reviews">Instagram</a>
-            <a href="#reviews">Facebook</a>
-            <a href="#reviews">TikTok</a>
+            <h3>Account</h3>
+            <Link href="/sign-in">Sign In</Link>
+            <Link href="/sign-up">Create Account</Link>
+            <Link href="/order-history">Order History</Link>
+            <Link href="/account-settings">Account Settings</Link>
           </div>
         </div>
         <div className="footer-bottom">

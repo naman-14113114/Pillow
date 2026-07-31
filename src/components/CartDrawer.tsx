@@ -7,15 +7,12 @@ import {
   colours,
   formatMoney,
   getBundle,
-  heights,
   product,
 } from "@/data/store";
 
 export function CartDrawer() {
   const cart = useCart();
-  const bundle = cart.line ? getBundle(cart.line.quantity) : null;
-  const colour = colours.find((item) => item.id === cart.line?.colour);
-  const height = heights.find((item) => item.id === cart.line?.height);
+  const bundle = cart.line ? getBundle(cart.line.pillows.length) : null;
 
   return (
     <>
@@ -44,7 +41,7 @@ export function CartDrawer() {
             <div className="cart-line">
               <div className="cart-line-image">
                 <img
-                  src="/assets/gallery/studio-product.png"
+                  src="/assets/gallery-01-hero-juujo.png"
                   alt=""
                   width="140"
                   height="140"
@@ -52,12 +49,22 @@ export function CartDrawer() {
               </div>
               <div>
                 <strong>{product.name}</strong>
-                <span>
-                  {colour?.name} / {height?.name}
-                </span>
                 <span>{bundle.name}</span>
+                <div className="cart-variant-list">
+                  {cart.line.pillows.map((pillow, index) => {
+                    const colour = colours.find(
+                      (item) => item.id === pillow.colour,
+                    );
+                    return (
+                      <span key={`${pillow.colour}-${pillow.height}-${index}`}>
+                        Pillow {index + 1}: {colour?.name} /{" "}
+                        {pillow.height === "high" ? "High" : "Regular"}
+                      </span>
+                    );
+                  })}
+                </div>
                 {cart.line.includeCovers && (
-                  <span>+ {cart.line.quantity} matching covers</span>
+                  <span>+ {cart.line.pillows.length} matching covers</span>
                 )}
                 <b>{formatMoney(cart.totalCents)}</b>
                 <button type="button" onClick={cart.clear}>

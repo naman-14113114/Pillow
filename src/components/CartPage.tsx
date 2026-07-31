@@ -8,7 +8,6 @@ import {
   colours,
   formatMoney,
   getBundle,
-  heights,
   product,
   siteConfig,
 } from "@/data/store";
@@ -17,9 +16,7 @@ export function CartPage() {
   const cart = useCart();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-  const bundle = cart.line ? getBundle(cart.line.quantity) : null;
-  const colour = colours.find((item) => item.id === cart.line?.colour);
-  const height = heights.find((item) => item.id === cart.line?.height);
+  const bundle = cart.line ? getBundle(cart.line.pillows.length) : null;
 
   async function checkout() {
     if (!cart.line) return;
@@ -86,19 +83,31 @@ export function CartPage() {
           <h1>Review your sleep setup.</h1>
           <article className="cart-page-line">
             <img
-              src="/assets/gallery/studio-product.png"
+              src="/assets/gallery-01-hero-juujo.png"
               alt=""
               width="280"
               height="280"
             />
             <div>
               <h2>{product.name}</h2>
-              <span>
-                {colour?.name} / {height?.name}
-              </span>
               <span>{bundle.name}</span>
+              <div className="cart-page-variants">
+                {cart.line.pillows.map((pillow, index) => {
+                  const colour = colours.find(
+                    (item) => item.id === pillow.colour,
+                  );
+                  return (
+                    <span key={`${pillow.colour}-${pillow.height}-${index}`}>
+                      Pillow {index + 1}: {colour?.name} /{" "}
+                      {pillow.height === "high" ? "High" : "Regular"}
+                    </span>
+                  );
+                })}
+              </div>
               {cart.line.includeCovers && (
-                <span>{cart.line.quantity} matching replacement covers</span>
+                <span>
+                  {cart.line.pillows.length} matching replacement covers
+                </span>
               )}
               <strong>{formatMoney(cart.totalCents)}</strong>
             </div>

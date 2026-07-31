@@ -43,6 +43,15 @@ const groups = [
       ["Terms", "/policies/terms-of-service"],
     ],
   },
+  {
+    title: "Account",
+    links: [
+      ["Sign In", "/sign-in"],
+      ["Create Account", "/sign-up"],
+      ["Order History", "/order-history"],
+      ["Settings", "/account-settings"],
+    ],
+  },
 ] as const;
 
 export function Footer() {

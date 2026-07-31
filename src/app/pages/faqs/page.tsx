@@ -1,52 +1,150 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
-import { productFaqs } from "@/data/store";
+import {
+  ArrowRight,
+  ChevronDown,
+  CircleHelp,
+  PackageCheck,
+  WashingMachine,
+} from "lucide-react";
+import { productFaqs, siteConfig } from "@/data/store";
 
-const supportFaqs = [
-  ...productFaqs,
+const groups = [
   {
-    question: "When will my order arrive?",
-    answer:
-      "Orders are normally processed within 1 to 3 business days. Tracked transit normally takes another 3 to 10 business days.",
+    title: "Choosing and using CloudAlign",
+    icon: CircleHelp,
+    items: productFaqs,
   },
   {
-    question: "Can I change my colour after ordering?",
-    answer:
-      "Contact support within 6 hours. We will try to help, but changes cannot be guaranteed after fulfilment begins.",
+    title: "Orders and delivery",
+    icon: PackageCheck,
+    items: [
+      {
+        question: "When will my order arrive?",
+        answer:
+          "Orders are normally processed within 1 to 3 business days. Tracked transit normally takes another 3 to 10 business days.",
+      },
+      {
+        question: "Can I change my colour or height after ordering?",
+        answer:
+          "Contact support within 6 hours. We will try to help, but changes cannot be guaranteed after fulfilment begins.",
+      },
+      {
+        question: "Where can I find my tracking number?",
+        answer:
+          "The tracking link is emailed after dispatch. It may take 1 to 2 business days for the first courier scan to appear.",
+      },
+      {
+        question: "What if tracking has not updated?",
+        answer:
+          "Courier scans can pause while a parcel moves between facilities. Contact support if there is no update for five business days.",
+      },
+    ],
   },
   {
-    question: "Where can I find my tracking number?",
-    answer:
-      "The tracking link is emailed after dispatch. It may take 1 to 2 business days for the first courier scan to appear.",
+    title: "Care, covers and returns",
+    icon: WashingMachine,
+    items: [
+      {
+        question: "How should I wash the fitted cover?",
+        answer:
+          "Remove the outer cover, machine wash at 30 C on a gentle cycle and air dry. Do not put the memory-foam core in a washing machine.",
+      },
+      {
+        question: "Can I buy a spare cover?",
+        answer:
+          "Yes. A colour-matched replacement cover can be added to one, two or four-pillow bundles on the product page.",
+      },
+      {
+        question: "What should I do if my order arrives damaged?",
+        answer:
+          "Contact support within 7 business days with your order number and clear photos or video of the item, packaging and delivery label.",
+      },
+      {
+        question: "Can I return an item without contacting support?",
+        answer:
+          "No. Contact the support team first so the order and issue can be reviewed and the correct return instructions can be provided.",
+      },
+    ],
   },
-];
+] as const;
 
 export default function Page() {
-  const [open, setOpen] = useState(0);
+  const [open, setOpen] = useState("0-0");
+
   return (
-    <main className="route-shell faq-route">
-      <span className="route-kicker">Help centre</span>
-      <h1>Frequently asked questions.</h1>
-      <p>Product, care, delivery and order answers in one place.</p>
-      <div className="accordion-list">
-        {supportFaqs.map((item, index) => (
-          <article key={item.question}>
-            <button
-              type="button"
-              aria-expanded={open === index}
-              onClick={() => setOpen(open === index ? -1 : index)}
-            >
-              <span>{item.question}</span>
-              <ChevronDown className={open === index ? "open" : ""} />
-            </button>
-            <div className={open === index ? "open" : ""}>
-              <p>{item.answer}</p>
-            </div>
-          </article>
-        ))}
-      </div>
+    <main className="faq-page-full">
+      <section className="faq-page-heading">
+        <CircleHelp aria-hidden="true" />
+        <span className="route-kicker">Juujo help centre</span>
+        <h1>Questions, answered clearly.</h1>
+        <p>
+          Product selection, care, delivery and order support in one place.
+        </p>
+        <div>
+          <Link href="/pages/sleep-quiz">
+            Take the height quiz <ArrowRight aria-hidden="true" />
+          </Link>
+          <Link href="/order-tracking">
+            Track an order <ArrowRight aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      <section className="faq-groups">
+        {groups.map((group, groupIndex) => {
+          const Icon = group.icon;
+          return (
+            <article key={group.title}>
+              <header>
+                <Icon aria-hidden="true" />
+                <h2>{group.title}</h2>
+              </header>
+              <div className="accordion-list">
+                {group.items.map((item, itemIndex) => {
+                  const id = `${groupIndex}-${itemIndex}`;
+                  return (
+                    <div key={item.question}>
+                      <button
+                        type="button"
+                        aria-expanded={open === id}
+                        onClick={() => setOpen(open === id ? "" : id)}
+                      >
+                        <span>{item.question}</span>
+                        <ChevronDown className={open === id ? "open" : ""} />
+                      </button>
+                      <div className={open === id ? "open" : ""}>
+                        <p>{item.answer}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </article>
+          );
+        })}
+      </section>
+
+      <section className="faq-contact-band">
+        <div>
+          <span className="route-kicker">Still need help?</span>
+          <h2>Send the support team the details.</h2>
+        </div>
+        <div>
+          <p>
+            Include your order number for delivery, damage or order-change
+            questions.
+          </p>
+          <a href={`mailto:${siteConfig.supportEmail}`}>
+            {siteConfig.supportEmail}
+          </a>
+          <Link className="primary-button" href="/pages/contact-us">
+            Contact support <ArrowRight aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }

@@ -487,12 +487,27 @@ export const policyContent = {
         heading: "Tracking",
         paragraphs: [
           "We send tracking details by email when the order is dispatched. Please allow 1 to 2 business days for the first courier scan to appear.",
+          "Courier scans can pause while a parcel moves between facilities. Contact support if tracking has not updated for five business days.",
+        ],
+      },
+      {
+        heading: "Delivery estimates",
+        paragraphs: [
+          "Business days exclude weekends and public holidays. Remote destinations, customs checks, severe weather and carrier disruption can extend delivery time.",
+          "An order containing more than one item may arrive in separate parcels. Each dispatched parcel will receive its own tracking information where available.",
         ],
       },
       {
         heading: "Address changes",
         paragraphs: [
           "Contact support@juujo.com as soon as possible if the delivery address is incorrect. Processing begins quickly, so an address change cannot be guaranteed after the order is placed.",
+        ],
+      },
+      {
+        heading: "Missing or delivered parcels",
+        paragraphs: [
+          "If tracking shows delivered but the parcel cannot be found, first check safe places, household members and neighbours. Then contact the courier and Juujo support with the order number and tracking reference.",
+          "Claims for parcels damaged in transit should include photographs of the outer packaging, delivery label and affected product.",
         ],
       },
     ],
@@ -506,6 +521,26 @@ export const policyContent = {
         paragraphs: [
           "Contact us through the website contact form within 7 business days of delivery and include your order number, a clear description and supporting photographs or video.",
           "Our customer service team will review the evidence and confirm the appropriate replacement or refund process. Do not post an item back unless our team provides return instructions.",
+        ],
+      },
+      {
+        heading: "Return condition",
+        paragraphs: [
+          "Where a return is approved, the item must be sent using the instructions provided by support. Include all supplied components and use protective packaging.",
+          "For hygiene reasons, opened or used sleep products may have return restrictions unless they are faulty, damaged or otherwise covered by applicable consumer law.",
+        ],
+      },
+      {
+        heading: "Return shipping",
+        paragraphs: [
+          "The support team will confirm the return destination and whether return postage is covered for the approved reason. Unauthorised returns may not be traceable or refundable.",
+          "Keep the postage receipt and tracking reference until the return has been inspected and resolved.",
+        ],
+      },
+      {
+        heading: "Your statutory rights",
+        paragraphs: [
+          "Nothing in this policy limits rights that cannot be excluded under applicable consumer law.",
         ],
       },
     ],
@@ -527,6 +562,24 @@ export const policyContent = {
           "Approved refunds are returned to the original payment method. The payment provider controls when the credit appears in your account.",
         ],
       },
+      {
+        heading: "Refund timing",
+        paragraphs: [
+          "After an approved refund is submitted, banks and payment providers may take several business days to post the credit. Original currency conversion or bank fees are controlled by the payment provider.",
+        ],
+      },
+      {
+        heading: "Partial refunds",
+        paragraphs: [
+          "A partial refund may apply where only part of a multi-item order is affected or where an agreed remedy does not require the full order to be refunded.",
+        ],
+      },
+      {
+        heading: "Promotions and bundles",
+        paragraphs: [
+          "Refund calculations use the amount actually paid after bundle pricing or discounts. Returning part of a bundle may change the discount applied to the retained items.",
+        ],
+      },
     ],
   },
   "privacy-policy": {
@@ -536,13 +589,40 @@ export const policyContent = {
       {
         heading: "Information we collect",
         paragraphs: [
-          "We collect information needed to operate the store, fulfil orders, provide support, prevent fraud and understand how customers use the website.",
+          "We collect information needed to operate the store, fulfil orders, provide support, prevent fraud and understand how customers use the website. This can include identity, contact, delivery, order, device and campaign-attribution information.",
+        ],
+      },
+      {
+        heading: "How we use information",
+        paragraphs: [
+          "We use personal information to provide the website, prepare checkout, fulfil and track orders, respond to support requests, secure the service and meet legal obligations.",
+          "Where configured and permitted, analytics and marketing tools help measure campaign performance and improve the store experience.",
+        ],
+      },
+      {
+        heading: "Service providers",
+        paragraphs: [
+          "Payment, fulfilment, hosting, authentication, analytics and customer-support providers may process information only as needed to provide their services. PlusBase remains the checkout and payment authority once activated.",
+        ],
+      },
+      {
+        heading: "Retention and security",
+        paragraphs: [
+          "Information is retained only as long as reasonably required for orders, support, fraud prevention, legal obligations and legitimate business records.",
+          "We use technical and organisational safeguards appropriate to the service, but no internet transmission or storage system can be guaranteed completely secure.",
         ],
       },
       {
         heading: "Your choices",
         paragraphs: [
-          "You may request access, correction or deletion of eligible personal information by contacting support@juujo.com.",
+          "You may request access, correction or deletion of eligible personal information, or object to certain processing, by contacting support@juujo.com.",
+          "Some information must be retained where required for tax, fraud-prevention, dispute or other legal purposes.",
+        ],
+      },
+      {
+        heading: "Contact",
+        paragraphs: [
+          "Privacy questions can be sent to support@juujo.com. The final legal company name and correspondence address will be published before checkout activation.",
         ],
       },
     ],
@@ -563,6 +643,18 @@ export const policyContent = {
           "When configured, analytics and advertising partners may use cookies to measure visits and campaign performance. Browser settings can restrict or remove cookies.",
         ],
       },
+      {
+        heading: "Attribution",
+        paragraphs: [
+          "Campaign parameters such as UTM values and Microsoft click identifiers may be stored temporarily so they can follow the customer from a comparison page to the store and checkout.",
+        ],
+      },
+      {
+        heading: "Managing cookies",
+        paragraphs: [
+          "You can delete or block cookies through your browser settings. Blocking essential storage can remove basket contents, end an account session or prevent checkout preparation.",
+        ],
+      },
     ],
   },
   "terms-of-service": {
@@ -574,6 +666,32 @@ export const policyContent = {
         paragraphs: [
           "By using this website or placing an order, you agree to the store terms, product descriptions, prices and policies shown at the time of purchase.",
           "Prices and availability may change without notice. We may refuse or cancel orders where information is incomplete, payment is not authorised or fraud is suspected.",
+        ],
+      },
+      {
+        heading: "Product information",
+        paragraphs: [
+          "We aim to present dimensions, colours and product images accurately. Screen settings and manufacturing tolerances can cause small differences in colour or measurement.",
+          "Sleep comfort is personal. Product information is not medical advice and the product is not intended to diagnose, treat or prevent a medical condition.",
+        ],
+      },
+      {
+        heading: "Orders and payment",
+        paragraphs: [
+          "An order is not accepted until checkout is completed and an order confirmation is issued. PlusBase and its payment providers control payment authorisation once checkout is activated.",
+          "Customers are responsible for providing accurate contact, billing and delivery information.",
+        ],
+      },
+      {
+        heading: "Website use",
+        paragraphs: [
+          "You may not misuse the website, attempt unauthorised access, interfere with service operation, submit malicious material or use store content in a way that infringes applicable rights.",
+        ],
+      },
+      {
+        heading: "Liability",
+        paragraphs: [
+          "Nothing in these terms excludes liability that cannot legally be excluded. To the extent permitted by law, Juujo is not responsible for indirect loss arising from use of the website or delays outside reasonable control.",
         ],
       },
       {

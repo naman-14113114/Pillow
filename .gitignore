@@ -39,6 +39,7 @@ yarn-error.log*
 
 # local visual QA output
 .codex-qa/
+.codex-assets/
 
 # typescript
 *.tsbuildinfo
