@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/store";
 
 const groups = [
@@ -43,6 +46,10 @@ const groups = [
 ] as const;
 
 export function Footer() {
+  const pathname = usePathname();
+
+  if (pathname === siteConfig.productPath) return null;
+
   return (
     <footer>
       <div className="footer-offer">

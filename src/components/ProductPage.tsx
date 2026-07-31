@@ -1,448 +1,1142 @@
 "use client";
 
-import Link from "next/link";
 import {
   ArrowLeft,
   ArrowRight,
   BadgeCheck,
-  Check,
-  ChevronDown,
+  Heart,
+  Menu,
   MoveVertical,
-  PackageCheck,
+  Pause,
+  Play,
+  Search,
   ShieldCheck,
+  ShoppingBag,
   Snowflake,
   Sparkles,
+  Star,
+  Stethoscope,
+  X,
 } from "lucide-react";
-import { useState } from "react";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/components/CartProvider";
-import { ReviewGrid } from "@/components/ReviewGrid";
-import { StarRating } from "@/components/StarRating";
 import {
-  bundles,
-  colours,
-  formatMoney,
-  gallery,
-  getBundle,
-  heights,
-  product,
-  productFaqs,
-  siteConfig,
   type BundleQuantity,
   type PillowColour,
   type PillowHeight,
 } from "@/data/store";
 
-const featureRows = [
+const gallery = [
   {
-    icon: MoveVertical,
-    title: "Two contour heights",
-    copy: "Rotate the pillow to choose the lower 8.9 cm or higher 10.9 cm neck contour.",
+    src: "/assets/gallery-01-hero-juujo.png",
+    alt: "#1 Best-Selling Pillow of 2025 with four award badges",
   },
   {
-    icon: Snowflake,
-    title: "Breathable removable cover",
-    copy: "A washable outer layer helps keep the sleep surface fresh without washing the foam.",
+    src: "/assets/gallery-02-zones-juujo.png",
+    alt: "CloudAlign pillow six-zone support diagram",
   },
   {
-    icon: Sparkles,
-    title: "Six purposeful zones",
-    copy: "A central cradle, neck channels, shoulder wings and arm space work together.",
+    src: "/assets/gallery-03-lifestyle-juujo.png",
+    alt: "CloudAlign pillow supporting a sleeping model",
+  },
+  {
+    src: "/assets/gallery-04-size-guide-juujo.png",
+    alt: "CloudAlign Regular and High pillow size guide",
+  },
+  {
+    src: "/assets/gallery-05-colours-juujo.png",
+    alt: "CloudAlign pillow colour collection",
+  },
+  {
+    src: "/assets/gallery-06-sleepers-juujo.png",
+    alt: "CloudAlign pillow in four sleeping positions",
+  },
+  {
+    src: "/assets/gallery-07-disclaimer-juujo.png",
+    alt: "Removable cooling pillow cover",
+  },
+  {
+    src: "/assets/gallery-08-callouts-juujo.png",
+    alt: "CloudAlign pillow ergonomic feature callouts",
+  },
+  {
+    src: "/assets/gallery-09-chiro-juujo.png",
+    alt: "Chiropractor CloudAlign pillow recommendation",
+  },
+  {
+    src: "/assets/gallery-10-comparison-juujo.png",
+    alt: "Juujo CloudAlign pillow compared with regular pillows",
+  },
+  {
+    src: "/assets/gallery-11-model-juujo.png",
+    alt: "Model holding the CloudAlign pillow",
   },
 ];
 
-const comparisonRows = [
-  ["Defined neck support", "Sculpted dual-height contour", "Loose filling"],
-  ["Shoulder space", "Dedicated side wings", "Straight edge"],
-  ["Night-time shape", "Stable memory-foam core", "Needs refluffing"],
-  ["Cover care", "Removable and washable", "Varies by pillow"],
-] as const;
+const productClaims = [
+  { icon: Sparkles, text: "#1 Selling TikTok Pillow" },
+  { icon: Snowflake, text: "Stays Cool All Night" },
+  { icon: MoveVertical, text: "Dual Height. Low & High Side" },
+  { icon: Heart, text: "Voted Softest Pillow of 2025!" },
+  { icon: ShieldCheck, text: "Hypoallergenic, Antibacterial & 100% Vegan" },
+  { icon: Stethoscope, text: "Recommended by Our Chiropractic Partners" },
+];
+
+const colours = [
+  { name: "White", colour: "#f8f8f6" },
+  { name: "Gray", colour: "#c4c7ca" },
+  { name: "Baby Blue", colour: "#a9cde9" },
+  { name: "Navy Blue", colour: "#172e59" },
+];
+
+const bundles = [
+  {
+    id: 1,
+    title: "1 Pillow",
+    label: "Limited Time Sale!",
+    note: "This Deal Ends Soon.",
+    price: "£49.99",
+    compareAt: "£100.00",
+    upsell: "+1 Cooling Pillowcase (Protect & Cool)",
+    upsellPrice: "£9.99",
+    upsellCompareAt: "£19.99",
+  },
+  {
+    id: 2,
+    title: "2 Pillow Bundle",
+    badge: "MOST POPULAR",
+    badgeType: "popular",
+    note: "Save £111.01!",
+    price: "£88.99",
+    compareAt: "£200.00",
+    upsell: "+2 Cooling Pillowcases at £19.99!",
+    upsellPrice: "£19.99",
+    upsellCompareAt: "£39.98",
+  },
+  {
+    id: 4,
+    title: "Family Bundle 4 Pillows",
+    badge: "BEST VALUE",
+    badgeType: "value",
+    label: "+Free Shipping",
+    note: "Limited Time Offer!",
+    price: "£151.99",
+    compareAt: "£400.00",
+    upsell: "+4 Cooling Pillowcases For Only £29.99!",
+    upsellPrice: "£29.99",
+    upsellCompareAt: "£79.96",
+  },
+];
+
+const colourIds: Record<string, PillowColour> = {
+  White: "white",
+  Gray: "grey",
+  "Baby Blue": "blue",
+  "Navy Blue": "navy",
+};
+
+const heightIds: Record<string, PillowHeight> = {
+  Regular: "regular",
+  High: "high",
+};
+
+const overviewItems = [
+  {
+    title: "Overview",
+    content:
+      "Meet the CloudAlign Pillow, crafted for deep, supported sleep in any position. The 3-zone contour design delivers targeted neck lift, pressure relief, and full-body alignment. Its dual-height system adapts to side, back, and stomach sleepers without bunching or constant flipping.",
+  },
+  {
+    title: "Materials",
+    content:
+      "OEKO-TEX certified cover: hypoallergenic, breathable, and gentle on skin. CloudSoft core: shape-retaining memory foam that stays supportive and flexible.",
+  },
+  {
+    title: "Care",
+    content:
+      "The memory-foam pillow is not machine washable. The optional cooling pillowcase is fully machine washable and dryer safe.",
+  },
+];
+
+const zoneItems = [
+  {
+    title: "Side Sleeper Zone",
+    content:
+      "Side wings relieve pressure on your shoulder and keep your neck elevated at the right angle, with room for your arm to rest naturally.",
+  },
+  {
+    title: "Lift Side (SwitchFit Design)",
+    content:
+      "Designed for deeper support and lift, this side suits side sleepers or anyone who needs extra neck height and pressure relief.",
+  },
+  {
+    title: "Soft Side (SwitchFit Design)",
+    content:
+      "Softer and lower, this side works for back and stomach sleepers or anyone who prefers minimal elevation.",
+  },
+  {
+    title: "The Full Sleep System",
+    content:
+      "Every zone works together so your neck, spine, and shoulders remain supported, no matter how you sleep.",
+  },
+];
+
+const chiropractorItems = [
+  {
+    title: "How It Works",
+    content:
+      "The CloudAlign Pillow has a high side and a low side. Flip it to match your body and sleep position, then let the contour cradle your head and neck.",
+  },
+  {
+    title: "Chiropractor-Designed for Alignment",
+    content:
+      "The ergonomic shape relieves pressure points and encourages a more neutral sleeping posture.",
+  },
+  {
+    title: "Arm Tunnel + Shoulder Relief Design",
+    content:
+      "The built-in arm cradle gives your shoulder room to rest naturally, reducing compression for side sleepers.",
+  },
+];
+
+const faqItems = [
+  {
+    title: "How does the dual-height system work?",
+    content:
+      "Each side is a different height. Flip the pillow to find the support level that feels best for your neck and sleep position.",
+  },
+  {
+    title: "Is this pillow good for side, back, and stomach sleepers?",
+    content:
+      "Yes. CloudAlign adapts to all three sleep styles by providing targeted lift and pressure relief where each position needs it.",
+  },
+  {
+    title: "Will it flatten over time?",
+    content:
+      "CloudAlign uses shape-retaining memory foam designed to maintain its contour and support.",
+  },
+  {
+    title: "Is it safe for sensitive skin?",
+    content:
+      "The OEKO-TEX certified cover is hypoallergenic, breathable, and gentle on sensitive skin.",
+  },
+];
+
+const relatedProducts = [
+  {
+    name: "Regular CloudAlign",
+    description:
+      "The lower 8.9 cm profile for smaller frames, softer mattresses and back sleepers.",
+    image: "/assets/gallery-04-size-guide-juujo.png",
+    hover: "/assets/gallery-03-lifestyle-juujo.png",
+    reviews: "478",
+    price: "£49.99",
+    compareAt: "£100.00",
+    href: "/pages/pillow-height-guide",
+  },
+  {
+    name: "High CloudAlign",
+    description:
+      "The higher 10.9 cm profile for broader shoulders and firmer mattresses.",
+    image: "/assets/gallery-02-zones-juujo.png",
+    hover: "/assets/gallery-06-sleepers-juujo.png",
+    reviews: "279",
+    price: "£49.99",
+    compareAt: "£100.00",
+    href: "/pages/pillow-height-guide",
+  },
+  {
+    name: "Matching Cooling Cover",
+    description:
+      "A removable colour-matched spare cover shaped for the CloudAlign contour.",
+    image: "/assets/gallery-07-disclaimer-juujo.png",
+    hover: "/assets/gallery-05-colours-juujo.png",
+    reviews: "956",
+    price: "£9.99",
+    compareAt: "£19.99",
+    href: "/pages/colour-and-cover-guide",
+  },
+];
+
+const pressLogos = [
+  "/assets/logo-press-01.avif",
+  "/assets/logo-press-02.avif",
+  "/assets/logo-press-03.avif",
+  "/assets/logo-lifestyle.avif",
+  "/assets/logo-scary-mommy.webp",
+  "/assets/logo-readers-digest.avif",
+  "/assets/logo-usa-today.avif",
+  "/assets/logo-forbes.avif",
+  "/assets/logo-press-09.avif",
+];
+
+const reviews = [
+  {
+    name: "Stephanie K.",
+    date: "1 Aug 2025",
+    image: "/assets/reviews/review-01.jpg",
+    text: "I just purchased another! This is such an amazing pillow.",
+  },
+  {
+    name: "Emma C.",
+    date: "4 Aug 2025",
+    image: "/assets/reviews/review-02.jpg",
+    text: "It stays cool all night and gives great support for the neck. Super comfortable and just the right height for me. I loved it so much I got another one for my mum!",
+  },
+  {
+    name: "Jessica L.",
+    date: "4 Aug 2025",
+    image: "/assets/reviews/review-03.jpg",
+    text: "Absolutely love it. It is big, super soft, and much gentler than the cervical pillow I was planning to get. It still supports my neck and looks so much nicer too.",
+  },
+  {
+    name: "Emily P.",
+    date: "9 Aug 2025",
+    image: "/assets/reviews/review-04.jpg",
+    text: "I love this. I use it all around my home. I sleep on it, and sometimes I even use it as a back cushion on the sofa.",
+  },
+  {
+    name: "Brooke S.",
+    date: "11 Aug 2025",
+    image: "/assets/reviews/review-05.jpg",
+    text: "Honestly this is better than I expected. I kept seeing people say they loved it, so I had to try it. I have purchased four in total and cannot wait to gift them.",
+  },
+  {
+    name: "Chloe N.",
+    date: "13 Aug 2025",
+    image: "/assets/reviews/review-06.jpg",
+    text: "I have bought so many pillows and this cloud pillow turned out to be the best. After a few nights of sleep, it felt just right.",
+  },
+  {
+    name: "Riley J.",
+    date: "19 Aug 2025",
+    image: "/assets/reviews/review-07.jpg",
+    text: "I am a light sleeper and picky about bedding, but after using it for a month I can honestly say it is the best one I have had. It stays cool and supports my neck perfectly.",
+  },
+  {
+    name: "Heather H.",
+    date: "14 Sep 2025",
+    image: "/assets/reviews/review-08.jpg",
+    text: "I have been recommending this to my patients. I love the functionality of the pillow and Juujo did a great job creating it.",
+    video: true,
+  },
+  {
+    name: "Jordyn G.",
+    date: "17 Aug 2025",
+    image: "/assets/reviews/review-09.jpg",
+    text: "It stays cool all night. It also helps take pressure off my neck and shoulders, so I have not been waking up in pain like I normally would.",
+  },
+  {
+    name: "Valeria M.",
+    date: "24 Aug 2025",
+    image: "/assets/reviews/review-10.jpg",
+    text: "This pillow exceeded my expectations. It is incredibly soft but supportive and cool to the touch. It makes you want five more minutes in bed.",
+    video: true,
+  },
+];
+
+function Stars({ count = 5 }: { count?: number }) {
+  return (
+    <span className="stars" aria-label={`${count} out of 5 stars`}>
+      {Array.from({ length: count }, (_, index) => (
+        <Star key={index} aria-hidden="true" />
+      ))}
+    </span>
+  );
+}
+
+function ProductQuote({ mobile = false }: { mobile?: boolean }) {
+  return (
+    <div className={`customer-quote ${mobile ? "mobile-quote" : "desktop-quote"}`}>
+      <Stars />
+      <p>
+        &ldquo;I did not realise how bad my old pillow was until I tried this.
+        The shape, the feel, the support, everything is just right. My husband
+        stole mine, so now we have two!&rdquo;
+      </p>
+      <strong>Stephanie P.</strong>
+      <span>
+        <BadgeCheck aria-hidden="true" /> Licensed product review
+      </span>
+    </div>
+  );
+}
+
+function CounterRing({ value, label }: { value: number; label: string }) {
+  const [displayValue, setDisplayValue] = useState(0);
+  const ringRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const node = ringRef.current;
+    if (!node) return;
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion) {
+      const frame = requestAnimationFrame(() => setDisplayValue(value));
+      return () => cancelAnimationFrame(frame);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        const startedAt = performance.now();
+        const duration = 1100;
+
+        const update = (now: number) => {
+          const progress = Math.min((now - startedAt) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 4);
+          setDisplayValue(Math.round(value * eased));
+          if (progress < 1) requestAnimationFrame(update);
+        };
+
+        requestAnimationFrame(update);
+        observer.disconnect();
+      },
+      { threshold: 0.45 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [value]);
+
+  return (
+    <article>
+      <div className="counter-ring" ref={ringRef}>
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle className="counter-track" cx="60" cy="60" r="51" />
+          <circle
+            className="counter-progress"
+            cx="60"
+            cy="60"
+            r="51"
+            pathLength="100"
+            style={{ strokeDashoffset: 100 - displayValue }}
+          />
+        </svg>
+        <span>{displayValue}%</span>
+      </div>
+      <p>{label}</p>
+    </article>
+  );
+}
+
+function AccordionList({
+  items,
+  compact = false,
+}: {
+  items: { title: string; content: string }[];
+  compact?: boolean;
+}) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <div className={`accordion-list ${compact ? "compact" : ""}`}>
+      {items.map((item, index) => {
+        const isOpen = openIndex === index;
+        return (
+          <div className="accordion-item" key={item.title}>
+            <button
+              type="button"
+              className="accordion-trigger"
+              aria-expanded={isOpen}
+              onClick={() => setOpenIndex(isOpen ? null : index)}
+            >
+              <span>{item.title}</span>
+              <span className="accordion-symbol" aria-hidden="true">
+                {isOpen ? "-" : "+"}
+              </span>
+            </button>
+            <div className={`accordion-content ${isOpen ? "open" : ""}`}>
+              <p>{item.content}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 export function ProductPage() {
   const [galleryIndex, setGalleryIndex] = useState(0);
-  const [colour, setColour] = useState<PillowColour>("white");
-  const [height, setHeight] = useState<PillowHeight>("regular");
-  const [quantity, setQuantity] = useState<BundleQuantity>(2);
-  const [includeCovers, setIncludeCovers] = useState(false);
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [selectedColour, setSelectedColour] = useState("White");
+  const [selectedSize, setSelectedSize] = useState("Regular");
+  const [selectedBundle, setSelectedBundle] = useState(2);
+  const [includeCovers, setIncludeCovers] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [videoPlaying, setVideoPlaying] = useState(true);
+  const [reviewsExpanded, setReviewsExpanded] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const thumbnailStripRef = useRef<HTMLDivElement>(null);
+  const gallerySwipeStart = useRef<number | null>(null);
   const cart = useCart();
-  const bundle = getBundle(quantity);
-  const total =
-    bundle.priceCents + (includeCovers ? bundle.coverPriceCents : 0);
+  const selectedBundleDetails =
+    bundles.find((bundle) => bundle.id === selectedBundle) ?? bundles[1];
 
-  function addToCart() {
-    cart.addLine({ colour, height, quantity, includeCovers });
-  }
+  const addToCart = () => {
+    cart.addLine({
+      colour: colourIds[selectedColour],
+      height: heightIds[selectedSize],
+      quantity: selectedBundle as BundleQuantity,
+      includeCovers,
+    });
+  };
+
+  useEffect(() => {
+    const revealNodes = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-reveal]"),
+    );
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reduceMotion) {
+      revealNodes.forEach((node) => node.classList.add("is-visible"));
+      return;
+    }
+
+    document.documentElement.classList.add("reveal-ready");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "0px 0px -60px", threshold: 0.08 },
+    );
+
+    revealNodes.forEach((node) => observer.observe(node));
+    return () => {
+      observer.disconnect();
+      document.documentElement.classList.remove("reveal-ready");
+    };
+  }, []);
+
+  useEffect(() => {
+    const strip = thumbnailStripRef.current;
+    const selected = strip?.querySelector<HTMLElement>(
+      `[data-gallery-index="${galleryIndex}"]`,
+    );
+    if (!strip || !selected) return;
+
+    const left =
+      selected.offsetLeft - strip.clientWidth / 2 + selected.clientWidth / 2;
+    strip.scrollTo({ left, behavior: "smooth" });
+  }, [galleryIndex]);
+
+  const showPrevious = () =>
+    setGalleryIndex((current) => (current - 1 + gallery.length) % gallery.length);
+  const showNext = () =>
+    setGalleryIndex((current) => (current + 1) % gallery.length);
+
+  const finishGallerySwipe = (clientX: number) => {
+    if (gallerySwipeStart.current === null) return;
+    const distance = clientX - gallerySwipeStart.current;
+    gallerySwipeStart.current = null;
+    if (Math.abs(distance) < 42) return;
+    if (distance > 0) showPrevious();
+    else showNext();
+  };
+
+  const toggleVideo = () => {
+    if (!videoRef.current) return;
+    if (videoRef.current.paused) {
+      void videoRef.current.play();
+      setVideoPlaying(true);
+      return;
+    }
+    videoRef.current.pause();
+    setVideoPlaying(false);
+  };
 
   return (
-    <main>
-      <section className="product-buying-area">
+    <main className="approved-product-page">
+      <a className="skip-link" href="#product">
+        Skip to content
+      </a>
+
+      <div className="announcement" aria-label="Current offers">
+        <div className="announcement-track">
+          {Array.from({ length: 6 }, (_, index) => (
+            <span key={index}>
+              Up to 50% Off CloudAlign
+              <b aria-hidden="true" />
+              Free Tracked UK Delivery
+              <b aria-hidden="true" />
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <header className="site-header">
+        <button
+          type="button"
+          className="icon-button mobile-menu-button"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          onClick={() => setMenuOpen((open) => !open)}
+        >
+          {menuOpen ? <X /> : <Menu />}
+        </button>
+        <nav className={menuOpen ? "open" : ""} aria-label="Primary navigation">
+          <a href="#product">Shop</a>
+          <a href="#story">About</a>
+          <a href="#reviews">Ambassadors</a>
+        </nav>
+        <a className="wordmark" href="#product" aria-label="Juujo home">
+          juujo
+        </a>
+        <div className="header-actions">
+          <button type="button" className="icon-button" aria-label="Search">
+            <Search />
+          </button>
+          <button
+            type="button"
+            className="icon-button"
+            aria-label={`Open basket with ${cart.itemCount} items`}
+            onClick={cart.open}
+          >
+            <ShoppingBag />
+            <span className="cart-count">{cart.itemCount}</span>
+          </button>
+        </div>
+      </header>
+
+      <section className="product-section" id="product">
         <div className="product-gallery">
           <div
             className="gallery-stage"
-            onTouchStart={(event) => {
-              event.currentTarget.dataset.startX = String(
-                event.touches[0].clientX,
-              );
+            role="group"
+            aria-label="CloudAlign product gallery"
+            tabIndex={0}
+            onKeyDown={(event) => {
+              if (event.key === "ArrowLeft") showPrevious();
+              if (event.key === "ArrowRight") showNext();
             }}
-            onTouchEnd={(event) => {
-              const start = Number(event.currentTarget.dataset.startX);
-              const distance = event.changedTouches[0].clientX - start;
-              if (Math.abs(distance) < 45) return;
-              setGalleryIndex((current) =>
-                distance < 0
-                  ? (current + 1) % gallery.length
-                  : (current - 1 + gallery.length) % gallery.length,
-              );
+            onPointerDown={(event) => {
+              gallerySwipeStart.current = event.clientX;
+            }}
+            onPointerUp={(event) => finishGallerySwipe(event.clientX)}
+            onPointerCancel={() => {
+              gallerySwipeStart.current = null;
             }}
           >
-            <img
-              src={gallery[galleryIndex].src}
-              alt={gallery[galleryIndex].alt}
-              width="1200"
-              height="1200"
-            />
+            {gallery.map((image, index) => (
+              <img
+                key={image.src}
+                className={`gallery-main ${
+                  galleryIndex === index ? "active" : ""
+                }`}
+                src={image.src}
+                alt={galleryIndex === index ? image.alt : ""}
+                aria-hidden={galleryIndex !== index}
+              />
+            ))}
             <button
-              className="gallery-arrow previous"
               type="button"
-              aria-label="Previous image"
-              onClick={() =>
-                setGalleryIndex(
-                  (current) => (current - 1 + gallery.length) % gallery.length,
-                )
-              }
+              className="gallery-arrow previous"
+              aria-label="Previous product image"
+              onClick={showPrevious}
             >
               <ArrowLeft />
             </button>
             <button
-              className="gallery-arrow next"
               type="button"
-              aria-label="Next image"
-              onClick={() =>
-                setGalleryIndex((current) => (current + 1) % gallery.length)
-              }
+              className="gallery-arrow next"
+              aria-label="Next product image"
+              onClick={showNext}
             >
               <ArrowRight />
             </button>
-            <span className="gallery-count">
-              {galleryIndex + 1} / {gallery.length}
-            </span>
           </div>
-          <div className="thumbnail-strip" aria-label="Product images">
-            {gallery.map((item, index) => (
+          <div
+            className="thumbnail-strip"
+            aria-label="Product images"
+            ref={thumbnailStripRef}
+          >
+            {gallery.map((image, index) => (
               <button
-                key={item.src}
                 type="button"
-                className={galleryIndex === index ? "active" : ""}
-                onClick={() => setGalleryIndex(index)}
+                key={image.src}
+                data-gallery-index={index}
+                className={index === galleryIndex ? "selected" : ""}
                 aria-label={`Show product image ${index + 1}`}
+                aria-pressed={index === galleryIndex}
+                onClick={() => setGalleryIndex(index)}
               >
-                <img src={item.src} alt="" width="120" height="120" />
+                <img src={image.src} alt="" />
               </button>
             ))}
           </div>
+          <ProductQuote />
         </div>
 
         <div className="purchase-panel">
-          <div className="rating-line">
-            <StarRating rating={siteConfig.reviewRating} />
-            <a href="#customer-reviews">
-              {siteConfig.reviewCount.toLocaleString("en-GB")} reviews
-            </a>
+          <a className="rating-row" href="#reviews">
+            <Stars />
+            <span>(42,093)</span>
+          </a>
+          <h1>CloudAlign&trade; Pillow</h1>
+          <div className="price-row">
+            <strong>{selectedBundleDetails.price}</strong>
+            <del>{selectedBundleDetails.compareAt}</del>
           </div>
-          <p className="eyebrow">{product.eyebrow}</p>
-          <h1>{product.name}</h1>
-          <div className="product-price">
-            <strong>{formatMoney(bundle.priceCents)}</strong>
-            <del>{formatMoney(bundle.compareAtCents)}</del>
-            <span>
-              Save {formatMoney(bundle.compareAtCents - bundle.priceCents)}
-            </span>
-          </div>
-          <p className="product-description">{product.description}</p>
-          <div className="mini-benefits">
-            {product.highlights.slice(0, 4).map((benefit) => (
-              <span key={benefit}>
-                <Check aria-hidden="true" /> {benefit}
-              </span>
-            ))}
-          </div>
+          <p className="comparable">
+            Savings based on comparable value. <u>Learn more</u>
+          </p>
 
-          <fieldset className="option-group">
+          <fieldset className="option-fieldset">
             <legend>
-              Colour:{" "}
-              <strong>
-                {colours.find((item) => item.id === colour)?.name}
-              </strong>
+              Select Color: <strong>{selectedColour}</strong>
             </legend>
             <div className="swatches">
-              {colours.map((item) => (
+              {colours.map((swatch) => (
                 <button
-                  key={item.id}
-                  className={colour === item.id ? "active" : ""}
                   type="button"
-                  aria-label={item.name}
-                  title={item.name}
-                  onClick={() => setColour(item.id)}
+                  key={swatch.name}
+                  className={selectedColour === swatch.name ? "selected" : ""}
+                  aria-label={swatch.name}
+                  aria-pressed={selectedColour === swatch.name}
+                  title={swatch.name}
+                  style={{ "--swatch": swatch.colour } as React.CSSProperties}
+                  onClick={() => setSelectedColour(swatch.name)}
+                />
+              ))}
+            </div>
+          </fieldset>
+
+          <fieldset className="option-fieldset">
+            <legend>Select Size:</legend>
+            <div className="segmented-control">
+              {["Regular", "High"].map((size) => (
+                <button
+                  type="button"
+                  key={size}
+                  className={selectedSize === size ? "selected" : ""}
+                  aria-pressed={selectedSize === size}
+                  onClick={() => setSelectedSize(size)}
                 >
-                  <span style={{ background: item.swatch }} />
+                  {size}
                 </button>
               ))}
             </div>
           </fieldset>
 
-          <fieldset className="option-group">
-            <legend>
-              Height:{" "}
-              <strong>
-                {heights.find((item) => item.id === height)?.name}
-              </strong>
-            </legend>
-            <div className="height-options">
-              {heights.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className={height === item.id ? "active" : ""}
-                  onClick={() => setHeight(item.id)}
-                >
-                  <strong>{item.name}</strong>
-                  <span>{item.depth}</span>
-                </button>
-              ))}
-            </div>
-            <p className="selection-help">
-              {heights.find((item) => item.id === height)?.recommendation}
-            </p>
-          </fieldset>
-
-          <fieldset className="bundle-fieldset">
-            <legend>BUY MORE - SAVE MORE</legend>
-            <div className="bundle-options">
-              {bundles.map((item) => (
-                <label
-                  key={item.quantity}
-                  className={quantity === item.quantity ? "active" : ""}
-                >
-                  <input
-                    type="radio"
-                    name="bundle"
-                    value={item.quantity}
-                    checked={quantity === item.quantity}
-                    onChange={() => setQuantity(item.quantity)}
-                  />
-                  <span className="radio-dot" />
-                  <span className="bundle-name">
-                    {item.badge && <b>{item.badge}</b>}
-                    <strong>{item.name}</strong>
-                    <small>
-                      Save{" "}
-                      {formatMoney(item.compareAtCents - item.priceCents)}
-                    </small>
-                  </span>
-                  <span className="bundle-price">
-                    <strong>{formatMoney(item.priceCents)}</strong>
-                    <del>{formatMoney(item.compareAtCents)}</del>
-                  </span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-
-          <label className="cover-upsell">
-            <input
-              type="checkbox"
-              checked={includeCovers}
-              onChange={(event) => setIncludeCovers(event.target.checked)}
-            />
-            <span>
-              <strong>
-                Add {quantity} colour-matched replacement{" "}
-                {quantity === 1 ? "cover" : "covers"}
-              </strong>
-              <small>Protect the pillow while the original cover is washed.</small>
-            </span>
-            <b>{formatMoney(bundle.coverPriceCents)}</b>
-          </label>
-
-          <button className="add-to-cart-button" type="button" onClick={addToCart}>
-            Add to basket - {formatMoney(total)}
-            <ArrowRight aria-hidden="true" />
-          </button>
-          <div className="checkout-trust">
-            <span>
-              <PackageCheck aria-hidden="true" /> Free tracked delivery
-            </span>
-            <span>
-              <ShieldCheck aria-hidden="true" /> Secure checkout
-            </span>
-          </div>
-          <div className="comfort-trial">
-            <BadgeCheck aria-hidden="true" />
-            <div>
-              <strong>90-night comfort trial</strong>
-              <span>Give your body time to settle into a new sleep position.</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="feature-strip">
-        {featureRows.map(({ icon: Icon, title, copy }) => (
-          <article key={title}>
-            <Icon aria-hidden="true" />
-            <div>
-              <h2>{title}</h2>
-              <p>{copy}</p>
-            </div>
-          </article>
-        ))}
-      </section>
-
-      <section className="story-section">
-        <div className="story-copy">
-          <p className="eyebrow">Every curve has a purpose</p>
-          <h2>One pillow. Six support zones.</h2>
-          <p>
-            CloudAlign gives your head a stable centre while creating more room
-            around the neck, shoulder and arm. Rotate it to change the contour
-            height without stacking another pillow.
-          </p>
-          <div className="zone-list">
-            {[
-              "Central head cradle",
-              "Upper neck contour",
-              "Lower neck contour",
-              "Left shoulder wing",
-              "Right shoulder wing",
-              "Arm-rest channels",
-            ].map((item, index) => (
-              <span key={item}>
-                <b>{String(index + 1).padStart(2, "0")}</b> {item}
-              </span>
+          <div className="claim-list">
+            {productClaims.map(({ icon: Icon, text }) => (
+              <div key={text}>
+                <Icon aria-hidden="true" />
+                <span>{text}</span>
+              </div>
             ))}
           </div>
-        </div>
-        <div className="story-media">
-          <img
-            src="/assets/gallery/support-zones.png"
-            alt="Six support zones on the CloudAlign pillow"
-            width="1200"
-            height="1200"
-          />
-        </div>
-      </section>
 
-      <section className="video-story">
-        <div className="video-shell">
-          <video
-            src="/assets/profile-guide-loop.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            aria-label="Animated Regular and High CloudAlign profile guide"
-          />
-        </div>
-        <div>
-          <p className="eyebrow">Find your side</p>
-          <h2>Two heights, one stable sleep surface.</h2>
-          <p>
-            Use the higher contour when you need more shoulder clearance.
-            Rotate to the lower side for a gentler lift when sleeping on your
-            back or using a softer mattress.
+          <p className="size-guide">
+            <strong>Size Guide:</strong>
+            <span>Under 5&apos;7 Tall = Regular</span>
+            <span>Above 5&apos;7 Tall = High</span>
           </p>
-          <Link className="text-link" href="/pages/pillow-height-guide">
-            Open the height guide <ArrowRight aria-hidden="true" />
-          </Link>
-        </div>
-      </section>
 
-      <section className="colour-story">
-        <div>
-          <p className="eyebrow">Made for the room you sleep in</p>
-          <h2>Four calm colours. Matching washable covers.</h2>
-          <p>
-            Choose crisp White, soft Grey, Baby Blue or deep Navy Blue. Add
-            matching spare covers to keep the same clean contour between wash
-            days.
-          </p>
-        </div>
-        <img
-          src="/assets/gallery/four-colours.png"
-          alt="Four Juujo pillow colours without product tags"
-          width="1536"
-          height="1024"
-        />
-      </section>
-
-      <section className="comparison-section">
-        <div className="section-heading">
-          <p className="eyebrow">CloudAlign vs a traditional pillow</p>
-          <h2>Support that does not need constant rebuilding.</h2>
-        </div>
-        <div className="comparison-table" role="table">
-          <div className="comparison-head" role="row">
-            <span role="columnheader">What matters</span>
-            <strong role="columnheader">CloudAlign</strong>
-            <span role="columnheader">Traditional pillow</span>
+          <div className="bundle-block">
+            <h2>BUY MORE - SAVE MORE</h2>
+            {bundles.map((bundle) => (
+              <div
+                className={`bundle-card bundle-card-${bundle.id} ${
+                  selectedBundle === bundle.id ? "selected" : ""
+                }`}
+                key={bundle.id}
+              >
+                {bundle.badge ? (
+                  <span
+                    className={`bundle-badge bundle-badge-${bundle.badgeType}`}
+                  >
+                    {bundle.badgeType === "popular" ? (
+                      <>
+                        <span>Most</span>
+                        <strong>Popular</strong>
+                      </>
+                    ) : (
+                      bundle.badge
+                    )}
+                  </span>
+                ) : null}
+                <button
+                  type="button"
+                  className="bundle-choice"
+                  onClick={() => setSelectedBundle(bundle.id)}
+                  aria-pressed={selectedBundle === bundle.id}
+                >
+                  <span className="radio-dot" aria-hidden="true" />
+                  <span className="bundle-copy">
+                    <span className="bundle-title-line">
+                      <strong>{bundle.title}</strong>
+                      {bundle.label ? <b>{bundle.label}</b> : null}
+                    </span>
+                    <small>{bundle.note}</small>
+                  </span>
+                  <span className="bundle-prices">
+                    <em>{bundle.price}</em>
+                    <del>{bundle.compareAt}</del>
+                  </span>
+                </button>
+                {selectedBundle === 2 && bundle.id === 2 ? (
+                  <div className="bundle-config" aria-label="Bundle options">
+                    <p>Color, Size</p>
+                    {[1, 2].map((pillow) => (
+                      <div key={pillow}>
+                        <span>#{pillow}</span>
+                        <label className="bundle-select colour-select">
+                          <span className="sr-only">
+                            Pillow {pillow} colour
+                          </span>
+                          <select defaultValue="White">
+                            <option>White</option>
+                            <option>Baby Blue</option>
+                            <option>Gray</option>
+                            <option>Navy Blue</option>
+                          </select>
+                        </label>
+                        <label className="bundle-select">
+                          <span className="sr-only">
+                            Pillow {pillow} size
+                          </span>
+                          <select defaultValue="Regular">
+                            <option>Regular</option>
+                            <option>High</option>
+                          </select>
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+                <label className="bundle-upsell">
+                  <input
+                    type="checkbox"
+                    checked={selectedBundle === bundle.id && includeCovers}
+                    onChange={(event) => {
+                      setSelectedBundle(bundle.id);
+                      setIncludeCovers(event.target.checked);
+                    }}
+                  />
+                  <span>{bundle.upsell}</span>
+                  <span className="bundle-upsell-prices">
+                    <strong>{bundle.upsellPrice}</strong>
+                    <del>{bundle.upsellCompareAt}</del>
+                  </span>
+                </label>
+              </div>
+            ))}
           </div>
-          {comparisonRows.map(([label, juujo, other]) => (
-            <div key={label} role="row">
-              <strong role="cell">{label}</strong>
-              <span role="cell">
-                <Check aria-hidden="true" /> {juujo}
-              </span>
-              <span role="cell">{other}</span>
+
+          <button type="button" className="add-to-cart" onClick={addToCart}>
+            Add to cart - {selectedBundleDetails.price}
+          </button>
+
+          <div className="trust-row">
+            <div>
+              <img src="/assets/trial.webp" alt="" />
+              <span>90-Night Comfort Trial</span>
             </div>
+            <div>
+              <img src="/assets/returns.avif" alt="" />
+              <span>Hassle-Free Returns</span>
+            </div>
+          </div>
+
+          <AccordionList items={overviewItems} compact />
+          <ProductQuote mobile />
+        </div>
+      </section>
+
+      <section
+        className="press-marquee"
+        aria-label="Featured publications"
+        data-reveal
+      >
+        <div className="press-track">
+          {[...pressLogos, ...pressLogos].map((logo, index) => (
+            <img src={logo} alt="" key={`${logo}-${index}`} />
           ))}
         </div>
       </section>
 
-      <div id="customer-reviews">
-        <ReviewGrid />
-      </div>
-
-      <section className="faq-section">
-        <div className="faq-intro">
-          <p className="eyebrow">Questions before bed</p>
-          <h2>CloudAlign FAQs</h2>
-          <p>
-            Need another answer? Contact{" "}
-            <a href={`mailto:${siteConfig.supportEmail}`}>
-              {siteConfig.supportEmail}
-            </a>
-            .
-          </p>
-        </div>
-        <div className="accordion-list">
-          {productFaqs.map((item, index) => {
-            const open = openFaq === index;
-            return (
-              <article key={item.question}>
-                <button
-                  type="button"
-                  aria-expanded={open}
-                  onClick={() => setOpenFaq(open ? null : index)}
-                >
-                  <span>{item.question}</span>
-                  <ChevronDown className={open ? "open" : ""} />
-                </button>
-                <div className={open ? "open" : ""}>
-                  <p>{item.answer}</p>
-                </div>
-              </article>
-            );
-          })}
+      <section className="feature-band" id="story" data-reveal>
+        <div className="feature-split">
+          <div className="feature-image">
+            <img
+              className="cool-shift"
+              src="/assets/feature-zones.webp"
+              alt="CloudAlign pillow three-zone support"
+            />
+          </div>
+          <div className="feature-copy">
+            <h2>One Pillow. Three Zones. Zero Compromises</h2>
+            <p>
+              Say goodbye to flat pillows, awkward angles, and one-size-fits-all
+              shapes. The SwitchFit design gives you dual-height support,
+              ergonomic zones, and custom comfort without shifting or bunching.
+            </p>
+            <AccordionList items={zoneItems} compact />
+          </div>
         </div>
       </section>
 
-      <div className="mobile-buy-bar">
+      <section className="reviews-section" id="reviews" data-reveal>
+        <div className="section-heading">
+          <p className="eyebrow">REAL SLEEPERS, REAL COMFORT</p>
+          <h2>Customer reviews</h2>
+        </div>
+        <div className="reviews-toolbar">
+          <div className="rating-breakdown">
+            <strong>4.8</strong>
+            <div>
+              <Stars />
+              <span>Based on 42,093 reviews</span>
+            </div>
+          </div>
+          <button type="button" className="write-review">
+            Write a review
+          </button>
+        </div>
+        <div className="review-tabs" aria-label="Review type">
+          <button type="button" className="selected">
+            Product reviews <span>42.1k</span>
+          </button>
+          <button type="button">
+            Store reviews <span>31</span>
+          </button>
+        </div>
+        <div className="review-grid">
+          {reviews
+            .slice(0, reviewsExpanded ? reviews.length : 8)
+            .map((review) => (
+              <article className="review-card" key={review.name}>
+                <div className="review-media">
+                  <img
+                    src={review.image}
+                    alt={`CloudAlign pillow photographed by ${review.name}`}
+                  />
+                  {review.video ? (
+                    <span className="review-play" aria-hidden="true">
+                      <Play />
+                    </span>
+                  ) : null}
+                </div>
+                <div className="review-body">
+                  <div className="review-author">
+                    <strong>{review.name}</strong>
+                    <span>
+                      <BadgeCheck aria-hidden="true" /> Licensed review
+                    </span>
+                  </div>
+                  <time>{review.date}</time>
+                  <Stars />
+                  <p>{review.text}</p>
+                </div>
+              </article>
+            ))}
+        </div>
+        <div className="review-more-wrap">
+          <button
+            type="button"
+            className="review-more"
+            onClick={() => setReviewsExpanded((expanded) => !expanded)}
+          >
+            {reviewsExpanded ? "Show fewer reviews" : "Show more reviews"}
+          </button>
+        </div>
+      </section>
+
+      <section className="chiropractor-section" data-reveal>
+        <div className="chiropractor-copy">
+          <h2>Trusted By Chiropractors. Loved By Sleepers.</h2>
+          <p>
+            Dual-height design. Built-in alignment support. No fluffing needed.
+            Chiropractor-approved comfort starts here.
+          </p>
+        </div>
+        <div className="video-shell">
+          <video
+            ref={videoRef}
+            src="/assets/chiropractor-loop.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <button
+            type="button"
+            className="video-toggle"
+            aria-label={videoPlaying ? "Pause video" : "Play video"}
+            onClick={toggleVideo}
+          >
+            {videoPlaying ? <Pause /> : <Play />}
+          </button>
+          <span className="video-brand-label" aria-hidden="true">
+            juujo
+          </span>
+        </div>
+        <div className="chiropractor-details">
+          <AccordionList items={chiropractorItems} compact />
+        </div>
+      </section>
+
+      <section className="support-section" data-reveal>
+        <div className="section-heading">
+          <h2>Ergonomic Support That Adapts to You</h2>
+        </div>
+        <div className="support-grid">
+          <article>
+            <img
+              src="/assets/feature-wing.webp"
+              alt="Side sleeper resting on the CloudAlign pillow"
+            />
+            <h3>Side Sleeper Wing</h3>
+            <p>Contours to relieve shoulder and neck pressure.</p>
+          </article>
+          <article>
+            <img
+              className="cool-shift"
+              src="/assets/feature-switchfit.avif"
+              alt="SwitchFit dual-height pillow design"
+            />
+            <h3>SwitchFit&trade; Design</h3>
+            <p>Adjustable dual-height design for personalised comfort.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="faq-section" id="faq" data-reveal>
+        <div className="faq-intro">
+          <h2>Frequently Asked Questions</h2>
+          <p>Everything you need to know about the CloudAlign Pillow.</p>
+        </div>
+        <AccordionList items={faqItems} />
+      </section>
+
+      <section className="countup-section" data-reveal>
+        <div className="section-heading">
+          <h2>Trusted By Thousands Of Happy Sleepers</h2>
+          <p>Real people are sleeping deeper, cooler, and more comfortably.</p>
+        </div>
+        <div className="counter-grid">
+          <CounterRing
+            value={95}
+            label="of Juujo customers sleep at their ideal temperature"
+          />
+          <CounterRing
+            value={98}
+            label="would recommend Juujo to family and friends"
+          />
+          <CounterRing
+            value={92}
+            label="of Juujo customers have left 5-star reviews"
+          />
+        </div>
+        <a className="light-button" href="#product">
+          Shop Now
+        </a>
+      </section>
+
+      <section className="related-section" data-reveal>
+        <div className="section-heading related-heading">
+          <h2>Complete Your Sleep Routine</h2>
+          <p>
+            Choose your contour height, colour and matching cover without
+            adding unrelated products to your sleep setup.
+          </p>
+        </div>
+        <div className="related-grid">
+          {relatedProducts.map((product) => (
+            <article className="product-card" key={product.name}>
+              <div className="related-image">
+                <img className="main" src={product.image} alt={product.name} />
+                <img className="hover" src={product.hover} alt="" />
+              </div>
+              <div className="mini-rating">
+                <Stars />
+                <span>({product.reviews})</span>
+              </div>
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+              <div className="mini-price">
+                <strong>{product.price}</strong>
+                <del>{product.compareAt}</del>
+              </div>
+              <Link className="related-action" href={product.href}>
+                Learn More
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <footer>
+        <section className="footer-cta">
+          <div>
+            <p>
+              <Stars /> 100,000+ Happy Sleepers
+            </p>
+            <h2>Cloud-like comfort is just a click away. Try Juujo today.</h2>
+          </div>
+          <a href="#product">Sleep Better</a>
+        </section>
+        <div className="footer-grid">
+          <div>
+            <h3>Shop</h3>
+            <a href="#product">CloudAlign Pillow</a>
+            <Link href="/pages/pillow-height-guide">Choose Your Height</Link>
+            <Link href="/pages/colour-and-cover-guide">
+              Colour &amp; Cover Guide
+            </Link>
+            <Link href="/pages/sleep-quiz">Sleep Quiz</Link>
+          </div>
+          <div>
+            <h3>Learn</h3>
+            <Link href="/pages/about-us">About Us</Link>
+            <Link href="/blog">Journal</Link>
+            <Link href="/pages/how-it-works">How It Works</Link>
+            <Link href="/pages/customer-reviews">Customer Reviews</Link>
+          </div>
+          <div>
+            <h3>Support</h3>
+            <Link href="/pages/contact-us">Contact Us</Link>
+            <Link href="/order-tracking">Tracking</Link>
+            <Link href="/sign-in">Account</Link>
+            <Link href="/pages/faqs">FAQs</Link>
+            <Link href="/policies/privacy-policy">Privacy Policy</Link>
+            <Link href="/policies/terms-of-service">Terms of Service</Link>
+            <Link href="/policies/return-policy">Returns</Link>
+            <Link href="/policies/shipping-policy">Shipping Policy</Link>
+          </div>
+          <div>
+            <h3>Social</h3>
+            <a href="#reviews">Instagram</a>
+            <a href="#reviews">Facebook</a>
+            <a href="#reviews">TikTok</a>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <span>&copy; Copyright JUUJO</span>
+        </div>
+        <div className="footer-watermark" aria-hidden="true">
+          juujo
+        </div>
+      </footer>
+
+      <div className="approved-mobile-buy-bar">
         <div>
-          <strong>{formatMoney(total)}</strong>
-          <span>{quantity} {quantity === 1 ? "pillow" : "pillows"}</span>
+          <strong>{selectedBundleDetails.price}</strong>
+          <span>
+            {selectedBundle} {selectedBundle === 1 ? "pillow" : "pillows"}
+          </span>
         </div>
         <button type="button" onClick={addToCart}>
-          Add to basket <ArrowRight />
+          Add to cart
         </button>
       </div>
     </main>

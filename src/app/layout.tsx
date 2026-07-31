@@ -8,6 +8,7 @@ import { Header } from "@/components/Header";
 import { MarketingIntegrations } from "@/components/MarketingIntegrations";
 import { siteConfig } from "@/data/store";
 import "./globals.css";
+import "./approved-product.css";
 
 const inter = localFont({
   src: [
@@ -56,7 +57,13 @@ export const metadata: Metadata = {
     title: "Juujo CloudAlign Pillow",
     description:
       "Sculpted memory-foam support for side, back and stomach sleepers.",
-    images: [{ url: "/assets/gallery/hero-bedroom.png", width: 1536, height: 1024 }],
+    images: [
+      {
+        url: "/assets/gallery-01-hero-juujo.png",
+        width: 1255,
+        height: 1255,
+      },
+    ],
   },
 };
 

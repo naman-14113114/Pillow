@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Menu, ShoppingBag, UserRound, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "@/components/CartProvider";
 import { siteConfig } from "@/data/store";
@@ -15,8 +16,11 @@ const nav = [
 ] as const;
 
 export function Header() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const cart = useCart();
+
+  if (pathname === siteConfig.productPath) return null;
 
   return (
     <>

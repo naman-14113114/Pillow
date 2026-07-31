@@ -138,52 +138,48 @@ export const product = {
 
 export const gallery = [
   {
-    src: "/assets/gallery/studio-product.png",
-    alt: "Two tag-free white Juujo CloudAlign pillows showing the sculpted top and side profiles",
+    src: "/assets/gallery-01-hero-juujo.png",
+    alt: "Tag-free CloudAlign pillow with best-selling pillow award artwork",
   },
   {
-    src: "/assets/gallery/hero-bedroom.png",
-    alt: "White and navy Juujo CloudAlign pillows in a bright bedroom",
+    src: "/assets/gallery-02-zones-juujo.png",
+    alt: "CloudAlign pillow six-zone support diagram",
   },
   {
-    src: "/assets/gallery/model-side-sleeper.png",
-    alt: "A side sleeper resting on the white Juujo CloudAlign pillow",
+    src: "/assets/gallery-03-lifestyle-juujo.png",
+    alt: "CloudAlign pillow supporting a sleeping model",
   },
   {
-    src: "/assets/gallery/four-colours.png",
-    alt: "Juujo CloudAlign pillow in White, Grey, Baby Blue and Navy Blue",
+    src: "/assets/gallery-04-size-guide-juujo.png",
+    alt: "CloudAlign Regular and High pillow size guide",
   },
   {
-    src: "/assets/gallery/support-zones.png",
-    alt: "Six ergonomic support areas of the Juujo CloudAlign pillow",
+    src: "/assets/gallery-05-colours-juujo.png",
+    alt: "Four tag-free CloudAlign colours: White, Grey, Baby Blue and Navy Blue",
   },
   {
-    src: "/assets/gallery/bundle-packaging.png",
-    alt: "Juujo pillow bundle, replacement cover, packaging and side-sleeper guide",
+    src: "/assets/gallery-06-sleepers-juujo.png",
+    alt: "Tag-free CloudAlign pillow in four sleeping positions",
   },
   {
-    src: "/assets/gallery/licensed-zones.png",
-    alt: "CloudAlign head, neck and shoulder support zones",
+    src: "/assets/gallery-07-disclaimer-juujo.png",
+    alt: "Removable machine-washable CloudAlign cover",
   },
   {
-    src: "/assets/gallery/size-guide.png",
-    alt: "Regular and High Juujo pillow height guide",
+    src: "/assets/gallery-08-callouts-juujo.png",
+    alt: "CloudAlign ergonomic feature callouts",
   },
   {
-    src: "/assets/gallery/sleep-positions.png",
-    alt: "CloudAlign support for side, back and stomach sleeping",
+    src: "/assets/gallery-09-chiro-juujo.png",
+    alt: "CloudAlign pillow recommendation artwork",
   },
   {
-    src: "/assets/gallery/cover-care.png",
-    alt: "Breathable removable CloudAlign pillow cover",
+    src: "/assets/gallery-10-comparison-juujo.png",
+    alt: "Juujo CloudAlign pillow comparison",
   },
   {
-    src: "/assets/gallery/feature-callouts.png",
-    alt: "CloudAlign contour feature callouts",
-  },
-  {
-    src: "/assets/gallery/pillow-comparison.png",
-    alt: "CloudAlign ergonomic pillow compared with a traditional pillow",
+    src: "/assets/gallery-11-model-juujo.png",
+    alt: "Model holding a tag-free CloudAlign pillow",
   },
 ] as const;
 
