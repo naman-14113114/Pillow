@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Juujo UK
 
-## Getting Started
+Production Next.js storefront for the Juujo CloudAlign Pillow.
 
-First, run the development server:
+## Local development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The default local URL is `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Verification
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint
+npm run typecheck
+npm run verify
+npm run build
+```
 
-## Learn More
+`npm run verify` checks required routes and assets, scans for inherited store
+branding, and verifies that the product-only comfort-trial statement does not
+leak into other routes.
 
-To learn more about Next.js, take a look at the following resources:
+## Integrations
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Copy `.env.example` to `.env.local` and supply the owner-controlled credentials.
+The storefront is fully previewable without them. Checkout, accounts, mirrored
+orders, analytics, chat and live tracking remain in staging mode until their
+corresponding variables are configured.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+PlusBase remains the payment and fulfilment authority. Supabase stores customer
+profiles, checkout sessions, mirrored order status and review records.
 
-## Deploy on Vercel
+## Product mapping
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Eight pillow variants are required:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- White, Grey, Baby Blue and Navy Blue
+- Regular and High for each colour
+
+Four matching replacement-cover variant IDs are required. The server validates
+all product, height, colour, bundle and cover combinations before preparing a
+PlusBase checkout.
+
+Claims that require transferable certification, award, professional approval or
+measured performance evidence are retained in the central product configuration
+with `enabled: false`. They must not be enabled until the supporting evidence is
+available for the exact supplied product.
+
+## Physical product imagery
+
+The physical pillow and cover have no Juujo wordmark, logo, printed label or
+sewn brand tag. Branding is limited to the storefront UI, packaging and printed
+guide.
