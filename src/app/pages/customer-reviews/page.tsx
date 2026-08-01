@@ -29,10 +29,10 @@ export default function Page() {
           </Link>
         </div>
         <img
-          src="/assets/gallery-11-model-juujo.png"
-          alt="Woman holding a tag-free CloudAlign pillow"
-          width="1255"
-          height="1255"
+          src="/assets/editorial/couple-cloudalign.webp"
+          alt="Couple sitting together with a white tag-free CloudAlign pillow"
+          width="1400"
+          height="1749"
         />
       </section>
       <ReviewGrid />

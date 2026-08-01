@@ -10,6 +10,11 @@ const pages = {
     description:
       "Understand the central cradle, neck contours, shoulder wings and arm channels.",
     image: "/assets/gallery-02-zones-juujo.png",
+    editorialImage: "/assets/editorial/foam-compression.webp",
+    editorialAlt: "Hand pressing into the responsive CloudAlign pillow surface",
+    editorialTitle: "Responsive support you can feel.",
+    editorialCopy:
+      "The high-density memory-foam core compresses under pressure and returns to its sculpted contour when that pressure lifts.",
     sections: [
       ["A stable centre", "The broad central area cradles the head without loose filling shifting to the edges."],
       ["Room for the shoulder", "Concave side edges and raised wings create a defined place for the shoulder and arm."],
@@ -21,6 +26,11 @@ const pages = {
     description:
       "Match the CloudAlign contour to your shoulder frame, mattress and usual sleep position.",
     image: "/assets/gallery-04-size-guide-juujo.png",
+    editorialImage: "/assets/editorial/side-sleeper-man.webp",
+    editorialAlt: "Man sleeping on his side with a CloudAlign contour pillow",
+    editorialTitle: "Start with the gap between shoulder and mattress.",
+    editorialCopy:
+      "A side sleeper usually needs enough height to support the head without pushing it upward. Your frame and mattress firmness determine the best starting profile.",
     sections: [
       ["Choose Regular", "Start with Regular if you have a smaller frame, sleep on your back, or use a softer mattress."],
       ["Choose High", "Start with High if you have broader shoulders, mainly sleep on your side, or use a firmer mattress."],
@@ -32,6 +42,11 @@ const pages = {
     description:
       "Choose White, Grey, Baby Blue or Navy Blue and add matching washable spare covers.",
     image: "/assets/gallery-05-colours-juujo.png",
+    editorialImage: "/assets/editorial/holding-cloudalign-blue.webp",
+    editorialAlt: "Woman holding the tag-free white CloudAlign pillow against a blue background",
+    editorialTitle: "A calm finish for the rest of the room.",
+    editorialCopy:
+      "The fitted cover follows every curve without adding a visible product tag. Choose a colour that sits naturally with your bedding.",
     sections: [
       ["Four calm finishes", "All four options use the same memory-foam core and shaped removable cover."],
       ["Match every spare", "Replacement covers automatically follow the pillow colour selected in the product options."],
@@ -86,6 +101,19 @@ export default async function Page({
             <p>{copy}</p>
           </article>
         ))}
+      </div>
+      <div className="guide-editorial">
+        <img
+          src={page.editorialImage}
+          alt={page.editorialAlt}
+          width="1400"
+          height="1400"
+        />
+        <div>
+          <span className="route-kicker">A closer look</span>
+          <h2>{page.editorialTitle}</h2>
+          <p>{page.editorialCopy}</p>
+        </div>
       </div>
     </main>
   );

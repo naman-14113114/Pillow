@@ -105,10 +105,10 @@ export function HomePage() {
 
       <section className="home-product-story">
         <img
-          src="/assets/gallery-03-lifestyle-juujo.png"
-          alt="Side sleeper supported by the CloudAlign pillow"
-          width="1255"
-          height="1255"
+          src="/assets/editorial/bedroom-cloudalign.webp"
+          alt="Woman relaxing with a tag-free CloudAlign pillow in a bright bedroom"
+          width="1400"
+          height="933"
         />
         <div>
           <p className="eyebrow">Designed for side-sleeper space</p>
@@ -131,6 +131,46 @@ export function HomePage() {
           <Link className="primary-button" href={siteConfig.productPath}>
             Choose your CloudAlign <ArrowRight aria-hidden="true" />
           </Link>
+        </div>
+      </section>
+
+      <section className="home-editorial-story">
+        <header>
+          <div>
+            <p className="eyebrow">CloudAlign at home</p>
+            <h2>A considered shape, from bedtime to the morning light.</h2>
+          </div>
+          <p>
+            A sculpted pillow should feel natural in the room as well as under
+            your head. CloudAlign keeps its distinctive contour soft, simple
+            and easy to live with.
+          </p>
+        </header>
+        <div className="home-editorial-grid">
+          <figure>
+            <img
+              src="/assets/editorial/sleeping-white-bed.webp"
+              alt="Side sleeper resting with a white CloudAlign pillow"
+              width="1400"
+              height="1400"
+            />
+          </figure>
+          <figure>
+            <img
+              src="/assets/editorial/holding-cloudalign-blue.webp"
+              alt="Woman holding a white tag-free CloudAlign pillow against a blue background"
+              width="1254"
+              height="1254"
+            />
+          </figure>
+          <figure>
+            <img
+              src="/assets/editorial/four-pillow-studio.webp"
+              alt="Woman carrying four white CloudAlign pillows"
+              width="1400"
+              height="1746"
+            />
+          </figure>
         </div>
       </section>
 
@@ -226,10 +266,10 @@ export function HomePage() {
 
       <section className="home-final">
         <img
-          src="/assets/gallery-11-model-juujo.png"
-          alt="Model holding the CloudAlign pillow"
-          width="1255"
-          height="1255"
+          src="/assets/editorial/studio-cloudalign-model.webp"
+          alt="Woman holding a tag-free white CloudAlign pillow behind her head"
+          width="1600"
+          height="1600"
         />
         <div>
           <Sparkles aria-hidden="true" />

@@ -93,6 +93,24 @@ export default function Page() {
         </div>
       </section>
 
+      <section className="faq-editorial-band">
+        <img
+          src="/assets/editorial/sleeping-white-bed.webp"
+          alt="Side sleeper resting with a white CloudAlign pillow"
+          width="1400"
+          height="1400"
+        />
+        <div>
+          <span className="route-kicker">Before you choose</span>
+          <h2>Start with fit, then colour and care.</h2>
+          <p>
+            The most useful questions are often about height, shoulder space,
+            washable covers and delivery. The answers below keep those details
+            easy to compare.
+          </p>
+        </div>
+      </section>
+
       <section className="faq-groups">
         {groups.map((group, groupIndex) => {
           const Icon = group.icon;
