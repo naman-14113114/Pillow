@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/data/store";
 
 const shopLinks = [
@@ -26,6 +27,16 @@ const supportLinks = [
 export function Footer() {
   return (
     <footer className="store-footer">
+      <section className="store-footer-offer">
+        <div>
+          <span>Find your contour</span>
+          <h2>Better support starts with the right height.</h2>
+        </div>
+        <Link href="/pages/sleep-quiz">
+          Take the sleep quiz <ArrowUpRight aria-hidden="true" />
+        </Link>
+      </section>
+
       <div className="store-footer-inner">
         <div className="store-footer-brand">
           <Link className="wordmark" href="/" aria-label="Juujo home">
@@ -79,6 +90,9 @@ export function Footer() {
       <div className="store-footer-bottom">
         <span>&copy; 2026 Juujo</span>
         <span>Free tracked shipping on all UK orders</span>
+      </div>
+      <div className="store-footer-watermark" aria-hidden="true">
+        juujo
       </div>
     </footer>
   );
