@@ -22,7 +22,7 @@ export default function Page() {
           <OrderTrackingForm />
         </div>
         <img
-          src="/assets/gallery/bundle-packaging.png"
+          src="/assets/gallery-05-colours-juujo.png"
           alt="Juujo CloudAlign order and packaging"
           width="1536"
           height="1024"

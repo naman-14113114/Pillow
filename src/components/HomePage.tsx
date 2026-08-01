@@ -5,7 +5,6 @@ import {
   Check,
   MoveVertical,
   PackageCheck,
-  RefreshCw,
   ShieldCheck,
   Sparkles,
   WashingMachine,
@@ -14,34 +13,42 @@ import { ReviewGrid } from "@/components/ReviewGrid";
 import { formatMoney, product, siteConfig } from "@/data/store";
 
 const benefits = [
-  ["Six sculpted zones", "Support for the head, neck, shoulders and arms."],
-  ["Two contour heights", "Rotate between an 8.9 cm and 10.9 cm edge."],
-  ["Shape-retaining foam", "A stable core that returns to its original form."],
-  ["Washable outer cover", "Remove the fitted cover and machine wash at 30 C."],
+  ["Six support zones", "Dedicated areas for the head, neck, shoulders and arms."],
+  ["Two contour profiles", "Choose Regular at 8.9 cm or High at 10.9 cm."],
+  ["Shape-retaining foam", "A high-density core that returns to its sculpted form."],
+  ["Washable outer cover", "Remove the fitted cover and machine wash it at 30 C."],
+] as const;
+
+const pressLogos = [
+  ["/assets/logo-forbes.avif", "Forbes"],
+  ["/assets/logo-lifestyle.avif", "Lifestyle"],
+  ["/assets/logo-readers-digest.avif", "Reader's Digest"],
+  ["/assets/logo-usa-today.avif", "USA Today"],
+  ["/assets/logo-scary-mommy.webp", "Scary Mommy"],
 ] as const;
 
 export function HomePage() {
   return (
-    <main className="store-home">
-      <section className="home-hero">
+    <main className="store-home redesigned-home">
+      <section className="juujo-home-hero">
         <picture>
           <source
             media="(max-width: 700px)"
-            srcSet="/assets/home/home-hero-mobile-juujo.webp"
+            srcSet="/assets/licensed/juujo-about-hero-mobile.png"
           />
           <img
-            src="/assets/home/home-hero-desktop-juujo.webp"
-            alt="Three women relaxing with tag-free CloudAlign pillows"
-            width="2061"
-            height="763"
+            src="/assets/licensed/juujo-about-hero-desktop.png"
+            alt="Sleeper resting against the CloudAlign contour pillow"
+            width="2048"
+            height="749"
           />
         </picture>
-        <div className="home-hero-copy">
-          <p>JUUJO CLOUDALIGN PILLOW</p>
-          <h1>Your pillow should fit how you sleep.</h1>
+        <div className="juujo-home-hero-copy">
+          <p>THE CONTOUR PILLOW FOR SIDE SLEEPERS</p>
+          <h1>Wake up feeling properly supported.</h1>
           <span>
-            Sculpted memory-foam support for side, back and changing-position
-            sleepers, in two heights and four calm colours.
+            CloudAlign gives your head, neck and shoulder their own place to
+            settle, with Regular and High profiles for a more personal fit.
           </span>
           <div>
             <Link className="primary-button" href={siteConfig.productPath}>
@@ -53,14 +60,14 @@ export function HomePage() {
             </Link>
           </div>
           <small>
-            <span>★★★★★</span> 4.9 from licensed product reviews
+            <b>4.9/5</b> from 42,093 licensed product reviews
           </small>
         </div>
       </section>
 
       <section className="trust-row home-trust-row" aria-label="Store benefits">
         <span>
-          <PackageCheck /> Free tracked delivery
+          <PackageCheck /> Free shipping on all UK orders
         </span>
         <span>
           <MoveVertical /> Regular and High profiles
@@ -73,35 +80,42 @@ export function HomePage() {
         </span>
       </section>
 
+      <section className="home-press-row" aria-label="Featured in">
+        <p>As featured in</p>
+        {pressLogos.map(([src, alt]) => (
+          <img src={src} alt={alt} key={src} />
+        ))}
+      </section>
+
       <section className="home-intro">
         <div>
           <p className="eyebrow">Not another flat pillow</p>
-          <h2>A shape made around the way your body reaches the bed.</h2>
+          <h2>A contour shaped around the way your body reaches the bed.</h2>
         </div>
         <div>
           <p>
-            CloudAlign creates dedicated space for the head, neck, shoulder
-            and arm instead of asking one flat surface to support everything.
+            CloudAlign creates dedicated space for the head, neck, shoulder and
+            arm instead of asking one flat surface to support everything.
           </p>
           <Link className="text-link" href="/pages/how-it-works">
-            Explore the six zones <ArrowRight aria-hidden="true" />
+            Explore the support zones <ArrowRight aria-hidden="true" />
           </Link>
         </div>
       </section>
 
       <section className="home-product-story">
         <img
-          src="/assets/gallery/model-side-sleeper.png"
-          alt="Side sleeper resting on a tag-free CloudAlign pillow"
-          width="1536"
-          height="1024"
+          src="/assets/gallery-03-lifestyle-juujo.png"
+          alt="Side sleeper supported by the CloudAlign pillow"
+          width="1255"
+          height="1255"
         />
         <div>
           <p className="eyebrow">Designed for side-sleeper space</p>
           <h2>Support your neck without crowding your shoulder.</h2>
           <p>
-            The raised side wings keep the head supported while the curved
-            shoulder channel gives your upper body room to settle naturally.
+            Raised side wings support the head while the curved shoulder channel
+            gives your upper body room to settle naturally.
           </p>
           <ul>
             <li>
@@ -123,7 +137,7 @@ export function HomePage() {
       <section className="home-benefit-band">
         <div className="section-heading">
           <p className="eyebrow">One considered design</p>
-          <h2>Every detail has a job.</h2>
+          <h2>Every curve has a job.</h2>
         </div>
         <div className="home-benefit-grid">
           {benefits.map(([title, copy], index) => (
@@ -138,19 +152,18 @@ export function HomePage() {
 
       <section className="home-height-section">
         <div>
-          <p className="eyebrow">SwitchFit dual profile</p>
-          <h2>Regular on one side. High on the other.</h2>
+          <p className="eyebrow">Choose your profile</p>
+          <h2>Regular or High, selected for your frame.</h2>
           <p>
-            Your ideal pillow height depends on your shoulder frame, mattress
-            and sleep position. CloudAlign gives you two useful contours in
-            one design.
+            Your ideal pillow height depends on shoulder width, mattress feel
+            and sleep position. Use the guide or take the four-question quiz.
           </p>
           <div className="height-measures">
             <span>
               <strong>8.9 cm</strong>
               Regular
             </span>
-            <RefreshCw aria-hidden="true" />
+            <MoveVertical aria-hidden="true" />
             <span>
               <strong>10.9 cm</strong>
               High
@@ -161,30 +174,30 @@ export function HomePage() {
           </Link>
         </div>
         <img
-          src="/assets/gallery/size-guide.png"
-          alt="CloudAlign Regular and High contour heights"
-          width="1200"
-          height="1200"
+          src="/assets/gallery-04-size-guide-juujo.png"
+          alt="CloudAlign Regular and High contour profile guide"
+          width="1255"
+          height="1255"
         />
       </section>
 
       <section className="home-colours">
         <div>
-          <p className="eyebrow">Your room, your colour</p>
+          <p className="eyebrow">Four calm colours</p>
           <h2>White, Grey, Baby Blue or Navy Blue.</h2>
           <p>
             Every colour uses the same sculpted memory-foam core and removable
-            fitted cover. Add matching spare covers to any bundle.
+            cover. Add colour-matched replacement covers to any bundle.
           </p>
           <Link className="text-link" href={siteConfig.productPath}>
             See all colours <ArrowRight aria-hidden="true" />
           </Link>
         </div>
         <img
-          src="/assets/gallery/four-colours.png"
-          alt="Four tag-free CloudAlign pillow colours"
-          width="1536"
-          height="1024"
+          src="/assets/gallery-05-colours-juujo.png"
+          alt="CloudAlign pillow in White, Grey, Baby Blue and Navy Blue"
+          width="1255"
+          height="1255"
         />
       </section>
 
@@ -192,7 +205,7 @@ export function HomePage() {
         <div>
           <BedDouble aria-hidden="true" />
           <p>Four quick questions</p>
-          <h2>Regular or High? Start with your sleep position.</h2>
+          <h2>Regular or High? Start with how you sleep.</h2>
         </div>
         <Link className="light-button" href="/pages/sleep-quiz">
           Take the sleep quiz <ArrowRight aria-hidden="true" />
@@ -201,27 +214,27 @@ export function HomePage() {
 
       <section className="home-reviews-intro">
         <div>
-          <p className="eyebrow">Real product feedback</p>
-          <h2>See how the CloudAlign design fits different sleepers.</h2>
+          <p className="eyebrow">Product feedback</p>
+          <h2>See how CloudAlign fits different sleepers.</h2>
         </div>
         <p>
-          Filter licensed product reviews by rating or open customer media for
-          a closer look at the pillow in everyday bedrooms.
+          Browse licensed product reviews and customer media for a closer look
+          at the pillow in everyday bedrooms.
         </p>
       </section>
       <ReviewGrid compact />
 
       <section className="home-final">
         <img
-          src="/assets/gallery/bundle-packaging.png"
-          alt="Juujo CloudAlign pillow bundle and packaging"
-          width="1536"
-          height="1024"
+          src="/assets/gallery-11-model-juujo.png"
+          alt="Model holding the CloudAlign pillow"
+          width="1255"
+          height="1255"
         />
         <div>
           <Sparkles aria-hidden="true" />
           <p className="eyebrow">Build your sleep setup</p>
-          <h2>One pillow, two pillows or a four-pillow home set.</h2>
+          <h2>One pillow, a pair, or a four-pillow home set.</h2>
           <p>{product.description}</p>
           <Link className="primary-button" href={siteConfig.productPath}>
             Choose colours and heights <ArrowRight aria-hidden="true" />

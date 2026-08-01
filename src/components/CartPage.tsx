@@ -83,7 +83,7 @@ export function CartPage() {
           <h1>Review your sleep setup.</h1>
           <article className="cart-page-line">
             <img
-              src="/assets/gallery-01-hero-juujo.png"
+              src="/assets/gallery-05-colours-juujo.png"
               alt=""
               width="280"
               height="280"

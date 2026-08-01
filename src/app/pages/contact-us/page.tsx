@@ -57,7 +57,7 @@ export default function Page() {
           </span>
         </div>
         <img
-          src="/assets/gallery/bundle-packaging.png"
+          src="/assets/gallery-11-model-juujo.png"
           alt="Juujo CloudAlign pillow and packaging"
           width="1536"
           height="1024"

@@ -33,7 +33,7 @@ export default function Page() {
       </section>
       <section className="quiz-explainer">
         <img
-          src="/assets/gallery/size-guide.png"
+          src="/assets/gallery-04-size-guide-juujo.png"
           alt="Regular and High CloudAlign contour height guide"
           width="1200"
           height="1200"

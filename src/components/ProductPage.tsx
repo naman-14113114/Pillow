@@ -5,18 +5,14 @@ import {
   ArrowRight,
   BadgeCheck,
   Heart,
-  Menu,
   MoveVertical,
   Pause,
   Play,
-  Search,
   ShieldCheck,
-  ShoppingBag,
   Snowflake,
   Sparkles,
   Star,
   Stethoscope,
-  X,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -477,7 +473,6 @@ export function ProductPage() {
   const [pillowChoices, setPillowChoices] =
     useState<PillowChoice[]>(defaultPillows);
   const [includeCovers, setIncludeCovers] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(true);
   const [reviewsExpanded, setReviewsExpanded] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -653,65 +648,6 @@ export function ProductPage() {
       <a className="skip-link" href="#product">
         Skip to content
       </a>
-
-      <div className="announcement" aria-label="Current offers">
-        <div className="announcement-track">
-          {Array.from({ length: 6 }, (_, index) => (
-            <span key={index}>
-              Up to 50% Off CloudAlign
-              <b aria-hidden="true" />
-              Free Tracked UK Delivery
-              <b aria-hidden="true" />
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <header className="site-header">
-        <button
-          type="button"
-          className="icon-button mobile-menu-button"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          {menuOpen ? <X /> : <Menu />}
-        </button>
-        <nav className={menuOpen ? "open" : ""} aria-label="Primary navigation">
-          <Link href="/" onClick={() => setMenuOpen(false)}>
-            Home
-          </Link>
-          <Link href="/pages/about-us" onClick={() => setMenuOpen(false)}>
-            About
-          </Link>
-          <Link
-            href="/pages/customer-reviews"
-            onClick={() => setMenuOpen(false)}
-          >
-            Reviews
-          </Link>
-        </nav>
-        <Link className="wordmark" href="/" aria-label="Juujo home">
-          juujo
-        </Link>
-        <div className="header-actions">
-          <Link
-            href="/blog"
-            className="icon-button"
-            aria-label="Browse sleep guides"
-          >
-            <Search />
-          </Link>
-          <button
-            type="button"
-            className="icon-button"
-            aria-label={`Open basket with ${cart.itemCount} items`}
-            onClick={cart.open}
-          >
-            <ShoppingBag />
-            <span className="cart-count">{cart.itemCount}</span>
-          </button>
-        </div>
-      </header>
 
       <section className="product-section" id="product">
         <div className="product-gallery">
@@ -1217,60 +1153,6 @@ export function ProductPage() {
           ))}
         </div>
       </section>
-
-      <footer>
-        <section className="footer-cta">
-          <div>
-            <p>
-              <Stars /> 42,093 licensed product reviews
-            </p>
-            <h2>Cloud-like comfort is just a click away. Try Juujo today.</h2>
-          </div>
-          <a href="#product">Sleep Better</a>
-        </section>
-        <div className="footer-grid">
-          <div>
-            <h3>Shop</h3>
-            <a href="#product">CloudAlign Pillow</a>
-            <Link href="/pages/pillow-height-guide">Choose Your Height</Link>
-            <Link href="/pages/colour-and-cover-guide">
-              Colour &amp; Cover Guide
-            </Link>
-            <Link href="/pages/sleep-quiz">Sleep Quiz</Link>
-          </div>
-          <div>
-            <h3>Learn</h3>
-            <Link href="/pages/about-us">About Us</Link>
-            <Link href="/blog">Journal</Link>
-            <Link href="/pages/how-it-works">How It Works</Link>
-            <Link href="/pages/customer-reviews">Customer Reviews</Link>
-          </div>
-          <div>
-            <h3>Support</h3>
-            <Link href="/pages/contact-us">Contact Us</Link>
-            <Link href="/order-tracking">Tracking</Link>
-            <Link href="/sign-in">Account</Link>
-            <Link href="/pages/faqs">FAQs</Link>
-            <Link href="/policies/privacy-policy">Privacy Policy</Link>
-            <Link href="/policies/terms-of-service">Terms of Service</Link>
-            <Link href="/policies/return-policy">Returns</Link>
-            <Link href="/policies/shipping-policy">Shipping Policy</Link>
-          </div>
-          <div>
-            <h3>Account</h3>
-            <Link href="/sign-in">Sign In</Link>
-            <Link href="/sign-up">Create Account</Link>
-            <Link href="/order-history">Order History</Link>
-            <Link href="/account-settings">Account Settings</Link>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <span>&copy; Copyright JUUJO</span>
-        </div>
-        <div className="footer-watermark" aria-hidden="true">
-          juujo
-        </div>
-      </footer>
 
       <div className="approved-mobile-buy-bar">
         <div>

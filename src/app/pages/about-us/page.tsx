@@ -37,12 +37,18 @@ export default function Page() {
   return (
     <main className="about-page">
       <section className="about-hero">
-        <img
-          src="/assets/about/about-hero-juujo.webp"
-          alt="Woman resting in blue and white bedding with tag-free CloudAlign pillows"
-          width="1016"
-          height="1548"
-        />
+        <picture>
+          <source
+            media="(max-width: 700px)"
+            srcSet="/assets/licensed/juujo-about-hero-mobile.png"
+          />
+          <img
+            src="/assets/licensed/juujo-about-hero-desktop.png"
+            alt="Woman resting in blue and white bedding with tag-free CloudAlign pillows"
+            width="1016"
+            height="1548"
+          />
+        </picture>
         <div>
           <span>ABOUT JUUJO</span>
           <h1>Sleep products should be easier to understand.</h1>
@@ -74,7 +80,7 @@ export default function Page() {
 
       <section className="about-product-band">
         <img
-          src="/assets/gallery/studio-product.png"
+          src="/assets/gallery-02-zones-juujo.png"
           alt="Top and side views of the tag-free CloudAlign pillow"
           width="1200"
           height="1200"
@@ -134,7 +140,7 @@ export default function Page() {
           </Link>
         </div>
         <img
-          src="/assets/gallery/four-colours.png"
+          src="/assets/gallery-05-colours-juujo.png"
           alt="White, Grey, Baby Blue and Navy Blue CloudAlign pillows"
           width="1536"
           height="1024"
