@@ -48,10 +48,10 @@ export function CartDrawer() {
             <article className="cart-line">
               <div className="cart-line-image">
                 <img
-                  src="/assets/gallery-05-colours-juujo.png"
-                  alt="CloudAlign pillow colour collection"
-                  width="160"
-                  height="160"
+                  src="/assets/cart/cloudalign-bedroom.webp"
+                  alt="White and navy CloudAlign pillows arranged on a bed"
+                  width="800"
+                  height="800"
                 />
               </div>
               <div>

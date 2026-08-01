@@ -3399,7 +3399,7 @@ footer {
 /* Shared Juujo storefront shell */
 .store-announcement {
   position: relative;
-  z-index: 70;
+  z-index: 40;
   height: 34px;
   overflow: hidden;
   background: var(--navy);
