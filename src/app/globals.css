@@ -4097,12 +4097,19 @@ footer.store-footer {
   header.site-header.store-site-header {
     min-height: 60px;
     padding: 0 14px;
+    background: #dceeff;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   header.store-site-header nav.header-primary-nav,
   header.store-site-header nav.header-secondary-nav,
   header.store-site-header .header-actions .icon-button:last-child {
     display: none;
+  }
+
+  header.store-site-header .header-actions .cart-button {
+    display: grid;
   }
 
   header.store-site-header .mobile-menu-button {
