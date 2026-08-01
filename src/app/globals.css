@@ -5580,8 +5580,18 @@ footer.store-footer {
     font-size: 46px;
   }
 
+  .about-hero {
+    height: calc(100svh - 124px);
+    min-height: 0;
+  }
+
   .about-hero > div {
-    padding-top: 330px;
+    min-height: 100%;
+    padding: 270px 24px 36px;
+  }
+
+  .about-hero h1 {
+    font-size: 43px;
   }
 
   .faq-page-heading > div {
