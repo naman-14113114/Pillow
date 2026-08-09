@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import checkoutDiscounts from "@/data/checkout-discounts.json";
 import { appendAttribution, cleanAttribution } from "@/lib/attribution";
 import {
   createSupabaseAdmin,
@@ -75,6 +76,22 @@ const defaultVariantIds = {
   },
 } as const;
 
+function pillowTier(pillow: z.infer<typeof pillowSchema>) {
+  if (pillow.colour === "white" && pillow.height === "regular") return 0;
+  if (pillow.colour === "white" || pillow.height === "regular") return 1;
+  return 2;
+}
+
+function getBundleDiscountCode(pillows: z.infer<typeof pillowSchema>[]) {
+  if (pillows.length === 2) return checkoutDiscounts.two;
+  if (pillows.length !== 4) return undefined;
+
+  const tierOneCount = pillows.filter((pillow) => pillowTier(pillow) === 1).length;
+  const tierTwoCount = pillows.filter((pillow) => pillowTier(pillow) === 2).length;
+  const key = `${tierOneCount}-${tierTwoCount}`;
+  return (checkoutDiscounts.four as Record<string, string>)[key];
+}
+
 export async function POST(request: Request) {
   const parsed = requestSchema.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) {
@@ -139,6 +156,10 @@ export async function POST(request: Request) {
       })),
     ),
   );
+  const bundleDiscountCode = getBundleDiscountCode(line.pillows);
+  if (bundleDiscountCode) {
+    target.searchParams.set("discount", bundleDiscountCode);
+  }
 
   if (line.includeCovers && coverProductId && coverItems[0]?.variantId) {
     target.searchParams.set("cover_product_id", coverProductId);

@@ -27,6 +27,8 @@
       .map((key) => [key, params.get(key)])
       .filter((entry) => entry[1]),
   );
+  const discountCode = params.get("discount") || "";
+  if (discountCode && !/^[A-Z0-9-]{4,32}$/.test(discountCode)) return;
 
   const shell = document.createElement("main");
   shell.setAttribute("aria-live", "polite");
@@ -160,6 +162,7 @@
         for (const [key, value] of Object.entries(attribution)) {
           checkoutUrl.searchParams.set(key, value);
         }
+        if (discountCode) checkoutUrl.searchParams.set("discount", discountCode);
         window.location.assign(checkoutUrl);
       } catch (error) {
         console.error("Juujo checkout bridge failed", error);
