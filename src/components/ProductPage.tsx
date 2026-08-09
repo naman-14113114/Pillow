@@ -27,6 +27,9 @@ import {
   type PillowHeight,
 } from "@/data/store";
 
+const replacementCoversAvailable =
+  process.env.NEXT_PUBLIC_REPLACEMENT_COVERS_AVAILABLE === "true";
+
 const gallery = [
   {
     src: "/assets/gallery-01-hero-juujo.png",
@@ -878,89 +881,91 @@ export function ProductPage() {
                   </span>
                   </button>
                   {selectedBundle === bundle.id && selectedBundle > 1 ? (
-                  <div className="bundle-config" aria-label="Bundle options">
-                    <p>Choose each pillow&apos;s colour and height</p>
-                    {Array.from(
-                      { length: selectedBundle },
-                      (_, pillowIndex) => (
-                        <div className="bundle-config-row" key={pillowIndex}>
-                          <span className="bundle-pillow-label">
-                            Pillow {pillowIndex + 1}
-                          </span>
-                          <label
-                            className="bundle-select colour-select"
-                            style={
-                              {
-                                "--bundle-swatch":
-                                  colours.find(
-                                    (colour) =>
-                                      colour.id ===
-                                      pillowChoices[pillowIndex].colour,
-                                  )?.colour || "#f8f8f6",
-                              } as React.CSSProperties
-                            }
-                          >
-                            <span className="sr-only">
-                              Pillow {pillowIndex + 1} colour
+                    <div className="bundle-config" aria-label="Bundle options">
+                      <p>Choose each pillow&apos;s colour and height</p>
+                      {Array.from(
+                        { length: selectedBundle },
+                        (_, pillowIndex) => (
+                          <div className="bundle-config-row" key={pillowIndex}>
+                            <span className="bundle-pillow-label">
+                              Pillow {pillowIndex + 1}
                             </span>
-                            <span
-                              className="bundle-colour-dot"
-                              aria-hidden="true"
-                            />
-                            <select
-                              value={pillowChoices[pillowIndex].colour}
-                              onChange={(event) =>
-                                updatePillow(pillowIndex, {
-                                  colour: event.target.value as PillowColour,
-                                })
+                            <label
+                              className="bundle-select colour-select"
+                              style={
+                                {
+                                  "--bundle-swatch":
+                                    colours.find(
+                                      (colour) =>
+                                        colour.id ===
+                                        pillowChoices[pillowIndex].colour,
+                                    )?.colour || "#f8f8f6",
+                                } as React.CSSProperties
                               }
                             >
-                              {colours.map((colour) => (
-                                <option key={colour.id} value={colour.id}>
-                                  {colour.name}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                          <label className="bundle-select height-select">
-                            <span className="sr-only">
-                              Pillow {pillowIndex + 1} height
-                            </span>
-                            <select
-                              value={pillowChoices[pillowIndex].height}
-                              onChange={(event) =>
-                                updatePillow(pillowIndex, {
-                                  height: event.target.value as PillowHeight,
-                                })
-                              }
-                            >
-                              {heights.map((height) => (
-                                <option key={height.id} value={height.id}>
-                                  {height.name}
-                                </option>
-                              ))}
-                            </select>
-                          </label>
-                        </div>
-                      ),
-                    )}
-                  </div>
+                              <span className="sr-only">
+                                Pillow {pillowIndex + 1} colour
+                              </span>
+                              <span
+                                className="bundle-colour-dot"
+                                aria-hidden="true"
+                              />
+                              <select
+                                value={pillowChoices[pillowIndex].colour}
+                                onChange={(event) =>
+                                  updatePillow(pillowIndex, {
+                                    colour: event.target.value as PillowColour,
+                                  })
+                                }
+                              >
+                                {colours.map((colour) => (
+                                  <option key={colour.id} value={colour.id}>
+                                    {colour.name}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <label className="bundle-select height-select">
+                              <span className="sr-only">
+                                Pillow {pillowIndex + 1} height
+                              </span>
+                              <select
+                                value={pillowChoices[pillowIndex].height}
+                                onChange={(event) =>
+                                  updatePillow(pillowIndex, {
+                                    height: event.target.value as PillowHeight,
+                                  })
+                                }
+                              >
+                                {heights.map((height) => (
+                                  <option key={height.id} value={height.id}>
+                                    {height.name}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                          </div>
+                        ),
+                      )}
+                    </div>
                   ) : null}
-                  <label className="bundle-upsell">
-                  <input
-                    type="checkbox"
-                    checked={selectedBundle === bundle.id && includeCovers}
-                    onChange={(event) => {
-                      chooseBundle(bundle.id as 1 | 2 | 4);
-                      setIncludeCovers(event.target.checked);
-                    }}
-                  />
-                  <span>{bundle.upsell}</span>
-                  <span className="bundle-upsell-prices">
-                    <strong>{bundle.upsellPrice}</strong>
-                    <del>{bundle.upsellCompareAt}</del>
-                  </span>
-                  </label>
+                  {replacementCoversAvailable ? (
+                    <label className="bundle-upsell">
+                      <input
+                        type="checkbox"
+                        checked={selectedBundle === bundle.id && includeCovers}
+                        onChange={(event) => {
+                          chooseBundle(bundle.id as 1 | 2 | 4);
+                          setIncludeCovers(event.target.checked);
+                        }}
+                      />
+                      <span>{bundle.upsell}</span>
+                      <span className="bundle-upsell-prices">
+                        <strong>{bundle.upsellPrice}</strong>
+                        <del>{bundle.upsellCompareAt}</del>
+                      </span>
+                    </label>
+                  ) : null}
                 </div>
               );
             })}
