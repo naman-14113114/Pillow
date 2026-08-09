@@ -55,7 +55,7 @@ const coverEnvironmentKeys = {
 } as const;
 
 const defaultPillowProductId = "1000000673217468";
-const defaultCheckoutBase = "https://www.juujo.com/pages/add-to-cart";
+const defaultCheckoutBase = "https://www.juujo.com/cart";
 const defaultVariantIds = {
   white: {
     regular: "1000020655426746",
@@ -125,6 +125,7 @@ export async function POST(request: Request) {
   }
 
   const target = new URL(checkoutBase);
+  target.searchParams.set("juujo_bridge", "1");
   target.searchParams.set("product_id", productId);
   target.searchParams.set("variant_id", pillowItems[0].variantId || "");
   target.searchParams.set("quantity", String(line.pillows.length));

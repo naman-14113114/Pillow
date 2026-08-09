@@ -66,27 +66,6 @@ for (const [id, price] of variantPrices) {
   });
 }
 
-const pageResponse = await shopbase("/admin/pages.json?limit=250");
-let bridgePage = pageResponse.pages?.find(
-  (page) => page.handle === "add-to-cart",
-);
-
-if (!bridgePage) {
-  const created = await shopbase("/admin/pages.json", {
-    method: "POST",
-    body: JSON.stringify({
-      page: {
-        title: "Add to cart",
-        handle: "add-to-cart",
-        body_html: "",
-        published: true,
-        is_show_in_search: false,
-      },
-    }),
-  });
-  bridgePage = created.page;
-}
-
 const scriptResponse = await shopbase("/admin/script_tags.json");
 const existingScript = scriptResponse.script_tags?.find(
   (script) => script.src === scriptUrl,
@@ -101,9 +80,8 @@ if (!existingScript) {
 
 console.log(
   JSON.stringify({
-    pageId: bridgePage.id,
-    pageHandle: bridgePage.handle,
     variantPricesUpdated: variantPrices.size,
     scriptUrl,
+    bridgeUrl: "https://www.juujo.com/cart?juujo_bridge=1",
   }),
 );

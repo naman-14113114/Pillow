@@ -1,5 +1,8 @@
 (() => {
-  if (window.location.pathname !== "/pages/add-to-cart") return;
+  const params = new URLSearchParams(window.location.search);
+  if (window.location.pathname !== "/cart" || params.get("juujo_bridge") !== "1") {
+    return;
+  }
 
   const allowedVariants = new Set([
     "1000020655426740",
@@ -11,7 +14,6 @@
     "1000020655426746",
     "1000020655426747",
   ]);
-  const params = new URLSearchParams(window.location.search);
   const attributionKeys = [
     "msclkid",
     "utm_source",
@@ -72,17 +74,24 @@
   }
 
   const quantities = {};
+  let totalQuantity = 0;
   for (const item of parsedItems) {
     const variantId = String(item?.variant_id || "");
     const quantity = Number(item?.quantity || 0);
-    if (!allowedVariants.has(variantId) || !Number.isInteger(quantity) || quantity < 1) {
+    if (
+      !allowedVariants.has(variantId) ||
+      !Number.isInteger(quantity) ||
+      quantity < 1 ||
+      quantity > 4
+    ) {
       fail("This pillow selection is not available. Please return to Juujo and choose it again.");
       return;
     }
     quantities[variantId] = (quantities[variantId] || 0) + quantity;
+    totalQuantity += quantity;
   }
 
-  if (!Object.keys(quantities).length) {
+  if (!Object.keys(quantities).length || ![1, 2, 4].includes(totalQuantity)) {
     fail("No pillows were selected. Please return to Juujo and choose your bundle.");
     return;
   }
