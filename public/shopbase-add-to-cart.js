@@ -139,12 +139,28 @@
           );
         }
 
-        await waitForCart(
+        const preparedCart = await waitForCart(
           (cart) => cart.total_quantity === totalQuantity,
         );
         window.clearTimeout(timeout);
         status.textContent = "Your pillows are ready. Opening checkout now.";
-        window.sbsdk.checkout.navigateCheckout();
+        if (typeof window.sbsdk.checkout.navigateCheckout === "function") {
+          window.sbsdk.checkout.navigateCheckout();
+          return;
+        }
+
+        if (!preparedCart.checkoutToken) {
+          throw new Error("ShopBase did not return a checkout token.");
+        }
+
+        const checkoutUrl = new URL(
+          `/checkouts/${preparedCart.checkoutToken}`,
+          window.location.origin,
+        );
+        for (const [key, value] of Object.entries(attribution)) {
+          checkoutUrl.searchParams.set(key, value);
+        }
+        window.location.assign(checkoutUrl);
       } catch (error) {
         console.error("Juujo checkout bridge failed", error);
         window.clearTimeout(timeout);
