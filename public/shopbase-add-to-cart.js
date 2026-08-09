@@ -1,40 +1,5 @@
 (() => {
   const params = new URLSearchParams(window.location.search);
-  if (window.location.pathname.startsWith("/checkouts/")) {
-    if (!document.querySelector("#juujo-checkout-mobile-styles")) {
-      const checkoutStyles = document.createElement("style");
-      checkoutStyles.id = "juujo-checkout-mobile-styles";
-      checkoutStyles.textContent = `
-        @media (max-width: 767px) {
-          .wb-builder__row--container.space-32.row.flex {
-            display: flex !important;
-            flex-direction: column !important;
-            gap: 0 !important;
-          }
-          .wb-builder__column--container[class*="w-7/12"],
-          .wb-builder__column--container[class*="w-5/12"] {
-            width: 100% !important;
-            max-width: none !important;
-            flex: 0 0 auto !important;
-            margin: 0 !important;
-          }
-          .wb-builder__column--container[class*="w-5/12"] {
-            order: -1;
-          }
-          .block-checkout-container,
-          .block-checkout-summary,
-          .checkout-one-page,
-          .checkout-customer-information {
-            width: 100% !important;
-            max-width: none !important;
-          }
-        }
-      `;
-      document.head.append(checkoutStyles);
-    }
-    return;
-  }
-
   if (window.location.pathname !== "/cart" || params.get("juujo_bridge") !== "1") {
     return;
   }
