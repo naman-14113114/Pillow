@@ -104,19 +104,49 @@
 
   const timeout = window.setTimeout(() => {
     fail("Checkout took longer than expected. Please try again.");
-  }, 12000);
+  }, 20000);
+
+  const sleep = (milliseconds) =>
+    new Promise((resolve) => window.setTimeout(resolve, milliseconds));
+
+  const waitForCart = async (matches) => {
+    for (let attempt = 0; attempt < 40; attempt += 1) {
+      const cart = await window.sbsdk.cart.get();
+      if (matches(cart)) return cart;
+      await sleep(150);
+    }
+    throw new Error("ShopBase cart did not update in time.");
+  };
 
   const beginCheckout = () => {
     window.sbsdk.ready(async () => {
       try {
-        await window.sbsdk.cart.clear();
+        const existingCart = await window.sbsdk.cart.get();
+        for (const item of existingCart.items || []) {
+          await window.sbsdk.cart.remove(item.variant_id);
+        }
+        if ((existingCart.items || []).length) {
+          await waitForCart((cart) => cart.total_quantity === 0);
+        }
+
         for (const [variantId, quantity] of Object.entries(quantities)) {
           await window.sbsdk.cart.add(Number(variantId), quantity);
+          await waitForCart((cart) =>
+            cart.items?.some(
+              (item) =>
+                String(item.variant_id) === variantId && item.qty === quantity,
+            ),
+          );
         }
+
+        await waitForCart(
+          (cart) => cart.total_quantity === totalQuantity,
+        );
         window.clearTimeout(timeout);
         status.textContent = "Your pillows are ready. Opening checkout now.";
         window.sbsdk.checkout.navigateCheckout();
-      } catch {
+      } catch (error) {
+        console.error("Juujo checkout bridge failed", error);
         window.clearTimeout(timeout);
         fail("We could not prepare checkout. Please try again.");
       }
