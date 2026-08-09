@@ -54,6 +54,27 @@ const coverEnvironmentKeys = {
   navy: "PLUSBASE_COVER_VARIANT_NAVY",
 } as const;
 
+const defaultPillowProductId = "1000000673217468";
+const defaultCheckoutBase = "https://www.juujo.com/pages/add-to-cart";
+const defaultVariantIds = {
+  white: {
+    regular: "1000020655426746",
+    high: "1000020655426747",
+  },
+  grey: {
+    regular: "1000020655426744",
+    high: "1000020655426745",
+  },
+  blue: {
+    regular: "1000020655426742",
+    high: "1000020655426743",
+  },
+  navy: {
+    regular: "1000020655426740",
+    high: "1000020655426741",
+  },
+} as const;
+
 export async function POST(request: Request) {
   const parsed = requestSchema.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) {
@@ -64,14 +85,17 @@ export async function POST(request: Request) {
   }
 
   const { line } = parsed.data;
-  const productId = process.env.PLUSBASE_PILLOW_PRODUCT_ID;
+  const productId =
+    process.env.PLUSBASE_PILLOW_PRODUCT_ID || defaultPillowProductId;
   const coverProductId = process.env.PLUSBASE_COVER_PRODUCT_ID;
-  const checkoutBase = process.env.PLUSBASE_CHECKOUT_BASE_URL;
+  const checkoutBase =
+    process.env.PLUSBASE_CHECKOUT_BASE_URL || defaultCheckoutBase;
   const pillowItems = line.pillows.map((pillow) => ({
     ...pillow,
     productId,
     variantId:
-      process.env[variantEnvironmentKeys[pillow.colour][pillow.height]],
+      process.env[variantEnvironmentKeys[pillow.colour][pillow.height]] ||
+      defaultVariantIds[pillow.colour][pillow.height],
     quantity: 1,
   }));
   const coverItems = line.includeCovers
@@ -93,7 +117,7 @@ export async function POST(request: Request) {
     return NextResponse.json(
       {
         message:
-          "Checkout is in staging mode until the Juujo PlusBase product and variant IDs are connected.",
+          "Replacement cover checkout is waiting for the cover product IDs. Untick the cover option to continue with your pillows.",
         missingConfiguration: true,
       },
       { status: 503 },

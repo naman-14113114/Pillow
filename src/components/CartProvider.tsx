@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import type { PillowColour, PillowHeight } from "@/data/store";
-import { getBundle } from "@/data/store";
+import { getPillowSelectionTotalCents } from "@/data/store";
 
 export type PillowChoice = {
   colour: PillowColour;
@@ -113,17 +113,15 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const value = useMemo<CartContextValue>(() => {
     const quantity = line?.pillows.length ?? 0;
-    const bundle = line ? getBundle(quantity) : null;
     return {
       line,
       isOpen,
       isHydrated,
       itemCount: quantity,
       totalCents:
-        bundle == null
+        line == null
           ? 0
-          : bundle.priceCents +
-            (line?.includeCovers ? bundle.coverPriceCents : 0),
+          : getPillowSelectionTotalCents(line.pillows, line.includeCovers),
       addLine(next) {
         setLine({
           ...next,

@@ -8,6 +8,7 @@ import {
   colours,
   formatMoney,
   getBundle,
+  getPillowBundlePriceCents,
   product,
   siteConfig,
 } from "@/data/store";
@@ -17,6 +18,9 @@ export function CartPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const bundle = cart.line ? getBundle(cart.line.pillows.length) : null;
+  const pillowBundlePrice = cart.line
+    ? getPillowBundlePriceCents(cart.line.pillows)
+    : 0;
 
   async function checkout() {
     if (!cart.line) return;
@@ -46,7 +50,7 @@ export function CartPage() {
 
     setMessage(
       data.message ||
-        "Checkout is in staging mode until the Juujo PlusBase variant IDs are connected.",
+        "Checkout could not be prepared. Please review your selection and try again.",
     );
     setLoading(false);
   }
@@ -120,7 +124,7 @@ export function CartPage() {
           <h2>Order summary</h2>
           <div>
             <span>Pillow bundle</span>
-            <strong>{formatMoney(bundle.priceCents)}</strong>
+            <strong>{formatMoney(pillowBundlePrice)}</strong>
           </div>
           {cart.line.includeCovers && (
             <div>
@@ -147,8 +151,8 @@ export function CartPage() {
           </button>
           {message && <p className="integration-message">{message}</p>}
           <p className="secure-note">
-            <Check /> PlusBase checkout activates when the product and variant
-            IDs are supplied.
+            <Check /> Secure payment and order fulfilment are handled by
+            PlusBase.
           </p>
         </aside>
       </div>

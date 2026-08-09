@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { ProductPage } from "@/components/ProductPage";
-import {
-  bundles,
-  gallery,
-  product,
-  productFaqs,
-  siteConfig,
-} from "@/data/store";
+import { gallery, product, productFaqs, siteConfig } from "@/data/store";
 
 export const metadata: Metadata = {
   title: "CloudAlign Pillow",
@@ -27,13 +21,15 @@ const productSchema = {
     ratingValue: siteConfig.reviewRating,
     reviewCount: siteConfig.reviewCount,
   },
-  offers: bundles.map((bundle) => ({
-    "@type": "Offer",
+  offers: {
+    "@type": "AggregateOffer",
     priceCurrency: siteConfig.currency,
-    price: (bundle.priceCents / 100).toFixed(2),
+    lowPrice: "49.99",
+    highPrice: "182.99",
+    offerCount: 9,
     availability: "https://schema.org/InStock",
     url: `${siteConfig.siteUrl}${siteConfig.productPath}`,
-  })),
+  },
 };
 
 const faqSchema = {

@@ -13,11 +13,19 @@ import {
   Sparkles,
   Star,
   Stethoscope,
+  ShoppingBag,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useCart, type PillowChoice } from "@/components/CartProvider";
-import { type PillowColour, type PillowHeight } from "@/data/store";
+import {
+  formatMoney,
+  getBundle,
+  getPillowBundlePriceCents,
+  getPillowSelectionTotalCents,
+  type PillowColour,
+  type PillowHeight,
+} from "@/data/store";
 
 const gallery = [
   {
@@ -105,7 +113,6 @@ const bundles = [
     title: "1 Pillow",
     label: "Limited Time Sale!",
     note: "This Deal Ends Soon.",
-    price: "£49.99",
     compareAt: "£100.00",
     upsell: "+1 Cooling Pillowcase (Protect & Cool)",
     upsellPrice: "£9.99",
@@ -117,7 +124,6 @@ const bundles = [
     badge: "MOST POPULAR",
     badgeType: "popular",
     note: "Save £111.01!",
-    price: "£88.99",
     compareAt: "£200.00",
     upsell: "+2 Cooling Pillowcases at £19.99!",
     upsellPrice: "£19.99",
@@ -130,7 +136,6 @@ const bundles = [
     badgeType: "value",
     label: "+Free Shipping",
     note: "Limited Time Offer!",
-    price: "£151.99",
     compareAt: "£400.00",
     upsell: "+4 Cooling Pillowcases For Only £29.99!",
     upsellPrice: "£29.99",
@@ -140,9 +145,6 @@ const bundles = [
 
 const colourName = (colour: PillowColour) =>
   colours.find((option) => option.id === colour)?.name || "White";
-
-const heightName = (height: PillowHeight) =>
-  heights.find((option) => option.id === height)?.name || "Regular";
 
 const overviewItems = [
   {
@@ -475,12 +477,30 @@ export function ProductPage() {
   const [includeCovers, setIncludeCovers] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(true);
   const [reviewsExpanded, setReviewsExpanded] = useState(false);
+  const [stickyVisible, setStickyVisible] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const thumbnailStripRef = useRef<HTMLDivElement>(null);
   const gallerySwipeStart = useRef<number | null>(null);
   const cart = useCart();
   const selectedBundleDetails =
     bundles.find((bundle) => bundle.id === selectedBundle) ?? bundles[1];
+  const selectedPillows = pillowChoices.slice(0, selectedBundle);
+  const selectedBundlePriceCents =
+    getPillowBundlePriceCents(selectedPillows);
+  const selectedTotalCents = getPillowSelectionTotalCents(
+    selectedPillows,
+    includeCovers,
+  );
+  const displayedBundlePrice = (quantity: 1 | 2 | 4) => {
+    const choices =
+      quantity === selectedBundle
+        ? pillowChoices.slice(0, quantity)
+        : Array.from({ length: quantity }, () => ({
+            colour: selectedColour,
+            height: selectedSize,
+          }));
+    return getPillowBundlePriceCents(choices);
+  };
   const activeGallery = gallery.map((image, index) =>
     index === 0
       ? {
@@ -618,6 +638,26 @@ export function ProductPage() {
     strip.scrollTo({ left, behavior: "smooth" });
   }, [galleryIndex]);
 
+  useEffect(() => {
+    const primaryButton = document.getElementById("hero-add-to-cart");
+    if (!primaryButton) return;
+
+    const updateStickyVisibility = () => {
+      setStickyVisible(primaryButton.getBoundingClientRect().bottom < 0);
+    };
+
+    updateStickyVisibility();
+    window.addEventListener("scroll", updateStickyVisibility, {
+      passive: true,
+    });
+    window.addEventListener("resize", updateStickyVisibility);
+
+    return () => {
+      window.removeEventListener("scroll", updateStickyVisibility);
+      window.removeEventListener("resize", updateStickyVisibility);
+    };
+  }, []);
+
   const showPrevious = () =>
     setGalleryIndex((current) => (current - 1 + gallery.length) % gallery.length);
   const showNext = () =>
@@ -725,7 +765,7 @@ export function ProductPage() {
           </a>
           <h1>CloudAlign&trade; Pillow</h1>
           <div className="price-row">
-            <strong>{selectedBundleDetails.price}</strong>
+            <strong>{formatMoney(selectedBundlePriceCents)}</strong>
             <del>{selectedBundleDetails.compareAt}</del>
           </div>
           <p className="comparable">
@@ -786,60 +826,87 @@ export function ProductPage() {
 
           <div className="bundle-block">
             <h2>BUY MORE - SAVE MORE</h2>
-            {bundles.map((bundle) => (
-              <div
-                className={`bundle-card bundle-card-${bundle.id} ${
-                  selectedBundle === bundle.id ? "selected" : ""
-                }`}
-                key={bundle.id}
-              >
-                {bundle.badge ? (
-                  <span
-                    className={`bundle-badge bundle-badge-${bundle.badgeType}`}
-                  >
-                    {bundle.badgeType === "popular" ? (
-                      <>
-                        <span>Most</span>
-                        <strong>Popular</strong>
-                      </>
-                    ) : (
-                      bundle.badge
-                    )}
-                  </span>
-                ) : null}
-                <button
-                  type="button"
-                  className="bundle-choice"
-                  onClick={() =>
-                    chooseBundle(bundle.id as 1 | 2 | 4)
-                  }
-                  aria-pressed={selectedBundle === bundle.id}
+            {bundles.map((bundle) => {
+              const bundlePriceCents = displayedBundlePrice(
+                bundle.id as 1 | 2 | 4,
+              );
+              const bundleSavings =
+                getBundle(bundle.id).compareAtCents - bundlePriceCents;
+
+              return (
+                <div
+                  className={`bundle-card bundle-card-${bundle.id} ${
+                    selectedBundle === bundle.id ? "selected" : ""
+                  }`}
+                  key={bundle.id}
                 >
+                  {bundle.badge ? (
+                    <span
+                      className={`bundle-badge bundle-badge-${bundle.badgeType}`}
+                    >
+                      {bundle.badgeType === "popular" ? (
+                        <>
+                          <span>Most</span>
+                          <strong>Popular</strong>
+                        </>
+                      ) : (
+                        bundle.badge
+                      )}
+                    </span>
+                  ) : null}
+                  <button
+                    type="button"
+                    className="bundle-choice"
+                    onClick={() => chooseBundle(bundle.id as 1 | 2 | 4)}
+                    aria-pressed={selectedBundle === bundle.id}
+                  >
                   <span className="radio-dot" aria-hidden="true" />
                   <span className="bundle-copy">
                     <span className="bundle-title-line">
                       <strong>{bundle.title}</strong>
                       {bundle.label ? <b>{bundle.label}</b> : null}
                     </span>
-                    <small>{bundle.note}</small>
+                    <small>
+                      {bundle.id === 1
+                        ? bundle.note
+                        : `Save ${formatMoney(bundleSavings)}!`}
+                    </small>
                   </span>
                   <span className="bundle-prices">
-                    <em>{bundle.price}</em>
+                    <em>{formatMoney(bundlePriceCents)}</em>
                     <del>{bundle.compareAt}</del>
                   </span>
-                </button>
-                {selectedBundle === bundle.id && selectedBundle > 1 ? (
+                  </button>
+                  {selectedBundle === bundle.id && selectedBundle > 1 ? (
                   <div className="bundle-config" aria-label="Bundle options">
                     <p>Choose each pillow&apos;s colour and height</p>
                     {Array.from(
                       { length: selectedBundle },
                       (_, pillowIndex) => (
-                        <div key={pillowIndex}>
-                          <span>#{pillowIndex + 1}</span>
-                          <label className="bundle-select colour-select">
+                        <div className="bundle-config-row" key={pillowIndex}>
+                          <span className="bundle-pillow-label">
+                            Pillow {pillowIndex + 1}
+                          </span>
+                          <label
+                            className="bundle-select colour-select"
+                            style={
+                              {
+                                "--bundle-swatch":
+                                  colours.find(
+                                    (colour) =>
+                                      colour.id ===
+                                      pillowChoices[pillowIndex].colour,
+                                  )?.colour || "#f8f8f6",
+                              } as React.CSSProperties
+                            }
+                          >
                             <span className="sr-only">
                               Pillow {pillowIndex + 1} colour
                             </span>
+                            <span
+                              className="bundle-colour-dot"
+                              aria-hidden="true"
+                            />
                             <select
                               value={pillowChoices[pillowIndex].colour}
                               onChange={(event) =>
@@ -855,7 +922,7 @@ export function ProductPage() {
                               ))}
                             </select>
                           </label>
-                          <label className="bundle-select">
+                          <label className="bundle-select height-select">
                             <span className="sr-only">
                               Pillow {pillowIndex + 1} height
                             </span>
@@ -878,8 +945,8 @@ export function ProductPage() {
                       ),
                     )}
                   </div>
-                ) : null}
-                <label className="bundle-upsell">
+                  ) : null}
+                  <label className="bundle-upsell">
                   <input
                     type="checkbox"
                     checked={selectedBundle === bundle.id && includeCovers}
@@ -893,26 +960,19 @@ export function ProductPage() {
                     <strong>{bundle.upsellPrice}</strong>
                     <del>{bundle.upsellCompareAt}</del>
                   </span>
-                </label>
-              </div>
-            ))}
+                  </label>
+                </div>
+              );
+            })}
           </div>
 
-          <div className="selection-summary" aria-live="polite">
-            <span>Your selection</span>
-            {pillowChoices.slice(0, selectedBundle).map((pillow, index) => (
-              <strong key={`${pillow.colour}-${pillow.height}-${index}`}>
-                {selectedBundle > 1 ? `${index + 1}. ` : ""}
-                {colourName(pillow.colour)} / {heightName(pillow.height)}
-              </strong>
-            ))}
-            {includeCovers ? (
-              <small>Includes {selectedBundle} matching replacement cover{selectedBundle > 1 ? "s" : ""}</small>
-            ) : null}
-          </div>
-
-          <button type="button" className="add-to-cart" onClick={addToCart}>
-            Add to cart - {selectedBundleDetails.price}
+          <button
+            id="hero-add-to-cart"
+            type="button"
+            className="add-to-cart"
+            onClick={addToCart}
+          >
+            Add to cart - {formatMoney(selectedTotalCents)}
           </button>
 
           <div className="trust-row">
@@ -1154,15 +1214,28 @@ export function ProductPage() {
         </div>
       </section>
 
-      <div className="approved-mobile-buy-bar">
-        <div>
-          <strong>{selectedBundleDetails.price}</strong>
+      <div
+        className={`sticky-purchase-bar ${stickyVisible ? "visible" : ""}`}
+        aria-hidden={!stickyVisible}
+      >
+        <div className="sticky-product-summary">
+          <img
+            src="/assets/cart/cloudalign-bedroom.webp"
+            alt=""
+            width="84"
+            height="84"
+          />
           <span>
-            {selectedBundle} {selectedBundle === 1 ? "pillow" : "pillows"}
+            <strong>CloudAlign&trade; Pillow</strong>
+            <small>
+              {selectedBundle} {selectedBundle === 1 ? "pillow" : "pillows"}
+              {includeCovers ? " + matching covers" : ""}
+            </small>
           </span>
         </div>
         <button type="button" onClick={addToCart}>
-          Add to cart
+          <ShoppingBag aria-hidden="true" />
+          Add to cart - {formatMoney(selectedTotalCents)}
         </button>
       </div>
     </main>

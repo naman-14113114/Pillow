@@ -19,6 +19,8 @@ export type ProductSelection = {
   includeCovers: boolean;
 };
 
+export type PricedPillowChoice = Pick<ProductSelection, "colour" | "height">;
+
 export const colours: Array<{
   id: PillowColour;
   name: string;
@@ -709,6 +711,44 @@ export function formatMoney(cents: number) {
     style: "currency",
     currency: siteConfig.currency,
   }).format(cents / 100);
+}
+
+const pillowTier = ({ colour, height }: PricedPillowChoice) => {
+  if (colour === "white" && height === "regular") return 0;
+  if (colour === "white" || height === "regular") return 1;
+  return 2;
+};
+
+export function getPillowUnitPriceCents(choice: PricedPillowChoice) {
+  return [4999, 5499, 5999][pillowTier(choice)];
+}
+
+export function getPillowBundlePriceCents(
+  pillows: readonly PricedPillowChoice[],
+) {
+  const quantity = pillows.length;
+  const bundle = getBundle(quantity);
+
+  if (quantity === 1) return getPillowUnitPriceCents(pillows[0]);
+
+  const tierAdjustments =
+    quantity === 2 ? [0, 500, 1000] : [0, 400, 775];
+
+  return pillows.reduce(
+    (total, pillow) => total + tierAdjustments[pillowTier(pillow)],
+    bundle.priceCents,
+  );
+}
+
+export function getPillowSelectionTotalCents(
+  pillows: readonly PricedPillowChoice[],
+  includeCovers: boolean,
+) {
+  const bundle = getBundle(pillows.length);
+  return (
+    getPillowBundlePriceCents(pillows) +
+    (includeCovers ? bundle.coverPriceCents : 0)
+  );
 }
 
 export function getBundle(quantity: number) {
