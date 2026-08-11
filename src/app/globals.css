@@ -22,13 +22,16 @@
 
 html {
   scroll-behavior: smooth;
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
 }
 
 body {
   margin: 0;
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-inter), Arial, sans-serif;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: 1.5;
   letter-spacing: 0;
 }
 
@@ -3489,7 +3492,7 @@ header.store-site-header nav.header-primary-nav a,
 header.store-site-header nav.header-secondary-nav a {
   padding: 22px 0 20px;
   color: var(--navy);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
 }
@@ -3637,7 +3640,7 @@ footer.store-footer {
   max-width: 360px;
   margin: 22px 0 0;
   color: rgba(255, 255, 255, 0.65);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.8;
 }
 
@@ -3653,7 +3656,7 @@ footer.store-footer {
   margin: 7px 0 20px;
   color: var(--sky);
   font-family: var(--font-inter), sans-serif;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -3661,7 +3664,7 @@ footer.store-footer {
 .store-footer-menu a {
   margin-bottom: 11px;
   color: rgba(255, 255, 255, 0.72);
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.35;
   transition: color 180ms ease;
 }
@@ -3674,7 +3677,7 @@ footer.store-footer {
 .store-footer-contact > a {
   margin-top: 16px;
   color: white;
-  font-size: 13px;
+  font-size: 14px;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -4215,7 +4218,7 @@ footer.store-footer {
     padding: 14px 6px;
     border-bottom: 1px solid rgba(155, 179, 207, 0.4);
     color: var(--navy);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
   }
 
@@ -4300,7 +4303,7 @@ footer.store-footer {
   }
 
   .store-footer-menu a {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .store-footer-bottom {
