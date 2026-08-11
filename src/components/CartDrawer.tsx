@@ -1,12 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { Minus, ShoppingBag, X } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, Minus, ShoppingBag, X } from "lucide-react";
 import { useCart } from "@/components/CartProvider";
 import {
-  colours,
   formatMoney,
   getBundle,
+  getPillowBundlePriceCents,
+  getPillowColourName,
+  getPillowUnitPriceCents,
+  pillowVariantImages,
   product,
   siteConfig,
 } from "@/data/store";
@@ -14,6 +18,16 @@ import {
 export function CartDrawer() {
   const cart = useCart();
   const bundle = cart.line ? getBundle(cart.line.pillows.length) : null;
+  const regularSalePrice = cart.line
+    ? cart.line.pillows.reduce(
+        (total, pillow) => total + getPillowUnitPriceCents(pillow),
+        0,
+      )
+    : 0;
+  const bundlePrice = cart.line
+    ? getPillowBundlePriceCents(cart.line.pillows)
+    : 0;
+  const bundleSaving = Math.max(0, regularSalePrice - bundlePrice);
 
   return (
     <div className={`cart-drawer-shell ${cart.isOpen ? "open" : ""}`}>
@@ -30,7 +44,7 @@ export function CartDrawer() {
       >
         <div className="cart-drawer-header">
           <div>
-            <span>Cart</span>
+            <span>{cart.itemCount} {cart.itemCount === 1 ? "item" : "items"}</span>
             <strong>Your Juujo bag</strong>
           </div>
           <button
@@ -47,38 +61,31 @@ export function CartDrawer() {
           {cart.line && bundle ? (
             <article className="cart-line">
               <div className="cart-line-image">
-                <img
-                  src="/assets/cart/cloudalign-bedroom.webp"
-                  alt="White and navy CloudAlign pillows arranged on a bed"
-                  width="800"
-                  height="800"
+                <Image
+                  src={pillowVariantImages[cart.line.pillows[0].colour]}
+                  alt={`${getPillowColourName(cart.line.pillows[0].colour)} CloudAlign pillow`}
+                  width={1080}
+                  height={1080}
+                  sizes="(max-width: 600px) 112px, 128px"
                 />
+                <span className="cart-image-quantity">
+                  {cart.line.pillows.length}x
+                </span>
               </div>
               <div>
                 <strong>{product.name}</strong>
-                <span>{bundle.name}</span>
+                <span className="cart-bundle-name">{bundle.name}</span>
                 <div className="cart-variant-list">
-                  {cart.line.pillows.map((pillow, index) => {
-                    const colour = colours.find(
-                      (item) => item.id === pillow.colour,
-                    );
-                    return (
-                      <span key={`${pillow.colour}-${pillow.height}-${index}`}>
-                        Pillow {index + 1}: {colour?.name} /{" "}
-                        {pillow.height === "high" ? "High" : "Regular"}
-                      </span>
-                    );
-                  })}
+                  {cart.line.pillows.map((pillow, index) => (
+                    <span key={`${pillow.colour}-${pillow.height}-${index}`}>
+                      Pillow {index + 1}: {getPillowColourName(pillow.colour)} /{" "}
+                      {pillow.height === "high" ? "High" : "Regular"}
+                    </span>
+                  ))}
                 </div>
-                {cart.line.includeCovers && (
-                  <span>
-                    + {cart.line.pillows.length} matching replacement cover
-                    {cart.line.pillows.length > 1 ? "s" : ""}
-                  </span>
-                )}
                 <b>{formatMoney(cart.totalCents)}</b>
                 <button type="button" onClick={cart.clear}>
-                  <Minus aria-hidden="true" /> Remove
+                  <Minus aria-hidden="true" /> Remove bundle
                 </button>
               </div>
             </article>
@@ -101,26 +108,34 @@ export function CartDrawer() {
           )}
         </div>
 
-        <div className="cart-drawer-footer">
-          <Link href="/cart" onClick={cart.close}>
-            <span>+ Wanna add more discount?</span>
-            <strong>Move to checkout</strong>
-          </Link>
-          <div className="cart-subtotal">
-            <div>
-              <strong>SUBTOTAL</strong>
-              <span>Includes all taxes.</span>
+        {cart.line && bundle && (
+          <div className="cart-drawer-footer">
+            {bundleSaving > 0 && (
+              <div className="cart-drawer-saving">
+                <span>Automatic bundle saving</span>
+                <strong>-{formatMoney(bundleSaving)}</strong>
+              </div>
+            )}
+            <div className="cart-subtotal">
+              <div>
+                <strong>Subtotal</strong>
+                <span>Free tracked delivery</span>
+              </div>
+              <b>{formatMoney(cart.totalCents)}</b>
             </div>
-            <b>{formatMoney(cart.totalCents)}</b>
+            <Link
+              className="cart-checkout-button"
+              href="/cart"
+              scroll
+              onClick={() => {
+                cart.close();
+                window.scrollTo({ top: 0, left: 0 });
+              }}
+            >
+              Review basket <ArrowRight aria-hidden="true" />
+            </Link>
           </div>
-          <Link
-            className="cart-checkout-button"
-            href="/cart"
-            onClick={cart.close}
-          >
-            Go to cart
-          </Link>
-        </div>
+        )}
       </aside>
     </div>
   );

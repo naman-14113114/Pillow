@@ -1798,7 +1798,8 @@ video {
   height: 58px;
   flex: 0 0 58px;
   border-radius: 6px;
-  object-fit: cover;
+  object-fit: contain;
+  background: #f4f8ff;
 }
 
 .sticky-product-summary > span {
@@ -1986,7 +1987,10 @@ footer {
   }
 
   .sticky-product-summary img {
-    display: none;
+    display: block;
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
   }
 
   .sticky-product-summary strong {
@@ -1998,7 +2002,7 @@ footer {
   }
 
   .sticky-purchase-bar button {
-    min-width: 188px;
+    min-width: 164px;
     height: 46px;
     padding: 0 13px;
     font-size: 14px;

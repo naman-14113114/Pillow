@@ -5,7 +5,7 @@ import { gallery, product, productFaqs, siteConfig } from "@/data/store";
 export const metadata: Metadata = {
   title: "CloudAlign Pillow",
   description:
-    "Shop the Juujo CloudAlign Pillow in four colours and two contour heights, with bundle savings and matching replacement covers.",
+    "Shop the Juujo CloudAlign Pillow in four colours and two contour heights, with bundle savings and free tracked delivery.",
   alternates: { canonical: siteConfig.productPath },
 };
 
@@ -25,8 +25,8 @@ const productSchema = {
     "@type": "AggregateOffer",
     priceCurrency: siteConfig.currency,
     lowPrice: "49.99",
-    highPrice: "182.99",
-    offerCount: 9,
+    highPrice: "59.99",
+    offerCount: 8,
     availability: "https://schema.org/InStock",
     url: `${siteConfig.siteUrl}${siteConfig.productPath}`,
   },

@@ -32,6 +32,13 @@ export const colours: Array<{
   { id: "navy", name: "Navy Blue", swatch: "#0b214d" },
 ];
 
+export const pillowVariantImages: Record<PillowColour, string> = {
+  white: "/assets/variants/white.webp",
+  grey: "/assets/variants/grey.webp",
+  blue: "/assets/variants/baby-blue.webp",
+  navy: "/assets/variants/navy.webp",
+};
+
 export const heights: Array<{
   id: PillowHeight;
   name: string;
@@ -111,7 +118,7 @@ export const product = {
     "Dedicated side-sleeper wings",
     "Dual-height neck support",
     "Breathable removable cover",
-    "Colour-matched spare cover option",
+    "Four calming colour options",
     "Free tracked delivery",
   ],
   evidenceClaims: [
@@ -324,7 +331,7 @@ export const productFaqs = [
   {
     question: "Will it fit a standard pillowcase?",
     answer:
-      "The pillow measures 68.5 x 37 cm. A flexible standard UK pillowcase can fit, but the shaped replacement cover preserves the contour more cleanly.",
+      "The pillow measures 68.5 x 37 cm. A flexible standard UK pillowcase can fit over the included shaped, removable cover.",
   },
 ];
 
@@ -721,6 +728,10 @@ const pillowTier = ({ colour, height }: PricedPillowChoice) => {
 
 export function getPillowUnitPriceCents(choice: PricedPillowChoice) {
   return [4999, 5499, 5999][pillowTier(choice)];
+}
+
+export function getPillowColourName(colour: PillowColour) {
+  return colours.find((option) => option.id === colour)?.name ?? "White";
 }
 
 export function getPillowBundlePriceCents(

@@ -227,7 +227,7 @@ export function HomePage() {
           <h2>White, Grey, Baby Blue or Navy Blue.</h2>
           <p>
             Every colour uses the same sculpted memory-foam core and removable
-            cover. Add colour-matched replacement covers to any bundle.
+            fitted cover, which can be removed and machine washed at 30 C.
           </p>
           <Link className="text-link" href={siteConfig.productPath}>
             See all colours <ArrowRight aria-hidden="true" />

@@ -53,9 +53,9 @@ const groups = [
           "Remove the outer cover, machine wash at 30 C on a gentle cycle and air dry. Do not put the memory-foam core in a washing machine.",
       },
       {
-        question: "Can I buy a spare cover?",
+        question: "How should I dry the fitted cover?",
         answer:
-          "Yes. A colour-matched replacement cover can be added to one, two or four-pillow bundles on the product page.",
+          "Air dry the fitted cover completely before putting it back on the memory-foam core. Do not tumble dry the foam core.",
       },
       {
         question: "What should I do if my order arrives damaged?",

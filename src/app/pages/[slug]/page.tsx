@@ -38,9 +38,9 @@ const pages = {
     ],
   },
   "colour-and-cover-guide": {
-    title: "Colours and Replacement Covers",
+    title: "Colours and Cover Care",
     description:
-      "Choose White, Grey, Baby Blue or Navy Blue and add matching washable spare covers.",
+      "Choose White, Grey, Baby Blue or Navy Blue and care for the included washable cover.",
     image: "/assets/gallery-05-colours-juujo.png",
     editorialImage: "/assets/editorial/holding-cloudalign-blue.webp",
     editorialAlt: "Woman holding the tag-free white CloudAlign pillow against a blue background",
@@ -49,7 +49,7 @@ const pages = {
       "The fitted cover follows every curve without adding a visible product tag. Choose a colour that sits naturally with your bedding.",
     sections: [
       ["Four calm finishes", "All four options use the same memory-foam core and shaped removable cover."],
-      ["Match every spare", "Replacement covers automatically follow the pillow colour selected in the product options."],
+      ["Included fitted cover", "Each colour includes a shaped removable cover that follows the CloudAlign contour."],
       ["Wash at 30 C", "Remove the outer cover, wash gently at 30 C and air dry before refitting it to the foam core."],
     ],
   },

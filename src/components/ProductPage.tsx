@@ -23,6 +23,8 @@ import {
   getBundle,
   getPillowBundlePriceCents,
   getPillowSelectionTotalCents,
+  getPillowUnitPriceCents,
+  pillowVariantImages,
   type PillowColour,
   type PillowHeight,
 } from "@/data/store";
@@ -163,7 +165,7 @@ const overviewItems = [
   {
     title: "Care",
     content:
-      "The memory-foam pillow is not machine washable. The optional cooling pillowcase is fully machine washable and dryer safe.",
+      "The memory-foam core is not machine washable. Remove the included fitted cover, machine wash it at 30 C, and air dry before refitting.",
   },
 ];
 
@@ -253,17 +255,6 @@ const relatedProducts = [
     price: "£49.99",
     compareAt: "£100.00",
     href: "/pages/pillow-height-guide",
-  },
-  {
-    name: "Matching Cooling Cover",
-    description:
-      "A removable colour-matched spare cover shaped for the CloudAlign contour.",
-    image: "/assets/gallery-07-disclaimer-juujo.png",
-    hover: "/assets/gallery-05-colours-juujo.png",
-    reviews: "956",
-    price: "£9.99",
-    compareAt: "£19.99",
-    href: "/pages/colour-and-cover-guide",
   },
 ];
 
@@ -485,11 +476,11 @@ export function ProductPage() {
   const thumbnailStripRef = useRef<HTMLDivElement>(null);
   const gallerySwipeStart = useRef<number | null>(null);
   const cart = useCart();
-  const selectedBundleDetails =
-    bundles.find((bundle) => bundle.id === selectedBundle) ?? bundles[1];
   const selectedPillows = pillowChoices.slice(0, selectedBundle);
-  const selectedBundlePriceCents =
-    getPillowBundlePriceCents(selectedPillows);
+  const selectedUnitPriceCents = getPillowUnitPriceCents({
+    colour: selectedColour,
+    height: selectedSize,
+  });
   const selectedTotalCents = getPillowSelectionTotalCents(
     selectedPillows,
     includeCovers,
@@ -768,8 +759,8 @@ export function ProductPage() {
           </a>
           <h1>CloudAlign&trade; Pillow</h1>
           <div className="price-row">
-            <strong>{formatMoney(selectedBundlePriceCents)}</strong>
-            <del>{selectedBundleDetails.compareAt}</del>
+            <strong>{formatMoney(selectedUnitPriceCents)}</strong>
+            <del>{formatMoney(getBundle(1).compareAtCents)}</del>
           </div>
           <p className="comparable">
             Savings based on comparable value. <u>Learn more</u>
@@ -1190,8 +1181,8 @@ export function ProductPage() {
         <div className="section-heading related-heading">
           <h2>Complete Your Sleep Routine</h2>
           <p>
-            Choose your contour height, colour and matching cover without
-            adding unrelated products to your sleep setup.
+            Compare both contour heights and choose the colour that suits your
+            sleep setup.
           </p>
         </div>
         <div className="related-grid">
@@ -1225,8 +1216,8 @@ export function ProductPage() {
       >
         <div className="sticky-product-summary">
           <img
-            src="/assets/cart/cloudalign-bedroom.webp"
-            alt=""
+            src={pillowVariantImages[selectedColour]}
+            alt={`${colourName(selectedColour)} CloudAlign pillow`}
             width="84"
             height="84"
           />

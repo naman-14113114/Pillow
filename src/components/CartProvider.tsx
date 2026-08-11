@@ -1,7 +1,11 @@
 "use client";
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import type { PillowColour, PillowHeight } from "@/data/store";
+import type {
+  BundleQuantity,
+  PillowColour,
+  PillowHeight,
+} from "@/data/store";
 import { getPillowSelectionTotalCents } from "@/data/store";
 
 export type PillowChoice = {
@@ -22,6 +26,8 @@ type CartContextValue = {
   itemCount: number;
   totalCents: number;
   addLine: (line: Omit<CartLine, "id">) => void;
+  updatePillow: (index: number, pillow: PillowChoice) => void;
+  setBundleQuantity: (quantity: BundleQuantity) => void;
   clear: () => void;
   open: () => void;
   close: () => void;
@@ -30,6 +36,8 @@ type CartContextValue = {
 const CartContext = createContext<CartContextValue | null>(null);
 const storageKey = "juujo-cart-v2";
 const previousStorageKey = "juujo-cart-v1";
+const replacementCoversAvailable =
+  process.env.NEXT_PUBLIC_REPLACEMENT_COVERS_AVAILABLE === "true";
 
 function isPillowChoice(value: unknown): value is PillowChoice {
   if (!value || typeof value !== "object") return false;
@@ -56,7 +64,8 @@ function normaliseStoredLine(value: unknown): CartLine | null {
     return {
       id: stored.id || crypto.randomUUID(),
       pillows: stored.pillows,
-      includeCovers: Boolean(stored.includeCovers),
+      includeCovers:
+        replacementCoversAvailable && Boolean(stored.includeCovers),
     };
   }
 
@@ -72,7 +81,8 @@ function normaliseStoredLine(value: unknown): CartLine | null {
         colour: stored.colour as PillowColour,
         height: stored.height as PillowHeight,
       })),
-      includeCovers: Boolean(stored.includeCovers),
+      includeCovers:
+        replacementCoversAvailable && Boolean(stored.includeCovers),
     };
   }
 
@@ -126,9 +136,43 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         setLine({
           ...next,
           pillows: next.pillows.map((pillow) => ({ ...pillow })),
+          includeCovers:
+            replacementCoversAvailable && Boolean(next.includeCovers),
           id: crypto.randomUUID(),
         });
         setIsOpen(true);
+      },
+      updatePillow(index, pillow) {
+        setLine((current) => {
+          if (!current || !current.pillows[index]) return current;
+          return {
+            ...current,
+            pillows: current.pillows.map((choice, choiceIndex) =>
+              choiceIndex === index ? { ...pillow } : choice,
+            ),
+          };
+        });
+      },
+      setBundleQuantity(quantity) {
+        setLine((current) => {
+          if (!current) return current;
+          if (quantity <= current.pillows.length) {
+            return { ...current, pillows: current.pillows.slice(0, quantity) };
+          }
+
+          const fallback = current.pillows.at(-1) ?? {
+            colour: "white" as const,
+            height: "regular" as const,
+          };
+          return {
+            ...current,
+            pillows: Array.from({ length: quantity }, (_, index) =>
+              current.pillows[index]
+                ? { ...current.pillows[index] }
+                : { ...fallback },
+            ),
+          };
+        });
       },
       clear() {
         setLine(null);
