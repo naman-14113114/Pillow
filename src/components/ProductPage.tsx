@@ -252,7 +252,7 @@ const relatedProducts = [
     image: "/assets/gallery-02-zones-juujo.png",
     hover: "/assets/gallery-06-sleepers-juujo.png",
     reviews: "279",
-    price: "£49.99",
+    price: "£54.99",
     compareAt: "£100.00",
     href: "/pages/pillow-height-guide",
   },
