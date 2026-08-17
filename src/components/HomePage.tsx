@@ -10,7 +10,13 @@ import {
   WashingMachine,
 } from "lucide-react";
 import { ReviewGrid } from "@/components/ReviewGrid";
-import { formatMoney, product, siteConfig } from "@/data/store";
+import {
+  colours,
+  formatMoney,
+  heights,
+  product,
+  siteConfig,
+} from "@/data/store";
 
 const benefits = [
   ["Six support zones", "Dedicated areas for the head, neck, shoulders and arms."],
@@ -134,43 +140,23 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="home-editorial-story">
-        <header>
-          <div>
-            <p className="eyebrow">CloudAlign at home</p>
-            <h2>A considered shape, from bedtime to the morning light.</h2>
-          </div>
+      <section className="home-lifestyle-banner">
+        <img
+          src="/assets/v2/lifestyle-peaceful-banner.webp"
+          alt="Woman relaxing with a CloudAlign pillow and layered bedding"
+          width="1024"
+          height="576"
+        />
+        <div>
+          <p className="eyebrow">CloudAlign at home</p>
+          <h2>Support that still feels soft, calm and easy to live with.</h2>
           <p>
-            A sculpted pillow should feel natural in the room as well as under
-            your head. CloudAlign keeps its distinctive contour soft, simple
-            and easy to live with.
+            The distinctive contour gives your head and shoulders room to
+            settle without making the bedroom feel clinical.
           </p>
-        </header>
-        <div className="home-editorial-grid">
-          <figure>
-            <img
-              src="/assets/editorial/sleeping-white-bed.webp"
-              alt="Side sleeper resting with a white CloudAlign pillow"
-              width="1400"
-              height="1400"
-            />
-          </figure>
-          <figure>
-            <img
-              src="/assets/editorial/holding-cloudalign-blue.webp"
-              alt="Woman holding a white tag-free CloudAlign pillow against a blue background"
-              width="1254"
-              height="1254"
-            />
-          </figure>
-          <figure>
-            <img
-              src="/assets/editorial/four-pillow-studio.webp"
-              alt="Woman carrying four white CloudAlign pillows"
-              width="1400"
-              height="1746"
-            />
-          </figure>
+          <Link className="light-button" href={siteConfig.productPath}>
+            See CloudAlign in detail <ArrowRight aria-hidden="true" />
+          </Link>
         </div>
       </section>
 
@@ -193,31 +179,31 @@ export function HomePage() {
       <section className="home-height-section">
         <div>
           <p className="eyebrow">Choose your profile</p>
-          <h2>Regular or High, selected for your frame.</h2>
+          <h2>Choose the height that meets your shoulder.</h2>
           <p>
             Your ideal pillow height depends on shoulder width, mattress feel
             and sleep position. Use the guide or take the four-question quiz.
           </p>
-          <div className="height-measures">
-            <span>
-              <strong>8.9 cm</strong>
-              Regular
-            </span>
-            <MoveVertical aria-hidden="true" />
-            <span>
-              <strong>10.9 cm</strong>
-              High
-            </span>
+          <div className="height-profile-list">
+            {heights.map((height) => (
+              <article key={height.id}>
+                <div>
+                  <strong>{height.name}</strong>
+                  <span>{height.depth}</span>
+                </div>
+                <p>{height.recommendation}</p>
+              </article>
+            ))}
           </div>
           <Link className="text-link" href="/pages/pillow-height-guide">
             Read the height guide <ArrowRight aria-hidden="true" />
           </Link>
         </div>
         <img
-          src="/assets/gallery-04-size-guide-juujo.png"
-          alt="CloudAlign Regular and High contour profile guide"
-          width="1255"
-          height="1255"
+          src="/assets/v2/lifestyle-brunette-pillow-lift.webp"
+          alt="Woman holding the CloudAlign pillow behind her head"
+          width="1024"
+          height="1024"
         />
       </section>
 
@@ -229,16 +215,29 @@ export function HomePage() {
             Every colour uses the same sculpted memory-foam core and removable
             fitted cover, which can be removed and machine washed at 30 C.
           </p>
+          <div className="home-colour-swatches" aria-label="Available colours">
+            {colours.map((colour) => (
+              <span key={colour.id}>
+                <i
+                  aria-hidden="true"
+                  style={{ backgroundColor: colour.swatch }}
+                />
+                {colour.name}
+              </span>
+            ))}
+          </div>
           <Link className="text-link" href={siteConfig.productPath}>
             See all colours <ArrowRight aria-hidden="true" />
           </Link>
         </div>
-        <img
-          src="/assets/gallery-05-colours-juujo.png"
-          alt="CloudAlign pillow in White, Grey, Baby Blue and Navy Blue"
-          width="1255"
-          height="1255"
-        />
+        <figure className="home-colours-visual">
+          <img
+            src="/assets/gallery-05-colours-juujo.png"
+            alt="CloudAlign pillow in White, Grey, Baby Blue and Navy Blue"
+            width="1255"
+            height="1255"
+          />
+        </figure>
       </section>
 
       <section className="quiz-band">
@@ -252,24 +251,14 @@ export function HomePage() {
         </Link>
       </section>
 
-      <section className="home-reviews-intro">
-        <div>
-          <p className="eyebrow">Product feedback</p>
-          <h2>See how CloudAlign fits different sleepers.</h2>
-        </div>
-        <p>
-          Browse licensed product reviews and customer media for a closer look
-          at the pillow in everyday bedrooms.
-        </p>
-      </section>
       <ReviewGrid compact />
 
       <section className="home-final">
         <img
-          src="/assets/editorial/studio-cloudalign-model.webp"
-          alt="Woman holding a tag-free white CloudAlign pillow behind her head"
-          width="1600"
-          height="1600"
+          src="/assets/editorial/four-pillow-studio.webp"
+          alt="Woman carrying four white CloudAlign pillows"
+          width="1080"
+          height="1350"
         />
         <div>
           <Sparkles aria-hidden="true" />

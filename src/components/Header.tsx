@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Menu, ShoppingBag, UserRound, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useCart } from "@/components/CartProvider";
 import { siteConfig } from "@/data/store";
@@ -51,6 +52,8 @@ function AnnouncementBar() {
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const cart = useCart();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -73,7 +76,11 @@ export function Header() {
   return (
     <>
       <AnnouncementBar />
-      <header className="site-header store-site-header">
+      <header
+        className={`site-header store-site-header ${
+          isHome ? "store-site-header--home" : ""
+        }`}
+      >
         <button
           className="icon-button mobile-menu-button"
           type="button"

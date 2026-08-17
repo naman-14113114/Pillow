@@ -95,10 +95,10 @@ export default function Page() {
 
       <section className="faq-editorial-band">
         <img
-          src="/assets/editorial/sleeping-white-bed.webp"
-          alt="Side sleeper resting with a white CloudAlign pillow"
-          width="1400"
-          height="1400"
+          src="/assets/v2/lifestyle-man-side-sleeper.webp"
+          alt="Side sleeper resting with the CloudAlign contour beneath his neck"
+          width="1024"
+          height="1024"
         />
         <div>
           <span className="route-kicker">Before you choose</span>

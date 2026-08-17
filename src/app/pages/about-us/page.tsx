@@ -78,36 +78,20 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="about-editorial">
-        <header>
-          <div>
-            <span className="route-kicker">Made for different sleepers</span>
-            <h2>One distinctive contour, pictured in real sleep routines.</h2>
-          </div>
+      <section className="about-editorial about-editorial-single">
+        <img
+          src="/assets/v2/lifestyle-cloud-stack.webp"
+          alt="Woman sitting on layered bedding and holding a CloudAlign pillow"
+          width="1024"
+          height="576"
+        />
+        <div>
+          <span className="route-kicker">Made for different sleepers</span>
+          <h2>One distinctive contour, made easier to choose.</h2>
           <p>
             CloudAlign is designed for different frames, bedrooms and ways of
             settling in, while keeping the same tag-free sculpted form.
           </p>
-        </header>
-        <div>
-          <img
-            src="/assets/editorial/bedroom-cloudalign.webp"
-            alt="Woman relaxing with a CloudAlign pillow in bed"
-            width="1400"
-            height="933"
-          />
-          <img
-            src="/assets/editorial/couple-cloudalign.webp"
-            alt="Couple sitting together with a white CloudAlign pillow"
-            width="1400"
-            height="1749"
-          />
-          <img
-            src="/assets/editorial/studio-cloudalign-model.webp"
-            alt="Woman holding a white CloudAlign pillow behind her head"
-            width="1600"
-            height="1600"
-          />
         </div>
       </section>
 
@@ -173,10 +157,10 @@ export default function Page() {
           </Link>
         </div>
         <img
-          src="/assets/gallery-05-colours-juujo.png"
-          alt="White, Grey, Baby Blue and Navy Blue CloudAlign pillows"
-          width="1536"
-          height="1024"
+          src="/assets/editorial/holding-cloudalign-blue.webp"
+          alt="Woman holding the tag-free CloudAlign pillow"
+          width="1254"
+          height="1254"
         />
       </section>
 
