@@ -24,6 +24,8 @@ DEFAULT_HASH = "1787051976925"
 PAGE_SIZE = 20
 rate_lock = threading.Lock()
 last_request_at = 0.0
+jina_rate_lock = threading.Lock()
+last_jina_request_at = 0.0
 
 
 def parse_args() -> argparse.Namespace:
@@ -39,6 +41,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--batch-delay", type=float, default=8.0)
     parser.add_argument("--max-pages", type=int, default=800)
     parser.add_argument(
+        "--enrich-existing-videos",
+        action="store_true",
+        help="Add playable video embeds to the reviews already in --output.",
+    )
+    parser.add_argument(
         "--cache-dir",
         type=Path,
         default=Path(".codex-tmp/licensed-review-pages"),
@@ -47,6 +54,11 @@ def parse_args() -> argparse.Namespace:
         "--output",
         type=Path,
         default=Path("src/data/licensed-product-reviews.json"),
+    )
+    parser.add_argument(
+        "--video-cache-dir",
+        type=Path,
+        default=Path(".codex-tmp/licensed-review-videos"),
     )
     return parser.parse_args()
 
@@ -159,8 +171,176 @@ def is_allowed(review: dict[str, Any], excluded_terms: list[str]) -> bool:
     return not any(term.casefold() in searchable for term in excluded_terms if term)
 
 
+def fetch_video_embed(
+    args: argparse.Namespace,
+    review: dict[str, Any],
+) -> tuple[str, str]:
+    source_id = review["sourceReviewId"]
+    cache_file = args.video_cache_dir / f"{source_id}.html"
+    if cache_file.exists():
+        html = cache_file.read_text(encoding="utf-8")
+    else:
+        source_url = (
+            f"https://loox.io/post/quickview/{source_id}"
+            f"?p={args.product_id}&h={args.widget_hash}"
+        )
+        request = Request(
+            source_url,
+            headers={
+                "Accept": "text/html,application/xhtml+xml",
+                "User-Agent": "Mozilla/5.0 (compatible; LicensedReviewImporter/1.0)",
+            },
+        )
+        last_error: Exception | None = None
+        html = ""
+        for attempt in range(3):
+            try:
+                global last_request_at
+                with rate_lock:
+                    wait_for = args.request_spacing - (
+                        time.monotonic() - last_request_at
+                    )
+                    if wait_for > 0:
+                        time.sleep(wait_for)
+                    last_request_at = time.monotonic()
+                with urlopen(request, timeout=30) as response:
+                    html = response.read().decode("utf-8", errors="replace")
+                args.video_cache_dir.mkdir(parents=True, exist_ok=True)
+                cache_file.write_text(html, encoding="utf-8")
+                break
+            except HTTPError as error:
+                last_error = error
+                if error.code == 429:
+                    break
+                time.sleep(2.0 * (attempt + 1))
+            except (HTTPError, URLError, TimeoutError) as error:
+                last_error = error
+                time.sleep(2.0 * (attempt + 1))
+        if not html:
+            reader_url = source_url.replace(
+                "https://loox.io/", "https://r.jina.ai/http://loox.io/"
+            )
+            reader_request = Request(
+                reader_url,
+                headers={
+                    "Accept": "text/html",
+                    "User-Agent": "Mozilla/5.0 (compatible; LicensedReviewImporter/1.0)",
+                    "X-Return-Format": "html",
+                },
+            )
+            for attempt in range(7):
+                try:
+                    global last_jina_request_at
+                    with jina_rate_lock:
+                        wait_for = 3.2 - (
+                            time.monotonic() - last_jina_request_at
+                        )
+                        if wait_for > 0:
+                            time.sleep(wait_for)
+                        last_jina_request_at = time.monotonic()
+                    with urlopen(reader_request, timeout=45) as response:
+                        html = response.read().decode("utf-8", errors="replace")
+                    args.video_cache_dir.mkdir(parents=True, exist_ok=True)
+                    cache_file.write_text(html, encoding="utf-8")
+                    break
+                except (HTTPError, URLError, TimeoutError) as error:
+                    last_error = error
+                    time.sleep(5.0 * (attempt + 1))
+            else:
+                raise RuntimeError(
+                    f"Unable to fetch video review {source_id}: {last_error}"
+                )
+
+    soup = BeautifulSoup(html, "html.parser")
+    player = soup.select_one("#loox-video-player[src]")
+    if not player:
+        raise RuntimeError(f"No video player found for review {source_id}")
+    return source_id, player.get("src", "")
+
+
+def fetch_video_slider_embeds(args: argparse.Namespace) -> dict[str, str]:
+    url = (
+        f"https://loox.io/widget/{args.client_id}/video-slider/product/"
+        f"{args.product_id}.{args.widget_hash}.js"
+    )
+    request = Request(
+        url,
+        headers={"User-Agent": "Mozilla/5.0 (compatible; LicensedReviewImporter/1.0)"},
+    )
+    with urlopen(request, timeout=45) as response:
+        script = response.read().decode("utf-8", errors="replace")
+    match = re.search(
+        r"window\.__LX_VIDEO_SLIDER_DATA=(.*?);var __typeError=",
+        script,
+        re.DOTALL,
+    )
+    if not match:
+        return {}
+    payload = json.loads(match.group(1))
+    items = payload.get("data", {}).get(args.product_id, {}).get("reviews", [])
+    embeds: dict[str, str] = {}
+    for item in items:
+        stream_match = re.search(r"/([0-9a-f]{32})/manifest/", item.get("streaming", ""))
+        if stream_match:
+            stream_id = stream_match.group(1)
+            embeds[item["id"]] = (
+                f"https://iframe.videodelivery.net/{stream_id}"
+                "?autoplay=true&muted=true&preload=auto"
+            )
+    return embeds
+
+
+def enrich_video_reviews(
+    args: argparse.Namespace,
+    reviews: list[dict[str, Any]],
+) -> None:
+    slider_embeds = fetch_video_slider_embeds(args)
+    for review in reviews:
+        embed = slider_embeds.get(review.get("sourceReviewId", ""))
+        if review.get("mediaType") == "video" and embed:
+            review["videoEmbedUrl"] = embed
+
+    video_reviews = [
+        review
+        for review in reviews
+        if review.get("mediaType") == "video" and not review.get("videoEmbedUrl")
+    ]
+    if not video_reviews:
+        return
+
+    by_source_id = {review["sourceReviewId"]: review for review in video_reviews}
+    with ThreadPoolExecutor(max_workers=args.workers) as executor:
+        futures = {
+            executor.submit(fetch_video_embed, args, review): review
+            for review in video_reviews
+        }
+        for index, future in enumerate(as_completed(futures), start=1):
+            source_id, embed_url = future.result()
+            by_source_id[source_id]["videoEmbedUrl"] = embed_url
+            if index % 25 == 0 or index == len(video_reviews):
+                print(
+                    f"Resolved {index:,} of {len(video_reviews):,} video reviews",
+                    flush=True,
+                )
+
+
+def write_output(args: argparse.Namespace, output: dict[str, Any]) -> None:
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    args.output.write_text(
+        json.dumps(output, ensure_ascii=True, separators=(",", ":")),
+        encoding="utf-8",
+    )
+
+
 def main() -> None:
     args = parse_args()
+    if args.enrich_existing_videos:
+        output = json.loads(args.output.read_text(encoding="utf-8"))
+        enrich_video_reviews(args, output["reviews"])
+        write_output(args, output)
+        print(f"Updated video media in {args.output}")
+        return
+
     reviews: list[dict[str, Any]] = []
     seen: set[str] = set()
     next_page = 1
@@ -209,11 +389,8 @@ def main() -> None:
         },
         "reviews": reviews,
     }
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(
-        json.dumps(output, ensure_ascii=True, separators=(",", ":")),
-        encoding="utf-8",
-    )
+    enrich_video_reviews(args, reviews)
+    write_output(args, output)
     print(f"Wrote {len(reviews):,} reviews to {args.output}")
 
 

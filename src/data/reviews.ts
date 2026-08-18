@@ -8,6 +8,7 @@ export type Review = {
   body: string;
   image?: string;
   mediaType?: "image" | "video";
+  videoEmbedUrl?: string;
   source: "licensed-product-review";
   sourceVerified: boolean;
 };

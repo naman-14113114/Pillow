@@ -1,16 +1,15 @@
 "use client";
 
-import { BadgeCheck, ImageIcon, X } from "lucide-react";
+import { BadgeCheck, ImageIcon } from "lucide-react";
 import { useState } from "react";
+import { ReviewMedia } from "@/components/ReviewMedia";
 import { StarRating } from "@/components/StarRating";
-import type { Review } from "@/data/reviews";
 import { siteConfig } from "@/data/store";
 import { useReviews } from "@/hooks/useReviews";
 
 export function ReviewGrid({ compact = false }: { compact?: boolean }) {
   const [rating, setRating] = useState(0);
   const [mediaOnly, setMediaOnly] = useState(false);
-  const [active, setActive] = useState<Review | null>(null);
   const pageSize = compact ? 6 : 8;
   const {
     reviews,
@@ -61,16 +60,7 @@ export function ReviewGrid({ compact = false }: { compact?: boolean }) {
       <div className="review-grid">
         {reviews.map((review) => (
           <article className="review-card" key={review.id}>
-            {review.image && (
-              <button
-                type="button"
-                className="review-media"
-                onClick={() => setActive(review)}
-                aria-label={`Open media from ${review.name}`}
-              >
-                <img src={review.image} alt="" width="520" height="620" />
-              </button>
-            )}
+            <ReviewMedia review={review} />
             <div className="review-copy">
               <StarRating rating={review.rating} />
               <h3>{review.title}</h3>
@@ -112,24 +102,6 @@ export function ReviewGrid({ compact = false }: { compact?: boolean }) {
         >
           {loading ? "Loading reviews..." : "Show more reviews"}
         </button>
-      )}
-      {active && (
-        <div className="media-lightbox" role="dialog" aria-modal="true">
-          <button
-            className="icon-button"
-            type="button"
-            aria-label="Close media"
-            onClick={() => setActive(null)}
-          >
-            <X />
-          </button>
-          <img src={active.image} alt="" width="900" height="1000" />
-          <div>
-            <StarRating rating={active.rating} />
-            <strong>{active.name}</strong>
-            <p>{active.body}</p>
-          </div>
-        </div>
       )}
     </section>
   );

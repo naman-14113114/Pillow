@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useCart, type PillowChoice } from "@/components/CartProvider";
+import { ReviewMedia } from "@/components/ReviewMedia";
 import {
   formatMoney,
   getBundle,
@@ -978,19 +979,10 @@ export function ProductPage() {
         <div className="review-grid">
           {productReviews.map((review) => (
               <article className="review-card" key={review.id}>
-                <div className="review-media">
-                  {review.image ? (
-                    <img
-                      src={review.image}
-                      alt={`Licensed product review media from ${review.name}`}
-                    />
-                  ) : null}
-                  {review.mediaType === "video" ? (
-                    <span className="review-play" aria-hidden="true">
-                      <Play />
-                    </span>
-                  ) : null}
-                </div>
+                <ReviewMedia
+                  review={review}
+                  alt={`Licensed product review media from ${review.name}`}
+                />
                 <div className="review-body">
                   <div className="review-author">
                     <strong>{review.name}</strong>

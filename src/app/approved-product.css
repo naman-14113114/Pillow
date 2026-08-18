@@ -1315,27 +1315,6 @@ video {
   transform: scale(1.08);
 }
 
-.review-play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: grid;
-  width: 46px;
-  height: 46px;
-  place-items: center;
-  transform: translate(-50%, -50%);
-  border: 2px solid var(--paper);
-  border-radius: 50%;
-  background: oklch(24% 0.11 264 / 70%);
-  color: var(--paper);
-}
-
-.review-play svg {
-  width: 18px;
-  height: 18px;
-  fill: currentColor;
-}
-
 .review-body {
   padding: 14px;
 }
