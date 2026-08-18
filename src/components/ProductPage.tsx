@@ -15,7 +15,6 @@ import {
   Stethoscope,
   ShoppingBag,
 } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useCart, type PillowChoice } from "@/components/CartProvider";
 import {
@@ -230,31 +229,6 @@ const faqItems = [
     title: "Is it safe for sensitive skin?",
     content:
       "The OEKO-TEX certified cover is hypoallergenic, breathable, and gentle on sensitive skin.",
-  },
-];
-
-const relatedProducts = [
-  {
-    name: "Regular CloudAlign",
-    description:
-      "The lower 8.9 cm profile for smaller frames, softer mattresses and back sleepers.",
-    image: "/assets/gallery-04-size-guide-juujo.png",
-    hover: "/assets/gallery-03-lifestyle-juujo.png",
-    reviews: "478",
-    price: "£49.99",
-    compareAt: "£100.00",
-    href: "/pages/pillow-height-guide",
-  },
-  {
-    name: "High CloudAlign",
-    description:
-      "The higher 10.9 cm profile for broader shoulders and firmer mattresses.",
-    image: "/assets/gallery-02-zones-juujo.png",
-    hover: "/assets/gallery-06-sleepers-juujo.png",
-    reviews: "279",
-    price: "£54.99",
-    compareAt: "£100.00",
-    href: "/pages/pillow-height-guide",
   },
 ];
 
@@ -1175,39 +1149,6 @@ export function ProductPage() {
         <a className="light-button" href="#product">
           Shop Now
         </a>
-      </section>
-
-      <section className="related-section" data-reveal>
-        <div className="section-heading related-heading">
-          <h2>Complete Your Sleep Routine</h2>
-          <p>
-            Compare both contour heights and choose the colour that suits your
-            sleep setup.
-          </p>
-        </div>
-        <div className="related-grid">
-          {relatedProducts.map((product) => (
-            <article className="product-card" key={product.name}>
-              <div className="related-image">
-                <img className="main" src={product.image} alt={product.name} />
-                <img className="hover" src={product.hover} alt="" />
-              </div>
-              <div className="mini-rating">
-                <Stars />
-                <span>({product.reviews})</span>
-              </div>
-              <h3>{product.name}</h3>
-              <p>{product.description}</p>
-              <div className="mini-price">
-                <strong>{product.price}</strong>
-                <del>{product.compareAt}</del>
-              </div>
-              <Link className="related-action" href={product.href}>
-                Learn More
-              </Link>
-            </article>
-          ))}
-        </div>
       </section>
 
       <div
