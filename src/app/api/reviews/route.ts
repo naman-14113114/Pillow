@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { reviews, siteConfig } from "@/data/store";
+import reviewDataset from "@/data/licensed-product-reviews.json";
+import type { Review } from "@/data/reviews";
+import { siteConfig } from "@/data/store";
+
+const reviews = reviewDataset.reviews as Review[];
 
 export async function GET(request: NextRequest) {
   const page = Math.max(
@@ -7,7 +11,7 @@ export async function GET(request: NextRequest) {
     Number.parseInt(request.nextUrl.searchParams.get("page") || "1", 10),
   );
   const limit = Math.min(
-    20,
+    48,
     Math.max(
       1,
       Number.parseInt(request.nextUrl.searchParams.get("limit") || "8", 10),
@@ -31,7 +35,9 @@ export async function GET(request: NextRequest) {
     source: "licensed-product-review",
     page,
     limit,
-    totalImported: filtered.length,
+    totalImported: reviews.length,
+    totalFiltered: filtered.length,
+    hasMore: start + limit < filtered.length,
     reviews: filtered.slice(start, start + limit),
   });
 }

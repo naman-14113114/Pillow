@@ -1,27 +1,25 @@
 "use client";
 
 import { BadgeCheck, ImageIcon, X } from "lucide-react";
-import { useMemo, useState } from "react";
-import { reviews, siteConfig, type Review } from "@/data/store";
+import { useState } from "react";
 import { StarRating } from "@/components/StarRating";
+import type { Review } from "@/data/reviews";
+import { siteConfig } from "@/data/store";
+import { useReviews } from "@/hooks/useReviews";
 
 export function ReviewGrid({ compact = false }: { compact?: boolean }) {
   const [rating, setRating] = useState(0);
   const [mediaOnly, setMediaOnly] = useState(false);
-  const [page, setPage] = useState(1);
   const [active, setActive] = useState<Review | null>(null);
   const pageSize = compact ? 6 : 8;
-
-  const filtered = useMemo(
-    () =>
-      reviews.filter(
-        (review) =>
-          (rating === 0 || review.rating === rating) &&
-          (!mediaOnly || Boolean(review.image)),
-      ),
-    [mediaOnly, rating],
-  );
-  const visible = filtered.slice(0, page * pageSize);
+  const {
+    reviews,
+    totalFiltered,
+    hasMore,
+    loading,
+    error,
+    loadMore,
+  } = useReviews({ limit: pageSize, rating, mediaOnly });
 
   return (
     <section className="reviews-module" aria-labelledby="reviews-heading">
@@ -45,10 +43,7 @@ export function ReviewGrid({ compact = false }: { compact?: boolean }) {
               key={value}
               type="button"
               className={rating === value ? "active" : ""}
-              onClick={() => {
-                setRating(value);
-                setPage(1);
-              }}
+              onClick={() => setRating(value)}
             >
               {value === 0 ? "All reviews" : `${value} stars`}
             </button>
@@ -58,16 +53,13 @@ export function ReviewGrid({ compact = false }: { compact?: boolean }) {
           <input
             type="checkbox"
             checked={mediaOnly}
-            onChange={(event) => {
-              setMediaOnly(event.target.checked);
-              setPage(1);
-            }}
+            onChange={(event) => setMediaOnly(event.target.checked)}
           />
           <ImageIcon aria-hidden="true" /> Media only
         </label>
       </div>
       <div className="review-grid">
-        {visible.map((review) => (
+        {reviews.map((review) => (
           <article className="review-card" key={review.id}>
             {review.image && (
               <button
@@ -95,19 +87,30 @@ export function ReviewGrid({ compact = false }: { compact?: boolean }) {
           </article>
         ))}
       </div>
-      {!visible.length && (
+      {!loading && !reviews.length && (
         <div className="reviews-empty">
-          <strong>No reviews match this filter.</strong>
-          <span>Choose another rating or clear the media filter.</span>
+          <strong>{error || "No reviews match this filter."}</strong>
+          <span>
+            {error
+              ? "Please try again shortly."
+              : "Choose another rating or clear the media filter."}
+          </span>
         </div>
       )}
-      {visible.length < filtered.length && (
+      {reviews.length > 0 && (
+        <p className="reviews-results-count">
+          Showing {reviews.length.toLocaleString("en-GB")} of{" "}
+          {totalFiltered.toLocaleString("en-GB")} imported reviews
+        </p>
+      )}
+      {hasMore && (
         <button
           className="secondary-button reviews-more"
           type="button"
-          onClick={() => setPage((current) => current + 1)}
+          onClick={loadMore}
+          disabled={loading}
         >
-          Show more reviews
+          {loading ? "Loading reviews..." : "Show more reviews"}
         </button>
       )}
       {active && (

@@ -27,6 +27,7 @@ import {
   type PillowColour,
   type PillowHeight,
 } from "@/data/store";
+import { useReviews } from "@/hooks/useReviews";
 
 const replacementCoversAvailable =
   process.env.NEXT_PUBLIC_REPLACEMENT_COVERS_AVAILABLE === "true";
@@ -243,71 +244,6 @@ const pressLogos = [
   "/assets/logo-press-09.avif",
 ];
 
-const reviews = [
-  {
-    name: "Stephanie K.",
-    date: "1 Aug 2025",
-    image: "/assets/reviews/review-01.jpg",
-    text: "I just purchased another! This is such an amazing pillow.",
-  },
-  {
-    name: "Emma C.",
-    date: "4 Aug 2025",
-    image: "/assets/reviews/review-02.jpg",
-    text: "It stays cool all night and gives great support for the neck. Super comfortable and just the right height for me. I loved it so much I got another one for my mum!",
-  },
-  {
-    name: "Jessica L.",
-    date: "4 Aug 2025",
-    image: "/assets/reviews/review-03.jpg",
-    text: "Absolutely love it. It is big, super soft, and much gentler than the cervical pillow I was planning to get. It still supports my neck and looks so much nicer too.",
-  },
-  {
-    name: "Emily P.",
-    date: "9 Aug 2025",
-    image: "/assets/reviews/review-04.jpg",
-    text: "I love this. I use it all around my home. I sleep on it, and sometimes I even use it as a back cushion on the sofa.",
-  },
-  {
-    name: "Brooke S.",
-    date: "11 Aug 2025",
-    image: "/assets/reviews/review-05.jpg",
-    text: "Honestly this is better than I expected. I kept seeing people say they loved it, so I had to try it. I have purchased four in total and cannot wait to gift them.",
-  },
-  {
-    name: "Chloe N.",
-    date: "13 Aug 2025",
-    image: "/assets/reviews/review-06.jpg",
-    text: "I have bought so many pillows and this cloud pillow turned out to be the best. After a few nights of sleep, it felt just right.",
-  },
-  {
-    name: "Riley J.",
-    date: "19 Aug 2025",
-    image: "/assets/reviews/review-07.jpg",
-    text: "I am a light sleeper and picky about bedding, but after using it for a month I can honestly say it is the best one I have had. It stays cool and supports my neck perfectly.",
-  },
-  {
-    name: "Heather H.",
-    date: "14 Sep 2025",
-    image: "/assets/reviews/review-08.jpg",
-    text: "I have been recommending this to my patients. I love the functionality of the pillow and Juujo did a great job creating it.",
-    video: true,
-  },
-  {
-    name: "Jordyn G.",
-    date: "17 Aug 2025",
-    image: "/assets/reviews/review-09.jpg",
-    text: "It stays cool all night. It also helps take pressure off my neck and shoulders, so I have not been waking up in pain like I normally would.",
-  },
-  {
-    name: "Valeria M.",
-    date: "24 Aug 2025",
-    image: "/assets/reviews/review-10.jpg",
-    text: "This pillow exceeded my expectations. It is incredibly soft but supportive and cool to the touch. It makes you want five more minutes in bed.",
-    video: true,
-  },
-];
-
 function Stars({ count = 5 }: { count?: number }) {
   return (
     <span className="stars" aria-label={`${count} out of 5 stars`}>
@@ -443,12 +379,18 @@ export function ProductPage() {
     useState<PillowChoice[]>(defaultPillows);
   const [includeCovers, setIncludeCovers] = useState(false);
   const [videoPlaying, setVideoPlaying] = useState(true);
-  const [reviewsExpanded, setReviewsExpanded] = useState(false);
   const [stickyVisible, setStickyVisible] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const thumbnailStripRef = useRef<HTMLDivElement>(null);
   const gallerySwipeStart = useRef<number | null>(null);
   const cart = useCart();
+  const {
+    reviews: productReviews,
+    hasMore: hasMoreReviews,
+    loading: reviewsLoading,
+    error: reviewsError,
+    loadMore: loadMoreReviews,
+  } = useReviews({ limit: 8 });
   const selectedPillows = pillowChoices.slice(0, selectedBundle);
   const selectedUnitPriceCents = getPillowUnitPriceCents({
     colour: selectedColour,
@@ -1034,16 +976,16 @@ export function ProductPage() {
           </button>
         </div>
         <div className="review-grid">
-          {reviews
-            .slice(0, reviewsExpanded ? reviews.length : 8)
-            .map((review) => (
-              <article className="review-card" key={review.name}>
+          {productReviews.map((review) => (
+              <article className="review-card" key={review.id}>
                 <div className="review-media">
-                  <img
-                    src={review.image}
-                    alt={`CloudAlign pillow photographed by ${review.name}`}
-                  />
-                  {review.video ? (
+                  {review.image ? (
+                    <img
+                      src={review.image}
+                      alt={`Licensed product review media from ${review.name}`}
+                    />
+                  ) : null}
+                  {review.mediaType === "video" ? (
                     <span className="review-play" aria-hidden="true">
                       <Play />
                     </span>
@@ -1057,20 +999,24 @@ export function ProductPage() {
                     </span>
                   </div>
                   <time>{review.date}</time>
-                  <Stars />
-                  <p>{review.text}</p>
+                  <Stars count={review.rating} />
+                  <p>{review.body}</p>
                 </div>
               </article>
             ))}
         </div>
+        {reviewsError ? <p className="review-load-error">{reviewsError}</p> : null}
         <div className="review-more-wrap">
-          <button
-            type="button"
-            className="review-more"
-            onClick={() => setReviewsExpanded((expanded) => !expanded)}
-          >
-            {reviewsExpanded ? "Show fewer reviews" : "Show more reviews"}
-          </button>
+          {hasMoreReviews ? (
+            <button
+              type="button"
+              className="review-more"
+              onClick={loadMoreReviews}
+              disabled={reviewsLoading}
+            >
+              {reviewsLoading ? "Loading reviews..." : "Show more reviews"}
+            </button>
+          ) : null}
         </div>
       </section>
 
