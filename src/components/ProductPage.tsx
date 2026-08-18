@@ -138,7 +138,6 @@ const bundles = [
     title: "Family Bundle 4 Pillows",
     badge: "BEST VALUE",
     badgeType: "value",
-    label: "+Free Shipping",
     note: "Limited Time Offer!",
     compareAt: "£400.00",
     upsell: "+4 Cooling Pillowcases For Only £29.99!",
@@ -855,60 +854,75 @@ export function ProductPage() {
                             <span className="bundle-pillow-label">
                               Pillow {pillowIndex + 1}
                             </span>
-                            <label
-                              className="bundle-select colour-select"
-                              style={
-                                {
-                                  "--bundle-swatch":
-                                    colours.find(
-                                      (colour) =>
-                                        colour.id ===
-                                        pillowChoices[pillowIndex].colour,
-                                    )?.colour || "#f8f8f6",
-                                } as React.CSSProperties
-                              }
-                            >
-                              <span className="sr-only">
-                                Pillow {pillowIndex + 1} colour
-                              </span>
-                              <span
-                                className="bundle-colour-dot"
-                                aria-hidden="true"
-                              />
-                              <select
-                                value={pillowChoices[pillowIndex].colour}
-                                onChange={(event) =>
-                                  updatePillow(pillowIndex, {
-                                    colour: event.target.value as PillowColour,
-                                  })
-                                }
-                              >
+                            <fieldset className="bundle-option-group">
+                              <legend>
+                                Colour:{" "}
+                                <strong>
+                                  {colourName(
+                                    pillowChoices[pillowIndex].colour,
+                                  )}
+                                </strong>
+                              </legend>
+                              <div className="swatches bundle-swatches">
                                 {colours.map((colour) => (
-                                  <option key={colour.id} value={colour.id}>
-                                    {colour.name}
-                                  </option>
+                                  <button
+                                    type="button"
+                                    key={colour.id}
+                                    className={
+                                      pillowChoices[pillowIndex].colour ===
+                                      colour.id
+                                        ? "selected"
+                                        : ""
+                                    }
+                                    aria-label={`Pillow ${pillowIndex + 1}: ${colour.name}`}
+                                    aria-pressed={
+                                      pillowChoices[pillowIndex].colour ===
+                                      colour.id
+                                    }
+                                    title={colour.name}
+                                    style={
+                                      {
+                                        "--swatch": colour.colour,
+                                      } as React.CSSProperties
+                                    }
+                                    onClick={() =>
+                                      updatePillow(pillowIndex, {
+                                        colour: colour.id,
+                                      })
+                                    }
+                                  />
                                 ))}
-                              </select>
-                            </label>
-                            <label className="bundle-select height-select">
-                              <span className="sr-only">
-                                Pillow {pillowIndex + 1} height
-                              </span>
-                              <select
-                                value={pillowChoices[pillowIndex].height}
-                                onChange={(event) =>
-                                  updatePillow(pillowIndex, {
-                                    height: event.target.value as PillowHeight,
-                                  })
-                                }
-                              >
+                              </div>
+                            </fieldset>
+                            <fieldset className="bundle-option-group bundle-height-choice">
+                              <legend>Height</legend>
+                              <div className="segmented-control">
                                 {heights.map((height) => (
-                                  <option key={height.id} value={height.id}>
+                                  <button
+                                    type="button"
+                                    key={height.id}
+                                    className={
+                                      pillowChoices[pillowIndex].height ===
+                                      height.id
+                                        ? "selected"
+                                        : ""
+                                    }
+                                    aria-label={`Pillow ${pillowIndex + 1}: ${height.name} height`}
+                                    aria-pressed={
+                                      pillowChoices[pillowIndex].height ===
+                                      height.id
+                                    }
+                                    onClick={() =>
+                                      updatePillow(pillowIndex, {
+                                        height: height.id,
+                                      })
+                                    }
+                                  >
                                     {height.name}
-                                  </option>
+                                  </button>
                                 ))}
-                              </select>
-                            </label>
+                              </div>
+                            </fieldset>
                           </div>
                         ),
                       )}
