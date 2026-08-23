@@ -67,11 +67,18 @@ for (const [id, price] of variantPrices) {
 }
 
 const scriptResponse = await shopbase("/admin/script_tags.json");
-const existingScript = scriptResponse.script_tags?.find(
-  (script) => script.src === scriptUrl,
-);
+const existingTags = scriptResponse.script_tags || [];
 
-if (!existingScript) {
+for (const tag of existingTags) {
+  if (tag.src !== scriptUrl && tag.src.includes("shopbase-add-to-cart.js")) {
+    console.log(`Removing outdated script tag: ${tag.id} (${tag.src})`);
+    await shopbase(`/admin/script_tags/${tag.id}.json`, { method: "DELETE" });
+  }
+}
+
+const hasCurrentScript = existingTags.some((script) => script.src === scriptUrl);
+if (!hasCurrentScript) {
+  console.log(`Registering script tag: ${scriptUrl}`);
   await shopbase("/admin/script_tags.json", {
     method: "POST",
     body: JSON.stringify({ script_tag: { event: "onload", src: scriptUrl } }),
@@ -85,3 +92,4 @@ console.log(
     bridgeUrl: "https://www.juujo.com/cart?juujo_bridge=1",
   }),
 );
+

@@ -1,6 +1,7 @@
 (() => {
   const params = new URLSearchParams(window.location.search);
-  if (window.location.pathname !== "/cart" || params.get("juujo_bridge") !== "1") {
+  const normalizedPath = window.location.pathname.replace(/\/+$/, "") || "/";
+  if (normalizedPath !== "/cart" || params.get("juujo_bridge") !== "1") {
     return;
   }
 
@@ -40,7 +41,7 @@
       .juujo-bridge__spinner{width:34px;height:34px;margin:0 auto 20px;border:3px solid #c8d9f0;border-top-color:#164ea4;border-radius:50%;animation:juujo-spin .7s linear infinite}
       .juujo-bridge h1{margin:0 0 8px;font-size:24px}
       .juujo-bridge p{margin:0;color:#4f6282;font-size:15px;line-height:1.5}
-      .juujo-bridge button{display:none;height:46px;margin:20px auto 0;padding:0 20px;border:0;border-radius:6px;background:#164ea4;color:#fff;font-size:15px;font-weight:700}
+      .juujo-bridge button{display:none;height:46px;margin:20px auto 0;padding:0 20px;border:0;border-radius:6px;background:#164ea4;color:#fff;font-size:15px;font-weight:700;cursor:pointer}
       .juujo-bridge.is-error button{display:inline-flex;align-items:center}
       .juujo-bridge.is-error .juujo-bridge__spinner{display:none}
       @keyframes juujo-spin{to{transform:rotate(360deg)}}
@@ -111,59 +112,102 @@
   const sleep = (milliseconds) =>
     new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 
+  const getItemQty = (item) => Number(item?.qty ?? item?.quantity ?? 0);
+  const getItemVariantId = (item) => String(item?.variant_id ?? item?.variantId ?? "");
+  const getCartCount = (cart) => {
+    if (typeof cart?.total_quantity === "number") return cart.total_quantity;
+    if (typeof cart?.item_count === "number") return cart.item_count;
+    return (cart?.items || []).reduce((sum, item) => sum + getItemQty(item), 0);
+  };
+
   const waitForCart = async (matches) => {
-    for (let attempt = 0; attempt < 40; attempt += 1) {
-      const cart = await window.sbsdk.cart.get();
-      if (matches(cart)) return cart;
+    for (let attempt = 0; attempt < 30; attempt += 1) {
+      try {
+        const cart = (await window.sbsdk?.cart?.get()) || {};
+        if (matches(cart)) return cart;
+      } catch {
+        // Continue polling
+      }
       await sleep(150);
     }
-    throw new Error("ShopBase cart did not update in time.");
+    return (await window.sbsdk?.cart?.get().catch(() => ({}))) || {};
+  };
+
+  const navigateToCheckout = (preparedCart) => {
+    window.clearTimeout(timeout);
+    status.textContent = "Your pillows are ready. Opening checkout now.";
+
+    const token =
+      preparedCart?.checkoutToken ||
+      preparedCart?.checkout_token ||
+      preparedCart?.token ||
+      preparedCart?.cart_token;
+
+    if (token) {
+      const checkoutUrl = new URL(
+        `/checkouts/${token}`,
+        window.location.origin,
+      );
+      for (const [key, value] of Object.entries(attribution)) {
+        checkoutUrl.searchParams.set(key, value);
+      }
+      if (discountCode) checkoutUrl.searchParams.set("discount", discountCode);
+      window.location.assign(checkoutUrl.toString());
+      return;
+    }
+
+    if (typeof window.sbsdk?.checkout?.navigateCheckout === "function") {
+      window.sbsdk.checkout.navigateCheckout();
+      return;
+    }
+
+    const domCheckoutBtn = document.querySelector(
+      '[name="checkout"], .btn-checkout, .checkout-btn, button.cart__checkout, a[href*="/checkouts"], a[href*="/checkout"]',
+    );
+    if (domCheckoutBtn) {
+      domCheckoutBtn.click();
+      return;
+    }
+
+    const fallbackUrl = new URL("/checkouts", window.location.origin);
+    for (const [key, value] of Object.entries(attribution)) {
+      fallbackUrl.searchParams.set(key, value);
+    }
+    if (discountCode) fallbackUrl.searchParams.set("discount", discountCode);
+    window.location.assign(fallbackUrl.toString());
   };
 
   const beginCheckout = () => {
     window.sbsdk.ready(async () => {
       try {
-        const existingCart = await window.sbsdk.cart.get();
-        for (const item of existingCart.items || []) {
-          await window.sbsdk.cart.remove(item.variant_id);
+        const existingCart = (await window.sbsdk.cart.get().catch(() => ({}))) || {};
+        const itemsToRemove = existingCart.items || [];
+        for (const item of itemsToRemove) {
+          const removeId = item.id ?? item.variant_id;
+          if (removeId !== undefined) {
+            await window.sbsdk.cart.remove(removeId).catch(() => {});
+          }
         }
-        if ((existingCart.items || []).length) {
-          await waitForCart((cart) => cart.total_quantity === 0);
+        if (itemsToRemove.length) {
+          await waitForCart((cart) => getCartCount(cart) === 0);
         }
 
         for (const [variantId, quantity] of Object.entries(quantities)) {
-          await window.sbsdk.cart.add(Number(variantId), quantity);
+          await window.sbsdk.cart.add(Number(variantId), quantity).catch(() => {});
           await waitForCart((cart) =>
-            cart.items?.some(
+            (cart.items || []).some(
               (item) =>
-                String(item.variant_id) === variantId && item.qty === quantity,
+                getItemVariantId(item) === variantId &&
+                getItemQty(item) === quantity,
             ),
           );
         }
 
         const preparedCart = await waitForCart(
-          (cart) => cart.total_quantity === totalQuantity,
+          (cart) => getCartCount(cart) === totalQuantity,
         );
-        window.clearTimeout(timeout);
-        status.textContent = "Your pillows are ready. Opening checkout now.";
-        if (typeof window.sbsdk.checkout.navigateCheckout === "function") {
-          window.sbsdk.checkout.navigateCheckout();
-          return;
-        }
 
-        if (!preparedCart.checkoutToken) {
-          throw new Error("ShopBase did not return a checkout token.");
-        }
-
-        const checkoutUrl = new URL(
-          `/checkouts/${preparedCart.checkoutToken}`,
-          window.location.origin,
-        );
-        for (const [key, value] of Object.entries(attribution)) {
-          checkoutUrl.searchParams.set(key, value);
-        }
-        if (discountCode) checkoutUrl.searchParams.set("discount", discountCode);
-        window.location.assign(checkoutUrl);
+        navigateToCheckout(preparedCart);
       } catch (error) {
         console.error("Juujo checkout bridge failed", error);
         window.clearTimeout(timeout);
