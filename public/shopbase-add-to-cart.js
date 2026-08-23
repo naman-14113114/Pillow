@@ -35,6 +35,12 @@
   const checkoutCookie = "Path=/; Max-Age=1800; SameSite=Lax; Secure";
   document.cookie = `X-Global-Market=GB; ${checkoutCookie}`;
   document.cookie = `X-Global-Market-Currency=GBP; ${checkoutCookie}`;
+  try {
+    window.localStorage?.removeItem("cartCheckoutToken");
+    window.localStorage?.removeItem("cartToken");
+  } catch {
+    // The SDK can still prepare a cart when storage is unavailable.
+  }
 
   // Use a fixed overlay instead of replacing document.body so the underlying ShopBase Vue app is not destroyed
   const shell = document.createElement("div");

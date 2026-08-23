@@ -47,21 +47,21 @@ async function shopbase(endpoint, init = {}) {
 }
 
 const variantPrices = new Map([
-  ["1000020655426740", 72.59],
-  ["1000020655426741", 79.19],
-  ["1000020655426742", 72.59],
-  ["1000020655426743", 79.19],
-  ["1000020655426744", 72.59],
-  ["1000020655426745", 79.19],
-  ["1000020655426746", 65.99],
-  ["1000020655426747", 72.59],
+  ["1000020655426740", 75.01],
+  ["1000020655426741", 81.83],
+  ["1000020655426742", 75.01],
+  ["1000020655426743", 81.83],
+  ["1000020655426744", 75.01],
+  ["1000020655426745", 81.83],
+  ["1000020655426746", 68.19],
+  ["1000020655426747", 75.01],
 ]);
 
 for (const [id, price] of variantPrices) {
   await shopbase(`/admin/variants/${id}.json`, {
     method: "PUT",
     body: JSON.stringify({
-      variant: { id: Number(id), price, compare_at_price: 134.66 },
+      variant: { id: Number(id), price, compare_at_price: 136.4 },
     }),
   });
 }
@@ -92,4 +92,3 @@ console.log(
     bridgeUrl: "https://www.juujo.com/cart?juujo_bridge=1",
   }),
 );
-

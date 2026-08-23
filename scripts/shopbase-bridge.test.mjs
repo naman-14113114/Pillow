@@ -62,7 +62,10 @@ async function runBridge() {
 
   const window = {
     location,
-    localStorage: { getItem: (key) => storage.get(key) ?? null },
+    localStorage: {
+      getItem: (key) => storage.get(key) ?? null,
+      removeItem: (key) => storage.delete(key),
+    },
     sessionStorage: { setItem() {} },
     setTimeout,
     clearTimeout,
@@ -89,6 +92,9 @@ async function runBridge() {
           return { success: true };
         },
         async add(variantId, quantity) {
+          if (!storage.has("cartCheckoutToken")) {
+            storage.set("cartCheckoutToken", "fresh-checkout-token-456");
+          }
           cart.items.push({
             id: variantId,
             variant_id: variantId,
@@ -142,6 +148,6 @@ test("bridge supports ShopBase's synchronous cart.get and opens checkout", async
   );
   assert.equal(
     result.href,
-    "https://www.juujo.com/checkouts/checkout-token-123?discount=J2-TEST",
+    "https://www.juujo.com/checkouts/fresh-checkout-token-456?discount=J2-TEST",
   );
 });

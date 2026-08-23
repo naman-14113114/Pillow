@@ -55,14 +55,34 @@ async function shopbase(endpoint, init = {}) {
   return payload;
 }
 
-const conversionFactor = 65.99 / 49.99;
 const definitions = [
   {
     code: discountConfig.two,
     quantity: 2,
-    discountUsd: 14.51,
+    discountUsd: 15,
   },
 ];
+
+// ShopBase stores fixed discounts in USD and converts the aggregated cart to
+// GBP. These values are calibrated against the live GBP market rate on
+// 2026-08-23, including ShopBase's cart-level penny rounding.
+const fourPillowDiscounts = {
+  "0-0": 65.44,
+  "0-1": 68.51,
+  "0-2": 71.58,
+  "0-3": 74.65,
+  "0-4": 77.72,
+  "1-0": 66.81,
+  "1-1": 69.88,
+  "1-2": 72.94,
+  "1-3": 76.01,
+  "2-0": 68.17,
+  "2-1": 71.24,
+  "2-2": 74.31,
+  "3-0": 69.53,
+  "3-1": 72.6,
+  "4-0": 70.9,
+};
 
 for (let tierOneCount = 0; tierOneCount <= 4; tierOneCount += 1) {
   for (
@@ -70,17 +90,11 @@ for (let tierOneCount = 0; tierOneCount <= 4; tierOneCount += 1) {
     tierTwoCount <= 4 - tierOneCount;
     tierTwoCount += 1
   ) {
-    const tierZeroCount = 4 - tierOneCount - tierTwoCount;
-    const rawUsd =
-      tierZeroCount * 65.99 + tierOneCount * 72.59 + tierTwoCount * 79.19;
-    const targetGbp =
-      151.99 + tierOneCount * 4 + tierTwoCount * 7.75;
-    const targetUsd = Math.round(targetGbp * conversionFactor * 100) / 100;
     const key = `${tierOneCount}-${tierTwoCount}`;
     definitions.push({
       code: discountConfig.four[key],
       quantity: 4,
-      discountUsd: Math.round((rawUsd - targetUsd) * 100) / 100,
+      discountUsd: fourPillowDiscounts[key],
     });
   }
 }
