@@ -23,7 +23,7 @@ export default function Page() {
         </div>
         <img
           src="/assets/gallery-05-colours-juujo.png"
-          alt="Juujo CloudAlign order and packaging"
+          alt="Juujo OrthoAlign order and packaging"
           width="1536"
           height="1024"
         />

@@ -63,7 +63,7 @@ export function CartDrawer() {
               <div className="cart-line-image">
                 <Image
                   src={pillowVariantImages[cart.line.pillows[0].colour]}
-                  alt={`${getPillowColourName(cart.line.pillows[0].colour)} CloudAlign pillow`}
+                  alt={`${getPillowColourName(cart.line.pillows[0].colour)} OrthoAlign pillow`}
                   width={1080}
                   height={1080}
                   sizes="(max-width: 600px) 112px, 128px"
@@ -94,7 +94,7 @@ export function CartDrawer() {
               <ShoppingBag aria-hidden="true" />
               <h2>Your bag is waiting.</h2>
               <p>
-                Add the Juujo CloudAlign Pillow to choose your colour, contour
+                Add the Juujo OrthoAlign™ Pillow to choose your colour, contour
                 height and bundle with free UK delivery.
               </p>
               <Link

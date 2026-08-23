@@ -4,7 +4,7 @@ import { siteConfig } from "@/data/store";
 
 const shopLinks = [
   ["Home", "/"],
-  ["CloudAlign Pillow", siteConfig.productPath],
+  ["OrthoAlign Pillow", siteConfig.productPath],
   ["Best Pillow for Side Sleepers UK", "/blog/best-pillow-for-side-sleepers-uk"],
   ["Sleep Quiz", "/pages/sleep-quiz"],
   ["Blog", "/blog"],

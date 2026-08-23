@@ -1,0 +1,10 @@
+.next
+node_modules
+.git
+.codex-qa
+.codex-tmp
+.codex-assets
+preview-*.png
+tsconfig.tsbuildinfo
+npm-debug.log*
+

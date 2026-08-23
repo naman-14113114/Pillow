@@ -25,7 +25,7 @@ export function IntegrationPage({
         </span>
       </div>
       <Link className="primary-button" href="/products/juujo-cloudalign-pillow">
-        Return to CloudAlign <ArrowRight />
+        Return to OrthoAlign <ArrowRight />
       </Link>
     </main>
   );

@@ -44,7 +44,7 @@ export default function Page() {
           />
           <img
             src="/assets/licensed/juujo-about-hero-desktop.png"
-            alt="Woman resting in blue and white bedding with tag-free CloudAlign pillows"
+            alt="Woman resting in blue and white bedding with tag-free OrthoAlign pillows"
             width="1016"
             height="1548"
           />
@@ -71,7 +71,7 @@ export default function Page() {
             opposite approach: one focused product, explained properly.
           </p>
           <p>
-            CloudAlign combines a sculpted memory-foam core, two contour
+            OrthoAlign combines a sculpted memory-foam core, two contour
             heights and four fitted-cover colours so the decision starts with
             how you sleep, not a wall of nearly identical options.
           </p>
@@ -81,7 +81,7 @@ export default function Page() {
       <section className="about-editorial about-editorial-single">
         <img
           src="/assets/v2/lifestyle-cloud-stack.webp"
-          alt="Woman sitting on layered bedding and holding a CloudAlign pillow"
+          alt="Woman sitting on layered bedding and holding an OrthoAlign pillow"
           width="1024"
           height="576"
         />
@@ -89,7 +89,7 @@ export default function Page() {
           <span className="route-kicker">Made for different sleepers</span>
           <h2>One distinctive contour, made easier to choose.</h2>
           <p>
-            CloudAlign is designed for different frames, bedrooms and ways of
+            OrthoAlign is designed for different frames, bedrooms and ways of
             settling in, while keeping the same tag-free sculpted form.
           </p>
         </div>
@@ -98,13 +98,13 @@ export default function Page() {
       <section className="about-product-band">
         <img
           src="/assets/gallery-02-zones-juujo.png"
-          alt="Top and side views of the tag-free CloudAlign pillow"
+          alt="Top and side views of the tag-free OrthoAlign pillow"
           width="1200"
           height="1200"
         />
         <div>
           <span className="route-kicker">Our first product</span>
-          <h2>CloudAlign is shaped around real sleeping positions.</h2>
+          <h2>OrthoAlign is shaped around real sleeping positions.</h2>
           <p>
             The central cradle supports the head, raised wings define the neck
             position and curved edges leave room for shoulders and arms.
@@ -122,7 +122,7 @@ export default function Page() {
             </li>
           </ul>
           <Link className="primary-button" href={siteConfig.productPath}>
-            Meet CloudAlign <ArrowRight aria-hidden="true" />
+            Meet OrthoAlign <ArrowRight aria-hidden="true" />
           </Link>
         </div>
       </section>
@@ -158,7 +158,7 @@ export default function Page() {
         </div>
         <img
           src="/assets/editorial/holding-cloudalign-blue.webp"
-          alt="Woman holding the tag-free CloudAlign pillow"
+          alt="Woman holding the tag-free OrthoAlign pillow"
           width="1254"
           height="1254"
         />

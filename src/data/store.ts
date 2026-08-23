@@ -99,8 +99,8 @@ export const bundles: Array<{
 export const product = {
   id: "juujo-cloudalign-pillow",
   slug: "juujo-cloudalign-pillow",
-  sku: "JUUJO-CLOUDALIGN",
-  name: "Juujo CloudAlign Pillow",
+  sku: "JUUJO-ORTHOALIGN",
+  name: "Juujo OrthoAlign™ Pillow",
   eyebrow: "Ergonomic support for every sleep position",
   description:
     "A sculpted memory-foam pillow with dedicated neck, shoulder and arm zones, two contour heights and a breathable removable cover.",
@@ -148,47 +148,47 @@ export const product = {
 export const gallery = [
   {
     src: "/assets/gallery-01-hero-juujo.png",
-    alt: "Tag-free CloudAlign pillow with best-selling pillow award artwork",
+    alt: "Tag-free OrthoAlign pillow with best-selling pillow award artwork",
   },
   {
     src: "/assets/gallery-02-zones-juujo.png",
-    alt: "CloudAlign pillow six-zone support diagram",
+    alt: "OrthoAlign pillow six-zone support diagram",
   },
   {
     src: "/assets/gallery-03-lifestyle-juujo.png",
-    alt: "CloudAlign pillow supporting a sleeping model",
+    alt: "OrthoAlign pillow supporting a sleeping model",
   },
   {
     src: "/assets/gallery-04-size-guide-juujo.png",
-    alt: "CloudAlign Regular and High pillow size guide",
+    alt: "OrthoAlign Regular and High pillow size guide",
   },
   {
     src: "/assets/gallery-05-colours-juujo.png",
-    alt: "Four tag-free CloudAlign colours: White, Grey, Baby Blue and Navy Blue",
+    alt: "Four tag-free OrthoAlign colours: White, Grey, Baby Blue and Navy Blue",
   },
   {
     src: "/assets/gallery-06-sleepers-juujo.png",
-    alt: "Tag-free CloudAlign pillow in four sleeping positions",
+    alt: "Tag-free OrthoAlign pillow in four sleeping positions",
   },
   {
     src: "/assets/gallery-07-disclaimer-juujo.png",
-    alt: "Removable machine-washable CloudAlign cover",
+    alt: "Removable machine-washable OrthoAlign cover",
   },
   {
     src: "/assets/gallery-08-callouts-juujo.png",
-    alt: "CloudAlign ergonomic feature callouts",
+    alt: "OrthoAlign ergonomic feature callouts",
   },
   {
     src: "/assets/gallery-09-chiro-juujo.png",
-    alt: "CloudAlign pillow recommendation artwork",
+    alt: "OrthoAlign pillow recommendation artwork",
   },
   {
     src: "/assets/gallery-10-comparison-juujo.png",
-    alt: "Juujo CloudAlign pillow comparison",
+    alt: "Juujo OrthoAlign pillow comparison",
   },
   {
     src: "/assets/gallery-11-model-juujo.png",
-    alt: "Model holding a tag-free CloudAlign pillow",
+    alt: "Model holding a tag-free OrthoAlign pillow",
   },
 ] as const;
 

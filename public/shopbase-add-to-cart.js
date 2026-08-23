@@ -51,7 +51,7 @@
         <div class="juujo-bridge__mark">juujo</div>
         <div class="juujo-bridge__spinner" aria-hidden="true"></div>
         <h1>Preparing your secure checkout</h1>
-        <p data-status>Adding your selected CloudAlign pillows.</p>
+        <p data-status>Adding your selected OrthoAlign pillows.</p>
         <button type="button">Try again</button>
       </div>
     </section>`;

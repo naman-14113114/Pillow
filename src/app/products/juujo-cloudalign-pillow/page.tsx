@@ -3,9 +3,9 @@ import { ProductPage } from "@/components/ProductPage";
 import { gallery, product, productFaqs, siteConfig } from "@/data/store";
 
 export const metadata: Metadata = {
-  title: "CloudAlign Pillow",
+  title: "Juujo OrthoAlign™ Pillow",
   description:
-    "Shop the Juujo CloudAlign Pillow in four colours and two contour heights, with bundle savings and free tracked delivery.",
+    "Shop the Juujo OrthoAlign™ Pillow in four colours and two contour heights, with bundle savings and free tracked delivery.",
   alternates: { canonical: siteConfig.productPath },
 };
 

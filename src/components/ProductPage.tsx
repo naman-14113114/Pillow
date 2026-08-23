@@ -40,23 +40,23 @@ const gallery = [
   },
   {
     src: "/assets/gallery-02-zones-juujo.png",
-    alt: "CloudAlign pillow six-zone support diagram",
+    alt: "OrthoAlign pillow six-zone support diagram",
   },
   {
     src: "/assets/gallery-03-lifestyle-juujo.png",
-    alt: "CloudAlign pillow supporting a sleeping model",
+    alt: "OrthoAlign pillow supporting a sleeping model",
   },
   {
     src: "/assets/gallery-04-size-guide-juujo.png",
-    alt: "CloudAlign Regular and High pillow size guide",
+    alt: "OrthoAlign Regular and High pillow size guide",
   },
   {
     src: "/assets/gallery-05-colours-juujo.png",
-    alt: "CloudAlign pillow colour collection",
+    alt: "OrthoAlign pillow colour collection",
   },
   {
     src: "/assets/gallery-06-sleepers-juujo.png",
-    alt: "CloudAlign pillow in four sleeping positions",
+    alt: "OrthoAlign pillow in four sleeping positions",
   },
   {
     src: "/assets/gallery-07-disclaimer-juujo.png",
@@ -64,19 +64,19 @@ const gallery = [
   },
   {
     src: "/assets/gallery-08-callouts-juujo.png",
-    alt: "CloudAlign pillow ergonomic feature callouts",
+    alt: "OrthoAlign pillow ergonomic feature callouts",
   },
   {
     src: "/assets/gallery-09-chiro-juujo.png",
-    alt: "Chiropractor CloudAlign pillow recommendation",
+    alt: "Chiropractor OrthoAlign pillow recommendation",
   },
   {
     src: "/assets/gallery-10-comparison-juujo.png",
-    alt: "Juujo CloudAlign pillow compared with regular pillows",
+    alt: "Juujo OrthoAlign pillow compared with regular pillows",
   },
   {
     src: "/assets/gallery-11-model-juujo.png",
-    alt: "Model holding the CloudAlign pillow",
+    alt: "Model holding the OrthoAlign pillow",
   },
 ];
 
@@ -155,7 +155,7 @@ const overviewItems = [
   {
     title: "Overview",
     content:
-      "Meet the CloudAlign Pillow, crafted for deep, supported sleep in any position. The 3-zone contour design delivers targeted neck lift, pressure relief, and full-body alignment. Its dual-height system adapts to side, back, and stomach sleepers without bunching or constant flipping.",
+      "Meet the OrthoAlign Pillow, crafted for deep, supported sleep in any position. The 3-zone contour design delivers targeted neck lift, pressure relief, and full-body alignment. Its dual-height system adapts to side, back, and stomach sleepers without bunching or constant flipping.",
   },
   {
     title: "Materials",
@@ -196,7 +196,7 @@ const chiropractorItems = [
   {
     title: "How It Works",
     content:
-      "The CloudAlign Pillow has a high side and a low side. Flip it to match your body and sleep position, then let the contour cradle your head and neck.",
+      "The OrthoAlign Pillow has a high side and a low side. Flip it to match your body and sleep position, then let the contour cradle your head and neck.",
   },
   {
     title: "Chiropractor-Designed for Alignment",
@@ -219,12 +219,12 @@ const faqItems = [
   {
     title: "Is this pillow good for side, back, and stomach sleepers?",
     content:
-      "Yes. CloudAlign adapts to all three sleep styles by providing targeted lift and pressure relief where each position needs it.",
+      "Yes. OrthoAlign adapts to all three sleep styles by providing targeted lift and pressure relief where each position needs it.",
   },
   {
     title: "Will it flatten over time?",
     content:
-      "CloudAlign uses shape-retaining memory foam designed to maintain its contour and support.",
+      "OrthoAlign uses shape-retaining memory foam designed to maintain its contour and support.",
   },
   {
     title: "Is it safe for sensitive skin?",
@@ -416,7 +416,7 @@ export function ProductPage() {
       ? {
           ...image,
           src: colourHero[selectedColour],
-          alt: `${colourName(selectedColour)} CloudAlign pillow with award artwork`,
+          alt: `${colourName(selectedColour)} OrthoAlign pillow with award artwork`,
         }
       : image,
   );
@@ -604,7 +604,7 @@ export function ProductPage() {
           <div
             className="gallery-stage"
             role="group"
-            aria-label="CloudAlign product gallery"
+            aria-label="OrthoAlign product gallery"
             tabIndex={0}
             onKeyDown={(event) => {
               if (event.key === "ArrowLeft") showPrevious();
@@ -673,7 +673,7 @@ export function ProductPage() {
             <Stars />
             <span>(42,093)</span>
           </a>
-          <h1>CloudAlign&trade; Pillow</h1>
+          <h1>OrthoAlign&trade; Pillow</h1>
           <div className="price-row">
             <strong>{formatMoney(selectedUnitPriceCents)}</strong>
             <del>{formatMoney(getBundle(1).compareAtCents)}</del>
@@ -936,7 +936,7 @@ export function ProductPage() {
             <img
               className="cool-shift"
               src="/assets/feature-zones.webp"
-              alt="CloudAlign pillow three-zone support"
+              alt="OrthoAlign pillow three-zone support"
             />
           </div>
           <div className="feature-copy">
@@ -1054,7 +1054,7 @@ export function ProductPage() {
           <article>
             <img
               src="/assets/feature-wing.webp"
-              alt="Side sleeper resting on the CloudAlign pillow"
+              alt="Side sleeper resting on the OrthoAlign pillow"
             />
             <h3>Side Sleeper Wing</h3>
             <p>Contours to relieve shoulder and neck pressure.</p>
@@ -1074,7 +1074,7 @@ export function ProductPage() {
       <section className="faq-section" id="faq" data-reveal>
         <div className="faq-intro">
           <h2>Frequently Asked Questions</h2>
-          <p>Everything you need to know about the CloudAlign Pillow.</p>
+          <p>Everything you need to know about the OrthoAlign Pillow.</p>
         </div>
         <AccordionList items={faqItems} />
       </section>
@@ -1110,12 +1110,12 @@ export function ProductPage() {
         <div className="sticky-product-summary">
           <img
             src={pillowVariantImages[selectedColour]}
-            alt={`${colourName(selectedColour)} CloudAlign pillow`}
+            alt={`${colourName(selectedColour)} OrthoAlign pillow`}
             width="84"
             height="84"
           />
           <span>
-            <strong>CloudAlign&trade; Pillow</strong>
+            <strong>OrthoAlign&trade; Pillow</strong>
             <small>
               {selectedBundle} {selectedBundle === 1 ? "pillow" : "pillows"}
               {includeCovers ? " + matching covers" : ""}

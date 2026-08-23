@@ -58,7 +58,7 @@ export default function Page() {
         </div>
         <img
           src="/assets/editorial/holding-cloudalign-blue.webp"
-          alt="Woman holding a tag-free CloudAlign pillow against a blue background"
+          alt="Woman holding a tag-free OrthoAlign pillow against a blue background"
           width="1254"
           height="1254"
         />

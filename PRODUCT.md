@@ -6,7 +6,7 @@ brand
 
 ## Users
 
-UK shoppers arriving with strong side-sleeper and pillow-comparison intent. They need to understand the CloudAlign shape, choose a suitable height and colour, and move to checkout without ambiguity.
+UK shoppers arriving with strong side-sleeper and pillow-comparison intent. They need to understand the OrthoAlign shape, choose a suitable height and colour, and move to checkout without ambiguity.
 
 ## Product Purpose
 

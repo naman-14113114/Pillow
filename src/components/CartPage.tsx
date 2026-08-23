@@ -126,7 +126,7 @@ export function CartPage() {
         <h1>No pillows selected yet.</h1>
         <p>Choose your colour, contour height and bundle on the product page.</p>
         <Link className="primary-button" href={siteConfig.productPath}>
-          Shop CloudAlign <ArrowRight />
+          Shop OrthoAlign <ArrowRight />
         </Link>
       </main>
     );
@@ -150,7 +150,7 @@ export function CartPage() {
 
       <div className="cart-page-heading">
         <span className="route-kicker">Your basket</span>
-        <h1>Review your CloudAlign setup.</h1>
+        <h1>Review your OrthoAlign setup.</h1>
         <p>Confirm every pillow before continuing to secure checkout.</p>
       </div>
 
@@ -159,7 +159,7 @@ export function CartPage() {
           <article className="cart-bundle-card">
             <div className="cart-bundle-header">
               <div>
-                <span>CloudAlign bundle</span>
+                <span>OrthoAlign bundle</span>
                 <h2>{product.name}</h2>
               </div>
               <button type="button" onClick={cart.clear}>
@@ -201,7 +201,7 @@ export function CartPage() {
                 >
                   <Image
                     src={pillowVariantImages[pillow.colour]}
-                    alt={`${getPillowColourName(pillow.colour)} CloudAlign pillow`}
+                    alt={`${getPillowColourName(pillow.colour)} OrthoAlign pillow`}
                     width={1080}
                     height={1080}
                     sizes="(max-width: 600px) 94px, 132px"

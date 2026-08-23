@@ -6,12 +6,12 @@ import { siteConfig } from "@/data/store";
 
 const pages = {
   "how-it-works": {
-    title: "How CloudAlign Works",
+    title: "How OrthoAlign Works",
     description:
       "Understand the central cradle, neck contours, shoulder wings and arm channels.",
     image: "/assets/gallery-02-zones-juujo.png",
     editorialImage: "/assets/editorial/foam-compression.webp",
-    editorialAlt: "Hand pressing into the responsive CloudAlign pillow surface",
+    editorialAlt: "Hand pressing into the responsive OrthoAlign pillow surface",
     editorialTitle: "Responsive support you can feel.",
     editorialCopy:
       "The high-density memory-foam core compresses under pressure and returns to its sculpted contour when that pressure lifts.",
@@ -24,10 +24,10 @@ const pages = {
   "pillow-height-guide": {
     title: "Choose Regular or High",
     description:
-      "Match the CloudAlign contour to your shoulder frame, mattress and usual sleep position.",
+      "Match the OrthoAlign contour to your shoulder frame, mattress and usual sleep position.",
     image: "/assets/gallery-04-size-guide-juujo.png",
     editorialImage: "/assets/editorial/side-sleeper-man.webp",
-    editorialAlt: "Man sleeping on his side with a CloudAlign contour pillow",
+    editorialAlt: "Man sleeping on his side with an OrthoAlign contour pillow",
     editorialTitle: "Start with the gap between shoulder and mattress.",
     editorialCopy:
       "A side sleeper usually needs enough height to support the head without pushing it upward. Your frame and mattress firmness determine the best starting profile.",
@@ -43,13 +43,13 @@ const pages = {
       "Choose White, Grey, Baby Blue or Navy Blue and care for the included washable cover.",
     image: "/assets/gallery-05-colours-juujo.png",
     editorialImage: "/assets/editorial/holding-cloudalign-blue.webp",
-    editorialAlt: "Woman holding the tag-free white CloudAlign pillow against a blue background",
+    editorialAlt: "Woman holding the tag-free white OrthoAlign pillow against a blue background",
     editorialTitle: "A calm finish for the rest of the room.",
     editorialCopy:
       "The fitted cover follows every curve without adding a visible product tag. Choose a colour that sits naturally with your bedding.",
     sections: [
       ["Four calm finishes", "All four options use the same memory-foam core and shaped removable cover."],
-      ["Included fitted cover", "Each colour includes a shaped removable cover that follows the CloudAlign contour."],
+      ["Included fitted cover", "Each colour includes a shaped removable cover that follows the OrthoAlign contour."],
       ["Wash at 30 C", "Remove the outer cover, wash gently at 30 C and air dry before refitting it to the foam core."],
     ],
   },
@@ -88,7 +88,7 @@ export default async function Page({
           <h1>{page.title}</h1>
           <p>{page.description}</p>
           <Link className="primary-button" href={siteConfig.productPath}>
-            Shop CloudAlign <ArrowRight />
+            Shop OrthoAlign <ArrowRight />
           </Link>
         </div>
         <img src={page.image} alt="" width="1200" height="1200" />

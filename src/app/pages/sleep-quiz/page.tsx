@@ -4,7 +4,7 @@ import { SleepQuiz } from "@/components/SleepQuiz";
 export const metadata: Metadata = {
   title: "Pillow Height Quiz",
   description:
-    "Answer four questions to choose a Regular or High CloudAlign contour.",
+    "Answer four questions to choose a Regular or High OrthoAlign contour.",
 };
 
 export default function Page() {
@@ -34,7 +34,7 @@ export default function Page() {
       <section className="quiz-explainer">
         <img
           src="/assets/gallery-04-size-guide-juujo.png"
-          alt="Regular and High CloudAlign contour height guide"
+          alt="Regular and High OrthoAlign contour height guide"
           width="1200"
           height="1200"
         />

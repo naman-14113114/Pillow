@@ -1,6 +1,6 @@
 # Juujo UK
 
-Production Next.js storefront for the Juujo CloudAlign Pillow.
+Production Next.js storefront for the Juujo OrthoAlign Pillow.
 
 ## Local development
 

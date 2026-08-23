@@ -72,7 +72,7 @@ export default async function Page({
       <aside>
         <h2>Ready to choose your contour?</h2>
         <Link className="primary-button" href={siteConfig.productPath}>
-          Shop CloudAlign <ArrowRight />
+          Shop OrthoAlign <ArrowRight />
         </Link>
       </aside>
     </main>

@@ -3,12 +3,12 @@ import { siteConfig } from "@/data/store";
 export function GET() {
   const body = `# Juujo
 
-Juujo is a UK-focused sleep brand offering the CloudAlign ergonomic memory-foam pillow.
+Juujo is a UK-focused sleep brand offering the OrthoAlign ergonomic memory-foam pillow.
 
 ## Primary pages
-- [CloudAlign Pillow](${siteConfig.siteUrl}${siteConfig.productPath})
+- [OrthoAlign Pillow](${siteConfig.siteUrl}${siteConfig.productPath})
 - [Pillow Height Quiz](${siteConfig.siteUrl}/pages/sleep-quiz)
-- [How CloudAlign Works](${siteConfig.siteUrl}/pages/how-it-works)
+- [How OrthoAlign Works](${siteConfig.siteUrl}/pages/how-it-works)
 - [Customer Reviews](${siteConfig.siteUrl}/pages/customer-reviews)
 - [Sleep Journal](${siteConfig.siteUrl}/blog)
 - [Shipping Policy](${siteConfig.siteUrl}/policies/shipping-policy)

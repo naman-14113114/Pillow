@@ -45,16 +45,16 @@ const display = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl),
   title: {
-    default: "Juujo CloudAlign Pillow | Support for Side Sleepers",
+    default: "Juujo OrthoAlign™ Pillow | Support for Side Sleepers",
     template: "%s | Juujo",
   },
   description:
-    "Discover the Juujo CloudAlign Pillow with six ergonomic zones, two contour heights and four washable-cover colours.",
+    "Discover the Juujo OrthoAlign™ Pillow with six ergonomic zones, two contour heights and four washable-cover colours.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: "Juujo",
-    title: "Juujo CloudAlign Pillow",
+    title: "Juujo OrthoAlign™ Pillow",
     description:
       "Sculpted memory-foam support for side, back and stomach sleepers.",
     images: [

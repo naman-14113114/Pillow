@@ -8,7 +8,7 @@ import { useCart } from "@/components/CartProvider";
 import { siteConfig } from "@/data/store";
 
 const primaryNavigation = [
-  ["CloudAlign Pillow", siteConfig.productPath],
+  ["OrthoAlign Pillow", siteConfig.productPath],
   ["Pillow Height Guide", "/pages/pillow-height-guide"],
   ["Sleep Quiz", "/pages/sleep-quiz"],
 ] as const;

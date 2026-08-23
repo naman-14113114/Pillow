@@ -44,7 +44,7 @@ export function HomePage() {
           />
           <img
             src="/assets/licensed/juujo-about-hero-desktop.png"
-            alt="Sleeper resting against the CloudAlign contour pillow"
+            alt="Sleeper resting against the OrthoAlign contour pillow"
             width="2048"
             height="749"
           />
@@ -53,7 +53,7 @@ export function HomePage() {
           <p>THE CONTOUR PILLOW FOR SIDE SLEEPERS</p>
           <h1>Wake up feeling properly supported.</h1>
           <span>
-            CloudAlign gives your head, neck and shoulder their own place to
+            OrthoAlign gives your head, neck and shoulder their own place to
             settle, with Regular and High profiles for a more personal fit.
           </span>
           <div>
@@ -100,7 +100,7 @@ export function HomePage() {
         </div>
         <div>
           <p>
-            CloudAlign creates dedicated space for the head, neck, shoulder and
+            OrthoAlign creates dedicated space for the head, neck, shoulder and
             arm instead of asking one flat surface to support everything.
           </p>
           <Link className="text-link" href="/pages/how-it-works">
@@ -112,7 +112,7 @@ export function HomePage() {
       <section className="home-product-story">
         <img
           src="/assets/editorial/bedroom-cloudalign.webp"
-          alt="Woman relaxing with a tag-free CloudAlign pillow in a bright bedroom"
+          alt="Woman relaxing with a tag-free OrthoAlign pillow in a bright bedroom"
           width="1400"
           height="933"
         />
@@ -135,7 +135,7 @@ export function HomePage() {
             </li>
           </ul>
           <Link className="primary-button" href={siteConfig.productPath}>
-            Choose your CloudAlign <ArrowRight aria-hidden="true" />
+            Choose your OrthoAlign <ArrowRight aria-hidden="true" />
           </Link>
         </div>
       </section>
@@ -143,19 +143,19 @@ export function HomePage() {
       <section className="home-lifestyle-banner">
         <img
           src="/assets/v2/lifestyle-peaceful-banner.webp"
-          alt="Woman relaxing with a CloudAlign pillow and layered bedding"
+          alt="Woman relaxing with an OrthoAlign pillow and layered bedding"
           width="1024"
           height="576"
         />
         <div>
-          <p className="eyebrow">CloudAlign at home</p>
+          <p className="eyebrow">OrthoAlign at home</p>
           <h2>Support that still feels soft, calm and easy to live with.</h2>
           <p>
             The distinctive contour gives your head and shoulders room to
             settle without making the bedroom feel clinical.
           </p>
           <Link className="light-button" href={siteConfig.productPath}>
-            See CloudAlign in detail <ArrowRight aria-hidden="true" />
+            See OrthoAlign in detail <ArrowRight aria-hidden="true" />
           </Link>
         </div>
       </section>
@@ -201,7 +201,7 @@ export function HomePage() {
         </div>
         <img
           src="/assets/v2/lifestyle-brunette-pillow-lift.webp"
-          alt="Woman holding the CloudAlign pillow behind her head"
+          alt="Woman holding the OrthoAlign pillow behind her head"
           width="1024"
           height="1024"
         />
@@ -233,7 +233,7 @@ export function HomePage() {
         <figure className="home-colours-visual">
           <img
             src="/assets/gallery-05-colours-juujo.png"
-            alt="CloudAlign pillow in White, Grey, Baby Blue and Navy Blue"
+            alt="OrthoAlign pillow in White, Grey, Baby Blue and Navy Blue"
             width="1255"
             height="1255"
           />
@@ -256,7 +256,7 @@ export function HomePage() {
       <section className="home-final">
         <img
           src="/assets/editorial/four-pillow-studio.webp"
-          alt="Woman carrying four white CloudAlign pillows"
+          alt="Woman carrying four white OrthoAlign pillows"
           width="1080"
           height="1350"
         />

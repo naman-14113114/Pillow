@@ -60,7 +60,7 @@ export function AccountForm({ mode }: { mode: "sign-in" | "sign-up" }) {
       <section className="account-visual">
         <img
           src="/assets/gallery-03-lifestyle-juujo.png"
-          alt="CloudAlign pillows in a calm bedroom"
+          alt="OrthoAlign pillows in a calm bedroom"
           width="1536"
           height="1024"
         />

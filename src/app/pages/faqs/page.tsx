@@ -13,7 +13,7 @@ import { productFaqs, siteConfig } from "@/data/store";
 
 const groups = [
   {
-    title: "Choosing and using CloudAlign",
+    title: "Choosing and using OrthoAlign",
     icon: CircleHelp,
     items: productFaqs,
   },
@@ -96,7 +96,7 @@ export default function Page() {
       <section className="faq-editorial-band">
         <img
           src="/assets/v2/lifestyle-man-side-sleeper.webp"
-          alt="Side sleeper resting with the CloudAlign contour beneath his neck"
+          alt="Side sleeper resting with the OrthoAlign contour beneath his neck"
           width="1024"
           height="1024"
         />

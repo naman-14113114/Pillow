@@ -7,9 +7,9 @@ export default function NotFound() {
     <main className="route-shell integration-page">
       <span className="route-kicker">404</span>
       <h1>This page has gone back to bed.</h1>
-      <p>The page may have moved, but CloudAlign is still here.</p>
+      <p>The page may have moved, but OrthoAlign is still here.</p>
       <Link className="primary-button" href={siteConfig.productPath}>
-        Shop CloudAlign <ArrowRight />
+        Shop OrthoAlign <ArrowRight />
       </Link>
     </main>
   );
