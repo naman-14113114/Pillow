@@ -138,7 +138,13 @@
     new Promise((resolve) => window.setTimeout(resolve, milliseconds));
 
   const getItemQty = (item) => Number(item?.qty ?? item?.quantity ?? 0);
-  const getItemVariantId = (item) => String(item?.variant_id ?? item?.variantId ?? "");
+  const readCart = async () => {
+    try {
+      return (await window.sbsdk?.cart?.get?.()) || {};
+    } catch {
+      return {};
+    }
+  };
   const getCartCount = (cart) => {
     if (typeof cart?.total_quantity === "number") return cart.total_quantity;
     if (typeof cart?.item_count === "number") return cart.item_count;
@@ -147,15 +153,11 @@
 
   const waitForCart = async (matches) => {
     for (let attempt = 0; attempt < 25; attempt += 1) {
-      try {
-        const cart = (await window.sbsdk?.cart?.get()) || {};
-        if (matches(cart)) return cart;
-      } catch {
-        // Continue polling
-      }
+      const cart = await readCart();
+      if (matches(cart)) return cart;
       await sleep(150);
     }
-    return (await window.sbsdk?.cart?.get().catch(() => ({}))) || {};
+    return readCart();
   };
 
   const navigateToCheckout = async (preparedCart) => {
@@ -208,7 +210,7 @@
   const beginCheckout = () => {
     window.sbsdk.ready(async () => {
       try {
-        const existingCart = (await window.sbsdk.cart.get().catch(() => ({}))) || {};
+        const existingCart = await readCart();
         const itemsToRemove = existingCart.items || [];
         for (const item of itemsToRemove) {
           const removeId = item.id ?? item.variant_id;
