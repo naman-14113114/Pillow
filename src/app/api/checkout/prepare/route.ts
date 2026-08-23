@@ -3,10 +3,17 @@ import { z } from "zod";
 import checkoutDiscounts from "@/data/checkout-discounts.json";
 import { appendAttribution, cleanAttribution } from "@/lib/attribution";
 import {
+  checkoutMarketCookies,
+  createPlusbaseCheckout,
+} from "@/lib/plusbase-checkout";
+import {
   createSupabaseAdmin,
   createSupabaseServer,
   isSupabaseConfigured,
 } from "@/lib/supabase-server";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 const pillowSchema = z.object({
   colour: z.enum(["white", "grey", "blue", "navy"]),
@@ -56,7 +63,7 @@ const coverEnvironmentKeys = {
 } as const;
 
 const defaultPillowProductId = "1000000673217468";
-const defaultCheckoutBase = "https://www.juujo.com/cart";
+const defaultCheckoutBase = "https://www.juujo.com";
 const defaultVariantIds = {
   white: {
     regular: "1000020655426746",
@@ -115,11 +122,11 @@ export async function POST(request: Request) {
       defaultVariantIds[pillow.colour][pillow.height],
     quantity: 1,
   }));
-  const coverItems = line.includeCovers
+  const coverItems = line.includeCovers && coverProductId
     ? line.pillows.map((pillow) => ({
         colour: pillow.colour,
         productId: coverProductId,
-        variantId: process.env[coverEnvironmentKeys[pillow.colour]],
+        variantId: process.env[coverEnvironmentKeys[pillow.colour]] || "",
         quantity: 1,
       }))
     : [];
@@ -141,33 +148,53 @@ export async function POST(request: Request) {
     );
   }
 
-  const target = new URL(checkoutBase);
-  target.searchParams.set("juujo_bridge", "1");
-  target.searchParams.set("product_id", productId);
-  target.searchParams.set("variant_id", pillowItems[0].variantId || "");
-  target.searchParams.set("quantity", String(line.pillows.length));
-  target.searchParams.set(
-    "items",
-    JSON.stringify(
-      [...pillowItems, ...coverItems].map((item) => ({
-        product_id: item.productId,
-        variant_id: item.variantId,
-        quantity: item.quantity,
-      })),
-    ),
+  const attribution = cleanAttribution(parsed.data.attribution);
+  const attributionProperties = Object.entries(attribution).map(
+    ([key, value]) => ({
+      name: `_blfm_${key}`,
+      value,
+    }),
   );
+  const groupedItems = new Map<
+    string,
+    { productId: string; variantId: string; quantity: number }
+  >();
+
+  [...pillowItems, ...coverItems].forEach((item) => {
+    const productIdValue = String(item.productId);
+    const variantIdValue = String(item.variantId);
+    const key = `${productIdValue}:${variantIdValue}`;
+    const existing = groupedItems.get(key);
+    groupedItems.set(key, {
+      productId: productIdValue,
+      variantId: variantIdValue,
+      quantity: (existing?.quantity || 0) + item.quantity,
+    });
+  });
+
+  let checkout: Awaited<ReturnType<typeof createPlusbaseCheckout>>;
+  try {
+    checkout = await createPlusbaseCheckout({
+      origin: checkoutBase,
+      items: Array.from(groupedItems.values()),
+      properties: attributionProperties,
+    });
+  } catch (error) {
+    console.error("Direct ShopBase checkout creation failed", error);
+    return NextResponse.json(
+      {
+        message:
+          "Secure checkout could not be prepared. Please try again in a moment.",
+      },
+      { status: 502 },
+    );
+  }
+
+  const target = new URL(checkout.checkoutUrl);
   const bundleDiscountCode = getBundleDiscountCode(line.pillows);
   if (bundleDiscountCode) {
     target.searchParams.set("discount", bundleDiscountCode);
   }
-
-  if (line.includeCovers && coverProductId && coverItems[0]?.variantId) {
-    target.searchParams.set("cover_product_id", coverProductId);
-    target.searchParams.set("cover_variant_id", coverItems[0].variantId);
-    target.searchParams.set("cover_quantity", String(line.pillows.length));
-  }
-
-  const attribution = cleanAttribution(parsed.data.attribution);
   const checkoutUrl = appendAttribution(target.toString(), attribution);
 
   if (isSupabaseConfigured() && process.env.SUPABASE_SERVICE_ROLE_KEY) {
@@ -190,5 +217,19 @@ export async function POST(request: Request) {
     }
   }
 
-  return NextResponse.json({ checkoutUrl });
+  const response = NextResponse.json({
+    checkoutToken: checkout.checkoutToken,
+    checkoutUrl,
+  });
+  checkoutMarketCookies.forEach(({ name, value }) => {
+    response.cookies.set(name, value, {
+      domain: ".juujo.com",
+      path: "/",
+      maxAge: 60 * 30,
+      sameSite: "lax",
+      secure: true,
+    });
+  });
+
+  return response;
 }

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:checkout": "node --test scripts/shopbase-bridge.test.mjs",
+    "test:checkout": "node --experimental-strip-types --test scripts/direct-checkout.test.mjs",
     "typecheck": "tsc --noEmit",
     "verify": "node scripts/verify-store.mjs"
   },
