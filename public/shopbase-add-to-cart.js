@@ -31,6 +31,11 @@
   const discountCode = params.get("discount") || "";
   if (discountCode && !/^[A-Z0-9-]{4,32}$/.test(discountCode)) return;
 
+  // Keep the UK storefront's hosted ShopBase checkout in the same market and currency.
+  const checkoutCookie = "Path=/; Max-Age=1800; SameSite=Lax; Secure";
+  document.cookie = `X-Global-Market=GB; ${checkoutCookie}`;
+  document.cookie = `X-Global-Market-Currency=GBP; ${checkoutCookie}`;
+
   // Use a fixed overlay instead of replacing document.body so the underlying ShopBase Vue app is not destroyed
   const shell = document.createElement("div");
   shell.id = "juujo-bridge-root";

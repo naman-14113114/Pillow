@@ -58,6 +58,7 @@ async function runBridge() {
   };
   const storage = new Map([["cartCheckoutToken", "checkout-token-123"]]);
   const shell = createElement();
+  const cookies = [];
 
   const window = {
     location,
@@ -108,6 +109,11 @@ async function runBridge() {
     getElementById: () => null,
     querySelector: () => null,
   };
+  Object.defineProperty(document, "cookie", {
+    set(value) {
+      cookies.push(value);
+    },
+  });
 
   vm.runInNewContext(bridgeSource, {
     URL,
@@ -118,7 +124,7 @@ async function runBridge() {
   });
 
   await new Promise((resolve) => setTimeout(resolve, 350));
-  return { cart, errors, href };
+  return { cart, cookies, errors, href };
 }
 
 test("bridge supports ShopBase's synchronous cart.get and opens checkout", async () => {
@@ -128,6 +134,12 @@ test("bridge supports ShopBase's synchronous cart.get and opens checkout", async
   assert.equal(result.cart.items.length, 1);
   assert.equal(result.cart.items[0].variant_id, 1000020655426746);
   assert.equal(result.cart.items[0].qty, 2);
+  assert.ok(result.cookies.some((cookie) => cookie.startsWith("X-Global-Market=GB;")));
+  assert.ok(
+    result.cookies.some((cookie) =>
+      cookie.startsWith("X-Global-Market-Currency=GBP;"),
+    ),
+  );
   assert.equal(
     result.href,
     "https://www.juujo.com/checkouts/checkout-token-123?discount=J2-TEST",
