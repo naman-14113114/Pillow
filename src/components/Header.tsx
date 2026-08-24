@@ -26,9 +26,12 @@ const announcementItems = [
   "4.9 stars from 42,000+ customers",
 ] as const;
 
-function AnnouncementBar() {
+function AnnouncementBar({ compact = false }: { compact?: boolean }) {
   return (
-    <div className="store-announcement" aria-label="Current offers">
+    <div
+      className={`store-announcement ${compact ? "store-announcement--compact" : ""}`}
+      aria-label="Current offers"
+    >
       <div className="store-announcement-track">
         {[0, 1].map((group) => (
           <div
@@ -54,6 +57,7 @@ export function Header() {
   const cart = useCart();
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const isCart = pathname === "/cart";
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -75,11 +79,11 @@ export function Header() {
 
   return (
     <>
-      <AnnouncementBar />
+      <AnnouncementBar compact={isCart} />
       <header
         className={`site-header store-site-header ${
           isHome ? "store-site-header--home" : ""
-        }`}
+        } ${isCart ? "store-site-header--cart" : ""}`}
       >
         <button
           className="icon-button mobile-menu-button"

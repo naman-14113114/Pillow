@@ -5,7 +5,6 @@ import Image from "next/image";
 import {
   ArrowLeft,
   ArrowRight,
-  Check,
   LoaderCircle,
   LockKeyhole,
   Trash2,
@@ -136,22 +135,24 @@ export function CartPage() {
 
   return (
     <main className="route-shell cart-page">
-      <Link className="back-link" href={siteConfig.productPath}>
-        <ArrowLeft /> Continue shopping
-      </Link>
+      <div className="cart-page-topline">
+        <Link className="back-link" href={siteConfig.productPath}>
+          <ArrowLeft /> Continue shopping
+        </Link>
 
-      <div className="cart-delivery-strip">
-        <Truck aria-hidden="true" />
-        <div>
-          <strong>Free tracked delivery</strong>
-          <span>Dispatched in 1-3 business days</span>
+        <div className="cart-delivery-strip">
+          <Truck aria-hidden="true" />
+          <div>
+            <strong>Free tracked delivery</strong>
+            <span>Dispatched in 1-3 business days</span>
+          </div>
         </div>
       </div>
 
       <div className="cart-page-heading">
         <span className="route-kicker">Your basket</span>
-        <h1>Review your OrthoAlign setup.</h1>
-        <p>Confirm every pillow before continuing to secure checkout.</p>
+        <h1>Review your order</h1>
+        <p>Check each pillow&apos;s colour and height before checkout.</p>
       </div>
 
       <div className="cart-layout">
@@ -282,10 +283,6 @@ export function CartPage() {
             <span>Subtotal</span>
             <strong>{formatMoney(cart.totalCents)}</strong>
           </div>
-          <p className="cart-saving-callout">
-            You save {formatMoney(comparableSaving)} against the {" "}
-            {formatMoney(bundle.compareAtCents)} comparable value.
-          </p>
           <button
             ref={checkoutButtonRef}
             id="main-cart-checkout"
@@ -298,10 +295,13 @@ export function CartPage() {
             {!loading && <ArrowRight />}
           </button>
           {message && <p className="integration-message">{message}</p>}
+          <p className="cart-saving-callout">
+            You save {formatMoney(comparableSaving)} against the {" "}
+            {formatMoney(bundle.compareAtCents)} comparable value.
+          </p>
           <div className="cart-trust-list">
             <span><LockKeyhole /> Encrypted checkout</span>
             <span><Truck /> Free tracked delivery</span>
-            <span><Check /> Colour and height confirmed above</span>
           </div>
         </aside>
       </div>
