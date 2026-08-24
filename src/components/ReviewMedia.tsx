@@ -13,6 +13,7 @@ export function ReviewMedia({
   alt?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -28,13 +29,36 @@ export function ReviewMedia({
   const isPlayableVideo =
     review.mediaType === "video" && Boolean(review.videoEmbedUrl);
 
+  if (isPlayableVideo) {
+    return playing ? (
+      <div className="review-media review-media-playing">
+        <iframe
+          className="review-inline-video"
+          src={review.videoEmbedUrl}
+          title={`Video review from ${review.name}`}
+          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    ) : (
+      <button
+        type="button"
+        className="review-media"
+        onClick={() => setPlaying(true)}
+        aria-label={`Play video from ${review.name}`}
+      >
+        <img src={review.image} alt={alt} width="520" height="620" />
+      </button>
+    );
+  }
+
   return (
     <>
       <button
         type="button"
         className="review-media"
         onClick={() => setOpen(true)}
-        aria-label={`${isPlayableVideo ? "Play video" : "Open media"} from ${review.name}`}
+        aria-label={`Open media from ${review.name}`}
       >
         <img src={review.image} alt={alt} width="520" height="620" />
       </button>
@@ -56,17 +80,7 @@ export function ReviewMedia({
           >
             <X />
           </button>
-          {isPlayableVideo ? (
-            <iframe
-              className="review-video-player"
-              src={review.videoEmbedUrl}
-              title={`Video review from ${review.name}`}
-              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-              allowFullScreen
-            />
-          ) : (
-            <img src={review.image} alt={alt} width="900" height="1000" />
-          )}
+          <img src={review.image} alt={alt} width="900" height="1000" />
           <div className="media-lightbox-copy">
             <StarRating rating={review.rating} />
             <strong>{review.name}</strong>
