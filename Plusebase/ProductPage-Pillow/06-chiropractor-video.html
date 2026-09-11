@@ -1,0 +1,356 @@
+<!-- ==========================================================================
+  PLUSBASE CUSTOM HTML SECTION: 06 - CHIROPRACTOR VIDEO SHOWCASE
+  Product: Juujo OrthoAlign™ Pillow
+  Deployment: Copy & paste directly into a PlusBase Custom HTML section block.
+========================================================================== -->
+
+<style>
+/* PlusBase Builder Zero-Gutter Overrides */
+.wb-builder .pb-prod-chiro-wrap,
+.wb-builder .wb-block-custom-html,
+.wb-builder .wb-section,
+.wb-builder .column-inner,
+.wb-builder .custom-code,
+.wb-builder .custom-code__content {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#pb-prod-sec-chiro {
+  --pb-navy: #06173b;
+  --pb-ink: #10223f;
+  --pb-blue: #0757d9;
+  --pb-powder: #dceeff;
+  --pb-paper: #ffffff;
+  --pb-muted: #60708a;
+  --pb-line: #cbd9e8;
+  --pb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --pb-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --pb-font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+
+  display: block;
+  width: 100%;
+  padding: 80px 0;
+  background: var(--pb-paper);
+  color: var(--pb-ink);
+  font-family: var(--pb-font);
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+#pb-prod-sec-chiro *,
+#pb-prod-sec-chiro *::before,
+#pb-prod-sec-chiro *::after {
+  box-sizing: border-box;
+}
+
+#pb-prod-sec-chiro .pb-chiro-container {
+  display: grid;
+  grid-template-areas:
+    "copy video"
+    "details video";
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  gap: 24px 48px;
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+  align-items: start;
+}
+
+#pb-prod-sec-chiro .pb-chiro-copy {
+  grid-area: copy;
+  padding-top: 20px;
+}
+
+#pb-prod-sec-chiro .pb-chiro-copy h2 {
+  margin: 0;
+  color: var(--pb-ink);
+  font-family: var(--pb-font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+#pb-prod-sec-chiro .pb-chiro-copy > p {
+  margin: 14px 0 0;
+  color: var(--pb-muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+#pb-prod-sec-chiro .pb-chiro-details {
+  grid-area: details;
+}
+
+#pb-prod-sec-chiro .pb-chiro-accordions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#pb-prod-sec-chiro .pb-chiro-item {
+  border-radius: 8px;
+  background: var(--pb-powder);
+  overflow: hidden;
+}
+
+#pb-prod-sec-chiro .pb-chiro-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 18px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 0;
+  background: transparent;
+  color: var(--pb-ink);
+  text-align: left;
+  font-size: 15px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+#pb-prod-sec-chiro .pb-chiro-symbol {
+  display: grid;
+  flex: 0 0 26px;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--pb-blue);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 240ms var(--pb-ease);
+}
+
+#pb-prod-sec-chiro .pb-chiro-trigger[aria-expanded="true"] .pb-chiro-symbol {
+  transform: rotate(180deg);
+}
+
+#pb-prod-sec-chiro .pb-chiro-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 320ms var(--pb-ease), opacity 240ms var(--pb-ease);
+}
+
+#pb-prod-sec-chiro .pb-chiro-content > p {
+  overflow: hidden;
+  margin: 0;
+  padding: 0 24px 16px 18px;
+  color: var(--pb-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+#pb-prod-sec-chiro .pb-chiro-content.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* Video Shell */
+#pb-prod-sec-chiro .pb-video-shell {
+  position: relative;
+  grid-area: video;
+  overflow: hidden;
+  aspect-ratio: 9 / 16;
+  border-radius: 14px;
+  background: var(--pb-powder);
+  box-shadow: 0 16px 36px rgba(6, 23, 59, 0.12);
+}
+
+#pb-prod-sec-chiro .pb-video-shell video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+#pb-prod-sec-chiro .pb-video-brand-label {
+  position: absolute;
+  z-index: 2;
+  top: 38.7%;
+  right: 20%;
+  display: grid;
+  width: 18%;
+  aspect-ratio: 3 / 1;
+  place-items: center;
+  transform: rotate(-1deg);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 3px;
+  background: rgba(247, 251, 255, 0.95);
+  color: var(--pb-blue);
+  font-family: var(--pb-font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  pointer-events: none;
+}
+
+#pb-prod-sec-chiro .pb-video-toggle {
+  position: absolute;
+  z-index: 3;
+  right: 14px;
+  bottom: 14px;
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--pb-navy);
+  box-shadow: 0 4px 14px rgba(6, 23, 59, 0.15);
+  cursor: pointer;
+  transition: transform 200ms ease, background 200ms ease;
+}
+
+#pb-prod-sec-chiro .pb-video-toggle:hover {
+  transform: scale(1.08);
+  background: #ffffff;
+}
+
+#pb-prod-sec-chiro .pb-video-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+@media (max-width: 860px) {
+  #pb-prod-sec-chiro {
+    padding: 48px 0;
+  }
+  #pb-prod-sec-chiro .pb-chiro-container {
+    grid-template-areas:
+      "copy"
+      "video"
+      "details";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 28px;
+  }
+  #pb-prod-sec-chiro .pb-chiro-copy {
+    padding-top: 0;
+  }
+  #pb-prod-sec-chiro .pb-video-shell {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+</style>
+
+<div id="pb-prod-sec-chiro" class="pb-prod-section pb-prod-chiro-wrap">
+  <div class="pb-chiro-container">
+    
+    <div class="pb-chiro-copy">
+      <h2>Trusted By Chiropractors. Loved By Sleepers.</h2>
+      <p>
+        Dual-height design. Built-in alignment support. No fluffing needed. Chiropractor-approved comfort starts here.
+      </p>
+    </div>
+
+    <div class="pb-video-shell">
+      <video id="pb-chiro-video" src="https://pillow-sepia.vercel.app/assets/chiropractor-loop.mp4" autoplay loop muted playsinline></video>
+      <span class="pb-video-brand-label" aria-hidden="true">juujo</span>
+      <button type="button" class="pb-video-toggle" id="pb-video-toggle-btn" aria-label="Pause video">
+        <svg id="pb-video-pause-icon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        <svg id="pb-video-play-icon" viewBox="0 0 24 24" style="display: none;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </button>
+    </div>
+
+    <div class="pb-chiro-details">
+      <div class="pb-chiro-accordions">
+        <div class="pb-chiro-item">
+          <button type="button" class="pb-chiro-trigger" aria-expanded="false">
+            <span>How It Works</span>
+            <span class="pb-chiro-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="pb-chiro-content">
+            <p>The OrthoAlign Pillow has a high side and a low side. Flip it to match your body and sleep position, then let the contour cradle your head and neck.</p>
+          </div>
+        </div>
+
+        <div class="pb-chiro-item">
+          <button type="button" class="pb-chiro-trigger" aria-expanded="false">
+            <span>Chiropractor-Designed for Alignment</span>
+            <span class="pb-chiro-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="pb-chiro-content">
+            <p>The ergonomic shape relieves pressure points and encourages a more neutral sleeping posture.</p>
+          </div>
+        </div>
+
+        <div class="pb-chiro-item">
+          <button type="button" class="pb-chiro-trigger" aria-expanded="false">
+            <span>Arm Tunnel + Shoulder Relief Design</span>
+            <span class="pb-chiro-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="pb-chiro-content">
+            <p>The built-in arm cradle gives your shoulder room to rest naturally, reducing compression for side sleepers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  function initChiro() {
+    var root = document.getElementById('pb-prod-sec-chiro');
+    if (!root || root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true';
+
+    // Video Play/Pause Toggle
+    var video = document.getElementById('pb-chiro-video');
+    var toggleBtn = document.getElementById('pb-video-toggle-btn');
+    var pauseIcon = document.getElementById('pb-video-pause-icon');
+    var playIcon = document.getElementById('pb-video-play-icon');
+
+    if (video && toggleBtn) {
+      toggleBtn.addEventListener('click', function() {
+        if (video.paused) {
+          video.play();
+          pauseIcon.style.display = 'block';
+          playIcon.style.display = 'none';
+          toggleBtn.setAttribute('aria-label', 'Pause video');
+        } else {
+          video.pause();
+          pauseIcon.style.display = 'none';
+          playIcon.style.display = 'block';
+          toggleBtn.setAttribute('aria-label', 'Play video');
+        }
+      });
+    }
+
+    // Accordions
+    var items = root.querySelectorAll('.pb-chiro-item');
+    items.forEach(function(item) {
+      var trigger = item.querySelector('.pb-chiro-trigger');
+      var content = item.querySelector('.pb-chiro-content');
+      var symbol = item.querySelector('.pb-chiro-symbol');
+
+      trigger.addEventListener('click', function() {
+        var isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        trigger.setAttribute('aria-expanded', !isOpen);
+        content.classList.toggle('open', !isOpen);
+        symbol.textContent = isOpen ? '+' : '−';
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initChiro);
+  } else {
+    initChiro();
+  }
+})();
+</script>

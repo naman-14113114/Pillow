@@ -1,0 +1,113 @@
+<!-- ==========================================================================
+  PLUSBASE CUSTOM HTML SECTION: 03 - PRESS LOGOS MARQUEE
+  Product: Juujo OrthoAlign™ Pillow
+  Deployment: Copy & paste directly into a PlusBase Custom HTML section block.
+========================================================================== -->
+
+<style>
+/* PlusBase Builder Zero-Gutter Overrides */
+.wb-builder .pb-prod-press,
+.wb-builder .wb-block-custom-html,
+.wb-builder .wb-section,
+.wb-builder .column-inner,
+.wb-builder .custom-code,
+.wb-builder .custom-code__content {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#pb-prod-sec-press {
+  --pb-blue: #0757d9;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  padding: 14px 0;
+  background: var(--pb-blue);
+  box-sizing: border-box;
+}
+
+#pb-prod-sec-press *,
+#pb-prod-sec-press *::before,
+#pb-prod-sec-press *::after {
+  box-sizing: border-box;
+}
+
+#pb-prod-sec-press .pb-press-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  animation: pb-press-marquee 42s linear infinite;
+}
+
+#pb-prod-sec-press:hover .pb-press-track {
+  animation-play-state: paused;
+}
+
+#pb-prod-sec-press .pb-press-group {
+  display: flex;
+  align-items: center;
+}
+
+#pb-prod-sec-press .pb-press-group img {
+  width: 118px;
+  height: 28px;
+  margin: 0 25px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+#pb-prod-sec-press .pb-press-group img:hover {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+@keyframes pb-press-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  #pb-prod-sec-press {
+    padding: 10px 0;
+  }
+  #pb-prod-sec-press .pb-press-group img {
+    width: 90px;
+    height: 22px;
+    margin: 0 16px;
+  }
+}
+</style>
+
+<div id="pb-prod-sec-press" class="pb-prod-section pb-prod-press" role="region" aria-label="Featured Publications">
+  <div class="pb-press-track">
+    <!-- Group 1 -->
+    <div class="pb-press-group">
+      <img src="https://pillow-sepia.vercel.app/assets/logo-press-01.avif" alt="Featured publication logo 1" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-press-02.avif" alt="Featured publication logo 2" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-press-03.avif" alt="Featured publication logo 3" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-lifestyle.avif" alt="Lifestyle Magazine" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-scary-mommy.webp" alt="Scary Mommy" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-readers-digest.avif" alt="Reader's Digest" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-usa-today.avif" alt="USA Today" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-forbes.avif" alt="Forbes" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-press-09.avif" alt="Featured publication logo 9" />
+    </div>
+    <!-- Group 2 (Duplicate for infinite seamless loop) -->
+    <div class="pb-press-group" aria-hidden="true">
+      <img src="https://pillow-sepia.vercel.app/assets/logo-press-01.avif" alt="" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-press-02.avif" alt="" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-press-03.avif" alt="" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-lifestyle.avif" alt="" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-scary-mommy.webp" alt="" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-readers-digest.avif" alt="" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-usa-today.avif" alt="" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-forbes.avif" alt="" />
+      <img src="https://pillow-sepia.vercel.app/assets/logo-press-09.avif" alt="" />
+    </div>
+  </div>
+</div>

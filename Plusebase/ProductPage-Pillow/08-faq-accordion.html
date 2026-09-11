@@ -1,0 +1,240 @@
+<!-- ==========================================================================
+  PLUSBASE CUSTOM HTML SECTION: 08 - FAQ ACCORDION
+  Product: Juujo OrthoAlign™ Pillow
+  Deployment: Copy & paste directly into a PlusBase Custom HTML section block.
+========================================================================== -->
+
+<style>
+/* PlusBase Builder Zero-Gutter Overrides */
+.wb-builder .pb-prod-faq-wrap,
+.wb-builder .wb-block-custom-html,
+.wb-builder .wb-section,
+.wb-builder .column-inner,
+.wb-builder .custom-code,
+.wb-builder .custom-code__content {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#pb-prod-sec-faq {
+  --pb-navy: #06173b;
+  --pb-ink: #10223f;
+  --pb-blue: #0757d9;
+  --pb-powder: #dceeff;
+  --pb-paper: #ffffff;
+  --pb-muted: #60708a;
+  --pb-line: #cbd9e8;
+  --pb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --pb-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --pb-font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+
+  display: block;
+  width: 100%;
+  padding: 80px 0;
+  background: var(--pb-paper);
+  color: var(--pb-ink);
+  font-family: var(--pb-font);
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+#pb-prod-sec-faq *,
+#pb-prod-sec-faq *::before,
+#pb-prod-sec-faq *::after {
+  box-sizing: border-box;
+}
+
+#pb-prod-sec-faq .pb-faq-container {
+  width: min(960px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+#pb-prod-sec-faq .pb-faq-intro {
+  margin-bottom: 36px;
+  text-align: center;
+}
+
+#pb-prod-sec-faq .pb-faq-intro h2 {
+  margin: 0;
+  color: var(--pb-ink);
+  font-family: var(--pb-font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+#pb-prod-sec-faq .pb-faq-intro p {
+  margin: 10px 0 0;
+  color: var(--pb-muted);
+  font-size: 14px;
+}
+
+#pb-prod-sec-faq .pb-faq-accordions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#pb-prod-sec-faq .pb-faq-item {
+  border-radius: 8px;
+  background: var(--pb-powder);
+  overflow: hidden;
+}
+
+#pb-prod-sec-faq .pb-faq-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 60px;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 0;
+  background: transparent;
+  color: var(--pb-ink);
+  text-align: left;
+  font-size: 16px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+#pb-prod-sec-faq .pb-faq-symbol {
+  display: grid;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--pb-blue);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 240ms var(--pb-ease);
+}
+
+#pb-prod-sec-faq .pb-faq-trigger[aria-expanded="true"] .pb-faq-symbol {
+  transform: rotate(180deg);
+}
+
+#pb-prod-sec-faq .pb-faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 320ms var(--pb-ease), opacity 240ms var(--pb-ease);
+}
+
+#pb-prod-sec-faq .pb-faq-content > p {
+  overflow: hidden;
+  margin: 0;
+  padding: 0 32px 18px 20px;
+  color: var(--pb-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#pb-prod-sec-faq .pb-faq-content.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  #pb-prod-sec-faq {
+    padding: 48px 0;
+  }
+  #pb-prod-sec-faq .pb-faq-intro h2 {
+    font-size: 26px;
+  }
+}
+</style>
+
+<div id="pb-prod-sec-faq" class="pb-prod-section pb-prod-faq-wrap">
+  <div class="pb-faq-container" id="faq">
+    
+    <div class="pb-faq-intro">
+      <h2>Frequently Asked Questions</h2>
+      <p>Everything you need to know about the OrthoAlign Pillow.</p>
+    </div>
+
+    <div class="pb-faq-accordions">
+      <!-- FAQ 1 -->
+      <div class="pb-faq-item">
+        <button type="button" class="pb-faq-trigger" aria-expanded="false">
+          <span>How does the dual-height system work?</span>
+          <span class="pb-faq-symbol" aria-hidden="true">+</span>
+        </button>
+        <div class="pb-faq-content">
+          <p>Each side is a different height. Flip the pillow to find the support level that feels best for your neck and sleep position.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="pb-faq-item">
+        <button type="button" class="pb-faq-trigger" aria-expanded="false">
+          <span>Is this pillow good for side, back, and stomach sleepers?</span>
+          <span class="pb-faq-symbol" aria-hidden="true">+</span>
+        </button>
+        <div class="pb-faq-content">
+          <p>Yes. OrthoAlign adapts to all three sleep styles by providing targeted lift and pressure relief where each position needs it.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="pb-faq-item">
+        <button type="button" class="pb-faq-trigger" aria-expanded="false">
+          <span>Will it flatten over time?</span>
+          <span class="pb-faq-symbol" aria-hidden="true">+</span>
+        </button>
+        <div class="pb-faq-content">
+          <p>OrthoAlign uses shape-retaining memory foam designed to maintain its contour and support.</p>
+        </div>
+      </div>
+
+      <!-- FAQ 4 -->
+      <div class="pb-faq-item">
+        <button type="button" class="pb-faq-trigger" aria-expanded="false">
+          <span>Is it safe for sensitive skin?</span>
+          <span class="pb-faq-symbol" aria-hidden="true">+</span>
+        </button>
+        <div class="pb-faq-content">
+          <p>The OEKO-TEX certified cover is hypoallergenic, breathable, and gentle on sensitive skin.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function() {
+  function initFaq() {
+    var root = document.getElementById('pb-prod-sec-faq');
+    if (!root || root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true';
+
+    var items = root.querySelectorAll('.pb-faq-item');
+    items.forEach(function(item) {
+      var trigger = item.querySelector('.pb-faq-trigger');
+      var content = item.querySelector('.pb-faq-content');
+      var symbol = item.querySelector('.pb-faq-symbol');
+
+      trigger.addEventListener('click', function() {
+        var isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        trigger.setAttribute('aria-expanded', !isOpen);
+        content.classList.toggle('open', !isOpen);
+        symbol.textContent = isOpen ? '+' : '−';
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFaq);
+  } else {
+    initFaq();
+  }
+})();
+</script>

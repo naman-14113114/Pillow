@@ -1,0 +1,268 @@
+<!-- ==========================================================================
+  PLUSBASE CUSTOM HTML SECTION: 04 - FEATURE ZONES STORY
+  Product: Juujo OrthoAlign™ Pillow
+  Deployment: Copy & paste directly into a PlusBase Custom HTML section block.
+========================================================================== -->
+
+<style>
+/* PlusBase Builder Zero-Gutter Overrides */
+.wb-builder .pb-prod-story-wrap,
+.wb-builder .wb-block-custom-html,
+.wb-builder .wb-section,
+.wb-builder .column-inner,
+.wb-builder .custom-code,
+.wb-builder .custom-code__content {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#pb-prod-sec-story {
+  --pb-navy: #06173b;
+  --pb-ink: #10223f;
+  --pb-blue: #0757d9;
+  --pb-powder: #dceeff;
+  --pb-paper: #ffffff;
+  --pb-muted: #60708a;
+  --pb-line: #cbd9e8;
+  --pb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --pb-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --pb-font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+
+  display: block;
+  width: 100%;
+  padding: 72px 0;
+  background: var(--pb-powder);
+  color: var(--pb-ink);
+  font-family: var(--pb-font);
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+#pb-prod-sec-story *,
+#pb-prod-sec-story *::before,
+#pb-prod-sec-story *::after {
+  box-sizing: border-box;
+}
+
+#pb-prod-sec-story .pb-story-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+  align-items: center;
+}
+
+#pb-prod-sec-story .pb-story-image {
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--pb-paper);
+  box-shadow: 0 12px 32px rgba(6, 23, 59, 0.08);
+}
+
+#pb-prod-sec-story .pb-story-image img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  filter: hue-rotate(-24deg) saturate(0.88);
+  display: block;
+}
+
+#pb-prod-sec-story .pb-story-copy {
+  text-align: left;
+}
+
+#pb-prod-sec-story .pb-story-copy h2 {
+  margin: 0;
+  color: var(--pb-ink);
+  font-family: var(--pb-font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+#pb-prod-sec-story .pb-story-copy > p {
+  margin: 14px 0 24px;
+  color: var(--pb-muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+#pb-prod-sec-story .pb-story-accordions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#pb-prod-sec-story .pb-story-item {
+  border-radius: 8px;
+  background: var(--pb-paper);
+  box-shadow: 0 2px 8px rgba(6, 23, 59, 0.04);
+  overflow: hidden;
+}
+
+#pb-prod-sec-story .pb-story-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 60px;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 0;
+  background: transparent;
+  color: var(--pb-ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+#pb-prod-sec-story .pb-story-trigger span:first-child {
+  font-family: var(--pb-font-display);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--pb-navy);
+}
+
+#pb-prod-sec-story .pb-story-symbol {
+  display: grid;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--pb-blue);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 240ms var(--pb-ease);
+}
+
+#pb-prod-sec-story .pb-story-trigger[aria-expanded="true"] .pb-story-symbol {
+  transform: rotate(180deg);
+}
+
+#pb-prod-sec-story .pb-story-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 320ms var(--pb-ease), opacity 240ms var(--pb-ease);
+}
+
+#pb-prod-sec-story .pb-story-content > p {
+  overflow: hidden;
+  margin: 0;
+  padding: 0 24px 18px 20px;
+  color: var(--pb-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+#pb-prod-sec-story .pb-story-content.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+@media (max-width: 860px) {
+  #pb-prod-sec-story {
+    padding: 48px 0;
+  }
+  #pb-prod-sec-story .pb-story-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  #pb-prod-sec-story .pb-story-copy h2 {
+    font-size: 26px;
+  }
+}
+</style>
+
+<div id="pb-prod-sec-story" class="pb-prod-section pb-prod-story-wrap">
+  <div class="pb-story-container" id="story">
+    <div class="pb-story-image">
+      <img src="https://pillow-sepia.vercel.app/assets/feature-zones.webp" alt="Juujo OrthoAlign pillow three-zone support breakdown" />
+    </div>
+    <div class="pb-story-copy">
+      <h2>One Pillow. Three Zones. Zero Compromises</h2>
+      <p>
+        Say goodbye to flat pillows, awkward angles, and one-size-fits-all shapes. The SwitchFit design gives you dual-height support, ergonomic zones, and custom comfort without shifting or bunching.
+      </p>
+
+      <div class="pb-story-accordions">
+        <div class="pb-story-item">
+          <button type="button" class="pb-story-trigger" aria-expanded="false">
+            <span>Side Sleeper Zone</span>
+            <span class="pb-story-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="pb-story-content">
+            <p>Side wings relieve pressure on your shoulder and keep your neck elevated at the right angle, with room for your arm to rest naturally.</p>
+          </div>
+        </div>
+
+        <div class="pb-story-item">
+          <button type="button" class="pb-story-trigger" aria-expanded="false">
+            <span>Lift Side (SwitchFit Design)</span>
+            <span class="pb-story-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="pb-story-content">
+            <p>Designed for deeper support and lift, this side suits side sleepers or anyone who needs extra neck height and pressure relief.</p>
+          </div>
+        </div>
+
+        <div class="pb-story-item">
+          <button type="button" class="pb-story-trigger" aria-expanded="false">
+            <span>Soft Side (SwitchFit Design)</span>
+            <span class="pb-story-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="pb-story-content">
+            <p>Softer and lower, this side works for back and stomach sleepers or anyone who prefers minimal elevation.</p>
+          </div>
+        </div>
+
+        <div class="pb-story-item">
+          <button type="button" class="pb-story-trigger" aria-expanded="false">
+            <span>The Full Sleep System</span>
+            <span class="pb-story-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="pb-story-content">
+            <p>Every zone works together so your neck, spine, and shoulders remain supported, no matter how you sleep.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  function initStory() {
+    var root = document.getElementById('pb-prod-sec-story');
+    if (!root || root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true';
+
+    var items = root.querySelectorAll('.pb-story-item');
+    items.forEach(function(item) {
+      var trigger = item.querySelector('.pb-story-trigger');
+      var content = item.querySelector('.pb-story-content');
+      var symbol = item.querySelector('.pb-story-symbol');
+
+      trigger.addEventListener('click', function() {
+        var isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        trigger.setAttribute('aria-expanded', !isOpen);
+        content.classList.toggle('open', !isOpen);
+        symbol.textContent = isOpen ? '+' : '−';
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStory);
+  } else {
+    initStory();
+  }
+})();
+</script>

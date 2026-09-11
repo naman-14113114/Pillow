@@ -1,0 +1,3681 @@
+<!-- ==========================================================================
+     PLUSBASE / SHOPBASE CUSTOM HTML HOMEPAGE: JUUJO ORTHOALIGN™ PILLOW
+     1-to-1 Parity with Next.js HomePageV2 & home-v2.css (V2 Visual Blue Theme)
+     Target: PlusBase Web Builder v2 / Custom HTML Block
+     ========================================================================== -->
+
+<div id="pb-custom-home-root" class="pb-custom-home" data-juujo-version="2.4.0">
+  <style>
+    /* ==========================================================================
+       PLUSBASE ZERO-GUTTER OVERRIDES & CSS RESET
+       ========================================================================== */
+    .wb-builder #pb-custom-home-root,
+    .wb-builder .wb-custom-html,
+    .wb-builder .wb-block-custom-html,
+    .wb-builder .wb-section,
+    .wb-builder .wb-builder__section--container,
+    .wb-builder .column-inner,
+    .wb-builder .custom-code,
+    .wb-builder .custom-code__content {
+      margin: 0 !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Scoped Custom Theme Variables */
+    #pb-custom-home-root {
+      --navy: #06173b;
+      --ink: #10223f;
+      --blue: #0757d9;
+      --blue-dark: #0344ad;
+      --sky: #85c6ff;
+      --powder: #dceeff;
+      --powder-soft: #edf7ff;
+      --mist: #f7fbff;
+      --paper: #ffffff;
+      --muted: #60708a;
+      --line: #cbd9e8;
+      --line-strong: #9bb3cf;
+      --success: #087a62;
+      --font-inter: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+      box-sizing: border-box;
+      font-family: var(--font-inter);
+      color: var(--ink);
+      background-color: var(--mist);
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #pb-custom-home-root *,
+    #pb-custom-home-root *::before,
+    #pb-custom-home-root *::after {
+      box-sizing: border-box;
+    }
+
+    #pb-custom-home-root a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    #pb-custom-home-root button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #pb-custom-home-root img,
+    #pb-custom-home-root video {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    #pb-custom-home-root h1,
+    #pb-custom-home-root h2,
+    #pb-custom-home-root h3,
+    #pb-custom-home-root h4,
+    #pb-custom-home-root p,
+    #pb-custom-home-root ul,
+    #pb-custom-home-root ol {
+      margin-top: 0;
+    }
+
+    /* Common Layout Utilities */
+    #pb-custom-home-root .juujo-v2-container {
+      width: 100%;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: clamp(16px, 4vw, 32px);
+      padding-right: clamp(16px, 4vw, 32px);
+    }
+
+    #pb-custom-home-root .juujo-v2-section {
+      padding-top: clamp(48px, 8vw, 84px);
+      padding-bottom: clamp(48px, 8vw, 84px);
+    }
+
+    #pb-custom-home-root .juujo-v2-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    #pb-custom-home-root .juujo-v2-section-header {
+      text-align: center;
+      max-width: 780px;
+      margin: 0 auto clamp(36px, 5vw, 56px);
+    }
+
+    #pb-custom-home-root .juujo-v2-section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    #pb-custom-home-root .juujo-v2-section-lead {
+      font-size: clamp(15px, 1.8vw, 17px);
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0 auto;
+    }
+
+    #pb-custom-home-root .juujo-v2-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--blue);
+      color: #ffffff !important;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 13px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.18s ease, transform 0.18s ease;
+      box-shadow: 0 4px 14px rgba(7, 87, 217, 0.25);
+    }
+
+    #pb-custom-home-root .juujo-v2-btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-1px);
+    }
+
+    #pb-custom-home-root .juujo-v2-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--powder-soft);
+      color: var(--blue) !important;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 13px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--powder);
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.18s ease;
+    }
+
+    #pb-custom-home-root .juujo-v2-btn-secondary:hover {
+      background: var(--powder);
+    }
+
+    #pb-custom-home-root .btn-arrow {
+      width: 17px;
+      height: 17px;
+      stroke-width: 2;
+      display: inline-block;
+    }
+
+    #pb-custom-home-root .star-icon {
+      width: 15px;
+      height: 15px;
+      fill: var(--blue);
+      color: var(--blue);
+      display: inline-block;
+    }
+
+    /* --------------------------------------------------------------------------
+       1. HEADER ANNOUNCEMENT MARQUEE
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .store-announcement {
+      position: relative;
+      z-index: 40;
+      height: 34px;
+      overflow: hidden;
+      background: var(--navy);
+      color: #ffffff;
+    }
+
+    #pb-custom-home-root .store-announcement-track {
+      display: flex;
+      width: max-content;
+      height: 100%;
+      animation: pb-announcement-loop 34s linear infinite;
+      will-change: transform;
+    }
+
+    #pb-custom-home-root .store-announcement-group {
+      display: flex;
+      flex: none;
+      height: 100%;
+      align-items: center;
+    }
+
+    #pb-custom-home-root .store-announcement-group span {
+      display: inline-flex;
+      height: 100%;
+      padding-left: 34px;
+      align-items: center;
+      gap: 34px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    #pb-custom-home-root .store-announcement-group b {
+      color: var(--sky);
+      font-size: 12px;
+    }
+
+    @keyframes pb-announcement-loop {
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       2. HERO SECTION
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-hero {
+      padding-top: clamp(28px, 5vw, 60px);
+      padding-bottom: clamp(40px, 6vw, 72px);
+      background: linear-gradient(180deg, #edf7ff 0%, #f7fbff 100%);
+      border-bottom: 1px solid rgba(203, 217, 232, 0.4);
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.95fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-badge {
+      display: inline-flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--powder);
+      box-shadow: 0 4px 12px rgba(7, 87, 217, 0.06);
+      font-size: 13px;
+      color: var(--navy);
+      margin-bottom: 18px;
+    }
+
+    #pb-custom-home-root .juujo-v2-stars {
+      display: inline-flex;
+      gap: 2px;
+      color: var(--blue);
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4.5vw, 52px);
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-subtitle {
+      font-size: clamp(16px, 1.8vw, 18px);
+      line-height: 1.55;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    #pb-custom-home-root .juujo-v2-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      background: #ffffff;
+      border: 1px solid var(--powder);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .pill-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--blue);
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-box {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: clamp(18px, 3vw, 26px);
+      box-shadow: 0 16px 36px rgba(6, 23, 59, 0.06);
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-selectors {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--powder-soft);
+    }
+
+    #pb-custom-home-root .hero-selector-group label {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    #pb-custom-home-root .hero-selector-group label strong {
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .hero-swatch-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    #pb-custom-home-root .hero-swatch-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--line);
+      padding: 0;
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease;
+    }
+
+    #pb-custom-home-root .hero-swatch-btn:hover {
+      transform: scale(1.1);
+    }
+
+    #pb-custom-home-root .hero-swatch-btn.active {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 2px rgba(7, 87, 217, 0.35);
+      transform: scale(1.1);
+    }
+
+    #pb-custom-home-root .hero-segmented-control {
+      display: flex;
+      background: var(--powder-soft);
+      border-radius: 8px;
+      padding: 3px;
+    }
+
+    #pb-custom-home-root .hero-seg-btn {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 6px;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background-color 0.18s ease, color 0.18s ease;
+    }
+
+    #pb-custom-home-root .hero-seg-btn.active {
+      background: #ffffff;
+      color: var(--navy);
+      font-weight: 600;
+      box-shadow: 0 2px 6px rgba(6, 23, 59, 0.08);
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-buy-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    #pb-custom-home-root .hero-price-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    #pb-custom-home-root .hero-current-price {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .hero-compare-price {
+      font-size: 16px;
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    #pb-custom-home-root .hero-save-badge {
+      background: var(--success);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    #pb-custom-home-root .hero-actions-wrap {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    #pb-custom-home-root .juujo-v2-micro-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--powder-soft);
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    #pb-custom-home-root .juujo-v2-micro-trust span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    #pb-custom-home-root .trust-icon {
+      width: 14px;
+      height: 14px;
+      color: var(--blue);
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(6, 23, 59, 0.12);
+      border: 1px solid var(--line);
+      background: var(--powder-soft);
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    #pb-custom-home-root .juujo-v2-hero-card:hover .juujo-v2-hero-image {
+      transform: scale(1.02);
+    }
+
+    #pb-custom-home-root .hero-image-toggle-strip {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      background: rgba(6, 23, 59, 0.75);
+      backdrop-filter: blur(8px);
+      padding: 3px;
+      border-radius: 8px;
+      gap: 2px;
+      z-index: 10;
+    }
+
+    #pb-custom-home-root .hero-toggle-btn {
+      border: none;
+      background: transparent;
+      color: var(--line);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    #pb-custom-home-root .hero-toggle-btn.active {
+      background: #ffffff;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    #pb-custom-home-root .juujo-v2-float-badge {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      padding: 8px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(203, 217, 232, 0.8);
+      box-shadow: 0 10px 24px rgba(6, 23, 59, 0.1);
+      animation: float-subtle 4s ease-in-out infinite;
+      z-index: 5;
+    }
+
+    #pb-custom-home-root .badge-top-left {
+      top: 18px;
+      left: 18px;
+    }
+
+    #pb-custom-home-root .badge-mid-right {
+      top: 48%;
+      right: 18px;
+      animation-delay: 1.5s;
+    }
+
+    #pb-custom-home-root .badge-bottom-left {
+      bottom: 20px;
+      left: 20px;
+      animation-delay: 2.5s;
+    }
+
+    @keyframes float-subtle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    #pb-custom-home-root .float-icon-wrap {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: var(--powder-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #pb-custom-home-root .float-icon {
+      width: 17px;
+      height: 17px;
+      color: var(--blue);
+    }
+
+    #pb-custom-home-root .float-text-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #pb-custom-home-root .float-text-wrap strong {
+      font-size: 13px;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    #pb-custom-home-root .float-text-wrap span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* --------------------------------------------------------------------------
+       3. PRESS & MEDIA MARQUEE
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-press-section {
+      padding: 28px 0;
+      background: #ffffff;
+      border-bottom: 1px solid var(--powder-soft);
+    }
+
+    #pb-custom-home-root .juujo-v2-press-label {
+      text-align: center;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    #pb-custom-home-root .juujo-v2-press-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: clamp(24px, 5vw, 64px);
+    }
+
+    #pb-custom-home-root .press-logo-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #pb-custom-home-root .press-logo-img {
+      height: 24px;
+      width: auto;
+      max-width: 120px;
+      object-fit: contain;
+      opacity: 0.65;
+      filter: grayscale(100%);
+      transition: opacity 0.2s ease, filter 0.2s ease;
+    }
+
+    #pb-custom-home-root .press-logo-img:hover {
+      opacity: 1;
+      filter: grayscale(0%);
+    }
+
+    /* --------------------------------------------------------------------------
+       4. PROBLEM VS SOLUTION GRID
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-vs-section {
+      background: #ffffff;
+    }
+
+    #pb-custom-home-root .juujo-v2-vs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    #pb-custom-home-root .juujo-v2-vs-card {
+      border-radius: 20px;
+      padding: clamp(24px, 4vw, 36px);
+      border: 1px solid var(--line);
+    }
+
+    #pb-custom-home-root .vs-traditional {
+      background: #fafafa;
+      border-color: #e5e7eb;
+    }
+
+    #pb-custom-home-root .vs-juujo {
+      background: linear-gradient(180deg, #edf7ff 0%, #f7fbff 100%);
+      border-color: #85c6ff;
+      box-shadow: 0 16px 36px rgba(7, 87, 217, 0.08);
+    }
+
+    #pb-custom-home-root .vs-card-header {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    #pb-custom-home-root .vs-status-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+
+    #pb-custom-home-root .badge-negative {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    #pb-custom-home-root .badge-positive {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    #pb-custom-home-root .vs-card-header h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    #pb-custom-home-root .vs-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    #pb-custom-home-root .vs-list li {
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    #pb-custom-home-root .vs-list li strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+
+    /* --------------------------------------------------------------------------
+       5. SIDE SLEEPER DEEP DIVE
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-sidesleeper-section {
+      background: #f7fbff;
+      border-top: 1px solid var(--powder-soft);
+      border-bottom: 1px solid var(--powder-soft);
+    }
+
+    #pb-custom-home-root .juujo-v2-sidesleeper-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+    }
+
+    #pb-custom-home-root .sidesleeper-image-card {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 48px rgba(6, 23, 59, 0.08);
+      border: 1px solid var(--line);
+    }
+
+    #pb-custom-home-root .sidesleeper-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    #pb-custom-home-root .sidesleeper-annotation {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background: rgba(6, 23, 59, 0.85);
+      backdrop-filter: blur(8px);
+      color: #ffffff;
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #pb-custom-home-root .ann-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--sky);
+    }
+
+    #pb-custom-home-root .sidesleeper-copy-col h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+
+    #pb-custom-home-root .sidesleeper-copy-col p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    #pb-custom-home-root .sidesleeper-feature-points {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 26px;
+    }
+
+    #pb-custom-home-root .ssf-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    #pb-custom-home-root .ssf-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    /* --------------------------------------------------------------------------
+       6. INTERACTIVE 6-ZONE ANATOMY
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-zones-section {
+      background: #edf7ff;
+    }
+
+    #pb-custom-home-root .juujo-v2-zones-interactive {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    #pb-custom-home-root .juujo-v2-zones-nav {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+    }
+
+    #pb-custom-home-root .zone-nav-btn {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 10px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    #pb-custom-home-root .zone-nav-btn:hover {
+      border-color: var(--blue);
+      background: #f7fbff;
+    }
+
+    #pb-custom-home-root .zone-nav-btn.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(6, 23, 59, 0.15);
+    }
+
+    #pb-custom-home-root .zone-btn-number {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    #pb-custom-home-root .zone-nav-btn.active .zone-btn-number {
+      color: var(--sky);
+    }
+
+    #pb-custom-home-root .zone-btn-text strong {
+      display: block;
+      font-size: 12px;
+      line-height: 1.25;
+      margin-bottom: 2px;
+    }
+
+    #pb-custom-home-root .zone-btn-text small {
+      display: block;
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    #pb-custom-home-root .zone-nav-btn.active .zone-btn-text small {
+      color: var(--line);
+    }
+
+    #pb-custom-home-root .juujo-v2-zone-display {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 4vw, 48px);
+      background: #ffffff;
+      border-radius: 24px;
+      padding: clamp(24px, 4vw, 40px);
+      border: 1px solid var(--line);
+      box-shadow: 0 20px 48px rgba(6, 23, 59, 0.06);
+      align-items: center;
+    }
+
+    #pb-custom-home-root .zone-display-image-wrap {
+      position: relative;
+      background: #f7fbff;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid var(--powder-soft);
+    }
+
+    #pb-custom-home-root .zone-display-img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+    }
+
+    #pb-custom-home-root .zone-active-pill {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      background: var(--navy);
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    #pb-custom-home-root .zone-display-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #pb-custom-home-root .zone-copy-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    #pb-custom-home-root .zone-display-copy h3 {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    #pb-custom-home-root .zone-display-copy h4 {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--blue);
+      margin: 0;
+    }
+
+    #pb-custom-home-root .zone-display-copy p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    #pb-custom-home-root .zone-feature-points {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 12px 0 16px;
+    }
+
+    #pb-custom-home-root .zone-point {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    #pb-custom-home-root .point-icon {
+      width: 16px;
+      height: 16px;
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    /* --------------------------------------------------------------------------
+       7. VISUAL LIFESTYLE SHOWCASE GRID
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-lifestyle-section {
+      background: #ffffff;
+    }
+
+    #pb-custom-home-root .juujo-v2-lifestyle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    #pb-custom-home-root .lifestyle-grid-card {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(6, 23, 59, 0.06);
+      border: 1px solid var(--powder-soft);
+      background: #f7fbff;
+    }
+
+    #pb-custom-home-root .lifestyle-grid-card.card-span-2 {
+      grid-column: span 2;
+    }
+
+    #pb-custom-home-root .lifestyle-card-img {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      max-height: 420px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    #pb-custom-home-root .lifestyle-grid-card:hover .lifestyle-card-img {
+      transform: scale(1.03);
+    }
+
+    #pb-custom-home-root .lifestyle-card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: clamp(16px, 3vw, 24px);
+      background: linear-gradient(180deg, transparent 0%, rgba(6, 23, 59, 0.88) 100%);
+      color: #ffffff;
+    }
+
+    #pb-custom-home-root .lifestyle-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(6px);
+      margin-bottom: 6px;
+    }
+
+    #pb-custom-home-root .lifestyle-card-overlay h3 {
+      font-family: var(--font-display);
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 600;
+      margin: 0 0 4px 0;
+      color: #ffffff;
+    }
+
+    #pb-custom-home-root .lifestyle-card-overlay p {
+      font-size: 13px;
+      color: var(--powder);
+      margin: 0;
+    }
+
+    /* --------------------------------------------------------------------------
+       8. SWITCHFIT DUAL HEIGHT SECTION
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-height-section {
+      background: #f7fbff;
+    }
+
+    #pb-custom-home-root .juujo-v2-height-box {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: clamp(24px, 5vw, 48px);
+      border: 1px solid var(--line);
+      box-shadow: 0 16px 40px rgba(6, 23, 59, 0.05);
+    }
+
+    #pb-custom-home-root .height-box-copy h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    #pb-custom-home-root .height-box-copy p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    #pb-custom-home-root .height-comparison-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    #pb-custom-home-root .height-card {
+      background: var(--powder-soft);
+      border-radius: 14px;
+      padding: 16px;
+      border: 1px solid var(--powder);
+    }
+
+    #pb-custom-home-root .height-card-header {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    #pb-custom-home-root .height-val {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    #pb-custom-home-root .height-card-header strong {
+      font-size: 14px;
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .height-card p {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    #pb-custom-home-root .height-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    #pb-custom-home-root .juujo-v2-text-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    #pb-custom-home-root .juujo-v2-text-link:hover {
+      text-decoration: underline;
+    }
+
+    #pb-custom-home-root .height-guide-img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      border: 1px solid var(--powder-soft);
+    }
+
+    /* --------------------------------------------------------------------------
+       9. DIRECT BUNDLE BUILDER
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-bundles-section {
+      background: #edf7ff;
+    }
+
+    #pb-custom-home-root .juujo-v2-bundles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    #pb-custom-home-root .juujo-v2-bundle-card {
+      position: relative;
+      background: #ffffff;
+      border-radius: 18px;
+      border: 2px solid var(--line);
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #pb-custom-home-root .juujo-v2-bundle-card:hover {
+      border-color: var(--blue);
+      box-shadow: 0 12px 30px rgba(7, 87, 217, 0.1);
+    }
+
+    #pb-custom-home-root .juujo-v2-bundle-card.selected {
+      border-color: var(--blue);
+      background: #ffffff;
+      box-shadow: 0 16px 40px rgba(7, 87, 217, 0.15);
+    }
+
+    #pb-custom-home-root .bundle-popular-ribbon {
+      position: absolute;
+      top: -12px;
+      right: 20px;
+      background: var(--navy);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      box-shadow: 0 4px 10px rgba(6, 23, 59, 0.2);
+    }
+
+    #pb-custom-home-root .bundle-card-top {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    #pb-custom-home-root .bundle-radio-indicator {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #pb-custom-home-root .juujo-v2-bundle-card.selected .bundle-radio-indicator {
+      border-color: var(--blue);
+    }
+
+    #pb-custom-home-root .radio-circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: transparent;
+      transition: background-color 0.15s ease;
+    }
+
+    #pb-custom-home-root .juujo-v2-bundle-card.selected .radio-circle {
+      background: var(--blue);
+    }
+
+    #pb-custom-home-root .bundle-title-col h3 {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 2px 0;
+    }
+
+    #pb-custom-home-root .bundle-note {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    #pb-custom-home-root .bundle-price-col {
+      text-align: right;
+    }
+
+    #pb-custom-home-root .bundle-current-price {
+      display: block;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .bundle-compare-price {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    #pb-custom-home-root .bundle-config-dropdowns {
+      background: #f7fbff;
+      border: 1px solid var(--powder);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+
+    #pb-custom-home-root .config-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      margin: 0 0 8px 0;
+    }
+
+    #pb-custom-home-root .bundle-pillow-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    #pb-custom-home-root .bundle-pillow-row:last-child {
+      margin-bottom: 0;
+    }
+
+    #pb-custom-home-root .pillow-row-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--navy);
+      min-width: 60px;
+    }
+
+    #pb-custom-home-root .bundle-select {
+      flex: 1;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: 12px;
+      background: #ffffff;
+      color: var(--ink);
+      outline: none;
+    }
+
+    #pb-custom-home-root .bundle-upsell-box {
+      background: #edf7ff;
+      border: 1px solid var(--powder);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+    }
+
+    #pb-custom-home-root .bundle-upsell-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    #pb-custom-home-root .bundle-upsell-checkbox {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+
+    #pb-custom-home-root .upsell-text {
+      flex: 1;
+    }
+
+    #pb-custom-home-root .upsell-text strong {
+      display: block;
+      font-size: 12px;
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .upsell-text span {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    #pb-custom-home-root .upsell-price {
+      text-align: right;
+    }
+
+    #pb-custom-home-root .upsell-price strong {
+      display: block;
+      font-size: 13px;
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .upsell-price del {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    #pb-custom-home-root .bundle-add-btn {
+      margin-top: auto;
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--navy);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.18s ease;
+    }
+
+    #pb-custom-home-root .juujo-v2-bundle-card.selected .bundle-add-btn {
+      background: var(--blue);
+    }
+
+    #pb-custom-home-root .bundle-add-btn:hover {
+      background: var(--blue-dark);
+    }
+
+    #pb-custom-home-root .juujo-v2-guarantee-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px 28px;
+      border: 1px solid var(--line);
+    }
+
+    #pb-custom-home-root .guarantee-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #pb-custom-home-root .g-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    #pb-custom-home-root .guarantee-item strong {
+      display: block;
+      font-size: 14px;
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .guarantee-item span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* --------------------------------------------------------------------------
+       10. CHIROPRACTOR & VIDEO SHOWCASE
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-chiro-section {
+      background: #ffffff;
+    }
+
+    #pb-custom-home-root .juujo-v2-chiro-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(32px, 5vw, 64px);
+      align-items: center;
+    }
+
+    #pb-custom-home-root .chiro-video-wrapper {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(6, 23, 59, 0.1);
+      border: 1px solid var(--line);
+      background: #000000;
+    }
+
+    #pb-custom-home-root .chiro-video-element {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    #pb-custom-home-root .video-play-toggle {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(6, 23, 59, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    #pb-custom-home-root .video-play-toggle svg {
+      width: 18px;
+      height: 18px;
+      fill: #ffffff;
+    }
+
+    #pb-custom-home-root .chiro-brand-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      background: rgba(6, 23, 59, 0.6);
+      backdrop-filter: blur(6px);
+      padding: 4px 12px;
+      border-radius: 8px;
+      z-index: 5;
+    }
+
+    #pb-custom-home-root .chiro-copy-col h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+
+    #pb-custom-home-root .chiro-copy-col p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    #pb-custom-home-root .chiro-benefits-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    #pb-custom-home-root .chiro-b-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    #pb-custom-home-root .chiro-b-icon {
+      width: 22px;
+      height: 22px;
+      color: var(--blue);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    #pb-custom-home-root .chiro-b-item strong {
+      display: block;
+      font-size: 15px;
+      color: var(--navy);
+      margin-bottom: 2px;
+    }
+
+    #pb-custom-home-root .chiro-b-item p {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* --------------------------------------------------------------------------
+       11. REVIEWS & CUSTOMER PROOF
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-reviews-section {
+      background: #f7fbff;
+    }
+
+    #pb-custom-home-root .reviews-score-hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    #pb-custom-home-root .reviews-score-num {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .reviews-score-stars-col {
+      text-align: left;
+    }
+
+    #pb-custom-home-root .reviews-score-stars-col span {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    #pb-custom-home-root .juujo-v2-reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+
+    #pb-custom-home-root .juujo-v2-review-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 20px rgba(6, 23, 59, 0.04);
+    }
+
+    #pb-custom-home-root .review-card-top {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    #pb-custom-home-root .review-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid var(--powder);
+    }
+
+    #pb-custom-home-root .review-user-info strong {
+      display: block;
+      font-size: 14px;
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .review-meta-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    #pb-custom-home-root .verified-badge {
+      font-size: 11px;
+      color: var(--success);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+
+    #pb-custom-home-root .check-icon {
+      width: 11px;
+      height: 11px;
+    }
+
+    #pb-custom-home-root .sleeper-tag {
+      font-size: 10px;
+      background: var(--powder-soft);
+      color: var(--blue);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    #pb-custom-home-root .card-stars {
+      margin-bottom: 8px;
+    }
+
+    #pb-custom-home-root .juujo-v2-review-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0 0 6px 0;
+    }
+
+    #pb-custom-home-root .juujo-v2-review-card p {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    #pb-custom-home-root .reviews-more-cta {
+      text-align: center;
+    }
+
+    /* --------------------------------------------------------------------------
+       12. PRODUCT SPECIFICATIONS TABLE
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-specs-section {
+      background: #ffffff;
+    }
+
+    #pb-custom-home-root .juujo-v2-specs-box {
+      background: var(--powder-soft);
+      border-radius: 20px;
+      padding: clamp(24px, 4vw, 40px);
+      border: 1px solid var(--line);
+    }
+
+    #pb-custom-home-root .specs-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    #pb-custom-home-root .specs-header h2 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--navy);
+      margin: 0;
+    }
+
+    #pb-custom-home-root .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    #pb-custom-home-root .spec-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid var(--powder);
+      font-size: 13.5px;
+    }
+
+    #pb-custom-home-root .spec-label {
+      color: var(--muted);
+    }
+
+    #pb-custom-home-root .spec-value {
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    /* --------------------------------------------------------------------------
+       13. FAQS ACCORDION
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-faq-section {
+      background: #f7fbff;
+    }
+
+    #pb-custom-home-root .juujo-v2-faq-list {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    #pb-custom-home-root .faq-accordion-item {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: border-color 0.2s ease;
+    }
+
+    #pb-custom-home-root .faq-accordion-item.open {
+      border-color: var(--blue);
+    }
+
+    #pb-custom-home-root .faq-trigger-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      background: transparent;
+      border: none;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    #pb-custom-home-root .faq-chevron {
+      width: 18px;
+      height: 18px;
+      color: var(--muted);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    #pb-custom-home-root .faq-accordion-item.open .faq-chevron {
+      transform: rotate(180deg);
+      color: var(--blue);
+    }
+
+    #pb-custom-home-root .faq-content-body {
+      display: none;
+      padding: 0 20px 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    #pb-custom-home-root .faq-accordion-item.open .faq-content-body {
+      display: block;
+    }
+
+    /* --------------------------------------------------------------------------
+       14. FINAL CALL TO ACTION
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-final-cta-section {
+      padding: clamp(40px, 6vw, 72px) 0;
+      background: #ffffff;
+    }
+
+    #pb-custom-home-root .final-cta-card {
+      background: linear-gradient(135deg, #06173b 0%, #0757d9 100%);
+      border-radius: 28px;
+      padding: clamp(32px, 6vw, 56px);
+      color: #ffffff;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: clamp(24px, 4vw, 48px);
+      align-items: center;
+      box-shadow: 0 24px 60px rgba(6, 23, 59, 0.2);
+    }
+
+    #pb-custom-home-root .final-cta-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 12px;
+    }
+
+    #pb-custom-home-root .cta-sparkle {
+      width: 15px;
+      height: 15px;
+    }
+
+    #pb-custom-home-root .final-cta-content h2 {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      color: #ffffff;
+    }
+
+    #pb-custom-home-root .final-cta-content p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--powder);
+      margin-bottom: 24px;
+    }
+
+    #pb-custom-home-root .btn-large {
+      padding: 15px 32px;
+      font-size: 16px;
+      background: #ffffff;
+      color: var(--navy) !important;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    #pb-custom-home-root .btn-large:hover {
+      background: var(--powder-soft);
+      color: var(--blue) !important;
+    }
+
+    #pb-custom-home-root .final-cta-img {
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* --------------------------------------------------------------------------
+       15. STICKY MOBILE QUICK-BUY BAR
+       -------------------------------------------------------------------------- */
+    #pb-custom-home-root .juujo-v2-sticky-buy-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: #ffffff;
+      border-top: 1px solid var(--line);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      box-shadow: 0 -8px 20px rgba(6, 23, 59, 0.08);
+      transform: translateY(100%);
+      transition: transform 0.25s ease-out;
+    }
+
+    #pb-custom-home-root .juujo-v2-sticky-buy-bar.visible {
+      transform: translateY(0);
+    }
+
+    #pb-custom-home-root .sticky-bar-left strong {
+      display: block;
+      font-size: 13px;
+      color: var(--navy);
+    }
+
+    #pb-custom-home-root .sticky-bar-left span {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+
+    #pb-custom-home-root .sticky-buy-btn {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+
+    /* --------------------------------------------------------------------------
+       RESPONSIVE BREAKPOINTS
+       -------------------------------------------------------------------------- */
+    @media (max-width: 1024px) {
+      #pb-custom-home-root .juujo-v2-hero-grid,
+      #pb-custom-home-root .juujo-v2-sidesleeper-grid,
+      #pb-custom-home-root .juujo-v2-zone-display,
+      #pb-custom-home-root .juujo-v2-height-box,
+      #pb-custom-home-root .juujo-v2-chiro-grid,
+      #pb-custom-home-root .final-cta-card {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      #pb-custom-home-root .juujo-v2-zones-nav {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      #pb-custom-home-root .juujo-v2-bundles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #pb-custom-home-root .juujo-v2-reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      #pb-custom-home-root .juujo-v2-guarantee-strip {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #pb-custom-home-root .juujo-v2-vs-grid,
+      #pb-custom-home-root .juujo-v2-lifestyle-grid,
+      #pb-custom-home-root .height-comparison-cards,
+      #pb-custom-home-root .specs-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #pb-custom-home-root .lifestyle-grid-card.card-span-2 {
+        grid-column: span 1;
+      }
+
+      #pb-custom-home-root .juujo-v2-zones-nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      #pb-custom-home-root .juujo-v2-hero-selectors {
+        grid-template-columns: 1fr;
+      }
+
+      #pb-custom-home-root .juujo-v2-reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #pb-custom-home-root .juujo-v2-float-badge {
+        display: none;
+      }
+    }
+  </style>
+
+  <!-- ========================================================================
+       1. ANNOUNCEMENT MARQUEE
+       ======================================================================== -->
+  <aside class="store-announcement" aria-label="Store Announcements">
+    <div class="store-announcement-track">
+      <div class="store-announcement-group">
+        <span><b>FREE DELIVERY:</b> FREE UK TRACKED DELIVERY ON ALL ORDERS</span>
+        <span><b>30-NIGHT GUARANTEE:</b> 30-DAY RISK-FREE SLEEP TRIAL</span>
+        <span><b>RATED 4.9/5:</b> OVER 42,000+ HAPPY CUSTOMERS</span>
+        <span><b>2-YEAR COVER:</b> 2-YEAR EXTENDED CORE WARRANTY</span>
+      </div>
+      <div class="store-announcement-group" aria-hidden="true">
+        <span><b>FREE DELIVERY:</b> FREE UK TRACKED DELIVERY ON ALL ORDERS</span>
+        <span><b>30-NIGHT GUARANTEE:</b> 30-DAY RISK-FREE SLEEP TRIAL</span>
+        <span><b>RATED 4.9/5:</b> OVER 42,000+ HAPPY CUSTOMERS</span>
+        <span><b>2-YEAR COVER:</b> 2-YEAR EXTENDED CORE WARRANTY</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       2. HERO SECTION
+       ======================================================================== -->
+  <section class="juujo-v2-hero" id="pb-hero-section">
+    <div class="juujo-v2-container juujo-v2-hero-grid">
+      <!-- Left Column: Copy & Quick Selector Box -->
+      <div class="juujo-v2-hero-content">
+        <div class="juujo-v2-hero-badge">
+          <span class="juujo-v2-stars">
+            <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </span>
+          <strong>4.9/5 RATED</strong>
+          <span>from 42,093+ licensed product reviews</span>
+        </div>
+
+        <h1 class="juujo-v2-hero-title">
+          Wake up without neck tension or shoulder pain.
+        </h1>
+
+        <p class="juujo-v2-hero-subtitle">
+          The sculpted cloud pillow engineered with 6 anatomical support zones and the SwitchFit™ dual-height contour system. Designed to eliminate midnight tossing and turning for side, back, and stomach sleepers.
+        </p>
+
+        <!-- Micro Feature Pills -->
+        <div class="juujo-v2-hero-pills">
+          <span class="juujo-v2-pill">
+            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            6 Support Zones
+          </span>
+          <span class="juujo-v2-pill">
+            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 18 12 22 16 18"/><polyline points="8 6 12 2 16 6"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+            Dual-Height SwitchFit™
+          </span>
+          <span class="juujo-v2-pill">
+            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M12 10v.01"/><path d="M7 6h.01"/></svg>
+            Washable Cover
+          </span>
+          <span class="juujo-v2-pill">
+            <svg class="pill-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            Shape-Retaining Memory Foam
+          </span>
+        </div>
+
+        <!-- Quick-Select Hero Box -->
+        <div class="juujo-v2-hero-box">
+          <div class="juujo-v2-hero-selectors">
+            <!-- Colour Swatch -->
+            <div class="hero-selector-group">
+              <label>Colour: <strong id="pb-hero-selected-colour">White</strong></label>
+              <div class="hero-swatch-row">
+                <button type="button" class="hero-swatch-btn active" data-colour="white" title="White" style="background-color: #f8fafc;" aria-label="Select White colour"></button>
+                <button type="button" class="hero-swatch-btn" data-colour="grey" title="Grey" style="background-color: #b8bdc5;" aria-label="Select Grey colour"></button>
+                <button type="button" class="hero-swatch-btn" data-colour="blue" title="Baby Blue" style="background-color: #b9d9f4;" aria-label="Select Baby Blue colour"></button>
+                <button type="button" class="hero-swatch-btn" data-colour="navy" title="Navy Blue" style="background-color: #0b214d;" aria-label="Select Navy Blue colour"></button>
+              </div>
+            </div>
+
+            <!-- Height Selector -->
+            <div class="hero-selector-group">
+              <label>Profile: <strong id="pb-hero-selected-height">Regular (8.9 cm)</strong></label>
+              <div class="hero-segmented-control">
+                <button type="button" class="hero-seg-btn active" data-height="regular">Regular (8.9 cm)</button>
+                <button type="button" class="hero-seg-btn" data-height="high">High (10.9 cm)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price & CTA -->
+          <div class="juujo-v2-hero-buy-row">
+            <div class="hero-price-wrap">
+              <span class="hero-current-price" id="pb-hero-price">£49.99</span>
+              <span class="hero-compare-price" id="pb-hero-compare-price">£100.00</span>
+              <span class="hero-save-badge">50% OFF</span>
+            </div>
+
+            <div class="hero-actions-wrap">
+              <button type="button" class="juujo-v2-btn-primary" id="pb-hero-add-to-basket">
+                Add to Basket
+                <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+              <a href="#bundles" class="juujo-v2-btn-secondary">
+                View Multi-Pillow Bundles
+              </a>
+            </div>
+          </div>
+
+          <!-- Micro Trust Row -->
+          <div class="juujo-v2-micro-trust">
+            <span>
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+              Free UK Tracked Delivery
+            </span>
+            <span>
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              30-Day Risk-Free Trial
+            </span>
+            <span>
+              <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+              2-Year Core Warranty
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Hero Visual with Interactive Image Toggle & Floating Badges -->
+      <div class="juujo-v2-hero-visual-col">
+        <div class="juujo-v2-hero-card">
+          <img
+            id="pb-hero-main-image"
+            src="https://pillow-sepia.vercel.app/assets/v2/lifestyle-cloud-stack.webp"
+            alt="Juujo OrthoAlign Ergonomic Contour Memory Foam Pillow"
+            class="juujo-v2-hero-image"
+            width="819"
+            height="1024"
+          />
+
+          <!-- Image Toggle Switch -->
+          <div class="hero-image-toggle-strip">
+            <button type="button" class="hero-toggle-btn active" id="pb-toggle-stack">
+              Cloud Structure
+            </button>
+            <button type="button" class="hero-toggle-btn" id="pb-toggle-sleep">
+              Side Sleep Position
+            </button>
+          </div>
+
+          <!-- Floating Highlight 1: Dual-Height SwitchFit -->
+          <div class="juujo-v2-float-badge badge-top-left">
+            <div class="float-icon-wrap">
+              <svg class="float-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="8 18 12 22 16 18"/><polyline points="8 6 12 2 16 6"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+            </div>
+            <div class="float-text-wrap">
+              <strong>SwitchFit™ System</strong>
+              <span>8.9 cm & 10.9 cm dual height</span>
+            </div>
+          </div>
+
+          <!-- Floating Highlight 2: Shoulder Arc -->
+          <div class="juujo-v2-float-badge badge-mid-right">
+            <div class="float-icon-wrap">
+              <svg class="float-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+            <div class="float-text-wrap">
+              <strong>Zero Shoulder Pinch</strong>
+              <span>Dedicated arm & neck relief</span>
+            </div>
+          </div>
+
+          <!-- Floating Highlight 3: Washable Cover -->
+          <div class="juujo-v2-float-badge badge-bottom-left">
+            <div class="float-icon-wrap">
+              <svg class="float-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="20" x="3" y="2" rx="2"/><circle cx="12" cy="13" r="5"/><path d="M12 10v.01"/><path d="M7 6h.01"/></svg>
+            </div>
+            <div class="float-text-wrap">
+              <strong>Ice-Weave Cover</strong>
+              <span>Breathable & machine-washable</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       3. PRESS & MEDIA MARQUEE
+       ======================================================================== -->
+  <section class="juujo-v2-press-section" aria-label="As featured in">
+    <div class="juujo-v2-container">
+      <p class="juujo-v2-press-label">
+        FEATURED & RECOGNISED ACROSS LEADING MEDIA
+      </p>
+      <div class="juujo-v2-press-logos">
+        <div class="press-logo-wrapper">
+          <img src="https://pillow-sepia.vercel.app/assets/logo-forbes.avif" alt="Forbes" class="press-logo-img" />
+        </div>
+        <div class="press-logo-wrapper">
+          <img src="https://pillow-sepia.vercel.app/assets/logo-usa-today.avif" alt="USA Today" class="press-logo-img" />
+        </div>
+        <div class="press-logo-wrapper">
+          <img src="https://pillow-sepia.vercel.app/assets/logo-readers-digest.avif" alt="Reader's Digest" class="press-logo-img" />
+        </div>
+        <div class="press-logo-wrapper">
+          <img src="https://pillow-sepia.vercel.app/assets/logo-lifestyle.avif" alt="Lifestyle" class="press-logo-img" />
+        </div>
+        <div class="press-logo-wrapper">
+          <img src="https://pillow-sepia.vercel.app/assets/logo-scary-mommy.webp" alt="Scary Mommy" class="press-logo-img" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. WHY TRADITIONAL PILLOWS FAIL (PROBLEM VS SOLUTION)
+       ======================================================================== -->
+  <section class="juujo-v2-section juujo-v2-vs-section">
+    <div class="juujo-v2-container">
+      <div class="juujo-v2-section-header">
+        <span class="juujo-v2-eyebrow">The Sleep Problem Solved</span>
+        <h2 class="juujo-v2-section-title">
+          Why Traditional Flat Pillows Are Ruining Your Morning.
+        </h2>
+        <p class="juujo-v2-section-lead">
+          Flat, unsupportive pillows bend your neck at an unnatural angle and compress your shoulder joints. OrthoAlign was engineered to realign your spine and give every part of your body space to rest.
+        </p>
+      </div>
+
+      <div class="juujo-v2-vs-grid">
+        <!-- Traditional Flat Pillows -->
+        <div class="juujo-v2-vs-card vs-traditional">
+          <div class="vs-card-header">
+            <span class="vs-status-badge badge-negative">❌ Traditional Flat Pillows</span>
+            <h3>The Daily Pain Cycle</h3>
+          </div>
+          <ul class="vs-list">
+            <li>
+              <strong>Crushes your cervical spine:</strong> Head tilts excessively down or up, putting continuous strain on your neck muscles.
+            </li>
+            <li>
+              <strong>Pinches shoulders & nerves:</strong> No dedicated shoulder clearance leads to numbness, tingling arms, and shoulder soreness.
+            </li>
+            <li>
+              <strong>Flattens after 2 hours:</strong> Loose feather and fibre fillings clump together, forcing you to repeatedly punch and fold the pillow.
+            </li>
+            <li>
+              <strong>Traps body heat:</strong> Dense non-breathable fabrics trap hot air, making you flip to the cool side all night.
+            </li>
+          </ul>
+        </div>
+
+        <!-- Juujo OrthoAlign -->
+        <div class="juujo-v2-vs-card vs-juujo">
+          <div class="vs-card-header">
+            <span class="vs-status-badge badge-positive">✨ Juujo OrthoAlign™ Pillow</span>
+            <h3>Anatomical Cloud Sleep</h3>
+          </div>
+          <ul class="vs-list">
+            <li>
+              <strong>100% Neutral Spinal Posture:</strong> Central head cradle and cervical arch keep your head, neck, and spine in a straight, restful line.
+            </li>
+            <li>
+              <strong>Curved Shoulder Relief:</strong> Sculpted side wings and shoulder contours relieve joint compression for true weightless comfort.
+            </li>
+            <li>
+              <strong>High-Density Shape Retention:</strong> CloudSoft™ memory foam adapts to your body and bounces back to its original sculpted form every morning.
+            </li>
+            <li>
+              <strong>Stays Cool & Fresh:</strong> Breathable, removable cooling cover allows airflow and washes clean at 30°C.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. SIDE SLEEPING DEEP-DIVE WITH MALE SLEEPER VISUAL
+       ======================================================================== -->
+  <section class="juujo-v2-section juujo-v2-sidesleeper-section">
+    <div class="juujo-v2-container juujo-v2-sidesleeper-grid">
+      <div class="sidesleeper-visual-col">
+        <div class="sidesleeper-image-card">
+          <img
+            src="https://pillow-sepia.vercel.app/assets/v2/lifestyle-man-side-sleeper.webp"
+            alt="Man side sleeping comfortably with proper cervical spine alignment on Juujo OrthoAlign pillow"
+            class="sidesleeper-img"
+            width="1024"
+            height="1024"
+          />
+          <div class="sidesleeper-annotation">
+            <svg class="ann-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            <span>100% Level Spinal Alignment</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidesleeper-copy-col">
+        <span class="juujo-v2-eyebrow">Zero Pressure Side Sleeping</span>
+        <h2>Eliminate The Dreaded Shoulder Gap.</h2>
+        <p>
+          74% of UK adults sleep on their side. When you lie sideways, the gap between your shoulder and head requires exact elevation. Too little height strains your neck downward; too much lifts your spine out of alignment.
+        </p>
+        <div class="sidesleeper-feature-points">
+          <div class="ssf-point">
+            <div class="ssf-dot"></div>
+            <div>
+              <strong>Shoulder Clearance Channel:</strong> Curves around your shoulder so you never sleep directly on the joint.
+            </div>
+          </div>
+          <div class="ssf-point">
+            <div class="ssf-dot"></div>
+            <div>
+              <strong>Lateral Head Lift:</strong> Holds your head firmly at bed-parallel height through the entire sleep cycle.
+            </div>
+          </div>
+          <div class="ssf-point">
+            <div class="ssf-dot"></div>
+            <div>
+              <strong>Under-Arm Rest:</strong> Lets your arm wrap naturally around or beneath the contour without loss of circulation.
+            </div>
+          </div>
+        </div>
+        <a href="#bundles" class="juujo-v2-btn-primary">
+          Order Your Side Sleeper Pillow
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. INTERACTIVE 6-ZONE ANATOMICAL ANATOMY
+       ======================================================================== -->
+  <section class="juujo-v2-section juujo-v2-zones-section" id="how-it-works">
+    <div class="juujo-v2-container">
+      <div class="juujo-v2-section-header">
+        <span class="juujo-v2-eyebrow">Sculpted Sleep Engineering</span>
+        <h2 class="juujo-v2-section-title">
+          Six Anatomical Zones. Zero Compromise.
+        </h2>
+        <p class="juujo-v2-section-lead">
+          Every single contour on the OrthoAlign pillow serves a clinical ergonomic purpose. Click each zone below to explore how it supports your body.
+        </p>
+      </div>
+
+      <div class="juujo-v2-zones-interactive">
+        <!-- Zone Selector Tabs -->
+        <div class="juujo-v2-zones-nav" id="pb-zone-tabs-container">
+          <button type="button" class="zone-nav-btn active" data-zone-index="0">
+            <span class="zone-btn-number">01</span>
+            <div class="zone-btn-text">
+              <strong>Occipital Head Cradle</strong>
+              <small>Head Alignment</small>
+            </div>
+          </button>
+          <button type="button" class="zone-nav-btn" data-zone-index="1">
+            <span class="zone-btn-number">02</span>
+            <div class="zone-btn-text">
+              <strong>Cervical Neck Arch</strong>
+              <small>Spinal Neutrality</small>
+            </div>
+          </button>
+          <button type="button" class="zone-nav-btn" data-zone-index="2">
+            <span class="zone-btn-number">03</span>
+            <div class="zone-btn-text">
+              <strong>Shoulder Clearance Arc</strong>
+              <small>Side Sleeper Focus</small>
+            </div>
+          </button>
+          <button type="button" class="zone-nav-btn" data-zone-index="3">
+            <span class="zone-btn-number">04</span>
+            <div class="zone-btn-text">
+              <strong>Side-Sleeper Wings</strong>
+              <small>No Tossing & Turning</small>
+            </div>
+          </button>
+          <button type="button" class="zone-nav-btn" data-zone-index="4">
+            <span class="zone-btn-number">05</span>
+            <div class="zone-btn-text">
+              <strong>Under-Arm Rest Channels</strong>
+              <small>Arm Comfort</small>
+            </div>
+          </button>
+          <button type="button" class="zone-nav-btn" data-zone-index="5">
+            <span class="zone-btn-number">06</span>
+            <div class="zone-btn-text">
+              <strong>SwitchFit™ Dual-Height Core</strong>
+              <small>Custom Fit</small>
+            </div>
+          </button>
+        </div>
+
+        <!-- Zone Detail Display Card -->
+        <div class="juujo-v2-zone-display">
+          <div class="zone-display-image-wrap">
+            <img
+              src="https://pillow-sepia.vercel.app/assets/gallery/support-zones.png"
+              alt="Juujo OrthoAlign six ergonomic support zones diagram"
+              class="zone-display-img"
+              width="1255"
+              height="1255"
+            />
+            <div class="zone-active-pill" id="pb-zone-active-badge">
+              Active Zone: 01 — Occipital Head Cradle
+            </div>
+          </div>
+
+          <div class="zone-display-copy">
+            <span class="zone-copy-tag" id="pb-zone-tag">Head Alignment</span>
+            <h3 id="pb-zone-title">Occipital Head Cradle</h3>
+            <h4 id="pb-zone-subtitle">Even pressure distribution</h4>
+            <p id="pb-zone-desc">
+              A sculpted central hollow gently cups the back of the head, preventing uncomfortable tilting and distributing skull weight evenly across high-density memory foam.
+            </p>
+
+            <div class="zone-feature-points">
+              <div class="zone-point">
+                <svg class="point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span>Reduces morning cervical tension</span>
+              </div>
+              <div class="zone-point">
+                <svg class="point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span>Eliminates shoulder and neck pinching</span>
+              </div>
+              <div class="zone-point">
+                <svg class="point-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                <span>Adapts to side, back, and stomach postures</span>
+              </div>
+            </div>
+
+            <a href="#bundles" class="juujo-v2-btn-primary">
+              Order OrthoAlign Now
+              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. VISUAL LIFESTYLE SHOWCASE GRID
+       ======================================================================== -->
+  <section class="juujo-v2-section juujo-v2-lifestyle-section">
+    <div class="juujo-v2-container">
+      <div class="juujo-v2-section-header">
+        <span class="juujo-v2-eyebrow">Everyday Comfort</span>
+        <h2 class="juujo-v2-section-title">
+          Designed For Real Homes & Restful Nights.
+        </h2>
+        <p class="juujo-v2-section-lead">
+          From morning stretches to deep restorative sleep, see how the Juujo OrthoAlign transforms bedrooms across the UK.
+        </p>
+      </div>
+
+      <div class="juujo-v2-lifestyle-grid">
+        <!-- Banner Card -->
+        <div class="lifestyle-grid-card card-span-2">
+          <img
+            src="https://pillow-sepia.vercel.app/assets/v2/lifestyle-peaceful-banner.webp"
+            alt="Woman relaxing peacefully with a Juujo cloud pillow on comfortable duvets"
+            class="lifestyle-card-img"
+            width="1024"
+            height="576"
+          />
+          <div class="lifestyle-card-overlay">
+            <span class="lifestyle-badge">Cloud-Soft Comfort</span>
+            <h3>Tactile cloud comfort for every hour of relaxation.</h3>
+            <p>Softer than feather pillows, more supportive than solid memory foam.</p>
+          </div>
+        </div>
+
+        <!-- Brunette Pillow Lift -->
+        <div class="lifestyle-grid-card">
+          <img
+            src="https://pillow-sepia.vercel.app/assets/v2/lifestyle-brunette-pillow-lift.webp"
+            alt="Smiling model holding the Juujo OrthoAlign pillow behind head"
+            class="lifestyle-card-img"
+            width="1024"
+            height="1024"
+          />
+          <div class="lifestyle-card-overlay">
+            <span class="lifestyle-badge">Sculpted Foam</span>
+            <h3>Shape retention that never clumps or sags.</h3>
+          </div>
+        </div>
+
+        <!-- Duo Friends Bed -->
+        <div class="lifestyle-grid-card">
+          <img
+            src="https://pillow-sepia.vercel.app/assets/v2/lifestyle-duo-friends-bed.webp"
+            alt="Two friends smiling in bed hugging Juujo OrthoAlign pillows"
+            class="lifestyle-card-img"
+            width="1024"
+            height="1024"
+          />
+          <div class="lifestyle-card-overlay">
+            <span class="lifestyle-badge">Duo Pack Favourite</span>
+            <h3>Double the comfort for you and your partner.</h3>
+          </div>
+        </div>
+
+        <!-- Couple Card -->
+        <div class="lifestyle-grid-card">
+          <img
+            src="https://pillow-sepia.vercel.app/assets/v2/lifestyle-couple-bed.webp"
+            alt="Couple smiling in bed holding the Juujo OrthoAlign pillow"
+            class="lifestyle-card-img"
+            width="1024"
+            height="1024"
+          />
+          <div class="lifestyle-card-overlay">
+            <span class="lifestyle-badge">Better Sleep Together</span>
+            <h3>Quiet nights with zero motion transfer.</h3>
+          </div>
+        </div>
+
+        <!-- Overhead Dual Sleepers Card -->
+        <div class="lifestyle-grid-card">
+          <img
+            src="https://pillow-sepia.vercel.app/assets/v2/lifestyle-overhead-sleepers.webp"
+            alt="Overhead view of two sleepers resting on Juujo cloud pillows"
+            class="lifestyle-card-img"
+            width="818"
+            height="1024"
+          />
+          <div class="lifestyle-card-overlay">
+            <span class="lifestyle-badge">Universal Alignment</span>
+            <h3>Ideal for side, back, and restless sleepers.</h3>
+          </div>
+        </div>
+
+        <!-- Bed Lift Card -->
+        <div class="lifestyle-grid-card">
+          <img
+            src="https://pillow-sepia.vercel.app/assets/v2/lifestyle-bed-lift.webp"
+            alt="Woman smiling happily in bed lifting the Juujo OrthoAlign pillow"
+            class="lifestyle-card-img"
+            width="819"
+            height="1024"
+          />
+          <div class="lifestyle-card-overlay">
+            <span class="lifestyle-badge">Morning Energy</span>
+            <h3>Wake up feeling genuinely refreshed.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       8. SWITCHFIT™ DUAL-HEIGHT SELECTOR & SIZE GUIDE
+       ======================================================================== -->
+  <section class="juujo-v2-section juujo-v2-height-section">
+    <div class="juujo-v2-container">
+      <div class="juujo-v2-height-box">
+        <div class="height-box-copy">
+          <span class="juujo-v2-eyebrow">SwitchFit™ System</span>
+          <h2>Two Height Profiles. One Perfect Night.</h2>
+          <p>
+            Your ideal pillow height depends on your shoulder width, sleep position, and mattress firmness. OrthoAlign gives you both contours in every pillow—just rotate to switch.
+          </p>
+
+          <div class="height-comparison-cards">
+            <div class="height-card">
+              <div class="height-card-header">
+                <span class="height-val">8.9 cm</span>
+                <strong>Regular Profile</strong>
+              </div>
+              <p>
+                A lower contour designed for petite frames, back sleepers, and softer mattresses that let your shoulder sink.
+              </p>
+            </div>
+
+            <div class="height-card">
+              <div class="height-card-header">
+                <span class="height-val">10.9 cm</span>
+                <strong>High Profile</strong>
+              </div>
+              <p>
+                Extra height clearance for taller or broader shoulders, dedicated side sleepers, and firmer mattresses.
+              </p>
+            </div>
+          </div>
+
+          <div class="height-cta-row">
+            <a href="#bundles" class="juujo-v2-btn-primary">
+              Find Your Height & Save
+              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+            <a href="#how-it-works" class="juujo-v2-text-link">Explore Support Zones ↓</a>
+          </div>
+        </div>
+
+        <div class="height-box-visual">
+          <img
+            src="https://pillow-sepia.vercel.app/assets/gallery/size-guide.png"
+            alt="Juujo OrthoAlign Regular and High pillow size guide diagram"
+            class="height-guide-img"
+            width="1255"
+            height="1255"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       9. DIRECT BUNDLE BUILDER (BUY MORE SAVE MORE)
+       ======================================================================== -->
+  <section class="juujo-v2-section juujo-v2-bundles-section" id="bundles">
+    <div class="juujo-v2-container">
+      <div class="juujo-v2-section-header">
+        <span class="juujo-v2-eyebrow">Direct Multi-Pillow Bundles</span>
+        <h2 class="juujo-v2-section-title">
+          Upgrade Every Bed In Your Home.
+        </h2>
+        <p class="juujo-v2-section-lead">
+          Save up to 62% when you choose a 2-pillow or 4-pillow family bundle. Customise the colour and height for every individual sleeper in your home.
+        </p>
+      </div>
+
+      <div class="juujo-v2-bundles-grid" id="pb-bundles-container">
+        <!-- 1 Pillow Single -->
+        <div class="juujo-v2-bundle-card" data-bundle-qty="1">
+          <div class="bundle-card-top">
+            <div class="bundle-radio-indicator">
+              <div class="radio-circle"></div>
+            </div>
+            <div class="bundle-title-col">
+              <h3>1 Pillow</h3>
+              <span class="bundle-note">Single Sleeper</span>
+            </div>
+            <div class="bundle-price-col">
+              <strong class="bundle-current-price">£49.99</strong>
+              <span class="bundle-compare-price">£100.00</span>
+            </div>
+          </div>
+
+          <div class="bundle-config-dropdowns" style="display: none;">
+            <p class="config-label">Customise Pillow Selection:</p>
+            <div class="bundle-pillow-row">
+              <span class="pillow-row-tag">Pillow 1:</span>
+              <select class="bundle-select pillow-colour-select" aria-label="Pillow 1 Colour">
+                <option value="white">White</option>
+                <option value="grey">Grey</option>
+                <option value="blue">Baby Blue</option>
+                <option value="navy">Navy Blue</option>
+              </select>
+              <select class="bundle-select pillow-height-select" aria-label="Pillow 1 Height">
+                <option value="regular">Regular (8.9 cm)</option>
+                <option value="high">High (10.9 cm)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="bundle-upsell-box">
+            <label class="bundle-upsell-label">
+              <input type="checkbox" class="bundle-upsell-checkbox" checked />
+              <div class="upsell-text">
+                <strong>Extra Cooling Cover (1x)</strong>
+                <span>Breathable ice-weave fabric</span>
+              </div>
+              <div class="upsell-price">
+                <strong>+£9.99</strong>
+                <del>£19.99</del>
+              </div>
+            </label>
+          </div>
+
+          <button type="button" class="bundle-add-btn">
+            Add 1 Pillow to Basket
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <!-- 2 Pillow Bundle (Most Popular) -->
+        <div class="juujo-v2-bundle-card selected" data-bundle-qty="2">
+          <div class="bundle-popular-ribbon">MOST POPULAR</div>
+          <div class="bundle-card-top">
+            <div class="bundle-radio-indicator">
+              <div class="radio-circle"></div>
+            </div>
+            <div class="bundle-title-col">
+              <h3>2 Pillow Bundle</h3>
+              <span class="bundle-note">Couples & Partner Pack</span>
+            </div>
+            <div class="bundle-price-col">
+              <strong class="bundle-current-price">£88.99</strong>
+              <span class="bundle-compare-price">£200.00</span>
+            </div>
+          </div>
+
+          <div class="bundle-config-dropdowns">
+            <p class="config-label">Customise Each Pillow:</p>
+            <div class="bundle-pillow-row">
+              <span class="pillow-row-tag">Pillow 1:</span>
+              <select class="bundle-select pillow-colour-select" aria-label="Pillow 1 Colour">
+                <option value="white" selected>White</option>
+                <option value="grey">Grey</option>
+                <option value="blue">Baby Blue</option>
+                <option value="navy">Navy Blue</option>
+              </select>
+              <select class="bundle-select pillow-height-select" aria-label="Pillow 1 Height">
+                <option value="regular" selected>Regular (8.9 cm)</option>
+                <option value="high">High (10.9 cm)</option>
+              </select>
+            </div>
+            <div class="bundle-pillow-row">
+              <span class="pillow-row-tag">Pillow 2:</span>
+              <select class="bundle-select pillow-colour-select" aria-label="Pillow 2 Colour">
+                <option value="white">White</option>
+                <option value="grey">Grey</option>
+                <option value="blue" selected>Baby Blue</option>
+                <option value="navy">Navy Blue</option>
+              </select>
+              <select class="bundle-select pillow-height-select" aria-label="Pillow 2 Height">
+                <option value="regular">Regular (8.9 cm)</option>
+                <option value="high" selected>High (10.9 cm)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="bundle-upsell-box">
+            <label class="bundle-upsell-label">
+              <input type="checkbox" class="bundle-upsell-checkbox" checked />
+              <div class="upsell-text">
+                <strong>Extra Cooling Covers (2x)</strong>
+                <span>Matching replacement pair</span>
+              </div>
+              <div class="upsell-price">
+                <strong>+£19.99</strong>
+                <del>£39.98</del>
+              </div>
+            </label>
+          </div>
+
+          <button type="button" class="bundle-add-btn">
+            Add 2 Pillow Bundle to Basket
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <!-- 4 Pillow Family Bundle -->
+        <div class="juujo-v2-bundle-card" data-bundle-qty="4">
+          <div class="bundle-popular-ribbon" style="background: var(--blue);">BEST VALUE</div>
+          <div class="bundle-card-top">
+            <div class="bundle-radio-indicator">
+              <div class="radio-circle"></div>
+            </div>
+            <div class="bundle-title-col">
+              <h3>Family Bundle</h3>
+              <span class="bundle-note">4 Total Pillows</span>
+            </div>
+            <div class="bundle-price-col">
+              <strong class="bundle-current-price">£151.99</strong>
+              <span class="bundle-compare-price">£400.00</span>
+            </div>
+          </div>
+
+          <div class="bundle-config-dropdowns" style="display: none;">
+            <p class="config-label">Customise Each Pillow:</p>
+            <div class="bundle-pillow-row">
+              <span class="pillow-row-tag">Pillow 1:</span>
+              <select class="bundle-select pillow-colour-select"><option value="white" selected>White</option><option value="grey">Grey</option><option value="blue">Baby Blue</option><option value="navy">Navy Blue</option></select>
+              <select class="bundle-select pillow-height-select"><option value="regular" selected>Regular (8.9 cm)</option><option value="high">High (10.9 cm)</option></select>
+            </div>
+            <div class="bundle-pillow-row">
+              <span class="pillow-row-tag">Pillow 2:</span>
+              <select class="bundle-select pillow-colour-select"><option value="white">White</option><option value="grey" selected>Grey</option><option value="blue">Baby Blue</option><option value="navy">Navy Blue</option></select>
+              <select class="bundle-select pillow-height-select"><option value="regular" selected>Regular (8.9 cm)</option><option value="high">High (10.9 cm)</option></select>
+            </div>
+            <div class="bundle-pillow-row">
+              <span class="pillow-row-tag">Pillow 3:</span>
+              <select class="bundle-select pillow-colour-select"><option value="white">White</option><option value="grey">Grey</option><option value="blue" selected>Baby Blue</option><option value="navy">Navy Blue</option></select>
+              <select class="bundle-select pillow-height-select"><option value="regular">Regular (8.9 cm)</option><option value="high" selected>High (10.9 cm)</option></select>
+            </div>
+            <div class="bundle-pillow-row">
+              <span class="pillow-row-tag">Pillow 4:</span>
+              <select class="bundle-select pillow-colour-select"><option value="white">White</option><option value="grey">Grey</option><option value="blue">Baby Blue</option><option value="navy" selected>Navy Blue</option></select>
+              <select class="bundle-select pillow-height-select"><option value="regular">Regular (8.9 cm)</option><option value="high" selected>High (10.9 cm)</option></select>
+            </div>
+          </div>
+
+          <div class="bundle-upsell-box">
+            <label class="bundle-upsell-label">
+              <input type="checkbox" class="bundle-upsell-checkbox" checked />
+              <div class="upsell-text">
+                <strong>Extra Cooling Covers (4x)</strong>
+                <span>Full home family pack</span>
+              </div>
+              <div class="upsell-price">
+                <strong>+£29.99</strong>
+                <del>£79.96</del>
+              </div>
+            </label>
+          </div>
+
+          <button type="button" class="bundle-add-btn">
+            Add 4 Pillow Bundle to Basket
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3-Item Guarantee Strip -->
+      <div class="juujo-v2-guarantee-strip">
+        <div class="guarantee-item">
+          <svg class="g-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+          <div>
+            <strong>Free UK Tracked Delivery</strong>
+            <span>Dispatched within 24-48 hours with courier tracking</span>
+          </div>
+        </div>
+
+        <div class="guarantee-item">
+          <svg class="g-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div>
+            <strong>30-Day Risk-Free Trial</strong>
+            <span>Test the pillow for 30 nights in your own bed</span>
+          </div>
+        </div>
+
+        <div class="guarantee-item">
+          <svg class="g-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <div>
+            <strong>2-Year Core Warranty</strong>
+            <span>Guaranteed not to sag, flatten, or lose its shape</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       10. CHIROPRACTOR & VIDEO SHOWCASE
+       ======================================================================== -->
+  <section class="juujo-v2-section juujo-v2-chiro-section">
+    <div class="juujo-v2-container juujo-v2-chiro-grid">
+      <!-- Video Player Wrapper -->
+      <div class="chiro-video-wrapper">
+        <video
+          id="pb-chiro-video"
+          src="https://pillow-sepia.vercel.app/assets/chiropractor-loop.mp4"
+          class="chiro-video-element"
+          autoplay
+          loop
+          muted
+          playsinline
+        ></video>
+        <div class="chiro-brand-badge">Juujo OrthoAlign™</div>
+        <button type="button" class="video-play-toggle" id="pb-video-toggle" aria-label="Toggle video playback">
+          <svg id="pb-video-icon" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+      </div>
+
+      <!-- Copy & Clinical Details -->
+      <div class="chiro-copy-col">
+        <span class="juujo-v2-eyebrow">Expert Alignment</span>
+        <h2>Precision Ergonomics For Restorative Sleep.</h2>
+        <p>
+          Standard pillows collapse under the weight of the head, forcing the cervical spine into unnatural flexion. OrthoAlign is engineered with high-density adaptive memory foam to maintain genuine lordotic curve alignment throughout the entire sleep cycle.
+        </p>
+
+        <div class="chiro-benefits-list">
+          <div class="chiro-b-item">
+            <svg class="chiro-b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+            <div>
+              <strong>Relieves Cervical Pressure</strong>
+              <p>Maintains the natural curve of the neck, reducing muscle spasms and tension headaches.</p>
+            </div>
+          </div>
+
+          <div class="chiro-b-item">
+            <svg class="chiro-b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <div>
+              <strong>Eliminates Shoulder Compression</strong>
+              <p>Curved clearance wings allow the shoulder to tuck in naturally without pinching nerves.</p>
+            </div>
+          </div>
+
+          <div class="chiro-b-item">
+            <svg class="chiro-b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+            <div>
+              <strong>Universal Rest For All Positions</strong>
+              <p>Effortlessly transitions between side, back, and stomach sleeping positions.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#bundles" class="juujo-v2-btn-primary">
+          Order Your OrthoAlign Today
+          <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       11. REVIEWS & CUSTOMER PROOF
+       ======================================================================== -->
+  <section class="juujo-v2-section juujo-v2-reviews-section">
+    <div class="juujo-v2-container">
+      <div class="juujo-v2-section-header">
+        <span class="juujo-v2-eyebrow">Real Customer Stories</span>
+        <h2 class="juujo-v2-section-title">
+          Over 42,000+ Nights Of Pain-Free Sleep.
+        </h2>
+        <div class="reviews-score-hero">
+          <span class="reviews-score-num">4.9</span>
+          <div class="reviews-score-stars-col">
+            <div class="juujo-v2-stars">
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span>Based on 42,093+ verified customer reviews</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="juujo-v2-reviews-grid">
+        <!-- Review 1 -->
+        <div class="juujo-v2-review-card">
+          <div class="review-card-top">
+            <img src="https://pillow-sepia.vercel.app/assets/reviews/review-01.jpg" alt="Stephanie K." class="review-avatar" />
+            <div class="review-user-info">
+              <strong>Stephanie K.</strong>
+              <div class="review-meta-row">
+                <span class="verified-badge">
+                  <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  Verified
+                </span>
+                <span class="sleeper-tag">Side Sleeper</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-stars">
+            <div class="juujo-v2-stars">
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <h4>Bought another one for my partner</h4>
+          <p>
+            The shape feels completely different from any pillow I have tried. It is soft where I want it and still gives my neck solid support. No more folding pillows in half!
+          </p>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="juujo-v2-review-card">
+          <div class="review-card-top">
+            <img src="https://pillow-sepia.vercel.app/assets/reviews/review-02.jpg" alt="Emma C." class="review-avatar" />
+            <div class="review-user-info">
+              <strong>Emma C.</strong>
+              <div class="review-meta-row">
+                <span class="verified-badge">
+                  <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  Verified
+                </span>
+                <span class="sleeper-tag">Neck Pain Relief</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-stars">
+            <div class="juujo-v2-stars">
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <h4>Stays cool and supportive all night</h4>
+          <p>
+            I used to wake up every morning with a stiff neck. After 3 nights on the OrthoAlign, the tightness was gone. The shoulder cut-out is genius.
+          </p>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="juujo-v2-review-card">
+          <div class="review-card-top">
+            <img src="https://pillow-sepia.vercel.app/assets/reviews/review-03.jpg" alt="Jessica L." class="review-avatar" />
+            <div class="review-user-info">
+              <strong>Jessica L.</strong>
+              <div class="review-meta-row">
+                <span class="verified-badge">
+                  <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  Verified
+                </span>
+                <span class="sleeper-tag">Gentle Contour</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-stars">
+            <div class="juujo-v2-stars">
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <h4>Much softer than clinical cervical pillows</h4>
+          <p>
+            It is broad, soft, and much less clinical-looking than typical medical pillows, while still keeping my neck perfectly level.
+          </p>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="juujo-v2-review-card">
+          <div class="review-card-top">
+            <img src="https://pillow-sepia.vercel.app/assets/reviews/review-05.jpg" alt="Brooke S." class="review-avatar" />
+            <div class="review-user-info">
+              <strong>Brooke S.</strong>
+              <div class="review-meta-row">
+                <span class="verified-badge">
+                  <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                  Verified
+                </span>
+                <span class="sleeper-tag">Gifted 4 Total</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-stars">
+            <div class="juujo-v2-stars">
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="star-icon" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+          </div>
+          <h4>Better than I ever expected</h4>
+          <p>
+            I kept seeing people rave about this cloud pillow shape and finally ordered the duo bundle. The materials feel exceptionally luxurious.
+          </p>
+        </div>
+      </div>
+
+      <div class="reviews-more-cta">
+        <a href="#bundles" class="juujo-v2-btn-secondary">
+          Join Over 42,000+ Happy Sleepers
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       12. PRODUCT SPECIFICATIONS TABLE
+       ======================================================================== -->
+  <section class="juujo-v2-section juujo-v2-specs-section">
+    <div class="juujo-v2-container">
+      <div class="juujo-v2-specs-box">
+        <div class="specs-header">
+          <span class="juujo-v2-eyebrow">Technical Build</span>
+          <h2>Product Specifications</h2>
+        </div>
+
+        <div class="specs-grid">
+          <div class="spec-row">
+            <span class="spec-label">Dimensions</span>
+            <span class="spec-value">68.5 x 37 cm</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Weight</span>
+            <span class="spec-value">Approximately 1.36 kg</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Core</span>
+            <span class="spec-value">High-density, shape-retaining memory foam</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Cover</span>
+            <span class="spec-value">Breathable, removable and machine washable at 30°C</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Regular profile</span>
+            <span class="spec-value">8.9 cm</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">High profile</span>
+            <span class="spec-value">10.9 cm</span>
+          </div>
+          <div class="spec-row" style="grid-column: span 2;">
+            <span class="spec-label">Sleep positions</span>
+            <span class="spec-value">Side, back and stomach</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       13. FAQS ACCORDION
+       ======================================================================== -->
+  <section class="juujo-v2-section juujo-v2-faq-section" id="faq">
+    <div class="juujo-v2-container">
+      <div class="juujo-v2-section-header">
+        <span class="juujo-v2-eyebrow">Frequently Asked Questions</span>
+        <h2 class="juujo-v2-section-title">
+          Everything You Need To Know.
+        </h2>
+        <p class="juujo-v2-section-lead">
+          Have a question about profile sizing, washing instructions, or trial guarantees? We've got you covered.
+        </p>
+      </div>
+
+      <div class="juujo-v2-faq-list" id="pb-faq-list">
+        <!-- FAQ 1 -->
+        <div class="faq-accordion-item">
+          <button type="button" class="faq-trigger-btn" aria-expanded="false">
+            <span>How do I choose Regular or High?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-content-body">
+            <p>
+              Choose Regular if you prefer a lower profile or have a smaller shoulder frame. Choose High if you have broader shoulders, are taller, or usually stack pillows when sleeping on your side.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-accordion-item">
+          <button type="button" class="faq-trigger-btn" aria-expanded="false">
+            <span>Can I use both sides?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-content-body">
+            <p>
+              Yes. Rotate the pillow to use the 8.9 cm or 10.9 cm contour. The central cradle and side wings work in either orientation.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-accordion-item">
+          <button type="button" class="faq-trigger-btn" aria-expanded="false">
+            <span>Is the entire pillow machine washable?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-content-body">
+            <p>
+              Only the removable cover should be machine washed at 30°C. Spot-clean the memory-foam core and allow it to air fully before replacing the cover.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-accordion-item">
+          <button type="button" class="faq-trigger-btn" aria-expanded="false">
+            <span>Does it work for back sleepers?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-content-body">
+            <p>
+              The central cradle and lower contour can support back sleepers who prefer a stable, medium-firm memory-foam feel.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-accordion-item">
+          <button type="button" class="faq-trigger-btn" aria-expanded="false">
+            <span>Will it fit a standard pillowcase?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-content-body">
+            <p>
+              The pillow measures 68.5 x 37 cm. A flexible standard UK pillowcase can fit over the included shaped, removable cover.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       14. FINAL CALL TO ACTION
+       ======================================================================== -->
+  <section class="juujo-v2-final-cta-section">
+    <div class="juujo-v2-container">
+      <div class="final-cta-card">
+        <div class="final-cta-content">
+          <div class="final-cta-eyebrow">
+            <svg class="cta-sparkle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            <span>Risk-Free 30-Night Guarantee</span>
+          </div>
+          <h2>Transform Your Sleep Tonight. Wake Up Ready.</h2>
+          <p>
+            Experience the sculpted cloud comfort that has helped over 42,000+ sleepers wake up without neck stiffness or aching shoulders.
+          </p>
+          <a href="#bundles" class="juujo-v2-btn-primary btn-large">
+            Claim 50% Off & Free Delivery
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="final-cta-visual">
+          <img
+            src="https://pillow-sepia.vercel.app/assets/v2/lifestyle-bed-lift.webp"
+            alt="Customer hugging Juujo OrthoAlign pillow happily in bed"
+            class="final-cta-img"
+            width="819"
+            height="1024"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       15. STICKY MOBILE QUICK-BUY BAR
+       ======================================================================== -->
+  <div class="juujo-v2-sticky-buy-bar" id="pb-sticky-buy-bar">
+    <div class="sticky-bar-left">
+      <strong>Juujo OrthoAlign™</strong>
+      <span>From £49.99 (Save 50%)</span>
+    </div>
+    <a href="#bundles" class="juujo-v2-btn-primary sticky-buy-btn">
+      Select Bundle
+      <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <!-- ========================================================================
+       16. PURE VANILLA JAVASCRIPT ENGINE (IDEMPOTENT & PLUSBASE COMPATIBLE)
+       ======================================================================== -->
+  <script>
+    (() => {
+      "use strict";
+
+      const initJuujoEngine = () => {
+        const root = document.getElementById("pb-custom-home-root");
+        if (!root) return;
+
+        // Prevent duplicate initializations on SPA navigation
+        if (root.dataset.juujoInitialized === "true") return;
+        root.dataset.juujoInitialized = "true";
+
+        /* ------------------------------------------------------------------
+           DATA & PLUSBASE VARIANT MAPPINGS
+           ------------------------------------------------------------------ */
+        const COLOUR_MAP = {
+          white: "White",
+          grey: "Grey",
+          blue: "Baby Blue",
+          navy: "Navy Blue"
+        };
+
+        const HEIGHT_MAP = {
+          regular: "Regular (8.9 cm)",
+          high: "High (10.9 cm)"
+        };
+
+        const VARIANT_ID_MATRIX = {
+          white: { regular: "1000020655426746", high: "1000020655426747" },
+          grey: { regular: "1000020655426744", high: "1000020655426745" },
+          blue: { regular: "1000020655426742", high: "1000020655426743" },
+          navy: { regular: "1000020655426740", high: "1000020655426741" }
+        };
+
+        const COOLING_COVER_VARIANT_ID = "1000020655426748";
+
+        const BUNDLE_BASE_PRICES = {
+          1: { price: 4999, compare: 10000, coverPrice: 999 },
+          2: { price: 8899, compare: 20000, coverPrice: 1999 },
+          4: { price: 15199, compare: 40000, coverPrice: 2999 }
+        };
+
+        const BUNDLE_DISCOUNT_CODES = {
+          1: null,
+          2: "J2-7QF9MK",
+          4: "J4-8NW3AX"
+        };
+
+        const SUPPORT_ZONES = [
+          {
+            number: "01",
+            title: "Occipital Head Cradle",
+            subtitle: "Even pressure distribution",
+            description: "A sculpted central hollow gently cups the back of the head, preventing uncomfortable tilting and distributing skull weight evenly across high-density memory foam.",
+            tag: "Head Alignment"
+          },
+          {
+            number: "02",
+            title: "Cervical Neck Arch",
+            subtitle: "Natural lordotic support",
+            description: "Fills the empty space beneath the curve of your neck with adaptive contouring that relieves pressure from tense cervical vertebrae.",
+            tag: "Spinal Neutrality"
+          },
+          {
+            number: "03",
+            title: "Shoulder Clearance Arc",
+            subtitle: "Zero compression for side sleepers",
+            description: "The ergonomic curved cut-out provides dedicated space for your shoulder to settle under the pillow without being crushed or pinched against the bed.",
+            tag: "Side Sleeper Focus"
+          },
+          {
+            number: "04",
+            title: "Side-Sleeper Wings",
+            subtitle: "Stable head elevation",
+            description: "Raised side wings keep your head parallel to the mattress when turning onto your side, preventing the downward neck angle that causes morning pain.",
+            tag: "No Tossing & Turning"
+          },
+          {
+            number: "05",
+            title: "Under-Arm Rest Channels",
+            subtitle: "Prevents numbness & tingling",
+            description: "Sculpted contours give your arms a natural, comfortable resting place beneath or around the pillow, eliminating midnight pins and needles.",
+            tag: "Arm Comfort"
+          },
+          {
+            number: "06",
+            title: "SwitchFit™ Dual-Height Core",
+            subtitle: "8.9 cm Regular & 10.9 cm High in one pillow",
+            description: "Simply rotate the pillow 180 degrees to switch between low and high contours to match your shoulder width and sleep position.",
+            tag: "Custom Fit"
+          }
+        ];
+
+        /* Helper to format money in GBP */
+        const formatMoney = (cents) => {
+          return "£" + (cents / 100).toFixed(2);
+        };
+
+        /* Tier calculation for custom bundle choices */
+        const getPillowTier = (colour, height) => {
+          if (colour === "white" && height === "regular") return 0;
+          if (colour === "white" || height === "regular") return 1;
+          return 2;
+        };
+
+        /* ------------------------------------------------------------------
+           1. HERO SECTION INTERACTIVITY
+           ------------------------------------------------------------------ */
+        let currentHeroColour = "white";
+        let currentHeroHeight = "regular";
+
+        const heroColourLabel = document.getElementById("pb-hero-selected-colour");
+        const heroHeightLabel = document.getElementById("pb-hero-selected-height");
+        const heroPriceEl = document.getElementById("pb-hero-price");
+        const heroSwatchBtns = root.querySelectorAll(".hero-swatch-btn");
+        const heroSegBtns = root.querySelectorAll(".hero-seg-btn");
+
+        const updateHeroPrice = () => {
+          const tier = getPillowTier(currentHeroColour, currentHeroHeight);
+          const priceCents = [4999, 5499, 5999][tier];
+          if (heroPriceEl) {
+            heroPriceEl.textContent = formatMoney(priceCents);
+          }
+        };
+
+        heroSwatchBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const colour = btn.dataset.colour;
+            if (!colour) return;
+            currentHeroColour = colour;
+            heroSwatchBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            if (heroColourLabel) heroColourLabel.textContent = COLOUR_MAP[colour] || colour;
+            updateHeroPrice();
+          });
+        });
+
+        heroSegBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const height = btn.dataset.height;
+            if (!height) return;
+            currentHeroHeight = height;
+            heroSegBtns.forEach((b) => b.classList.remove("active"));
+            btn.classList.add("active");
+            if (heroHeightLabel) heroHeightLabel.textContent = HEIGHT_MAP[height] || height;
+            updateHeroPrice();
+          });
+        });
+
+        /* Hero Image Toggle */
+        const heroImageEl = document.getElementById("pb-hero-main-image");
+        const toggleStackBtn = document.getElementById("pb-toggle-stack");
+        const toggleSleepBtn = document.getElementById("pb-toggle-sleep");
+
+        if (toggleStackBtn && toggleSleepBtn && heroImageEl) {
+          toggleStackBtn.addEventListener("click", () => {
+            toggleStackBtn.classList.add("active");
+            toggleSleepBtn.classList.remove("active");
+            heroImageEl.src = "https://pillow-sepia.vercel.app/assets/v2/lifestyle-cloud-stack.webp";
+          });
+
+          toggleSleepBtn.addEventListener("click", () => {
+            toggleSleepBtn.classList.add("active");
+            toggleStackBtn.classList.remove("active");
+            heroImageEl.src = "https://pillow-sepia.vercel.app/assets/v2/lifestyle-blonde-side-sleeper.webp";
+          });
+        }
+
+        /* Hero Add to Basket */
+        const heroAddBtn = document.getElementById("pb-hero-add-to-basket");
+        if (heroAddBtn) {
+          heroAddBtn.addEventListener("click", () => {
+            const variantId = VARIANT_ID_MATRIX[currentHeroColour]?.[currentHeroHeight] || "1000020655426746";
+            executePlusBaseAddToCart([{ variant_id: variantId, quantity: 1 }], null);
+          });
+        }
+
+        /* ------------------------------------------------------------------
+           2. INTERACTIVE 6-ZONE ANATOMICAL TABS
+           ------------------------------------------------------------------ */
+        const zoneTabs = root.querySelectorAll(".zone-nav-btn");
+        const zoneBadge = document.getElementById("pb-zone-active-badge");
+        const zoneTag = document.getElementById("pb-zone-tag");
+        const zoneTitle = document.getElementById("pb-zone-title");
+        const zoneSubtitle = document.getElementById("pb-zone-subtitle");
+        const zoneDesc = document.getElementById("pb-zone-desc");
+
+        zoneTabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            const idx = parseInt(tab.dataset.zoneIndex || "0", 10);
+            const data = SUPPORT_ZONES[idx];
+            if (!data) return;
+
+            zoneTabs.forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            if (zoneBadge) zoneBadge.textContent = `Active Zone: ${data.number} — ${data.title}`;
+            if (zoneTag) zoneTag.textContent = data.tag;
+            if (zoneTitle) zoneTitle.textContent = data.title;
+            if (zoneSubtitle) zoneSubtitle.textContent = data.subtitle;
+            if (zoneDesc) zoneDesc.textContent = data.description;
+          });
+        });
+
+        /* ------------------------------------------------------------------
+           3. DIRECT BUNDLE BUILDER
+           ------------------------------------------------------------------ */
+        const bundleCards = root.querySelectorAll(".juujo-v2-bundle-card");
+
+        const recalculateBundleCard = (card) => {
+          const qty = parseInt(card.dataset.bundleQty || "1", 10);
+          const baseData = BUNDLE_BASE_PRICES[qty] || BUNDLE_BASE_PRICES[1];
+          const upsellCheckbox = card.querySelector(".bundle-upsell-checkbox");
+          const hasCovers = upsellCheckbox ? upsellCheckbox.checked : false;
+
+          const colourSelects = card.querySelectorAll(".pillow-colour-select");
+          const heightSelects = card.querySelectorAll(".pillow-height-select");
+
+          let calculatedPrice = baseData.price;
+          const tierAdjustments = qty === 2 ? [0, 500, 1000] : qty === 4 ? [0, 400, 775] : [0, 500, 1000];
+
+          for (let i = 0; i < colourSelects.length; i++) {
+            const c = colourSelects[i].value;
+            const h = heightSelects[i] ? heightSelects[i].value : "regular";
+            const tier = getPillowTier(c, h);
+            if (qty > 1) {
+              calculatedPrice += tierAdjustments[tier];
+            } else {
+              calculatedPrice = [4999, 5499, 5999][tier];
+            }
+          }
+
+          if (hasCovers) {
+            calculatedPrice += baseData.coverPrice;
+          }
+
+          const priceEl = card.querySelector(".bundle-current-price");
+          if (priceEl) {
+            priceEl.textContent = formatMoney(calculatedPrice);
+          }
+        };
+
+        bundleCards.forEach((card) => {
+          // Click on card selects bundle
+          card.addEventListener("click", (e) => {
+            if (e.target.closest("select") || e.target.closest("input") || e.target.closest("button")) {
+              return;
+            }
+            bundleCards.forEach((c) => {
+              c.classList.remove("selected");
+              const config = c.querySelector(".bundle-config-dropdowns");
+              if (config && parseInt(c.dataset.bundleQty, 10) > 1) {
+                config.style.display = "none";
+              }
+            });
+
+            card.classList.add("selected");
+            const config = card.querySelector(".bundle-config-dropdowns");
+            if (config) {
+              config.style.display = "block";
+            }
+          });
+
+          // Dropdown change updates price
+          const selects = card.querySelectorAll(".bundle-select");
+          selects.forEach((sel) => {
+            sel.addEventListener("change", () => recalculateBundleCard(card));
+          });
+
+          // Upsell checkbox change updates price
+          const checkbox = card.querySelector(".bundle-upsell-checkbox");
+          if (checkbox) {
+            checkbox.addEventListener("change", () => recalculateBundleCard(card));
+          }
+
+          // Add to basket button on each bundle
+          const addBtn = card.querySelector(".bundle-add-btn");
+          if (addBtn) {
+            addBtn.addEventListener("click", (e) => {
+              e.stopPropagation();
+              const qty = parseInt(card.dataset.bundleQty || "1", 10);
+              const colourSelects = card.querySelectorAll(".pillow-colour-select");
+              const heightSelects = card.querySelectorAll(".pillow-height-select");
+              const upsellCheckbox = card.querySelector(".bundle-upsell-checkbox");
+              const includeCovers = upsellCheckbox ? upsellCheckbox.checked : false;
+
+              const items = [];
+
+              if (qty === 1 && colourSelects.length === 0) {
+                const variantId = VARIANT_ID_MATRIX[currentHeroColour]?.[currentHeroHeight] || "1000020655426746";
+                items.push({ variant_id: variantId, quantity: 1 });
+              } else {
+                for (let i = 0; i < colourSelects.length; i++) {
+                  const c = colourSelects[i].value;
+                  const h = heightSelects[i] ? heightSelects[i].value : "regular";
+                  const variantId = VARIANT_ID_MATRIX[c]?.[h] || "1000020655426746";
+                  items.push({ variant_id: variantId, quantity: 1 });
+                }
+              }
+
+              if (includeCovers) {
+                items.push({ variant_id: COOLING_COVER_VARIANT_ID, quantity: qty });
+              }
+
+              const discountCode = BUNDLE_DISCOUNT_CODES[qty] || null;
+              executePlusBaseAddToCart(items, discountCode);
+            });
+          }
+        });
+
+        /* ------------------------------------------------------------------
+           4. CHIROPRACTIC VIDEO CONTROLLER
+           ------------------------------------------------------------------ */
+        const videoEl = document.getElementById("pb-chiro-video");
+        const videoToggleBtn = document.getElementById("pb-video-toggle");
+        const videoIcon = document.getElementById("pb-video-icon");
+
+        if (videoEl && videoToggleBtn && videoIcon) {
+          videoToggleBtn.addEventListener("click", () => {
+            if (videoEl.paused) {
+              videoEl.play();
+              videoIcon.innerHTML = '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>';
+            } else {
+              videoEl.pause();
+              videoIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"/>';
+            }
+          });
+        }
+
+        /* ------------------------------------------------------------------
+           5. FAQS ACCORDION
+           ------------------------------------------------------------------ */
+        const faqItems = root.querySelectorAll(".faq-accordion-item");
+        faqItems.forEach((item) => {
+          const trigger = item.querySelector(".faq-trigger-btn");
+          if (!trigger) return;
+
+          trigger.addEventListener("click", () => {
+            const isOpen = item.classList.contains("open");
+            // Close all
+            faqItems.forEach((other) => {
+              other.classList.remove("open");
+              const t = other.querySelector(".faq-trigger-btn");
+              if (t) t.setAttribute("aria-expanded", "false");
+            });
+
+            if (!isOpen) {
+              item.classList.add("open");
+              trigger.setAttribute("aria-expanded", "true");
+            }
+          });
+        });
+
+        /* ------------------------------------------------------------------
+           6. STICKY QUICK-BUY BAR SCROLL DETECTION
+           ------------------------------------------------------------------ */
+        const stickyBar = document.getElementById("pb-sticky-buy-bar");
+        const heroSection = document.getElementById("pb-hero-section");
+
+        if (stickyBar && heroSection) {
+          let scrollTimeout;
+          const handleScroll = () => {
+            const heroRect = heroSection.getBoundingClientRect();
+            if (heroRect.bottom < 0) {
+              stickyBar.classList.add("visible");
+            } else {
+              stickyBar.classList.remove("visible");
+            }
+          };
+
+          window.addEventListener("scroll", () => {
+            if (!scrollTimeout) {
+              scrollTimeout = setTimeout(() => {
+                handleScroll();
+                scrollTimeout = null;
+              }, 30);
+            }
+          }, { passive: true });
+        }
+
+        /* ------------------------------------------------------------------
+           7. PLUSBASE CART & CHECKOUT DISPATCH ENGINE
+           ------------------------------------------------------------------ */
+        function executePlusBaseAddToCart(items, discountCode) {
+          // Show subtle loading state on active button if present
+          const activeBtn = document.activeElement;
+          const originalText = activeBtn ? activeBtn.innerHTML : "";
+          if (activeBtn && activeBtn.tagName === "BUTTON") {
+            activeBtn.innerHTML = '<span>Adding to basket...</span>';
+            activeBtn.disabled = true;
+          }
+
+          const restoreButton = () => {
+            if (activeBtn && activeBtn.tagName === "BUTTON") {
+              activeBtn.innerHTML = originalText;
+              activeBtn.disabled = false;
+            }
+          };
+
+          // Step A: Attempt ShopBase / PlusBase Native Cart SDK
+          if (window.sbsdk && window.sbsdk.cart && typeof window.sbsdk.cart.add === "function") {
+            window.sbsdk.cart.add({
+              items: items.map((it) => ({
+                id: it.variant_id,
+                quantity: it.quantity
+              }))
+            }).then(() => {
+              if (discountCode) {
+                window.location.href = `/checkout?discount=${encodeURIComponent(discountCode)}`;
+              } else {
+                window.location.href = "/cart";
+              }
+            }).catch(() => {
+              fallbackAjaxAdd(items, discountCode, restoreButton);
+            });
+            return;
+          }
+
+          // Step B: Standard ShopBase / PlusBase AJAX /cart/add.js
+          fallbackAjaxAdd(items, discountCode, restoreButton);
+        }
+
+        function fallbackAjaxAdd(items, discountCode, onComplete) {
+          fetch("/cart/add.js", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+            },
+            body: JSON.stringify({
+              items: items.map((it) => ({
+                id: it.variant_id,
+                quantity: it.quantity
+              }))
+            })
+          })
+          .then((res) => {
+            if (res.ok) {
+              if (discountCode) {
+                window.location.href = `/checkout?discount=${encodeURIComponent(discountCode)}`;
+              } else {
+                window.location.href = "/cart";
+              }
+            } else {
+              fallbackFormSubmit(items, discountCode);
+            }
+          })
+          .catch(() => {
+            fallbackFormSubmit(items, discountCode);
+          })
+          .finally(() => {
+            if (typeof onComplete === "function") onComplete();
+          });
+        }
+
+        function fallbackFormSubmit(items, discountCode) {
+          // Direct fallback redirect
+          if (items.length > 0) {
+            const first = items[0];
+            const targetUrl = `/cart/${first.variant_id}:${first.quantity}${discountCode ? `?discount=${encodeURIComponent(discountCode)}` : ""}`;
+            window.location.href = targetUrl;
+          } else {
+            window.location.href = "/cart";
+          }
+        }
+      };
+
+      // Lifecycle handlers
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initJuujoEngine);
+      } else {
+        initJuujoEngine();
+      }
+
+      // PlusBase custom HTML trigger
+      window.addEventListener("plusbase:custom-html:ready", initJuujoEngine);
+      window.addEventListener("popstate", initJuujoEngine);
+    })();
+  </script>
+</div>

@@ -1,0 +1,1688 @@
+<!-- ==========================================================================
+  PLUSBASE CUSTOM HTML SECTION: 02 - PRODUCT HERO GALLERY & BUY BOX
+  Product: Juujo OrthoAlign™ Pillow
+  PlusBase Product ID: 1000000663256638
+  Deployment: Copy & paste directly into a PlusBase Custom HTML section block.
+========================================================================== -->
+
+<style>
+/* PlusBase Builder Zero-Gutter Overrides */
+.wb-builder .pb-prod-hero-wrap,
+.wb-builder .wb-block-custom-html,
+.wb-builder .wb-section,
+.wb-builder .column-inner,
+.wb-builder .custom-code,
+.wb-builder .custom-code__content {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#pb-prod-sec-hero {
+  --pb-navy: #06173b;
+  --pb-ink: #10223f;
+  --pb-blue: #0757d9;
+  --pb-blue-dark: #0344ad;
+  --pb-sky: #85c6ff;
+  --pb-powder: #dceeff;
+  --pb-powder-soft: #edf7ff;
+  --pb-mist: #f7fbff;
+  --pb-paper: #ffffff;
+  --pb-muted: #60708a;
+  --pb-line: #cbd9e8;
+  --pb-line-strong: #9bb3cf;
+  --pb-success: #087a62;
+  --pb-rating: #3b82f6;
+  --pb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --pb-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --pb-font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+
+  display: block;
+  width: 100%;
+  background: var(--pb-paper);
+  color: var(--pb-ink);
+  font-family: var(--pb-font);
+  font-size: 16px;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+#pb-prod-sec-hero *,
+#pb-prod-sec-hero *::before,
+#pb-prod-sec-hero *::after {
+  box-sizing: border-box;
+}
+
+#pb-prod-sec-hero .pb-hero-container {
+  display: grid;
+  grid-template-columns: minmax(0, 580px) minmax(0, 520px);
+  gap: 50px;
+  width: min(1200px, calc(100% - 48px));
+  margin: 0 auto;
+  padding: 40px 0 64px;
+  align-items: start;
+}
+
+/* ==========================================================================
+   PRODUCT GALLERY (LEFT COLUMN)
+========================================================================== */
+#pb-prod-sec-hero .pb-product-gallery {
+  position: relative;
+  min-width: 0;
+}
+
+#pb-prod-sec-hero .pb-gallery-stage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border-radius: 14px;
+  background: var(--pb-powder);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+#pb-prod-sec-hero .pb-gallery-main {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.012);
+  transition: opacity 460ms var(--pb-ease), transform 680ms var(--pb-ease);
+  pointer-events: none;
+}
+
+#pb-prod-sec-hero .pb-gallery-main.active {
+  z-index: 1;
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+
+#pb-prod-sec-hero .pb-gallery-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  place-items: center;
+  transform: translateY(-50%);
+  border: 1px solid var(--pb-line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 7px 18px rgba(6, 23, 59, 0.12);
+  color: var(--pb-ink);
+  cursor: pointer;
+  transition: transform 240ms var(--pb-ease), background 240ms var(--pb-ease);
+}
+
+#pb-prod-sec-hero .pb-gallery-arrow:hover {
+  transform: translateY(-50%) scale(1.05);
+  background: #ffffff;
+}
+
+#pb-prod-sec-hero .pb-gallery-arrow svg {
+  width: 17px;
+  height: 17px;
+}
+
+#pb-prod-sec-hero .pb-gallery-arrow.prev { left: 10px; }
+#pb-prod-sec-hero .pb-gallery-arrow.next { right: 10px; }
+
+#pb-prod-sec-hero .pb-thumbnail-strip {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+  overflow-x: auto;
+  padding: 0 2px 6px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+}
+
+#pb-prod-sec-hero .pb-thumbnail-strip::-webkit-scrollbar {
+  display: none;
+}
+
+#pb-prod-sec-hero .pb-thumbnail-strip button {
+  flex: 0 0 90px;
+  overflow: hidden;
+  width: 90px;
+  height: 90px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  background: var(--pb-mist);
+  cursor: pointer;
+  opacity: 0.75;
+  transition: border-color 220ms var(--pb-ease), opacity 220ms var(--pb-ease), transform 260ms var(--pb-ease);
+}
+
+#pb-prod-sec-hero .pb-thumbnail-strip button.selected {
+  border-color: var(--pb-blue);
+  opacity: 1;
+}
+
+#pb-prod-sec-hero .pb-thumbnail-strip button:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+#pb-prod-sec-hero .pb-thumbnail-strip img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#pb-prod-sec-hero .pb-customer-quote {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 16px;
+  margin-top: 20px;
+  padding: 20px 22px;
+  border-radius: 12px;
+  background: var(--pb-powder);
+}
+
+#pb-prod-sec-hero .pb-customer-quote.pb-desktop-quote {
+  display: grid;
+}
+
+#pb-prod-sec-hero .pb-customer-quote.pb-mobile-quote {
+  display: none;
+}
+
+#pb-prod-sec-hero .pb-customer-quote .pb-stars,
+#pb-prod-sec-hero .pb-customer-quote p {
+  grid-column: 1 / -1;
+}
+
+#pb-prod-sec-hero .pb-customer-quote p {
+  margin: 5px 0 7px;
+  color: var(--pb-ink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+#pb-prod-sec-hero .pb-customer-quote strong {
+  font-size: 13px;
+}
+
+#pb-prod-sec-hero .pb-customer-quote > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--pb-muted);
+  font-size: 11px;
+}
+
+#pb-prod-sec-hero .pb-customer-quote > span svg {
+  width: 15px;
+  height: 15px;
+  color: var(--pb-blue);
+  fill: var(--pb-blue);
+  stroke: #ffffff;
+}
+
+/* ==========================================================================
+   PURCHASE PANEL & BUY BOX (RIGHT COLUMN)
+========================================================================== */
+#pb-prod-sec-hero .pb-purchase-panel {
+  position: sticky;
+  top: 90px;
+  min-width: 0;
+}
+
+#pb-prod-sec-hero .pb-rating-row {
+  display: inline-flex;
+  margin-bottom: 6px;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#pb-prod-sec-hero .pb-rating-row:hover {
+  text-decoration: underline;
+}
+
+#pb-prod-sec-hero .pb-stars {
+  display: inline-flex;
+  gap: 2px;
+  color: var(--pb-rating);
+}
+
+#pb-prod-sec-hero .pb-stars svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+#pb-prod-sec-hero h1 {
+  margin: 0;
+  color: var(--pb-ink);
+  font-family: var(--pb-font-display);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+#pb-prod-sec-hero .pb-price-row {
+  display: flex;
+  margin-top: 10px;
+  align-items: baseline;
+  gap: 14px;
+  line-height: 1;
+}
+
+#pb-prod-sec-hero .pb-price-row strong {
+  color: var(--pb-blue);
+  font-size: 32px;
+  font-weight: 800;
+}
+
+#pb-prod-sec-hero .pb-price-row del {
+  color: var(--pb-muted);
+  font-size: 20px;
+}
+
+#pb-prod-sec-hero .pb-comparable {
+  margin: 4px 0 18px;
+  color: var(--pb-muted);
+  font-size: 13px;
+}
+
+#pb-prod-sec-hero .pb-option-fieldset {
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+}
+
+#pb-prod-sec-hero .pb-option-fieldset legend {
+  margin-bottom: 8px;
+  padding: 0;
+  font-size: 14px;
+  color: var(--pb-ink);
+}
+
+#pb-prod-sec-hero .pb-swatches {
+  display: flex;
+  gap: 10px;
+}
+
+#pb-prod-sec-hero .pb-swatches button {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  padding: 3px;
+  border: 2px solid var(--pb-line);
+  border-radius: 50%;
+  background: var(--pb-paper);
+  cursor: pointer;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+}
+
+#pb-prod-sec-hero .pb-swatches button::after {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--swatch-color);
+  content: "";
+}
+
+#pb-prod-sec-hero .pb-swatches button.selected {
+  border-color: var(--pb-blue);
+  box-shadow: 0 0 0 2px var(--pb-paper), 0 0 0 4px var(--pb-blue);
+}
+
+#pb-prod-sec-hero .pb-segmented-control {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--pb-line);
+  border-radius: 6px;
+}
+
+#pb-prod-sec-hero .pb-segmented-control button {
+  min-width: 84px;
+  height: 38px;
+  padding: 0 16px;
+  border: 0;
+  background: var(--pb-paper);
+  color: var(--pb-ink);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 200ms ease, color 200ms ease;
+}
+
+#pb-prod-sec-hero .pb-segmented-control button + button {
+  border-left: 1px solid var(--pb-line);
+}
+
+#pb-prod-sec-hero .pb-segmented-control button.selected {
+  background: var(--pb-blue);
+  color: var(--pb-mist);
+}
+
+#pb-prod-sec-hero .pb-claim-list {
+  display: grid;
+  gap: 8px;
+  margin: 24px 0 18px;
+}
+
+#pb-prod-sec-hero .pb-claim-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+#pb-prod-sec-hero .pb-claim-item svg {
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  color: var(--pb-blue);
+  stroke-width: 2;
+}
+
+#pb-prod-sec-hero .pb-size-guide {
+  display: grid;
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: var(--pb-powder-soft);
+  color: var(--pb-ink);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+#pb-prod-sec-hero .pb-size-guide strong {
+  color: var(--pb-blue);
+}
+
+/* ==========================================================================
+   BUNDLE CONTAINER (BUY MORE - SAVE MORE)
+========================================================================== */
+#pb-prod-sec-hero .pb-bundle-block {
+  margin-top: 36px;
+}
+
+#pb-prod-sec-hero .pb-bundle-block h2 {
+  display: flex;
+  margin: 0 0 18px;
+  align-items: center;
+  gap: 10px;
+  color: var(--pb-blue);
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+#pb-prod-sec-hero .pb-bundle-block h2::before,
+#pb-prod-sec-hero .pb-bundle-block h2::after {
+  height: 1px;
+  flex: 1;
+  background: var(--pb-line);
+  content: "";
+}
+
+#pb-prod-sec-hero .pb-bundle-card {
+  position: relative;
+  margin-bottom: 12px;
+  border: 1px solid var(--pb-line);
+  border-radius: 10px;
+  background: var(--pb-paper);
+  transition: border-color 260ms var(--pb-ease), background 260ms var(--pb-ease), box-shadow 260ms var(--pb-ease);
+}
+
+#pb-prod-sec-hero .pb-bundle-card.selected {
+  border: 2px solid var(--pb-blue);
+  background: var(--pb-powder);
+}
+
+#pb-prod-sec-hero .pb-bundle-choice {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) auto;
+  gap: 10px;
+  width: 100%;
+  min-height: 72px;
+  padding: 12px 18px 11px 16px;
+  align-items: center;
+  border: 0;
+  border-radius: 9px 9px 0 0;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+#pb-prod-sec-hero .pb-radio-dot {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--pb-blue);
+  border-radius: 50%;
+  background: var(--pb-paper);
+  box-shadow: inset 0 0 0 4px var(--pb-paper);
+}
+
+#pb-prod-sec-hero .pb-bundle-card.selected .pb-radio-dot {
+  background: var(--pb-blue);
+}
+
+#pb-prod-sec-hero .pb-bundle-copy,
+#pb-prod-sec-hero .pb-bundle-prices {
+  display: flex;
+  flex-direction: column;
+}
+
+#pb-prod-sec-hero .pb-bundle-title-line {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+#pb-prod-sec-hero .pb-bundle-copy strong {
+  color: var(--pb-blue);
+  font-size: 15px;
+  font-weight: 750;
+  line-height: 1.15;
+}
+
+#pb-prod-sec-hero .pb-bundle-title-line b {
+  color: var(--pb-ink);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+#pb-prod-sec-hero .pb-bundle-copy small {
+  margin-top: 4px;
+  color: var(--pb-ink);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+#pb-prod-sec-hero .pb-bundle-prices {
+  align-items: flex-end;
+  line-height: 1.15;
+}
+
+#pb-prod-sec-hero .pb-bundle-prices em {
+  color: var(--pb-blue);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+}
+
+#pb-prod-sec-hero .pb-bundle-prices del {
+  margin-top: 3px;
+  color: var(--pb-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Badges */
+#pb-prod-sec-hero .pb-bundle-badge {
+  position: absolute;
+  z-index: 2;
+  right: 9px;
+  background: var(--pb-blue);
+  color: var(--pb-mist);
+  font-weight: 800;
+  text-align: center;
+  pointer-events: none;
+}
+
+#pb-prod-sec-hero .pb-bundle-badge-popular {
+  top: -16px;
+  right: -6px;
+  display: grid;
+  width: 86px;
+  height: 38px;
+  place-content: center;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px var(--pb-blue);
+  font-family: var(--pb-font-display);
+  line-height: 0.85;
+  transform: rotate(2deg);
+}
+
+#pb-prod-sec-hero .pb-bundle-badge-popular span { font-size: 11px; }
+#pb-prod-sec-hero .pb-bundle-badge-popular strong { font-size: 15px; }
+
+#pb-prod-sec-hero .pb-bundle-badge-value {
+  top: -10px;
+  right: 14px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+#pb-prod-sec-hero .pb-bundle-badge-value::before,
+#pb-prod-sec-hero .pb-bundle-badge-value::after {
+  position: absolute;
+  top: 0;
+  width: 8px;
+  height: 100%;
+  background: var(--pb-blue);
+  content: "";
+}
+
+#pb-prod-sec-hero .pb-bundle-badge-value::before {
+  left: -5px;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+#pb-prod-sec-hero .pb-bundle-badge-value::after {
+  right: -5px;
+  clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+/* Customisation Rows */
+#pb-prod-sec-hero .pb-bundle-config {
+  display: grid;
+  gap: 8px;
+  padding: 2px 14px 12px;
+}
+
+#pb-prod-sec-hero .pb-bundle-config p {
+  margin: 0 0 3px;
+  color: var(--pb-ink);
+  font-size: 14px;
+  font-weight: 650;
+}
+
+#pb-prod-sec-hero .pb-bundle-config-row {
+  display: grid;
+  grid-template-columns: 65px minmax(160px, 1fr) auto;
+  gap: 10px;
+  padding: 9px 12px;
+  align-items: center;
+  border: 1px solid var(--pb-line);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+#pb-prod-sec-hero .pb-bundle-pillow-label {
+  color: var(--pb-blue);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+#pb-prod-sec-hero .pb-bundle-option-group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+#pb-prod-sec-hero .pb-bundle-option-group legend {
+  margin-bottom: 5px;
+  padding: 0;
+  color: var(--pb-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+#pb-prod-sec-hero .pb-bundle-option-group legend strong {
+  color: var(--pb-ink);
+}
+
+#pb-prod-sec-hero .pb-bundle-swatches {
+  display: flex;
+  gap: 6px;
+}
+
+#pb-prod-sec-hero .pb-bundle-swatches button {
+  width: 28px;
+  height: 28px;
+  padding: 2px;
+  border: 2px solid var(--pb-line);
+  border-radius: 50%;
+  background: var(--pb-paper);
+  cursor: pointer;
+}
+
+#pb-prod-sec-hero .pb-bundle-swatches button::after {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--swatch-color);
+  content: "";
+}
+
+#pb-prod-sec-hero .pb-bundle-swatches button.selected {
+  border-color: var(--pb-blue);
+  box-shadow: 0 0 0 1px var(--pb-paper), 0 0 0 3px var(--pb-blue);
+}
+
+#pb-prod-sec-hero .pb-bundle-height-choice .pb-segmented-control button {
+  min-width: 58px;
+  height: 30px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+/* Upsell Bar */
+#pb-prod-sec-hero .pb-bundle-upsell {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  min-height: 48px;
+  padding: 8px 14px 8px 10px;
+  align-items: center;
+  border-radius: 0 0 9px 9px;
+  background: #e2ecf7;
+  color: var(--pb-ink);
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+#pb-prod-sec-hero .pb-bundle-upsell input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--pb-blue);
+}
+
+#pb-prod-sec-hero .pb-bundle-upsell-prices {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+#pb-prod-sec-hero .pb-bundle-upsell-prices strong {
+  color: var(--pb-blue);
+  font-size: 13px;
+}
+
+#pb-prod-sec-hero .pb-bundle-upsell-prices del {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--pb-muted);
+}
+
+/* Primary CTA Button */
+#pb-prod-sec-hero .pb-add-to-cart-btn {
+  display: flex;
+  width: 100%;
+  height: 54px;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--pb-blue);
+  color: var(--pb-mist);
+  font-size: 20px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 240ms var(--pb-ease), transform 240ms var(--pb-ease), box-shadow 240ms var(--pb-ease);
+  box-shadow: 0 4px 14px rgba(7, 87, 217, 0.25);
+}
+
+#pb-prod-sec-hero .pb-add-to-cart-btn:hover {
+  background: var(--pb-navy);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(6, 23, 59, 0.3);
+}
+
+#pb-prod-sec-hero .pb-trust-row {
+  display: flex;
+  margin: 12px 0 16px;
+  justify-content: center;
+  gap: 22px;
+}
+
+#pb-prod-sec-hero .pb-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--pb-muted);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+#pb-prod-sec-hero .pb-trust-item img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Accordion */
+#pb-prod-sec-hero .pb-accordion-list {
+  border-top: 1px solid var(--pb-line);
+}
+
+#pb-prod-sec-hero .pb-accordion-item {
+  border-bottom: 1px solid var(--pb-line);
+}
+
+#pb-prod-sec-hero .pb-accordion-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 54px;
+  padding: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border: 0;
+  background: transparent;
+  color: var(--pb-ink);
+  text-align: left;
+  font-size: 15px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+#pb-prod-sec-hero .pb-accordion-symbol {
+  display: grid;
+  flex: 0 0 26px;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--pb-blue);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+  transition: transform 240ms var(--pb-ease);
+}
+
+#pb-prod-sec-hero .pb-accordion-trigger[aria-expanded="true"] .pb-accordion-symbol {
+  transform: rotate(180deg);
+}
+
+#pb-prod-sec-hero .pb-accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 320ms var(--pb-ease), opacity 240ms var(--pb-ease);
+}
+
+#pb-prod-sec-hero .pb-accordion-content > p {
+  overflow: hidden;
+  margin: 0;
+  padding: 0 24px 14px 0;
+  color: var(--pb-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+#pb-prod-sec-hero .pb-accordion-content.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  #pb-prod-sec-hero .pb-hero-container {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 24px 0 48px;
+  }
+  #pb-prod-sec-hero .pb-purchase-panel {
+    position: static;
+  }
+  #pb-prod-sec-hero .pb-customer-quote.pb-desktop-quote {
+    display: none;
+  }
+  #pb-prod-sec-hero .pb-customer-quote.pb-mobile-quote {
+    display: grid;
+  }
+}
+</style>
+
+<div id="pb-prod-sec-hero" class="pb-prod-section pb-prod-hero-wrap">
+  <div class="pb-hero-container" id="product">
+    
+    <!-- LEFT COLUMN: PRODUCT GALLERY -->
+    <div class="pb-product-gallery">
+      <div class="pb-gallery-stage" id="pb-gallery-stage" role="region" aria-label="Product Image Gallery" tabindex="0">
+        <!-- Main Gallery Images (11 images) -->
+        <img class="pb-gallery-main active" src="https://pillow-sepia.vercel.app/assets/gallery-01-hero-juujo.png" alt="Juujo OrthoAlign Pillow #1 Best Seller" data-index="0" />
+        <img class="pb-gallery-main" src="https://pillow-sepia.vercel.app/assets/gallery-02-zones-juujo.png" alt="OrthoAlign pillow six-zone support diagram" data-index="1" />
+        <img class="pb-gallery-main" src="https://pillow-sepia.vercel.app/assets/gallery-03-lifestyle-juujo.png" alt="OrthoAlign pillow supporting a sleeping model" data-index="2" />
+        <img class="pb-gallery-main" src="https://pillow-sepia.vercel.app/assets/gallery-04-size-guide-juujo.png" alt="OrthoAlign Regular and High pillow size guide" data-index="3" />
+        <img class="pb-gallery-main" src="https://pillow-sepia.vercel.app/assets/gallery-05-colours-juujo.png" alt="OrthoAlign pillow colour collection" data-index="4" />
+        <img class="pb-gallery-main" src="https://pillow-sepia.vercel.app/assets/gallery-06-sleepers-juujo.png" alt="OrthoAlign pillow in four sleeping positions" data-index="5" />
+        <img class="pb-gallery-main" src="https://pillow-sepia.vercel.app/assets/gallery-07-disclaimer-juujo.png" alt="Removable cooling pillow cover" data-index="6" />
+        <img class="pb-gallery-main" src="https://pillow-sepia.vercel.app/assets/gallery-08-callouts-juujo.png" alt="OrthoAlign pillow ergonomic feature callouts" data-index="7" />
+        <img class="pb-gallery-main" src="https://pillow-sepia.vercel.app/assets/gallery-09-chiro-juujo.png" alt="Chiropractor OrthoAlign pillow recommendation" data-index="8" />
+        <img class="pb-gallery-main" src="https://pillow-sepia.vercel.app/assets/gallery-10-comparison-juujo.png" alt="Juujo OrthoAlign pillow compared with regular pillows" data-index="9" />
+        <img class="pb-gallery-main" src="https://pillow-sepia.vercel.app/assets/gallery-11-model-juujo.png" alt="Model holding the OrthoAlign pillow" data-index="10" />
+
+        <button type="button" class="pb-gallery-arrow prev" id="pb-gallery-prev" aria-label="Previous image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button type="button" class="pb-gallery-arrow next" id="pb-gallery-next" aria-label="Next image">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <!-- Thumbnail Strip (11 Thumbnails) -->
+      <div class="pb-thumbnail-strip" id="pb-thumbnail-strip" aria-label="Thumbnail strip">
+        <button type="button" class="selected" data-thumb="0" aria-label="Show thumbnail 1"><img src="https://pillow-sepia.vercel.app/assets/gallery-01-hero-juujo.png" alt="" /></button>
+        <button type="button" data-thumb="1" aria-label="Show thumbnail 2"><img src="https://pillow-sepia.vercel.app/assets/gallery-02-zones-juujo.png" alt="" /></button>
+        <button type="button" data-thumb="2" aria-label="Show thumbnail 3"><img src="https://pillow-sepia.vercel.app/assets/gallery-03-lifestyle-juujo.png" alt="" /></button>
+        <button type="button" data-thumb="3" aria-label="Show thumbnail 4"><img src="https://pillow-sepia.vercel.app/assets/gallery-04-size-guide-juujo.png" alt="" /></button>
+        <button type="button" data-thumb="4" aria-label="Show thumbnail 5"><img src="https://pillow-sepia.vercel.app/assets/gallery-05-colours-juujo.png" alt="" /></button>
+        <button type="button" data-thumb="5" aria-label="Show thumbnail 6"><img src="https://pillow-sepia.vercel.app/assets/gallery-06-sleepers-juujo.png" alt="" /></button>
+        <button type="button" data-thumb="6" aria-label="Show thumbnail 7"><img src="https://pillow-sepia.vercel.app/assets/gallery-07-disclaimer-juujo.png" alt="" /></button>
+        <button type="button" data-thumb="7" aria-label="Show thumbnail 8"><img src="https://pillow-sepia.vercel.app/assets/gallery-08-callouts-juujo.png" alt="" /></button>
+        <button type="button" data-thumb="8" aria-label="Show thumbnail 9"><img src="https://pillow-sepia.vercel.app/assets/gallery-09-chiro-juujo.png" alt="" /></button>
+        <button type="button" data-thumb="9" aria-label="Show thumbnail 10"><img src="https://pillow-sepia.vercel.app/assets/gallery-10-comparison-juujo.png" alt="" /></button>
+        <button type="button" data-thumb="10" aria-label="Show thumbnail 11"><img src="https://pillow-sepia.vercel.app/assets/gallery-11-model-juujo.png" alt="" /></button>
+      </div>
+
+      <!-- Desktop Customer Quote -->
+      <div class="pb-customer-quote pb-desktop-quote">
+        <span class="pb-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <p>&ldquo;I did not realise how bad my old pillow was until I tried this. The shape, the feel, the support, everything is just right. My husband stole mine, so now we have two!&rdquo;</p>
+        <strong>Stephanie P.</strong>
+        <span>
+          <svg viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+          Licensed product review
+        </span>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: PURCHASE PANEL & BUY BOX -->
+    <div class="pb-purchase-panel">
+      <a class="pb-rating-row" href="#reviews">
+        <span class="pb-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <span>(42,093)</span>
+      </a>
+
+      <h1>OrthoAlign&trade; Pillow</h1>
+
+      <div class="pb-price-row">
+        <strong id="pb-hero-display-price">£49.99</strong>
+        <del id="pb-hero-display-compare">£100.00</del>
+      </div>
+
+      <p class="pb-comparable">Savings based on comparable value. <u>Learn more</u></p>
+
+      <!-- Colour Swatches -->
+      <fieldset class="pb-option-fieldset">
+        <legend>Select Colour: <strong id="pb-selected-colour-name">White</strong></legend>
+        <div class="pb-swatches" id="pb-hero-swatches">
+          <button type="button" class="selected" data-colour="white" style="--swatch-color: #f8f8f6;" title="White" aria-label="White"></button>
+          <button type="button" data-colour="grey" style="--swatch-color: #c4c7ca;" title="Grey" aria-label="Grey"></button>
+          <button type="button" data-colour="blue" style="--swatch-color: #a9cde9;" title="Baby Blue" aria-label="Baby Blue"></button>
+          <button type="button" data-colour="navy" style="--swatch-color: #172e59;" title="Navy Blue" aria-label="Navy Blue"></button>
+        </div>
+      </fieldset>
+
+      <!-- Size / Height Control -->
+      <fieldset class="pb-option-fieldset">
+        <legend>Select Size:</legend>
+        <div class="pb-segmented-control" id="pb-hero-heights">
+          <button type="button" class="selected" data-height="regular">Regular</button>
+          <button type="button" data-height="high">High</button>
+        </div>
+      </fieldset>
+
+      <!-- 6 Feature Claims with Inline SVGs -->
+      <div class="pb-claim-list">
+        <div class="pb-claim-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          <span>#1 Selling TikTok Pillow</span>
+        </div>
+        <div class="pb-claim-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M2 12h20"/><path d="M20 10c0-4.4-3.6-8-8-8s-8 3.6-8 8"/><path d="m10 2 2 2 2-2"/><path d="m10 22 2-2 2 2"/><path d="m2 10 2 2-2 2"/><path d="m22 10-2 2 2 2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="m4.93 19.07 1.41-1.41"/><path d="m17.66 6.34 1.41-1.41"/></svg>
+          <span>Stays Cool All Night</span>
+        </div>
+        <div class="pb-claim-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="8 18 12 22 16 18"/><polyline points="8 6 12 2 16 6"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
+          <span>Dual Height. Low & High Side</span>
+        </div>
+        <div class="pb-claim-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <span>Voted Softest Pillow of 2025!</span>
+        </div>
+        <div class="pb-claim-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>Hypoallergenic, Antibacterial & 100% Vegan</span>
+        </div>
+        <div class="pb-claim-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>
+          <span>Recommended by Our Chiropractic Partners</span>
+        </div>
+      </div>
+
+      <!-- Size Guide Note -->
+      <p class="pb-size-guide">
+        <strong>Size Guide:</strong>
+        <span>Under 5&apos;7 Tall = Regular</span>
+        <span>Above 5&apos;7 Tall = High</span>
+      </p>
+
+      <!-- QUANTITY DISCOUNT BUNDLE CARDS -->
+      <div class="pb-bundle-block">
+        <h2>BUY MORE - SAVE MORE</h2>
+
+        <!-- 1 Pillow -->
+        <div class="pb-bundle-card" data-bundle="1" id="pb-bundle-card-1">
+          <button type="button" class="pb-bundle-choice" aria-label="1 Pillow">
+            <span class="pb-radio-dot"></span>
+            <span class="pb-bundle-copy">
+              <span class="pb-bundle-title-line">
+                <strong>1 Pillow</strong>
+                <b>Limited Time Sale!</b>
+              </span>
+              <small>This Deal Ends Soon.</small>
+            </span>
+            <span class="pb-bundle-prices">
+              <em id="pb-price-bundle-1">£49.99</em>
+              <del>£100.00</del>
+            </span>
+          </button>
+          <label class="pb-bundle-upsell">
+            <input type="checkbox" id="pb-upsell-1" />
+            <span>+1 Cooling Pillowcase (Protect & Cool)</span>
+            <span class="pb-bundle-upsell-prices">
+              <strong>£9.99</strong>
+              <del>£19.99</del>
+            </span>
+          </label>
+        </div>
+
+        <!-- 2 Pillow Bundle (MOST POPULAR) -->
+        <div class="pb-bundle-card selected" data-bundle="2" id="pb-bundle-card-2">
+          <span class="pb-bundle-badge pb-bundle-badge-popular">
+            <span>Most</span>
+            <strong>Popular</strong>
+          </span>
+          <button type="button" class="pb-bundle-choice" aria-label="2 Pillow Bundle">
+            <span class="pb-radio-dot"></span>
+            <span class="pb-bundle-copy">
+              <span class="pb-bundle-title-line">
+                <strong>2 Pillow Bundle</strong>
+              </span>
+              <small>Save £111.01!</small>
+            </span>
+            <span class="pb-bundle-prices">
+              <em id="pb-price-bundle-2">£88.99</em>
+              <del>£200.00</del>
+            </span>
+          </button>
+
+          <!-- Per-Pillow Configuration for Bundle 2 -->
+          <div class="pb-bundle-config" id="pb-config-bundle-2">
+            <p>Choose each pillow&apos;s colour and height</p>
+            <!-- Pillow 1 -->
+            <div class="pb-bundle-config-row" data-pillow-idx="0">
+              <span class="pb-bundle-pillow-label">Pillow 1</span>
+              <fieldset class="pb-bundle-option-group">
+                <legend>Colour: <strong class="pb-pillow-colour-label">White</strong></legend>
+                <div class="pb-bundle-swatches">
+                  <button type="button" class="selected" data-c="white" style="--swatch-color: #f8f8f6;" title="White"></button>
+                  <button type="button" data-c="grey" style="--swatch-color: #c4c7ca;" title="Grey"></button>
+                  <button type="button" data-c="blue" style="--swatch-color: #a9cde9;" title="Baby Blue"></button>
+                  <button type="button" data-c="navy" style="--swatch-color: #172e59;" title="Navy Blue"></button>
+                </div>
+              </fieldset>
+              <fieldset class="pb-bundle-option-group pb-bundle-height-choice">
+                <legend>Height</legend>
+                <div class="pb-segmented-control">
+                  <button type="button" class="selected" data-h="regular">Regular</button>
+                  <button type="button" data-h="high">High</button>
+                </div>
+              </fieldset>
+            </div>
+            <!-- Pillow 2 -->
+            <div class="pb-bundle-config-row" data-pillow-idx="1">
+              <span class="pb-bundle-pillow-label">Pillow 2</span>
+              <fieldset class="pb-bundle-option-group">
+                <legend>Colour: <strong class="pb-pillow-colour-label">White</strong></legend>
+                <div class="pb-bundle-swatches">
+                  <button type="button" class="selected" data-c="white" style="--swatch-color: #f8f8f6;" title="White"></button>
+                  <button type="button" data-c="grey" style="--swatch-color: #c4c7ca;" title="Grey"></button>
+                  <button type="button" data-c="blue" style="--swatch-color: #a9cde9;" title="Baby Blue"></button>
+                  <button type="button" data-c="navy" style="--swatch-color: #172e59;" title="Navy Blue"></button>
+                </div>
+              </fieldset>
+              <fieldset class="pb-bundle-option-group pb-bundle-height-choice">
+                <legend>Height</legend>
+                <div class="pb-segmented-control">
+                  <button type="button" class="selected" data-h="regular">Regular</button>
+                  <button type="button" data-h="high">High</button>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <label class="pb-bundle-upsell">
+            <input type="checkbox" id="pb-upsell-2" />
+            <span>+2 Cooling Pillowcases at £19.99!</span>
+            <span class="pb-bundle-upsell-prices">
+              <strong>£19.99</strong>
+              <del>£39.98</del>
+            </span>
+          </label>
+        </div>
+
+        <!-- 4 Pillow Family Bundle (BEST VALUE) -->
+        <div class="pb-bundle-card" data-bundle="4" id="pb-bundle-card-4">
+          <span class="pb-bundle-badge pb-bundle-badge-value">BEST VALUE</span>
+          <button type="button" class="pb-bundle-choice" aria-label="Family Bundle 4 Pillows">
+            <span class="pb-radio-dot"></span>
+            <span class="pb-bundle-copy">
+              <span class="pb-bundle-title-line">
+                <strong>Family Bundle 4 Pillows</strong>
+                <b>Limited Time Offer!</b>
+              </span>
+              <small>Save £248.01!</small>
+            </span>
+            <span class="pb-bundle-prices">
+              <em id="pb-price-bundle-4">£151.99</em>
+              <del>£400.00</del>
+            </span>
+          </button>
+
+          <!-- Per-Pillow Configuration for Bundle 4 -->
+          <div class="pb-bundle-config" id="pb-config-bundle-4" style="display: none;">
+            <p>Choose each pillow&apos;s colour and height</p>
+            <!-- Pillow 1 -->
+            <div class="pb-bundle-config-row" data-pillow-idx="0">
+              <span class="pb-bundle-pillow-label">Pillow 1</span>
+              <fieldset class="pb-bundle-option-group">
+                <legend>Colour: <strong class="pb-pillow-colour-label">White</strong></legend>
+                <div class="pb-bundle-swatches">
+                  <button type="button" class="selected" data-c="white" style="--swatch-color: #f8f8f6;" title="White"></button>
+                  <button type="button" data-c="grey" style="--swatch-color: #c4c7ca;" title="Grey"></button>
+                  <button type="button" data-c="blue" style="--swatch-color: #a9cde9;" title="Baby Blue"></button>
+                  <button type="button" data-c="navy" style="--swatch-color: #172e59;" title="Navy Blue"></button>
+                </div>
+              </fieldset>
+              <fieldset class="pb-bundle-option-group pb-bundle-height-choice">
+                <legend>Height</legend>
+                <div class="pb-segmented-control">
+                  <button type="button" class="selected" data-h="regular">Regular</button>
+                  <button type="button" data-h="high">High</button>
+                </div>
+              </fieldset>
+            </div>
+            <!-- Pillow 2 -->
+            <div class="pb-bundle-config-row" data-pillow-idx="1">
+              <span class="pb-bundle-pillow-label">Pillow 2</span>
+              <fieldset class="pb-bundle-option-group">
+                <legend>Colour: <strong class="pb-pillow-colour-label">White</strong></legend>
+                <div class="pb-bundle-swatches">
+                  <button type="button" class="selected" data-c="white" style="--swatch-color: #f8f8f6;" title="White"></button>
+                  <button type="button" data-c="grey" style="--swatch-color: #c4c7ca;" title="Grey"></button>
+                  <button type="button" data-c="blue" style="--swatch-color: #a9cde9;" title="Baby Blue"></button>
+                  <button type="button" data-c="navy" style="--swatch-color: #172e59;" title="Navy Blue"></button>
+                </div>
+              </fieldset>
+              <fieldset class="pb-bundle-option-group pb-bundle-height-choice">
+                <legend>Height</legend>
+                <div class="pb-segmented-control">
+                  <button type="button" class="selected" data-h="regular">Regular</button>
+                  <button type="button" data-h="high">High</button>
+                </div>
+              </fieldset>
+            </div>
+            <!-- Pillow 3 -->
+            <div class="pb-bundle-config-row" data-pillow-idx="2">
+              <span class="pb-bundle-pillow-label">Pillow 3</span>
+              <fieldset class="pb-bundle-option-group">
+                <legend>Colour: <strong class="pb-pillow-colour-label">White</strong></legend>
+                <div class="pb-bundle-swatches">
+                  <button type="button" class="selected" data-c="white" style="--swatch-color: #f8f8f6;" title="White"></button>
+                  <button type="button" data-c="grey" style="--swatch-color: #c4c7ca;" title="Grey"></button>
+                  <button type="button" data-c="blue" style="--swatch-color: #a9cde9;" title="Baby Blue"></button>
+                  <button type="button" data-c="navy" style="--swatch-color: #172e59;" title="Navy Blue"></button>
+                </div>
+              </fieldset>
+              <fieldset class="pb-bundle-option-group pb-bundle-height-choice">
+                <legend>Height</legend>
+                <div class="pb-segmented-control">
+                  <button type="button" class="selected" data-h="regular">Regular</button>
+                  <button type="button" data-h="high">High</button>
+                </div>
+              </fieldset>
+            </div>
+            <!-- Pillow 4 -->
+            <div class="pb-bundle-config-row" data-pillow-idx="3">
+              <span class="pb-bundle-pillow-label">Pillow 4</span>
+              <fieldset class="pb-bundle-option-group">
+                <legend>Colour: <strong class="pb-pillow-colour-label">White</strong></legend>
+                <div class="pb-bundle-swatches">
+                  <button type="button" class="selected" data-c="white" style="--swatch-color: #f8f8f6;" title="White"></button>
+                  <button type="button" data-c="grey" style="--swatch-color: #c4c7ca;" title="Grey"></button>
+                  <button type="button" data-c="blue" style="--swatch-color: #a9cde9;" title="Baby Blue"></button>
+                  <button type="button" data-c="navy" style="--swatch-color: #172e59;" title="Navy Blue"></button>
+                </div>
+              </fieldset>
+              <fieldset class="pb-bundle-option-group pb-bundle-height-choice">
+                <legend>Height</legend>
+                <div class="pb-segmented-control">
+                  <button type="button" class="selected" data-h="regular">Regular</button>
+                  <button type="button" data-h="high">High</button>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
+          <label class="pb-bundle-upsell">
+            <input type="checkbox" id="pb-upsell-4" />
+            <span>+4 Cooling Pillowcases For Only £29.99!</span>
+            <span class="pb-bundle-upsell-prices">
+              <strong>£29.99</strong>
+              <del>£79.96</del>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- PRIMARY ADD TO CART BUTTON -->
+      <button type="button" class="pb-add-to-cart-btn" id="hero-add-to-cart">
+        Add to cart - <span id="pb-hero-btn-price">£88.99</span>
+      </button>
+
+      <!-- Trust Badges -->
+      <div class="pb-trust-row">
+        <div class="pb-trust-item">
+          <img src="https://pillow-sepia.vercel.app/assets/trial.webp" alt="" />
+          <span>90-Night Comfort Trial</span>
+        </div>
+        <div class="pb-trust-item">
+          <img src="https://pillow-sepia.vercel.app/assets/returns.avif" alt="" />
+          <span>Hassle-Free Returns</span>
+        </div>
+      </div>
+
+      <!-- Accordion List: Overview, Materials, Care -->
+      <div class="pb-accordion-list">
+        <div class="pb-accordion-item">
+          <button type="button" class="pb-accordion-trigger" aria-expanded="false">
+            <span>Overview</span>
+            <span class="pb-accordion-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="pb-accordion-content">
+            <p>Meet the OrthoAlign Pillow, crafted for deep, supported sleep in any position. The 3-zone contour design delivers targeted neck lift, pressure relief, and full-body alignment. Its dual-height system adapts to side, back, and stomach sleepers without bunching or constant flipping.</p>
+          </div>
+        </div>
+
+        <div class="pb-accordion-item">
+          <button type="button" class="pb-accordion-trigger" aria-expanded="false">
+            <span>Materials</span>
+            <span class="pb-accordion-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="pb-accordion-content">
+            <p>OEKO-TEX certified cover: hypoallergenic, breathable, and gentle on skin. CloudSoft core: shape-retaining memory foam that stays supportive and flexible.</p>
+          </div>
+        </div>
+
+        <div class="pb-accordion-item">
+          <button type="button" class="pb-accordion-trigger" aria-expanded="false">
+            <span>Care</span>
+            <span class="pb-accordion-symbol" aria-hidden="true">+</span>
+          </button>
+          <div class="pb-accordion-content">
+            <p>The memory-foam core is not machine washable. Remove the included fitted cover, machine wash it at 30°C, and air dry before refitting.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Customer Quote -->
+      <div class="pb-customer-quote pb-mobile-quote">
+        <span class="pb-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </span>
+        <p>&ldquo;I did not realise how bad my old pillow was until I tried this. The shape, the feel, the support, everything is just right. My husband stole mine, so now we have two!&rdquo;</p>
+        <strong>Stephanie P.</strong>
+        <span>
+          <svg viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg>
+          Licensed product review
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // PLUSBASE PRODUCT STATE & VARIANT MAP
+  window.juujoProductState = window.juujoProductState || {
+    productId: '1000000663256638',
+    selectedColour: 'white',
+    selectedHeight: 'regular',
+    selectedBundle: 2,
+    includeCovers: false,
+    pillows: [
+      { colour: 'white', height: 'regular' },
+      { colour: 'white', height: 'regular' },
+      { colour: 'white', height: 'regular' },
+      { colour: 'white', height: 'regular' }
+    ],
+    // PlusBase Variant IDs
+    variantIds: {
+      'white_regular': '1000020655426746',
+      'white_high':    '1000020655426747',
+      'grey_regular':  '1000020655426744',
+      'grey_high':     '1000020655426745',
+      'blue_regular':  '1000020655426742',
+      'blue_high':     '1000020655426743',
+      'navy_regular':  '1000020655426740',
+      'navy_high':     '1000020655426741',
+      'cooling_cover': '1000020655426748'
+    },
+    discounts: {
+      2: 'J2-7QF9MK',
+      4: 'J4-8NW3AX'
+    },
+    colourHeroes: {
+      'white': 'https://pillow-sepia.vercel.app/assets/gallery-01-hero-juujo.png',
+      'grey':  'https://pillow-sepia.vercel.app/assets/gallery-colours/hero-grey.webp',
+      'blue':  'https://pillow-sepia.vercel.app/assets/gallery-colours/hero-baby-blue.webp',
+      'navy':  'https://pillow-sepia.vercel.app/assets/gallery-colours/hero-navy.webp'
+    },
+    colourNames: {
+      'white': 'White',
+      'grey': 'Grey',
+      'blue': 'Baby Blue',
+      'navy': 'Navy Blue'
+    },
+    // Pricing calculation
+    getBasePriceCents: function(quantity) {
+      if (quantity === 1) return 4999;
+      if (quantity === 2) return 8899;
+      return 15199;
+    },
+    getCompareAtCents: function(quantity) {
+      if (quantity === 1) return 10000;
+      if (quantity === 2) return 20000;
+      return 40000;
+    },
+    getCoverPriceCents: function(quantity) {
+      if (quantity === 1) return 999;
+      if (quantity === 2) return 1999;
+      return 2999;
+    },
+    getUnitPriceCents: function(colour, height) {
+      var tier = (colour === 'white' && height === 'regular') ? 0 :
+                 (colour === 'white' || height === 'regular') ? 1 : 2;
+      return [4999, 5499, 5999][tier];
+    },
+    getBundlePriceCents: function(choices) {
+      var count = choices.length;
+      var base = this.getBasePriceCents(count);
+      var extra = choices.reduce(function(acc, p) {
+        var tier = (p.colour === 'white' && p.height === 'regular') ? 0 :
+                   (p.colour === 'white' || p.height === 'regular') ? 1 : 2;
+        var bump = (count === 1) ? [0, 500, 1000][tier] :
+                   (count === 2) ? [0, 500, 1000][tier] : [0, 400, 775][tier];
+        return acc + bump;
+      }, 0);
+      return (count === 1) ? (base + extra) : (base + extra);
+    },
+    getTotalCents: function() {
+      var activeChoices = this.pillows.slice(0, this.selectedBundle);
+      var pillowTotal = this.getBundlePriceCents(activeChoices);
+      var coverTotal = this.includeCovers ? this.getCoverPriceCents(this.selectedBundle) : 0;
+      return pillowTotal + coverTotal;
+    },
+    formatMoney: function(cents) {
+      return '£' + (cents / 100).toFixed(2);
+    },
+    broadcast: function(source) {
+      window.dispatchEvent(new CustomEvent('juujo:state-change', {
+        detail: { state: this, source: source }
+      }));
+    }
+  };
+
+  var state = window.juujoProductState;
+
+  function initHero() {
+    var root = document.getElementById('pb-prod-sec-hero');
+    if (!root || root.dataset.initialized === 'true') return;
+    root.dataset.initialized = 'true';
+
+    // Gallery Elements
+    var stage = document.getElementById('pb-gallery-stage');
+    var mainImages = stage.querySelectorAll('.pb-gallery-main');
+    var prevBtn = document.getElementById('pb-gallery-prev');
+    var nextBtn = document.getElementById('pb-gallery-next');
+    var thumbStrip = document.getElementById('pb-thumbnail-strip');
+    var thumbs = thumbStrip.querySelectorAll('button');
+    var currentIndex = 0;
+
+    function setGalleryIndex(index) {
+      currentIndex = (index + mainImages.length) % mainImages.length;
+      mainImages.forEach(function(img, i) {
+        img.classList.toggle('active', i === currentIndex);
+      });
+      thumbs.forEach(function(t, i) {
+        t.classList.toggle('selected', i === currentIndex);
+      });
+      var activeThumb = thumbStrip.querySelector('button.selected');
+      if (activeThumb) {
+        var left = activeThumb.offsetLeft - (thumbStrip.clientWidth / 2) + (activeThumb.clientWidth / 2);
+        thumbStrip.scrollTo({ left: left, behavior: 'smooth' });
+      }
+    }
+
+    prevBtn.addEventListener('click', function() { setGalleryIndex(currentIndex - 1); });
+    nextBtn.addEventListener('click', function() { setGalleryIndex(currentIndex + 1); });
+
+    thumbs.forEach(function(t, i) {
+      t.addEventListener('click', function() { setGalleryIndex(i); });
+    });
+
+    // Touch Swipe on Gallery Stage
+    var touchStartX = null;
+    stage.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    stage.addEventListener('touchend', function(e) {
+      if (touchStartX === null) return;
+      var diff = e.changedTouches[0].clientX - touchStartX;
+      touchStartX = null;
+      if (Math.abs(diff) > 40) {
+        if (diff > 0) setGalleryIndex(currentIndex - 1);
+        else setGalleryIndex(currentIndex + 1);
+      }
+    });
+
+    // Swatches (Hero Primary)
+    var swatchBtns = root.querySelectorAll('#pb-hero-swatches button');
+    var colourLabel = document.getElementById('pb-selected-colour-name');
+    var heightBtns = root.querySelectorAll('#pb-hero-heights button');
+
+    function updateHeroGalleryImage(colour) {
+      var heroImg = mainImages[0];
+      if (heroImg && state.colourHeroes[colour]) {
+        heroImg.src = state.colourHeroes[colour];
+        var firstThumbImg = thumbs[0].querySelector('img');
+        if (firstThumbImg) firstThumbImg.src = state.colourHeroes[colour];
+      }
+    }
+
+    swatchBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var c = btn.dataset.colour;
+        state.selectedColour = c;
+        colourLabel.textContent = state.colourNames[c] || c;
+        swatchBtns.forEach(function(b) { b.classList.toggle('selected', b === btn); });
+
+        // Update active pillow choices for active bundle
+        for (var i = 0; i < state.selectedBundle; i++) {
+          state.pillows[i].colour = c;
+        }
+        updateHeroGalleryImage(c);
+        setGalleryIndex(0);
+        renderConfigRows();
+        renderPrices();
+        state.broadcast('hero-swatch');
+      });
+    });
+
+    heightBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var h = btn.dataset.height;
+        state.selectedHeight = h;
+        heightBtns.forEach(function(b) { b.classList.toggle('selected', b === btn); });
+
+        for (var i = 0; i < state.selectedBundle; i++) {
+          state.pillows[i].height = h;
+        }
+        renderConfigRows();
+        renderPrices();
+        state.broadcast('hero-height');
+      });
+    });
+
+    // Bundle Cards
+    var bundleCards = root.querySelectorAll('.pb-bundle-card');
+    function selectBundle(qty) {
+      state.selectedBundle = qty;
+      bundleCards.forEach(function(card) {
+        var cardQty = parseInt(card.dataset.bundle, 10);
+        card.classList.toggle('selected', cardQty === qty);
+      });
+
+      // Config rows visibility
+      var cfg2 = document.getElementById('pb-config-bundle-2');
+      var cfg4 = document.getElementById('pb-config-bundle-4');
+      if (cfg2) cfg2.style.display = (qty === 2) ? 'grid' : 'none';
+      if (cfg4) cfg4.style.display = (qty === 4) ? 'grid' : 'none';
+
+      // Ensure pillow choices are initialized up to qty
+      for (var i = 0; i < qty; i++) {
+        if (!state.pillows[i]) {
+          state.pillows[i] = { colour: state.selectedColour, height: state.selectedHeight };
+        }
+      }
+
+      // Sync checkbox state
+      var chk1 = document.getElementById('pb-upsell-1');
+      var chk2 = document.getElementById('pb-upsell-2');
+      var chk4 = document.getElementById('pb-upsell-4');
+      if (chk1) chk1.checked = (qty === 1 && state.includeCovers);
+      if (chk2) chk2.checked = (qty === 2 && state.includeCovers);
+      if (chk4) chk4.checked = (qty === 4 && state.includeCovers);
+
+      renderConfigRows();
+      renderPrices();
+      state.broadcast('hero-bundle');
+    }
+
+    bundleCards.forEach(function(card) {
+      var choiceBtn = card.querySelector('.pb-bundle-choice');
+      var qty = parseInt(card.dataset.bundle, 10);
+      choiceBtn.addEventListener('click', function() {
+        selectBundle(qty);
+      });
+
+      var upsellInput = card.querySelector('.pb-bundle-upsell input');
+      if (upsellInput) {
+        upsellInput.addEventListener('change', function(e) {
+          selectBundle(qty);
+          state.includeCovers = e.target.checked;
+          renderPrices();
+          state.broadcast('hero-upsell');
+        });
+      }
+    });
+
+    // Render Per-Pillow Configuration Rows
+    function renderConfigRows() {
+      var rows = root.querySelectorAll('.pb-bundle-config-row');
+      rows.forEach(function(row) {
+        var idx = parseInt(row.dataset.pillowIdx, 10);
+        var p = state.pillows[idx] || { colour: state.selectedColour, height: state.selectedHeight };
+        
+        var lbl = row.querySelector('.pb-pillow-colour-label');
+        if (lbl) lbl.textContent = state.colourNames[p.colour] || p.colour;
+
+        var sBtns = row.querySelectorAll('.pb-bundle-swatches button');
+        sBtns.forEach(function(b) {
+          b.classList.toggle('selected', b.dataset.c === p.colour);
+          if (!b.dataset.listenerAttached) {
+            b.dataset.listenerAttached = 'true';
+            b.addEventListener('click', function(e) {
+              e.stopPropagation();
+              var c = b.dataset.c;
+              state.pillows[idx].colour = c;
+              if (idx === 0) {
+                state.selectedColour = c;
+                colourLabel.textContent = state.colourNames[c] || c;
+                swatchBtns.forEach(function(sb) { sb.classList.toggle('selected', sb.dataset.colour === c); });
+                updateHeroGalleryImage(c);
+                setGalleryIndex(0);
+              }
+              renderConfigRows();
+              renderPrices();
+              state.broadcast('config-swatch');
+            });
+          }
+        });
+
+        var hBtns = row.querySelectorAll('.pb-bundle-height-choice button');
+        hBtns.forEach(function(b) {
+          b.classList.toggle('selected', b.dataset.h === p.height);
+          if (!b.dataset.listenerAttached) {
+            b.dataset.listenerAttached = 'true';
+            b.addEventListener('click', function(e) {
+              e.stopPropagation();
+              var h = b.dataset.h;
+              state.pillows[idx].height = h;
+              if (idx === 0) {
+                state.selectedHeight = h;
+                heightBtns.forEach(function(hb) { hb.classList.toggle('selected', hb.dataset.height === h); });
+              }
+              renderConfigRows();
+              renderPrices();
+              state.broadcast('config-height');
+            });
+          }
+        });
+      });
+    }
+
+    // Dynamic Price Renderer
+    function renderPrices() {
+      var unitPrice = state.getUnitPriceCents(state.selectedColour, state.selectedHeight);
+      var heroDisplayPrice = document.getElementById('pb-hero-display-price');
+      if (heroDisplayPrice) heroDisplayPrice.textContent = state.formatMoney(unitPrice);
+
+      var p1 = document.getElementById('pb-price-bundle-1');
+      var p2 = document.getElementById('pb-price-bundle-2');
+      var p4 = document.getElementById('pb-price-bundle-4');
+
+      if (p1) p1.textContent = state.formatMoney(state.getBundlePriceCents([state.pillows[0]]));
+      if (p2) p2.textContent = state.formatMoney(state.getBundlePriceCents(state.pillows.slice(0, 2)));
+      if (p4) p4.textContent = state.formatMoney(state.getBundlePriceCents(state.pillows.slice(0, 4)));
+
+      var total = state.getTotalCents();
+      var btnPrice = document.getElementById('pb-hero-btn-price');
+      if (btnPrice) btnPrice.textContent = state.formatMoney(total);
+    }
+
+    // Accordions (Overview / Materials / Care)
+    var accordions = root.querySelectorAll('.pb-accordion-item');
+    accordions.forEach(function(item) {
+      var trigger = item.querySelector('.pb-accordion-trigger');
+      var content = item.querySelector('.pb-accordion-content');
+      var symbol = item.querySelector('.pb-accordion-symbol');
+      trigger.addEventListener('click', function() {
+        var isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        trigger.setAttribute('aria-expanded', !isOpen);
+        content.classList.toggle('open', !isOpen);
+        symbol.textContent = isOpen ? '+' : '−';
+      });
+    });
+
+    // Add to Cart Execution on PlusBase
+    var atcBtn = document.getElementById('hero-add-to-cart');
+    atcBtn.addEventListener('click', function() {
+      var activePillows = state.pillows.slice(0, state.selectedBundle);
+      var items = activePillows.map(function(p, i) {
+        var variantKey = p.colour + '_' + p.height;
+        var varId = state.variantIds[variantKey] || '1000020655426746';
+        return {
+          id: varId,
+          variant_id: varId,
+          quantity: 1,
+          properties: {
+            'Pillow Position': (i + 1) + ' of ' + state.selectedBundle,
+            'Colour': state.colourNames[p.colour] || p.colour,
+            'Height': p.height.toUpperCase(),
+            'Cooling Cover': state.includeCovers ? 'Yes' : 'No'
+          }
+        };
+      });
+
+      if (state.includeCovers) {
+        items.push({
+          id: state.variantIds['cooling_cover'],
+          variant_id: state.variantIds['cooling_cover'],
+          quantity: state.selectedBundle,
+          properties: { 'Bundle Match': state.selectedBundle + ' Pillows' }
+        });
+      }
+
+      var discountCode = state.discounts[state.selectedBundle] || '';
+      var checkoutUrl = '/checkout' + (discountCode ? ('?discount=' + encodeURIComponent(discountCode)) : '');
+
+      // 1. PlusBase / ShopBase SDK
+      if (window.sbsdk && window.sbsdk.cart && typeof window.sbsdk.cart.add === 'function') {
+        window.sbsdk.cart.add({ items: items }).then(function() {
+          window.location.href = checkoutUrl;
+        }).catch(function() {
+          window.location.href = checkoutUrl;
+        });
+        return;
+      }
+
+      // 2. Direct AJAX /cart/add.js
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ items: items })
+      }).then(function(res) {
+        window.location.href = checkoutUrl;
+      }).catch(function() {
+        window.location.href = checkoutUrl;
+      });
+    });
+
+    // Sync from external state events (e.g. Sticky Bar or Standalone Bundle)
+    window.addEventListener('juujo:state-change', function(e) {
+      if (e.detail && e.detail.source !== 'hero-swatch' && e.detail.source !== 'hero-height' && e.detail.source !== 'hero-bundle' && e.detail.source !== 'hero-upsell' && e.detail.source !== 'config-swatch' && e.detail.source !== 'config-height') {
+        renderConfigRows();
+        renderPrices();
+      }
+    });
+
+    // Initial render
+    renderConfigRows();
+    renderPrices();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHero);
+  } else {
+    initHero();
+  }
+})();
+</script>
