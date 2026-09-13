@@ -7,9 +7,16 @@
 <style>
 /* PlusBase Wrapper Normalization (Scoped Strictly to this Custom Section via :has) */
 .wb-section:has(#pb-prod-sec-counter),
+.wb-builder__section--container:has(#pb-prod-sec-counter),
+section:has(#pb-prod-sec-counter),
 .column-inner:has(#pb-prod-sec-counter),
+.wb-builder__column--container:has(#pb-prod-sec-counter),
+.wb-builder__row--container:has(#pb-prod-sec-counter),
+.layout-full-width:has(#pb-prod-sec-counter),
+.block-wrapper:has(#pb-prod-sec-counter),
 .custom-code:has(#pb-prod-sec-counter),
-.custom-code__content:has(#pb-prod-sec-counter) {
+.custom-code__content:has(#pb-prod-sec-counter),
+.sb-images:has(#pb-prod-sec-counter) {
   margin: 0 !important;
   padding: 0 !important;
 }
@@ -133,9 +140,23 @@
 #pb-prod-sec-counter .pb-cnt-progress {
   stroke: var(--pb-blue) !important;
   stroke-dasharray: 314.16 !important;
-  stroke-dashoffset: 314.16 !important;
+  stroke-dashoffset: var(--pb-cnt-offset, 314.16px) !important;
   stroke-linecap: round !important;
-  transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Bulletproof CSS offsets when animated */
+#pb-prod-sec-counter .pb-cnt-ring[data-target="95"].is-animated .pb-cnt-progress {
+  --pb-cnt-offset: 15.71px !important;
+  stroke-dashoffset: 15.71px !important;
+}
+#pb-prod-sec-counter .pb-cnt-ring[data-target="98"].is-animated .pb-cnt-progress {
+  --pb-cnt-offset: 6.28px !important;
+  stroke-dashoffset: 6.28px !important;
+}
+#pb-prod-sec-counter .pb-cnt-ring[data-target="92"].is-animated .pb-cnt-progress {
+  --pb-cnt-offset: 25.13px !important;
+  stroke-dashoffset: 25.13px !important;
 }
 
 #pb-prod-sec-counter .pb-cnt-ring span {
@@ -259,13 +280,19 @@
     var circumference = 314.16; // 2 * PI * 50
 
     function animateRing(ring) {
+      if (ring.dataset.animated === 'true') return;
+      ring.dataset.animated = 'true';
+      ring.classList.add('is-animated');
+
       var targetVal = parseInt(ring.dataset.target, 10) || 0;
       var circle = ring.querySelector('.pb-cnt-progress');
       var label = ring.querySelector('.pb-cnt-number');
 
+      var offset = circumference * (1 - targetVal / 100);
       if (circle) {
-        var offset = circumference * (1 - targetVal / 100);
-        circle.style.strokeDashoffset = offset + 'px';
+        circle.style.setProperty('--pb-cnt-offset', offset + 'px', 'important');
+        circle.style.setProperty('stroke-dashoffset', offset + 'px', 'important');
+        circle.setAttribute('stroke-dashoffset', offset);
       }
 
       var startedAt = performance.now();
@@ -276,25 +303,45 @@
         var eased = 1 - Math.pow(1 - progress, 4);
         var currentVal = Math.round(targetVal * eased);
         if (label) label.textContent = currentVal + '%';
-        if (progress < 1) requestAnimationFrame(updateNumber);
+        if (progress < 1) {
+          requestAnimationFrame(updateNumber);
+        } else {
+          if (label) label.textContent = targetVal + '%';
+        }
       }
 
       requestAnimationFrame(updateNumber);
     }
 
-    if ('IntersectionObserver' in window) {
+    function checkInView() {
+      rings.forEach(function(ring) {
+        if (ring.dataset.animated === 'true') return;
+        var rect = ring.getBoundingClientRect();
+        if (rect.top < window.innerHeight + 50 && rect.bottom > 0) {
+          animateRing(ring);
+        }
+      });
+    }
+
+    if ('IntersectionObserver' in window && rings.length > 0) {
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (!entry.isIntersecting) return;
           animateRing(entry.target);
           observer.unobserve(entry.target);
         });
-      }, { threshold: 0.25 });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
       rings.forEach(function(ring) { observer.observe(ring); });
-    } else {
-      rings.forEach(function(ring) { animateRing(ring); });
     }
+
+    window.addEventListener('scroll', checkInView, { passive: true });
+    window.addEventListener('resize', checkInView, { passive: true });
+    checkInView();
+
+    setTimeout(function() {
+      rings.forEach(function(ring) { animateRing(ring); });
+    }, 2000);
   }
 
   if (document.readyState === 'loading') {
@@ -302,6 +349,7 @@
   } else {
     initCountup();
   }
+  window.addEventListener('load', initCountup);
   window.addEventListener('plusbase:custom-html:ready', initCountup);
 })();
 </script>

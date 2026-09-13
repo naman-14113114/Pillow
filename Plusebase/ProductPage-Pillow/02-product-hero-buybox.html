@@ -8,12 +8,22 @@
 <style>
 /* PlusBase Wrapper Normalization (Scoped Strictly to this Custom Section via :has) */
 .wb-section:has(#pb-prod-sec-hero),
+.wb-builder__section--container:has(#pb-prod-sec-hero),
+section:has(#pb-prod-sec-hero),
 .column-inner:has(#pb-prod-sec-hero),
+.wb-builder__column--container:has(#pb-prod-sec-hero),
+.wb-builder__row--container:has(#pb-prod-sec-hero),
+.layout-full-width:has(#pb-prod-sec-hero),
+.block-wrapper:has(#pb-prod-sec-hero),
 .custom-code:has(#pb-prod-sec-hero),
-.custom-code__content:has(#pb-prod-sec-hero) {
+.custom-code__content:has(#pb-prod-sec-hero),
+.sb-images:has(#pb-prod-sec-hero) {
   margin: 0 !important;
   padding: 0 !important;
   overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  contain: none !important;
 }
 
 #pb-prod-sec-hero {
@@ -1637,12 +1647,12 @@
       <!-- Trust Badges -->
       <div class="pb-trust-row">
         <div class="pb-trust-item">
-          <img src="https://pillow-sepia.vercel.app/assets/trial.webp" alt="" />
-          <span>90-Night Comfort Trial</span>
+          <img src="https://e-assets.beeketing.net/10690/10690847/themes/1789276907e9e99d6822.png" alt="Easy Refund" />
+          <span>Easy Refund</span>
         </div>
         <div class="pb-trust-item">
-          <img src="https://pillow-sepia.vercel.app/assets/returns.avif" alt="" />
-          <span>Hassle-Free Returns</span>
+          <img src="https://e-assets.beeketing.net/10690/10690847/themes/1789276914afca84067c.png" alt="Free and Fast Shipping" />
+          <span>Free and Fast Shipping</span>
         </div>
       </div>
 
@@ -2292,10 +2302,11 @@
       var p = root.parentElement;
       while (p && p !== document.documentElement) {
         var comp = window.getComputedStyle(p);
-        if (comp.overflow === 'hidden' || comp.overflowX === 'hidden' || comp.overflowY === 'hidden') {
+        if (comp.overflow !== 'visible' || comp.overflowX !== 'visible' || comp.overflowY !== 'visible' || comp.contain !== 'none') {
           p.style.setProperty('overflow', 'visible', 'important');
           p.style.setProperty('overflow-x', 'visible', 'important');
           p.style.setProperty('overflow-y', 'visible', 'important');
+          if (comp.contain !== 'none') p.style.setProperty('contain', 'none', 'important');
         }
         p = p.parentElement;
       }

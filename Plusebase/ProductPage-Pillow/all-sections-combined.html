@@ -9,12 +9,22 @@
 <style>
 /* PlusBase Wrapper Normalization (Scoped Strictly to this Custom Block via :has) */
 .wb-section:has(#pb-product-page-root),
+.wb-builder__section--container:has(#pb-product-page-root),
+section:has(#pb-product-page-root),
 .column-inner:has(#pb-product-page-root),
+.wb-builder__column--container:has(#pb-product-page-root),
+.wb-builder__row--container:has(#pb-product-page-root),
+.layout-full-width:has(#pb-product-page-root),
+.block-wrapper:has(#pb-product-page-root),
 .custom-code:has(#pb-product-page-root),
-.custom-code__content:has(#pb-product-page-root) {
+.custom-code__content:has(#pb-product-page-root),
+.sb-images:has(#pb-product-page-root) {
   margin: 0 !important;
   padding: 0 !important;
   overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  contain: none !important;
 }
 
 #pb-product-page-root {
@@ -920,33 +930,27 @@
 }
 
 #pb-product-page-root .pb-trust-row {
-  display: grid !important;
-  grid-template-columns: repeat(3, 1fr) !important;
-  gap: 8px !important;
-  padding: 14px 0 4px !important;
-  border-top: 1px solid var(--pb-line) !important;
-  border-bottom: 1px solid var(--pb-line) !important;
+  display: flex !important;
+  margin: 12px 0 16px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 22px !important;
 }
 
 #pb-product-page-root .pb-trust-item {
   display: flex !important;
-  flex-direction: column !important;
   align-items: center !important;
-  text-align: center !important;
-  gap: 4px !important;
+  gap: 6px !important;
+  color: var(--pb-muted) !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
 }
 
-#pb-product-page-root .pb-trust-item svg {
+#pb-product-page-root .pb-trust-item img {
   width: 20px !important;
   height: 20px !important;
-  color: var(--pb-blue) !important;
-}
-
-#pb-product-page-root .pb-trust-item span {
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  color: var(--pb-navy) !important;
-  line-height: 1.2 !important;
+  object-fit: contain !important;
+  flex-shrink: 0 !important;
 }
 
 /* Accordions (Overview / Materials / Care) */
@@ -1727,9 +1731,23 @@
 #pb-product-page-root .pb-cnt-progress {
   stroke: var(--pb-blue) !important;
   stroke-dasharray: 314.16 !important;
-  stroke-dashoffset: 314.16 !important;
+  stroke-dashoffset: var(--pb-cnt-offset, 314.16px) !important;
   stroke-linecap: round !important;
-  transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Bulletproof CSS offsets when animated */
+#pb-product-page-root .pb-cnt-ring[data-target="95"].is-animated .pb-cnt-progress {
+  --pb-cnt-offset: 15.71px !important;
+  stroke-dashoffset: 15.71px !important;
+}
+#pb-product-page-root .pb-cnt-ring[data-target="98"].is-animated .pb-cnt-progress {
+  --pb-cnt-offset: 6.28px !important;
+  stroke-dashoffset: 6.28px !important;
+}
+#pb-product-page-root .pb-cnt-ring[data-target="92"].is-animated .pb-cnt-progress {
+  --pb-cnt-offset: 25.13px !important;
+  stroke-dashoffset: 25.13px !important;
 }
 
 #pb-product-page-root .pb-cnt-ring span {
@@ -2211,19 +2229,15 @@
         <span id="pb-comb-btn-price">£88.99</span>
       </button>
 
-      <!-- Trust Row -->
+      <!-- Trust Badges -->
       <div class="pb-trust-row">
         <div class="pb-trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
-          <span>90-Night Comfort Trial</span>
+          <img src="https://e-assets.beeketing.net/10690/10690847/themes/1789276907e9e99d6822.png" alt="Easy Refund" />
+          <span>Easy Refund</span>
         </div>
         <div class="pb-trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span>Hassle-Free Returns</span>
-        </div>
-        <div class="pb-trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-          <span>Free Tracked Delivery</span>
+          <img src="https://e-assets.beeketing.net/10690/10690847/themes/1789276914afca84067c.png" alt="Free and Fast Shipping" />
+          <span>Free and Fast Shipping</span>
         </div>
       </div>
 
@@ -3146,18 +3160,24 @@
       });
     }
 
-    // 7. COUNTER RINGS ANIMATION
+    // 7. COUNTER RINGS ANIMATION (BULLETPROOF MULTI-TIER ENGINE)
     var rings = root.querySelectorAll('.pb-cnt-ring');
     var circumference = 314.16; // 2 * PI * 50
 
     function animateRing(ring) {
+      if (ring.dataset.animated === 'true') return;
+      ring.dataset.animated = 'true';
+      ring.classList.add('is-animated');
+
       var targetVal = parseInt(ring.dataset.target, 10) || 0;
       var circle = ring.querySelector('.pb-cnt-progress');
       var label = ring.querySelector('.pb-cnt-number');
 
+      var offset = circumference * (1 - targetVal / 100);
       if (circle) {
-        var offset = circumference * (1 - targetVal / 100);
-        circle.style.strokeDashoffset = offset + 'px';
+        circle.style.setProperty('--pb-cnt-offset', offset + 'px', 'important');
+        circle.style.setProperty('stroke-dashoffset', offset + 'px', 'important');
+        circle.setAttribute('stroke-dashoffset', offset);
       }
 
       var startedAt = performance.now();
@@ -3168,10 +3188,24 @@
         var eased = 1 - Math.pow(1 - progress, 4);
         var currentVal = Math.round(targetVal * eased);
         if (label) label.textContent = currentVal + '%';
-        if (progress < 1) requestAnimationFrame(updateNumber);
+        if (progress < 1) {
+          requestAnimationFrame(updateNumber);
+        } else {
+          if (label) label.textContent = targetVal + '%';
+        }
       }
 
       requestAnimationFrame(updateNumber);
+    }
+
+    function checkRingsInView() {
+      rings.forEach(function(ring) {
+        if (ring.dataset.animated === 'true') return;
+        var rect = ring.getBoundingClientRect();
+        if (rect.top < window.innerHeight + 50 && rect.bottom > 0) {
+          animateRing(ring);
+        }
+      });
     }
 
     if ('IntersectionObserver' in window && rings.length > 0) {
@@ -3181,12 +3215,18 @@
           animateRing(entry.target);
           countObserver.unobserve(entry.target);
         });
-      }, { threshold: 0.25 });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
       rings.forEach(function(r) { countObserver.observe(r); });
-    } else {
-      rings.forEach(function(r) { animateRing(r); });
     }
+
+    window.addEventListener('scroll', checkRingsInView, { passive: true });
+    window.addEventListener('resize', checkRingsInView, { passive: true });
+    checkRingsInView();
+
+    setTimeout(function() {
+      rings.forEach(function(r) { animateRing(r); });
+    }, 2500);
 
     // 8. STICKY ATC BAR VISIBILITY
     var stickyBar = document.getElementById('pb-comb-sticky-bar');
@@ -3276,10 +3316,11 @@
       var p = root.parentElement;
       while (p && p !== document.documentElement) {
         var comp = window.getComputedStyle(p);
-        if (comp.overflow === 'hidden' || comp.overflowX === 'hidden' || comp.overflowY === 'hidden') {
+        if (comp.overflow !== 'visible' || comp.overflowX !== 'visible' || comp.overflowY !== 'visible' || comp.contain !== 'none') {
           p.style.setProperty('overflow', 'visible', 'important');
           p.style.setProperty('overflow-x', 'visible', 'important');
           p.style.setProperty('overflow-y', 'visible', 'important');
+          if (comp.contain !== 'none') p.style.setProperty('contain', 'none', 'important');
         }
         p = p.parentElement;
       }
