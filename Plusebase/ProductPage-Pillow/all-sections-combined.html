@@ -47,20 +47,6 @@ body.pb-atc-in-progress .mini-cart {
   transform: translateX(100%) !important;
 }
 
-/* Ensure side cart drawer and backdrop are always layered in front of the sticky ATC bar */
-#default_cart_drawer,
-#popup-overlay-default_cart_drawer,
-[id*="cart_drawer"],
-[id*="cart-drawer"],
-.wb-cart-drawer,
-.cart-drawer,
-.side-cart,
-.mini-cart,
-.section-popup:has([id*="cart_drawer"]),
-.section-popup:has([id*="cart-drawer"]) {
-  z-index: 999999 !important;
-}
-
 #pb-product-page-root {
   --pb-navy: #06173b;
   --pb-ink: #10223f;
@@ -2010,7 +1996,7 @@ body.pb-atc-in-progress .mini-cart {
   bottom: 0 !important;
   left: 0 !important;
   right: 0 !important;
-  z-index: 990 !important;
+  z-index: 50 !important;
   background: rgba(255, 255, 255, 0.96) !important;
   backdrop-filter: blur(12px) !important;
   -webkit-backdrop-filter: blur(12px) !important;

@@ -45,20 +45,6 @@ body.pb-atc-in-progress .mini-cart {
   transform: translateX(100%) !important;
 }
 
-/* Ensure side cart drawer and backdrop are always layered in front of any floating bars */
-#default_cart_drawer,
-#popup-overlay-default_cart_drawer,
-[id*="cart_drawer"],
-[id*="cart-drawer"],
-.wb-cart-drawer,
-.cart-drawer,
-.side-cart,
-.mini-cart,
-.section-popup:has([id*="cart_drawer"]),
-.section-popup:has([id*="cart-drawer"]) {
-  z-index: 999999 !important;
-}
-
 #pb-prod-sec-hero {
   --pb-navy: #06173b;
   --pb-ink: #10223f;
