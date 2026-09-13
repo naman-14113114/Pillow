@@ -837,12 +837,13 @@ section:has(#pb-prod-sec-hero),
   display: grid !important;
 }
 
-#pb-prod-sec-hero #pb-bundle-card-1 .pb-bundle-config,
+#pb-prod-sec-hero #pb-bundle-card-1:not(.selected) #pb-config-bundle-1,
 #pb-prod-sec-hero #pb-bundle-card-2:not(.selected) #pb-config-bundle-2,
 #pb-prod-sec-hero #pb-bundle-card-4:not(.selected) #pb-config-bundle-4 {
   display: none !important;
 }
 
+#pb-prod-sec-hero #pb-bundle-card-1.selected #pb-config-bundle-1,
 #pb-prod-sec-hero #pb-bundle-card-2.selected #pb-config-bundle-2,
 #pb-prod-sec-hero #pb-bundle-card-4.selected #pb-config-bundle-4 {
   display: grid !important;
@@ -1536,6 +1537,31 @@ section:has(#pb-prod-sec-hero),
               <del>£100.00</del>
             </span>
           </button>
+
+          <!-- Per-Pillow Config 1 -->
+          <div class="pb-bundle-config" id="pb-config-bundle-1" style="display: none;">
+            <p>Choose each pillow&apos;s colour and height</p>
+            <div class="pb-bundle-config-row" data-pillow-idx="0">
+              <span class="pb-bundle-pillow-label">Pillow 1</span>
+              <fieldset class="pb-bundle-option-group">
+                <legend>Colour: <strong class="pb-pillow-colour-label">White</strong></legend>
+                <div class="pb-bundle-swatches">
+                  <button type="button" class="selected" data-c="white" style="--swatch-color: #f8f8f6;" title="White"><span class="pb-swatch-dot"></span></button>
+                  <button type="button" data-c="grey" style="--swatch-color: #c4c7ca;" title="Grey"><span class="pb-swatch-dot"></span></button>
+                  <button type="button" data-c="blue" style="--swatch-color: #a9cde9;" title="Baby Blue"><span class="pb-swatch-dot"></span></button>
+                  <button type="button" data-c="navy" style="--swatch-color: #172e59;" title="Navy Blue"><span class="pb-swatch-dot"></span></button>
+                </div>
+              </fieldset>
+              <fieldset class="pb-bundle-option-group pb-bundle-height-choice">
+                <legend>Height</legend>
+                <div class="pb-segmented-control">
+                  <button type="button" class="selected" data-h="regular">Regular</button>
+                  <button type="button" data-h="high">High</button>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+
           <label class="pb-bundle-upsell">
             <input type="checkbox" id="pb-upsell-1" />
             <span>+1 Cooling Pillowcase (Protect & Cool)</span>
@@ -2201,9 +2227,13 @@ section:has(#pb-prod-sec-hero),
         card.classList.toggle('selected', isSelected);
       });
 
+      var config1 = document.getElementById('pb-config-bundle-1');
       var config2 = document.getElementById('pb-config-bundle-2');
       var config4 = document.getElementById('pb-config-bundle-4');
 
+      if (config1) {
+        config1.style.setProperty('display', (quantity === 1) ? 'grid' : 'none', 'important');
+      }
       if (config2) {
         config2.style.setProperty('display', (quantity === 2) ? 'grid' : 'none', 'important');
       }
@@ -2292,6 +2322,21 @@ section:has(#pb-prod-sec-hero),
           e.stopPropagation();
           if (state.pillows[pIdx]) {
             state.pillows[pIdx].colour = this.dataset.c;
+            if (pIdx === 0) {
+              state.selectedColour = this.dataset.c;
+              if (selectedColourLabel) {
+                selectedColourLabel.textContent = state.colourNames[this.dataset.c] || this.dataset.c;
+              }
+              heroSwatches.forEach(function(sBtn) {
+                sBtn.classList.toggle('selected', sBtn.dataset.colour === state.selectedColour);
+              });
+              var variantUrl = variantImages[this.dataset.c];
+              if (variantUrl) {
+                if (slideImg0) slideImg0.src = variantUrl;
+                if (thumbImg0) thumbImg0.src = variantUrl;
+              }
+              setSlide(0);
+            }
             updateAllBundleSwatches();
             broadcastState();
           }
@@ -2303,6 +2348,12 @@ section:has(#pb-prod-sec-hero),
           e.stopPropagation();
           if (state.pillows[pIdx]) {
             state.pillows[pIdx].height = this.dataset.h;
+            if (pIdx === 0) {
+              state.selectedHeight = this.dataset.h;
+              heroHeights.forEach(function(hBtn) {
+                hBtn.classList.toggle('selected', hBtn.dataset.height === state.selectedHeight);
+              });
+            }
             updateAllBundleHeights();
             broadcastState();
           }
@@ -2337,8 +2388,12 @@ section:has(#pb-prod-sec-hero),
     // =========================================================================
     // PLUSBASE CART & CHECKOUT INTEGRATION
     // =========================================================================
-    heroAtcBtn.addEventListener('click', function(e) {
+    heroAtcBtn.addEventListener('click', async function(e) {
       e.preventDefault();
+      
+      heroAtcBtn.style.opacity = '0.75';
+      heroAtcBtn.style.cursor = 'wait';
+
       var activePillows = state.pillows.slice(0, state.selectedBundle);
       var items = activePillows.map(function(p, i) {
         var variantKey = p.colour + '_' + p.height;
@@ -2371,23 +2426,32 @@ section:has(#pb-prod-sec-hero),
       var cartUrl = '/cart' + (discountCode ? ('?discount=' + encodeURIComponent(discountCode)) : '');
 
       if (window.sbsdk && window.sbsdk.cart && typeof window.sbsdk.cart.add === 'function') {
-        window.sbsdk.cart.add({ items: items }).then(function() {
-          window.location.href = cartUrl;
-        }).catch(function() {
+        try {
+          for (var k = 0; k < items.length; k++) {
+            var itm = items[k];
+            await window.sbsdk.cart.add(Number(itm.variant_id) || itm.variant_id, itm.quantity || 1);
+          }
+        } catch (err) {
+          console.error('Error adding items to sbsdk cart:', err);
+        }
+        window.location.href = cartUrl;
+        return;
+      }
+
+      if (window.sbsdk && typeof window.sbsdk.ready === 'function') {
+        window.sbsdk.ready(async function() {
+          try {
+            for (var k = 0; k < items.length; k++) {
+              var itm = items[k];
+              await window.sbsdk.cart.add(Number(itm.variant_id) || itm.variant_id, itm.quantity || 1);
+            }
+          } catch (err) {}
           window.location.href = cartUrl;
         });
         return;
       }
 
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ items: items })
-      }).then(function() {
-        window.location.href = cartUrl;
-      }).catch(function() {
-        window.location.href = cartUrl;
-      });
+      window.location.href = cartUrl;
     });
 
     // Rating Link Click -> Smooth Scroll to PlusBase Reviews Section (#O9zSDc)

@@ -2177,6 +2177,28 @@ section:has(#pb-product-page-root),
               <div class="pb-bundle-each">£49.99 each</div>
             </div>
           </button>
+
+          <!-- 1 Pillow Customization -->
+          <div class="pb-bundle-config" id="pb-comb-config-bundle-1" style="display: none;">
+            <div class="pb-bundle-config-row" data-pillow-idx="0">
+              <div class="pb-bundle-config-header">
+                <span>Pillow 1 (<span class="pb-pillow-colour-label">White</span>)</span>
+              </div>
+              <div class="pb-bundle-config-controls">
+                <div class="pb-bundle-swatches">
+                  <button type="button" class="selected" data-c="white"><span style="background:#f8f8f6;"></span></button>
+                  <button type="button" data-c="grey"><span style="background:#c4c7ca;"></span></button>
+                  <button type="button" data-c="blue"><span style="background:#a9cde9;"></span></button>
+                  <button type="button" data-c="navy"><span style="background:#172e59;"></span></button>
+                </div>
+                <div class="pb-bundle-height-choice">
+                  <button type="button" class="selected" data-h="regular">Reg</button>
+                  <button type="button" data-h="high">High</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <label class="pb-bundle-upsell">
             <input type="checkbox" id="pb-comb-upsell-1" />
             <span>Add Cooling Pillowcase (+£9.99)</span>
@@ -3054,8 +3076,10 @@ section:has(#pb-product-page-root),
         card.classList.toggle('selected', cardQty === qty);
       });
 
+      var cfg1 = document.getElementById('pb-comb-config-bundle-1');
       var cfg2 = document.getElementById('pb-comb-config-bundle-2');
       var cfg4 = document.getElementById('pb-comb-config-bundle-4');
+      if (cfg1) cfg1.style.setProperty('display', (qty === 1) ? 'flex' : 'none', 'important');
       if (cfg2) cfg2.style.setProperty('display', (qty === 2) ? 'flex' : 'none', 'important');
       if (cfg4) cfg4.style.setProperty('display', (qty === 4) ? 'flex' : 'none', 'important');
 
@@ -3351,23 +3375,34 @@ section:has(#pb-product-page-root),
       var cartUrl = '/cart' + (discountCode ? ('?discount=' + encodeURIComponent(discountCode)) : '');
 
       if (window.sbsdk && window.sbsdk.cart && typeof window.sbsdk.cart.add === 'function') {
-        window.sbsdk.cart.add({ items: items }).then(function() {
+        (async function() {
+          try {
+            for (var k = 0; k < items.length; k++) {
+              var itm = items[k];
+              await window.sbsdk.cart.add(Number(itm.variant_id) || itm.variant_id, itm.quantity || 1);
+            }
+          } catch (err) {
+            console.error('Error adding items to sbsdk cart:', err);
+          }
           window.location.href = cartUrl;
-        }).catch(function() {
+        })();
+        return;
+      }
+
+      if (window.sbsdk && typeof window.sbsdk.ready === 'function') {
+        window.sbsdk.ready(async function() {
+          try {
+            for (var k = 0; k < items.length; k++) {
+              var itm = items[k];
+              await window.sbsdk.cart.add(Number(itm.variant_id) || itm.variant_id, itm.quantity || 1);
+            }
+          } catch (err) {}
           window.location.href = cartUrl;
         });
         return;
       }
 
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ items: items })
-      }).then(function() {
-        window.location.href = cartUrl;
-      }).catch(function() {
-        window.location.href = cartUrl;
-      });
+      window.location.href = cartUrl;
     }
 
     if (heroAtc) heroAtc.addEventListener('click', handleAddToCart);

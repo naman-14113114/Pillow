@@ -249,7 +249,7 @@
 
     // Sticky Add to Cart Click
     if (atcBtn) {
-      atcBtn.addEventListener('click', function() {
+      atcBtn.addEventListener('click', async function() {
         var heroBtn = document.getElementById('hero-add-to-cart');
         if (heroBtn) {
           heroBtn.click();
@@ -291,23 +291,32 @@
         var cartUrl = '/cart' + (discountCode ? ('?discount=' + encodeURIComponent(discountCode)) : '');
 
         if (window.sbsdk && window.sbsdk.cart && typeof window.sbsdk.cart.add === 'function') {
-          window.sbsdk.cart.add({ items: items }).then(function() {
-            window.location.href = cartUrl;
-          }).catch(function() {
+          try {
+            for (var k = 0; k < items.length; k++) {
+              var itm = items[k];
+              await window.sbsdk.cart.add(Number(itm.variant_id) || itm.variant_id, itm.quantity || 1);
+            }
+          } catch (err) {
+            console.error('Error adding items to sbsdk cart:', err);
+          }
+          window.location.href = cartUrl;
+          return;
+        }
+
+        if (window.sbsdk && typeof window.sbsdk.ready === 'function') {
+          window.sbsdk.ready(async function() {
+            try {
+              for (var k = 0; k < items.length; k++) {
+                var itm = items[k];
+                await window.sbsdk.cart.add(Number(itm.variant_id) || itm.variant_id, itm.quantity || 1);
+              }
+            } catch (err) {}
             window.location.href = cartUrl;
           });
           return;
         }
 
-        fetch('/cart/add.js', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ items: items })
-        }).then(function() {
-          window.location.href = cartUrl;
-        }).catch(function() {
-          window.location.href = cartUrl;
-        });
+        window.location.href = cartUrl;
       });
     }
   }
