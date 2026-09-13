@@ -128,9 +128,24 @@
   text-overflow: ellipsis !important;
 }
 
+@keyframes pb-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#pb-prod-sec-sticky .pb-btn-spinner {
+  display: inline-block !important;
+  width: 18px !important;
+  height: 18px !important;
+  animation: pb-spin 0.8s linear infinite !important;
+  vertical-align: middle !important;
+  flex-shrink: 0 !important;
+}
+
 #pb-prod-sec-sticky .pb-stk-btn {
   display: inline-flex !important;
   align-items: center !important;
+  justify-content: center !important;
   gap: 8px !important;
   height: 46px !important;
   min-height: 46px !important;
@@ -146,6 +161,13 @@
   flex-shrink: 0 !important;
   box-shadow: 0 4px 14px rgba(7, 87, 217, 0.25) !important;
   transition: background 200ms ease, transform 200ms ease !important;
+}
+
+#pb-prod-sec-sticky .pb-stk-btn.is-loading {
+  pointer-events: none !important;
+  cursor: wait !important;
+  opacity: 1 !important;
+  filter: none !important;
 }
 
 #pb-prod-sec-sticky .pb-stk-btn:hover {
@@ -270,6 +292,10 @@
     // Sticky Add to Cart Click
     if (atcBtn) {
       atcBtn.addEventListener('click', async function() {
+        // Luxury Animated Loading State (Solid branded button, zero blur/opacity drop)
+        atcBtn.classList.add('is-loading');
+        atcBtn.innerHTML = '<svg class="pb-btn-spinner" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.28)" stroke-width="2.75"></circle><circle cx="12" cy="12" r="9" stroke="#ffffff" stroke-width="2.75" stroke-dasharray="20 40" stroke-linecap="round"></circle></svg><span style="font-weight:750;font-size:14px;">Adding to cart...</span>';
+
         // Suppress PlusBase Side Cart Drawer & Overlay
         var drawer = document.getElementById('default_cart_drawer') || document.querySelector('[id*="cart_drawer"]');
         var overlay = document.getElementById('popup-overlay-default_cart_drawer') || document.querySelector('[id*="popup-overlay"]');

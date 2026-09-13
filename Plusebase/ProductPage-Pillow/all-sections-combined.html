@@ -754,15 +754,18 @@ section:has(#pb-product-page-root),
   position: relative !important;
   display: flex !important;
   flex-direction: column !important;
-  border: 2px solid var(--pb-line) !important;
-  border-radius: 12px !important;
-  background: var(--pb-paper) !important;
-  overflow: hidden !important;
+  justify-content: space-between !important;
+  border: 1px solid var(--pb-line) !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
   transition: border-color 200ms ease, box-shadow 200ms ease, background 200ms ease !important;
 }
 
 #pb-product-page-root .pb-bundle-card.selected {
-  border-color: var(--pb-blue) !important;
+  border: 2px solid var(--pb-blue) !important;
   background: #ffffff !important;
   box-shadow: 0 4px 18px rgba(7, 87, 217, 0.12) !important;
 }
@@ -1032,31 +1035,65 @@ section:has(#pb-product-page-root),
   color: #ffffff !important;
 }
 
-/* Upsell Checkbox */
+/* Upsell Checkbox - Collinear & Flush to Card Bottom */
+#pb-product-page-root label.pb-bundle-upsell,
 #pb-product-page-root .pb-bundle-upsell {
-  display: flex !important;
-  align-items: center !important;
+  display: grid !important;
+  grid-template-columns: auto 1fr auto !important;
   gap: 10px !important;
-  padding: 10px 18px 14px !important;
-  background: var(--pb-mist) !important;
-  border-top: 1px solid var(--pb-line) !important;
+  min-height: 44px !important;
+  margin: 0 !important;
+  margin-top: auto !important;
+  margin-bottom: 0 !important;
+  padding: 10px 14px !important;
+  align-items: center !important;
+  border-radius: 0 0 8px 8px !important;
+  border-top: 1px solid #dce8f5 !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+  border-bottom: 0 !important;
+  background: #edf4fb !important;
+  color: var(--pb-ink) !important;
+  font-size: 12px !important;
+  font-weight: 750 !important;
   cursor: pointer !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+}
+
+#pb-product-page-root .pb-bundle-card.selected .pb-bundle-upsell {
+  border-radius: 0 0 7px 7px !important;
 }
 
 #pb-product-page-root .pb-bundle-upsell input {
-  width: 16px !important;
-  height: 16px !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
   accent-color: var(--pb-blue) !important;
   cursor: pointer !important;
 }
 
 #pb-product-page-root .pb-bundle-upsell span {
   font-size: 12px !important;
-  font-weight: 600 !important;
+  font-weight: 750 !important;
   color: var(--pb-ink) !important;
 }
 
-/* Primary ATC Button & Trust Badges */
+/* Primary ATC Button, Sticky ATC Button & Loading Spinner */
+@keyframes pb-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#pb-product-page-root .pb-btn-spinner {
+  display: inline-block !important;
+  width: 22px !important;
+  height: 22px !important;
+  animation: pb-spin 0.8s linear infinite !important;
+  vertical-align: middle !important;
+  flex-shrink: 0 !important;
+}
+
 #pb-product-page-root .pb-hero-atc-btn {
   display: flex !important;
   align-items: center !important;
@@ -1076,6 +1113,18 @@ section:has(#pb-product-page-root),
   cursor: pointer !important;
   transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease !important;
   margin-top: 6px !important;
+}
+
+#pb-product-page-root .pb-hero-atc-btn.is-loading,
+#pb-comb-sticky-bar .pb-sticky-atc-btn.is-loading {
+  pointer-events: none !important;
+  cursor: wait !important;
+  opacity: 1 !important;
+  filter: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
 }
 
 #pb-product-page-root .pb-hero-atc-btn:hover {
@@ -3373,8 +3422,12 @@ section:has(#pb-product-page-root),
       }
 
       if (heroAtc) {
-        heroAtc.style.opacity = '0.75';
-        heroAtc.style.cursor = 'wait';
+        heroAtc.classList.add('is-loading');
+        heroAtc.innerHTML = '<svg class="pb-btn-spinner" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.28)" stroke-width="2.75"></circle><circle cx="12" cy="12" r="9" stroke="#ffffff" stroke-width="2.75" stroke-dasharray="20 40" stroke-linecap="round"></circle></svg><span style="font-weight:750;font-size:16px;">Adding to cart...</span>';
+      }
+      if (stickyAtc) {
+        stickyAtc.classList.add('is-loading');
+        stickyAtc.innerHTML = '<svg class="pb-btn-spinner" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="rgba(255,255,255,0.28)" stroke-width="2.75"></circle><circle cx="12" cy="12" r="9" stroke="#ffffff" stroke-width="2.75" stroke-dasharray="20 40" stroke-linecap="round"></circle></svg><span style="font-weight:750;font-size:14px;">Adding to cart...</span>';
       }
 
       var activePillows = state.pillows.slice(0, state.selectedBundle);
