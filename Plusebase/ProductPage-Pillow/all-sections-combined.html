@@ -293,15 +293,18 @@ section:has(#pb-product-page-root),
   height: 100% !important;
   object-fit: cover !important;
   opacity: 0 !important;
-  transform: scale(1.02) !important;
-  transition: opacity 400ms var(--pb-ease), transform 600ms var(--pb-ease) !important;
+  transform: scale(1) !important;
+  transform-origin: center center !important;
+  transition: opacity 300ms var(--pb-ease), transform 160ms ease-out !important;
   pointer-events: none !important;
+  will-change: transform, transform-origin !important;
 }
 
 #pb-product-page-root .pb-hero-stage-slide.is-active {
   opacity: 1 !important;
   transform: scale(1) !important;
   pointer-events: auto !important;
+  z-index: 1 !important;
 }
 
 /* Stage Navigation Arrows */
@@ -313,22 +316,24 @@ section:has(#pb-product-page-root),
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 38px !important;
-  height: 38px !important;
-  min-height: 38px !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-height: 40px !important;
   border-radius: 50% !important;
-  background: rgba(255, 255, 255, 0.9) !important;
+  background: #ffffff !important;
+  border: 1px solid rgba(6, 23, 59, 0.08) !important;
   color: var(--pb-navy) !important;
-  box-shadow: 0 4px 12px rgba(6, 23, 59, 0.15) !important;
+  box-shadow: 0 2px 8px rgba(6, 23, 59, 0.15), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
   cursor: pointer !important;
-  transition: background 200ms ease, transform 200ms ease, opacity 200ms ease !important;
-  opacity: 0.88 !important;
+  opacity: 1 !important;
+  transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease !important;
 }
 
 #pb-product-page-root .pb-hero-stage-arrow:hover {
   background: #ffffff !important;
   opacity: 1 !important;
   transform: translateY(-50%) scale(1.08) !important;
+  box-shadow: 0 4px 14px rgba(6, 23, 59, 0.22) !important;
 }
 
 #pb-product-page-root .pb-hero-stage-arrow.is-prev { left: 12px !important; }
@@ -337,7 +342,9 @@ section:has(#pb-product-page-root),
 #pb-product-page-root .pb-hero-stage-arrow svg {
   width: 20px !important;
   height: 20px !important;
+  stroke: var(--pb-navy) !important;
   stroke-width: 2.5 !important;
+  display: block !important;
 }
 
 /* Lightbox Modal Popup (Miroooo Pattern) */
@@ -2794,6 +2801,8 @@ section:has(#pb-product-page-root),
 
       slides.forEach(function(slide, i) {
         slide.classList.toggle('is-active', i === currentIndex);
+        slide.style.setProperty('transform-origin', 'center center', 'important');
+        slide.style.setProperty('transform', 'scale(1)', 'important');
       });
 
       thumbs.forEach(function(thumb, i) {
@@ -2891,6 +2900,37 @@ section:has(#pb-product-page-root),
 
     bindTouchSwipe(stage, function() { setSlide(currentIndex - 1); }, function() { setSlide(currentIndex + 1); });
     bindTouchSwipe(lightbox, function() { setSlide(currentIndex - 1); }, function() { setSlide(currentIndex + 1); });
+
+    // Miroooo Hover Magnification Engine
+    var zoomScale = 2; // 2x luxury magnification
+
+    function handleMouseMove(e) {
+      if (window.innerWidth <= 960 || !stage) return;
+      var activeImg = stage.querySelector('.pb-hero-stage-slide.is-active');
+      if (!activeImg) return;
+
+      var rect = stage.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width) * 100;
+      var y = ((e.clientY - rect.top) / rect.height) * 100;
+      x = Math.max(0, Math.min(100, x));
+      y = Math.max(0, Math.min(100, y));
+
+      activeImg.style.setProperty('transform-origin', x.toFixed(2) + '% ' + y.toFixed(2) + '%', 'important');
+      activeImg.style.setProperty('transform', 'scale(' + zoomScale + ')', 'important');
+    }
+
+    function handleMouseLeave() {
+      if (!stage) return;
+      var activeImg = stage.querySelector('.pb-hero-stage-slide.is-active');
+      if (!activeImg) return;
+      activeImg.style.setProperty('transform-origin', 'center center', 'important');
+      activeImg.style.setProperty('transform', 'scale(1)', 'important');
+    }
+
+    if (stage) {
+      stage.addEventListener('mousemove', handleMouseMove);
+      stage.addEventListener('mouseleave', handleMouseLeave);
+    }
 
     // 3. MAIN COLOUR & HEIGHT CONTROLLERS
     var swatchBtns = root.querySelectorAll('#pb-comb-hero-swatches button');
