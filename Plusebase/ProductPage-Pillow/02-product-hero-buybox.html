@@ -25,24 +25,6 @@ section:has(#pb-prod-sec-hero),
   contain: none !important;
 }
 
-/* Suppress PlusBase Side Cart Drawer & Overlay (Direct to /cart page flow) */
-#default_cart_drawer,
-#popup-overlay-default_cart_drawer,
-[id*="cart_drawer"],
-[id*="cart-drawer"],
-.section-popup:has([id*="cart_drawer"]),
-.section-popup:has([id*="cart-drawer"]),
-.wb-cart-drawer,
-.cart-drawer,
-.side-cart,
-.mini-cart {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-  transform: translateX(100%) !important;
-}
-
 #pb-prod-sec-hero {
   --pb-navy: #06173b;
   --pb-ink: #10223f;
