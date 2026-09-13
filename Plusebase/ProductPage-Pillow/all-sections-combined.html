@@ -27,6 +27,26 @@ section:has(#pb-product-page-root),
   contain: none !important;
 }
 
+/* Suppress side cart drawer ONLY during Add to Cart flow, keeping header cart icon 100% functional */
+body.pb-atc-in-progress #default_cart_drawer,
+body.pb-atc-in-progress #popup-overlay-default_cart_drawer,
+body.pb-atc-in-progress [id*="cart_drawer"],
+body.pb-atc-in-progress [id*="cart-drawer"],
+body.pb-atc-in-progress [data-section-id*="cart_drawer"],
+body.pb-atc-in-progress [data-section-id*="cart-drawer"],
+body.pb-atc-in-progress .section-popup:has([id*="cart_drawer"]),
+body.pb-atc-in-progress .section-popup:has([id*="cart-drawer"]),
+body.pb-atc-in-progress .wb-cart-drawer,
+body.pb-atc-in-progress .cart-drawer,
+body.pb-atc-in-progress .side-cart,
+body.pb-atc-in-progress .mini-cart {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateX(100%) !important;
+}
+
 #pb-product-page-root {
   --pb-navy: #06173b;
   --pb-ink: #10223f;
@@ -3387,19 +3407,8 @@ section:has(#pb-product-page-root),
       if (isSubmitting) return;
       isSubmitting = true;
 
-      // Suppress PlusBase Side Cart Drawer & Overlay
-      var drawer = document.getElementById('default_cart_drawer') || document.querySelector('[id*="cart_drawer"]');
-      var overlay = document.getElementById('popup-overlay-default_cart_drawer') || document.querySelector('[id*="popup-overlay"]');
-      if (drawer) {
-        drawer.style.setProperty('display', 'none', 'important');
-        drawer.style.setProperty('opacity', '0', 'important');
-        drawer.style.setProperty('visibility', 'hidden', 'important');
-      }
-      if (overlay) {
-        overlay.style.setProperty('display', 'none', 'important');
-        overlay.style.setProperty('opacity', '0', 'important');
-        overlay.style.setProperty('visibility', 'hidden', 'important');
-      }
+      // Activate ATC in-progress state to suppress drawer popup only for this action
+      document.body.classList.add('pb-atc-in-progress');
 
       if (heroAtc) {
         heroAtc.classList.add('is-loading');
@@ -3512,6 +3521,12 @@ section:has(#pb-product-page-root),
         p = p.parentElement;
       }
     } catch (e) {}
+    // Ensure header cart clicks work normally and clear any in-progress state
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#hero-add-to-cart') && !e.target.closest('#pb-sticky-atc-btn') && !e.target.closest('#pb-comb-sticky-atc-btn')) {
+        document.body.classList.remove('pb-atc-in-progress');
+      }
+    }, true);
   }
 
   if (document.readyState === 'loading') {
