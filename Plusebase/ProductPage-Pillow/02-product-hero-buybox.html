@@ -234,10 +234,8 @@ section:has(#pb-prod-sec-hero),
   object-fit: cover !important;
   opacity: 0 !important;
   transform: scale(1) !important;
-  transform-origin: center center !important;
-  transition: opacity 300ms var(--pb-ease), transform 160ms ease-out !important;
+  transition: opacity 360ms var(--pb-ease), transform 500ms var(--pb-ease) !important;
   pointer-events: none !important;
-  will-change: transform, transform-origin !important;
 }
 
 #pb-prod-sec-hero .pb-hero-slide.is-active {
@@ -715,6 +713,10 @@ section:has(#pb-prod-sec-hero),
 #pb-prod-sec-hero .pb-bundle-badge-popular strong {
   font-size: 15px !important;
   font-weight: 800 !important;
+}
+
+#pb-prod-sec-hero #pb-bundle-card-2 .pb-bundle-prices {
+  padding-top: 8px !important;
 }
 
 #pb-prod-sec-hero .pb-bundle-badge-value {
@@ -1896,8 +1898,6 @@ section:has(#pb-prod-sec-hero),
 
       slides.forEach(function(s, i) {
         s.classList.toggle('is-active', i === index);
-        s.style.setProperty('transform-origin', 'center center', 'important');
-        s.style.setProperty('transform', 'scale(1)', 'important');
       });
 
       thumbs.forEach(function(t, i) {
@@ -1974,36 +1974,7 @@ section:has(#pb-prod-sec-hero),
       }
     }, { passive: true });
 
-    // Miroooo Hover Magnification Engine
-    var zoomScale = 2; // 2x luxury magnification
 
-    function handleMouseMove(e) {
-      if (window.innerWidth <= 960 || !stageWrap) return;
-      var activeImg = stageWrap.querySelector('.pb-hero-slide.is-active');
-      if (!activeImg) return;
-
-      var rect = stageWrap.getBoundingClientRect();
-      var x = ((e.clientX - rect.left) / rect.width) * 100;
-      var y = ((e.clientY - rect.top) / rect.height) * 100;
-      x = Math.max(0, Math.min(100, x));
-      y = Math.max(0, Math.min(100, y));
-
-      activeImg.style.setProperty('transform-origin', x.toFixed(2) + '% ' + y.toFixed(2) + '%', 'important');
-      activeImg.style.setProperty('transform', 'scale(' + zoomScale + ')', 'important');
-    }
-
-    function handleMouseLeave() {
-      if (!stageWrap) return;
-      var activeImg = stageWrap.querySelector('.pb-hero-slide.is-active');
-      if (!activeImg) return;
-      activeImg.style.setProperty('transform-origin', 'center center', 'important');
-      activeImg.style.setProperty('transform', 'scale(1)', 'important');
-    }
-
-    if (stageWrap) {
-      stageWrap.addEventListener('mousemove', handleMouseMove);
-      stageWrap.addEventListener('mouseleave', handleMouseLeave);
-    }
 
     // =========================================================================
     // MIROOOO LIGHTBOX MODAL ENGINE

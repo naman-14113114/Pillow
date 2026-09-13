@@ -294,10 +294,8 @@ section:has(#pb-product-page-root),
   object-fit: cover !important;
   opacity: 0 !important;
   transform: scale(1) !important;
-  transform-origin: center center !important;
-  transition: opacity 300ms var(--pb-ease), transform 160ms ease-out !important;
+  transition: opacity 360ms var(--pb-ease), transform 500ms var(--pb-ease) !important;
   pointer-events: none !important;
-  will-change: transform, transform-origin !important;
 }
 
 #pb-product-page-root .pb-hero-stage-slide.is-active {
@@ -710,6 +708,10 @@ section:has(#pb-product-page-root),
 #pb-product-page-root .pb-bundle-badge-popular strong {
   font-size: 15px !important;
   font-weight: 800 !important;
+}
+
+#pb-product-page-root .pb-bundle-card[data-bundle="2"] .pb-bundle-prices {
+  padding-top: 8px !important;
 }
 
 #pb-product-page-root .pb-bundle-badge-value {
@@ -2801,8 +2803,6 @@ section:has(#pb-product-page-root),
 
       slides.forEach(function(slide, i) {
         slide.classList.toggle('is-active', i === currentIndex);
-        slide.style.setProperty('transform-origin', 'center center', 'important');
-        slide.style.setProperty('transform', 'scale(1)', 'important');
       });
 
       thumbs.forEach(function(thumb, i) {
@@ -2901,36 +2901,7 @@ section:has(#pb-product-page-root),
     bindTouchSwipe(stage, function() { setSlide(currentIndex - 1); }, function() { setSlide(currentIndex + 1); });
     bindTouchSwipe(lightbox, function() { setSlide(currentIndex - 1); }, function() { setSlide(currentIndex + 1); });
 
-    // Miroooo Hover Magnification Engine
-    var zoomScale = 2; // 2x luxury magnification
 
-    function handleMouseMove(e) {
-      if (window.innerWidth <= 960 || !stage) return;
-      var activeImg = stage.querySelector('.pb-hero-stage-slide.is-active');
-      if (!activeImg) return;
-
-      var rect = stage.getBoundingClientRect();
-      var x = ((e.clientX - rect.left) / rect.width) * 100;
-      var y = ((e.clientY - rect.top) / rect.height) * 100;
-      x = Math.max(0, Math.min(100, x));
-      y = Math.max(0, Math.min(100, y));
-
-      activeImg.style.setProperty('transform-origin', x.toFixed(2) + '% ' + y.toFixed(2) + '%', 'important');
-      activeImg.style.setProperty('transform', 'scale(' + zoomScale + ')', 'important');
-    }
-
-    function handleMouseLeave() {
-      if (!stage) return;
-      var activeImg = stage.querySelector('.pb-hero-stage-slide.is-active');
-      if (!activeImg) return;
-      activeImg.style.setProperty('transform-origin', 'center center', 'important');
-      activeImg.style.setProperty('transform', 'scale(1)', 'important');
-    }
-
-    if (stage) {
-      stage.addEventListener('mousemove', handleMouseMove);
-      stage.addEventListener('mouseleave', handleMouseLeave);
-    }
 
     // 3. MAIN COLOUR & HEIGHT CONTROLLERS
     var swatchBtns = root.querySelectorAll('#pb-comb-hero-swatches button');
