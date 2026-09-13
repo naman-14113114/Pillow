@@ -6,24 +6,14 @@
 ========================================================================== -->
 
 <style>
-/* PlusBase Builder Zero-Gutter & Overflow Normalization */
-.wb-builder,
-.wb-builder .wb-section,
-.wb-builder .wb-builder__section--container,
-.wb-builder .wb-block-custom-html,
-.wb-builder .column-inner,
-.wb-builder .custom-code,
-.wb-builder .custom-code__content,
-.wb-builder .pb-hero-wrap,
-.wb-builder #pb-prod-sec-hero {
+/* PlusBase Wrapper Normalization (Scoped Strictly to this Custom Section via :has) */
+.wb-section:has(#pb-prod-sec-hero),
+.column-inner:has(#pb-prod-sec-hero),
+.custom-code:has(#pb-prod-sec-hero),
+.custom-code__content:has(#pb-prod-sec-hero) {
   margin: 0 !important;
   padding: 0 !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
   overflow: visible !important;
-  overflow-x: visible !important;
-  overflow-y: visible !important;
 }
 
 #pb-prod-sec-hero {
@@ -100,6 +90,17 @@
   position: relative !important;
   min-width: 0 !important;
   overflow: visible !important;
+}
+
+@media (min-width: 961px) {
+  #pb-prod-sec-hero .pb-hero-gallery-col {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    top: 24px !important;
+    align-self: start !important;
+    height: fit-content !important;
+    z-index: 5 !important;
+  }
 }
 
 #pb-prod-sec-hero .pb-hero-gallery-layout {
@@ -722,9 +723,25 @@
 
 /* Bundle Config Dropdowns (Pillow 1, Pillow 2, etc.) */
 #pb-prod-sec-hero .pb-bundle-config {
-  display: grid !important;
+  display: none !important;
   gap: 8px !important;
   padding: 2px 14px 12px !important;
+  box-sizing: border-box !important;
+}
+
+#pb-prod-sec-hero .pb-bundle-card.selected .pb-bundle-config {
+  display: grid !important;
+}
+
+#pb-prod-sec-hero #pb-bundle-card-1 .pb-bundle-config,
+#pb-prod-sec-hero #pb-bundle-card-2:not(.selected) #pb-config-bundle-2,
+#pb-prod-sec-hero #pb-bundle-card-4:not(.selected) #pb-config-bundle-4 {
+  display: none !important;
+}
+
+#pb-prod-sec-hero #pb-bundle-card-2.selected #pb-config-bundle-2,
+#pb-prod-sec-hero #pb-bundle-card-4.selected #pb-config-bundle-4 {
+  display: grid !important;
 }
 
 #pb-prod-sec-hero .pb-bundle-config p {
@@ -1202,8 +1219,12 @@
     min-height: 68px !important;
   }
 
+  #pb-prod-sec-hero .pb-hero-gallery-col,
   #pb-prod-sec-hero .pb-purchase-panel {
     position: static !important;
+    top: auto !important;
+    align-self: auto !important;
+    height: auto !important;
   }
 
   #pb-prod-sec-hero .pb-customer-quote.pb-desktop-quote {
@@ -1709,8 +1730,8 @@
   // 4 Colour Variant Images
   var variantImages = {
     'white': 'https://e-assets.beeketing.net/10690/10690847/themes/1789267483ad01c077dd.png',
-    'grey':  'https://e-assets.beeketing.net/10690/10690847/themes/1789269720ae4d4e7c78.jpeg',
-    'blue':  'https://e-assets.beeketing.net/10690/10690847/themes/17892697294e1cdac6bb.jpeg',
+    'grey':  'https://e-assets.beeketing.net/10690/10690847/themes/17892697294e1cdac6bb.jpeg',
+    'blue':  'https://e-assets.beeketing.net/10690/10690847/themes/1789269720ae4d4e7c78.jpeg',
     'navy':  'https://e-assets.beeketing.net/10690/10690847/themes/17892697457e14a8efdf.jpeg'
   };
 
@@ -2068,16 +2089,22 @@
 
     function selectBundle(quantity) {
       state.selectedBundle = quantity;
+
       bundleCards.forEach(function(card) {
-        var isSelected = parseInt(card.dataset.bundle, 10) === quantity;
+        var cardQty = parseInt(card.dataset.bundle, 10);
+        var isSelected = (cardQty === quantity);
         card.classList.toggle('selected', isSelected);
       });
 
       var config2 = document.getElementById('pb-config-bundle-2');
       var config4 = document.getElementById('pb-config-bundle-4');
 
-      if (config2) config2.style.display = (quantity === 2) ? 'grid' : 'none';
-      if (config4) config4.style.display = (quantity === 4) ? 'grid' : 'none';
+      if (config2) {
+        config2.style.setProperty('display', (quantity === 2) ? 'grid' : 'none', 'important');
+      }
+      if (config4) {
+        config4.style.setProperty('display', (quantity === 4) ? 'grid' : 'none', 'important');
+      }
 
       // Sync active upsell checkbox
       if (quantity === 1 && upsell1) state.includeCovers = upsell1.checked;
@@ -2085,6 +2112,7 @@
       if (quantity === 4 && upsell4) state.includeCovers = upsell4.checked;
 
       updatePricing();
+      broadcastState();
     }
 
     function updateAllBundleSwatches() {
@@ -2116,24 +2144,36 @@
 
     // Swatch Clicks (Main Hero)
     heroSwatches.forEach(function(btn) {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
         selectMainColour(this.dataset.colour);
       });
     });
 
     // Height Clicks (Main Hero)
     heroHeights.forEach(function(btn) {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
         selectHeight(this.dataset.height);
       });
     });
 
-    // Bundle Card Clicks
+    // Bundle Card Clicks (Clicking anywhere on card selects it)
     bundleCards.forEach(function(card) {
+      var bundleQty = parseInt(card.dataset.bundle, 10);
+
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('.pb-bundle-config') || e.target.closest('.pb-bundle-upsell')) {
+          return;
+        }
+        selectBundle(bundleQty);
+      });
+
       var choiceBtn = card.querySelector('.pb-bundle-choice');
       if (choiceBtn) {
-        choiceBtn.addEventListener('click', function() {
-          selectBundle(parseInt(card.dataset.bundle, 10));
+        choiceBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          selectBundle(bundleQty);
         });
       }
     });
@@ -2143,7 +2183,8 @@
       var pIdx = parseInt(row.dataset.pillowIdx, 10);
 
       row.querySelectorAll('.pb-bundle-swatches button').forEach(function(btn) {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
           if (state.pillows[pIdx]) {
             state.pillows[pIdx].colour = this.dataset.c;
             updateAllBundleSwatches();
@@ -2153,7 +2194,8 @@
       });
 
       row.querySelectorAll('.pb-bundle-height-choice button').forEach(function(btn) {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
           if (state.pillows[pIdx]) {
             state.pillows[pIdx].height = this.dataset.h;
             updateAllBundleHeights();
@@ -2244,6 +2286,20 @@
     // Initialize Default State
     selectBundle(2);
     selectMainColour('white');
+
+    // Ensure PlusBase container ancestors do not trap position:sticky
+    try {
+      var p = root.parentElement;
+      while (p && p !== document.documentElement) {
+        var comp = window.getComputedStyle(p);
+        if (comp.overflow === 'hidden' || comp.overflowX === 'hidden' || comp.overflowY === 'hidden') {
+          p.style.setProperty('overflow', 'visible', 'important');
+          p.style.setProperty('overflow-x', 'visible', 'important');
+          p.style.setProperty('overflow-y', 'visible', 'important');
+        }
+        p = p.parentElement;
+      }
+    } catch (e) {}
   }
 
   if (document.readyState === 'loading') {

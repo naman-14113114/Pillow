@@ -5,19 +5,13 @@
 ========================================================================== -->
 
 <style>
-/* PlusBase Builder Zero-Gutter Overrides */
-.wb-builder #pb-prod-sec-counter,
-.wb-builder .pb-cnt-wrap,
-.wb-builder .wb-block-custom-html,
-.wb-builder .wb-section,
-.wb-builder .column-inner,
-.wb-builder .custom-code,
-.wb-builder .custom-code__content {
+/* PlusBase Wrapper Normalization (Scoped Strictly to this Custom Section via :has) */
+.wb-section:has(#pb-prod-sec-counter),
+.column-inner:has(#pb-prod-sec-counter),
+.custom-code:has(#pb-prod-sec-counter),
+.custom-code__content:has(#pb-prod-sec-counter) {
   margin: 0 !important;
   padding: 0 !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
 }
 
 #pb-prod-sec-counter {
@@ -47,6 +41,7 @@
   z-index: 5 !important;
 }
 
+#pb-prod-sec-counter,
 #pb-prod-sec-counter *,
 #pb-prod-sec-counter *::before,
 #pb-prod-sec-counter *::after {
@@ -108,11 +103,12 @@
 
 #pb-prod-sec-counter .pb-cnt-ring {
   position: relative !important;
-  display: grid !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   width: 130px !important;
   height: 130px !important;
-  place-items: center !important;
-  border-radius: 50% !important;
+  margin: 0 auto !important;
 }
 
 #pb-prod-sec-counter .pb-cnt-ring svg {
@@ -121,28 +117,30 @@
   width: 100% !important;
   height: 100% !important;
   transform: rotate(-90deg) !important;
+  display: block !important;
 }
 
 #pb-prod-sec-counter .pb-cnt-track,
 #pb-prod-sec-counter .pb-cnt-progress {
   fill: none !important;
-  stroke-width: 8 !important;
+  stroke-width: 8px !important;
 }
 
 #pb-prod-sec-counter .pb-cnt-track {
-  stroke: var(--pb-line) !important;
+  stroke: #cbd9e8 !important;
 }
 
 #pb-prod-sec-counter .pb-cnt-progress {
   stroke: var(--pb-blue) !important;
-  stroke-dasharray: 100 !important;
-  stroke-dashoffset: 100 !important;
+  stroke-dasharray: 314.16 !important;
+  stroke-dashoffset: 314.16 !important;
   stroke-linecap: round !important;
-  transition: stroke-dashoffset 1.1s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
 #pb-prod-sec-counter .pb-cnt-ring span {
   position: relative !important;
+  z-index: 2 !important;
   color: var(--pb-blue) !important;
   font-size: 28px !important;
   font-weight: 750 !important;
@@ -151,7 +149,7 @@
 
 #pb-prod-sec-counter .pb-cnt-card p {
   max-width: 220px !important;
-  margin: 12px 0 0 !important;
+  margin: 14px 0 0 !important;
   color: var(--pb-ink) !important;
   font-size: 13px !important;
   line-height: 1.45 !important;
@@ -211,9 +209,9 @@
       <!-- Ring 1: 95% -->
       <article class="pb-cnt-card">
         <div class="pb-cnt-ring" data-target="95">
-          <svg viewBox="0 0 120 120" aria-hidden="true">
-            <circle class="pb-cnt-track" cx="60" cy="60" r="51" />
-            <circle class="pb-cnt-progress" cx="60" cy="60" r="51" pathLength="100" />
+          <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
+            <circle class="pb-cnt-track" cx="60" cy="60" r="50" />
+            <circle class="pb-cnt-progress" cx="60" cy="60" r="50" />
           </svg>
           <span class="pb-cnt-number">0%</span>
         </div>
@@ -223,9 +221,9 @@
       <!-- Ring 2: 98% -->
       <article class="pb-cnt-card">
         <div class="pb-cnt-ring" data-target="98">
-          <svg viewBox="0 0 120 120" aria-hidden="true">
-            <circle class="pb-cnt-track" cx="60" cy="60" r="51" />
-            <circle class="pb-cnt-progress" cx="60" cy="60" r="51" pathLength="100" />
+          <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
+            <circle class="pb-cnt-track" cx="60" cy="60" r="50" />
+            <circle class="pb-cnt-progress" cx="60" cy="60" r="50" />
           </svg>
           <span class="pb-cnt-number">0%</span>
         </div>
@@ -235,9 +233,9 @@
       <!-- Ring 3: 92% -->
       <article class="pb-cnt-card">
         <div class="pb-cnt-ring" data-target="92">
-          <svg viewBox="0 0 120 120" aria-hidden="true">
-            <circle class="pb-cnt-track" cx="60" cy="60" r="51" />
-            <circle class="pb-cnt-progress" cx="60" cy="60" r="51" pathLength="100" />
+          <svg viewBox="0 0 120 120" width="120" height="120" aria-hidden="true">
+            <circle class="pb-cnt-track" cx="60" cy="60" r="50" />
+            <circle class="pb-cnt-progress" cx="60" cy="60" r="50" />
           </svg>
           <span class="pb-cnt-number">0%</span>
         </div>
@@ -245,7 +243,7 @@
       </article>
     </div>
 
-    <a class="pb-cnt-shop-btn" href="#product">Shop Now</a>
+    <a class="pb-cnt-shop-btn" href="#pb-prod-sec-hero">Shop Now</a>
 
   </div>
 </div>
@@ -258,43 +256,44 @@
     root.dataset.initialized = 'true';
 
     var rings = root.querySelectorAll('.pb-cnt-ring');
+    var circumference = 314.16; // 2 * PI * 50
+
+    function animateRing(ring) {
+      var targetVal = parseInt(ring.dataset.target, 10) || 0;
+      var circle = ring.querySelector('.pb-cnt-progress');
+      var label = ring.querySelector('.pb-cnt-number');
+
+      if (circle) {
+        var offset = circumference * (1 - targetVal / 100);
+        circle.style.strokeDashoffset = offset + 'px';
+      }
+
+      var startedAt = performance.now();
+      var duration = 1200;
+
+      function updateNumber(now) {
+        var progress = Math.min((now - startedAt) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 4);
+        var currentVal = Math.round(targetVal * eased);
+        if (label) label.textContent = currentVal + '%';
+        if (progress < 1) requestAnimationFrame(updateNumber);
+      }
+
+      requestAnimationFrame(updateNumber);
+    }
 
     if ('IntersectionObserver' in window) {
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
           if (!entry.isIntersecting) return;
-          var ring = entry.target;
-          var targetVal = parseInt(ring.dataset.target, 10) || 0;
-          var circle = ring.querySelector('.pb-cnt-progress');
-          var label = ring.querySelector('.pb-cnt-number');
-
-          if (circle) circle.style.strokeDashoffset = 100 - targetVal;
-
-          var startedAt = performance.now();
-          var duration = 1100;
-
-          function updateNumber(now) {
-            var progress = Math.min((now - startedAt) / duration, 1);
-            var eased = 1 - Math.pow(1 - progress, 4);
-            var currentVal = Math.round(targetVal * eased);
-            if (label) label.textContent = currentVal + '%';
-            if (progress < 1) requestAnimationFrame(updateNumber);
-          }
-
-          requestAnimationFrame(updateNumber);
-          observer.unobserve(ring);
+          animateRing(entry.target);
+          observer.unobserve(entry.target);
         });
-      }, { threshold: 0.35 });
+      }, { threshold: 0.25 });
 
       rings.forEach(function(ring) { observer.observe(ring); });
     } else {
-      rings.forEach(function(ring) {
-        var targetVal = parseInt(ring.dataset.target, 10) || 0;
-        var circle = ring.querySelector('.pb-cnt-progress');
-        var label = ring.querySelector('.pb-cnt-number');
-        if (circle) circle.style.strokeDashoffset = 100 - targetVal;
-        if (label) label.textContent = targetVal + '%';
-      });
+      rings.forEach(function(ring) { animateRing(ring); });
     }
   }
 
@@ -303,5 +302,6 @@
   } else {
     initCountup();
   }
+  window.addEventListener('plusbase:custom-html:ready', initCountup);
 })();
 </script>

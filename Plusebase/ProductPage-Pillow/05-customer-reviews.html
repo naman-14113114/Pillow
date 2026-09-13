@@ -5,18 +5,13 @@
 ========================================================================== -->
 
 <style>
-/* PlusBase Builder Zero-Gutter Overrides */
-.wb-builder .pb-prod-reviews-wrap,
-.wb-builder .wb-block-custom-html,
-.wb-builder .wb-section,
-.wb-builder .column-inner,
-.wb-builder .custom-code,
-.wb-builder .custom-code__content {
+/* PlusBase Wrapper Normalization (Scoped Strictly to this Custom Section via :has) */
+.wb-section:has(#pb-prod-sec-reviews),
+.column-inner:has(#pb-prod-sec-reviews),
+.custom-code:has(#pb-prod-sec-reviews),
+.custom-code__content:has(#pb-prod-sec-reviews) {
   margin: 0 !important;
   padding: 0 !important;
-  max-width: 100% !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
 }
 
 #pb-prod-sec-reviews {

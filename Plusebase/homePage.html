@@ -9,19 +9,12 @@
     /* ==========================================================================
        PLUSBASE ZERO-GUTTER OVERRIDES & CSS RESET
        ========================================================================== */
-    .wb-builder #pb-custom-home-root,
-    .wb-builder .wb-custom-html,
-    .wb-builder .wb-block-custom-html,
-    .wb-builder .wb-section,
-    .wb-builder .wb-builder__section--container,
-    .wb-builder .column-inner,
-    .wb-builder .custom-code,
-    .wb-builder .custom-code__content {
+    .wb-section:has(#pb-custom-home-root),
+    .column-inner:has(#pb-custom-home-root),
+    .custom-code:has(#pb-custom-home-root),
+    .custom-code__content:has(#pb-custom-home-root) {
       margin: 0 !important;
       padding: 0 !important;
-      max-width: 100% !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
     }
 
     /* Scoped Custom Theme Variables */
