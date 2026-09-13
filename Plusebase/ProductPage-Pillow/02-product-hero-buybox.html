@@ -1,7 +1,6 @@
 <!-- ==========================================================================
-  PLUSBASE CUSTOM HTML SECTION: 02 - PRODUCT HERO GALLERY & BUY BOX
-  Product: Ruuhu OrthoAlign™ Pillow
-  PlusBase Product ID: 1000000663256638
+  PLUSBASE CUSTOM HTML SECTION: 02 - PRODUCT HERO & BUY BOX
+  Product: RestArch Pillow
   Deployment: Copy & paste directly into a PlusBase Custom HTML section block.
 ========================================================================== -->
 
@@ -701,34 +700,72 @@ section:has(#pb-prod-sec-hero),
 
 #pb-prod-sec-hero .pb-bundle-badge-popular {
   position: absolute !important;
-  top: -14px !important;
-  right: -6px !important;
+  top: -18px !important;
+  right: 20px !important;
   display: grid !important;
-  width: 82px !important;
-  height: 36px !important;
+  width: 88px !important;
+  height: 40px !important;
   place-content: center !important;
   border: 1px solid #ffffff !important;
   border-radius: 50% !important;
+  box-shadow: 0 0 0 1px var(--pb-blue) !important;
   background: var(--pb-blue) !important;
   color: #ffffff !important;
+  font-family: Georgia, "Times New Roman", serif !important;
   font-size: 11px !important;
   font-weight: 800 !important;
   text-align: center !important;
-  line-height: 1.05 !important;
+  line-height: 0.85 !important;
+  transform: rotate(2deg) !important;
   pointer-events: none !important;
+  z-index: 4 !important;
+}
+
+#pb-prod-sec-hero .pb-bundle-badge-popular span {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+#pb-prod-sec-hero .pb-bundle-badge-popular strong {
+  font-size: 15px !important;
+  font-weight: 800 !important;
 }
 
 #pb-prod-sec-hero .pb-bundle-badge-value {
   position: absolute !important;
-  top: 12px !important;
-  right: 14px !important;
-  padding: 4px 8px !important;
+  top: -11px !important;
+  right: 20px !important;
+  padding: 4px 12px !important;
   border-radius: 4px !important;
   background: var(--pb-blue) !important;
   color: #ffffff !important;
-  font-size: 11px !important;
+  font-size: 11.5px !important;
   font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  text-align: center !important;
   pointer-events: none !important;
+  z-index: 4 !important;
+  box-shadow: 0 2px 6px rgba(7, 87, 217, 0.25) !important;
+}
+
+#pb-prod-sec-hero .pb-bundle-badge-value::before,
+#pb-prod-sec-hero .pb-bundle-badge-value::after {
+  position: absolute !important;
+  top: 0 !important;
+  width: 8px !important;
+  height: 100% !important;
+  background: var(--pb-blue) !important;
+  content: "" !important;
+}
+
+#pb-prod-sec-hero .pb-bundle-badge-value::before {
+  left: -5px !important;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%) !important;
+}
+
+#pb-prod-sec-hero .pb-bundle-badge-value::after {
+  right: -5px !important;
+  clip-path: polygon(0 0, 100% 100%, 0 100%) !important;
 }
 
 /* Bundle Config Dropdowns (Pillow 1, Pillow 2, etc.) */
@@ -1286,17 +1323,17 @@ section:has(#pb-prod-sec-hero),
           </button>
 
           <div class="pb-hero-nav-track" id="pb-hero-nav-track">
-            <button type="button" class="pb-hero-thumb is-active" data-index="0" aria-label="Product image 1"><img id="pb-thumb-img-0" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267483ad01c077dd.png" alt="Ruuhu OrthoAlign Pillow #1 Best Seller" /></button>
-            <button type="button" class="pb-hero-thumb" data-index="1" aria-label="Product image 2"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926751800b5511e60.png" alt="OrthoAlign pillow six-zone support diagram" /></button>
-            <button type="button" class="pb-hero-thumb" data-index="2" aria-label="Product image 3"><img src="https://e-assets.beeketing.net/10690/10690847/themes/1789267545abb5ce3e53.png" alt="OrthoAlign pillow supporting a sleeping model" /></button>
-            <button type="button" class="pb-hero-thumb" data-index="3" aria-label="Product image 4"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926756321e94f92a1.png" alt="OrthoAlign Regular and High pillow size guide" /></button>
-            <button type="button" class="pb-hero-thumb" data-index="4" aria-label="Product image 5"><img src="https://e-assets.beeketing.net/10690/10690847/themes/1789267579fc98524819.png" alt="OrthoAlign pillow colour collection" /></button>
-            <button type="button" class="pb-hero-thumb" data-index="5" aria-label="Product image 6"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926760210b7ed0a5e.png" alt="OrthoAlign pillow in four sleeping positions" /></button>
+            <button type="button" class="pb-hero-thumb is-active" data-index="0" aria-label="Product image 1"><img id="pb-thumb-img-0" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267483ad01c077dd.png" alt="RestArch Pillow #1 Best Seller" /></button>
+            <button type="button" class="pb-hero-thumb" data-index="1" aria-label="Product image 2"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926751800b5511e60.png" alt="RestArch Pillow six-zone support diagram" /></button>
+            <button type="button" class="pb-hero-thumb" data-index="2" aria-label="Product image 3"><img src="https://e-assets.beeketing.net/10690/10690847/themes/1789267545abb5ce3e53.png" alt="RestArch Pillow supporting a sleeping model" /></button>
+            <button type="button" class="pb-hero-thumb" data-index="3" aria-label="Product image 4"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926756321e94f92a1.png" alt="RestArch Pillow Regular and High size guide" /></button>
+            <button type="button" class="pb-hero-thumb" data-index="4" aria-label="Product image 5"><img src="https://e-assets.beeketing.net/10690/10690847/themes/1789267579fc98524819.png" alt="RestArch Pillow colour collection" /></button>
+            <button type="button" class="pb-hero-thumb" data-index="5" aria-label="Product image 6"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926760210b7ed0a5e.png" alt="RestArch Pillow in four sleeping positions" /></button>
             <button type="button" class="pb-hero-thumb" data-index="6" aria-label="Product image 7"><img src="https://e-assets.beeketing.net/10690/10690847/themes/17892676474dfdecad19.png" alt="Removable cooling pillow cover" /></button>
-            <button type="button" class="pb-hero-thumb" data-index="7" aria-label="Product image 8"><img src="https://e-assets.beeketing.net/10690/10690847/themes/1789267670afe084cdcb.png" alt="OrthoAlign pillow ergonomic feature callouts" /></button>
-            <button type="button" class="pb-hero-thumb" data-index="8" aria-label="Product image 9"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926769325a4d20d28.png" alt="Chiropractor OrthoAlign pillow recommendation" /></button>
-            <button type="button" class="pb-hero-thumb" data-index="9" aria-label="Product image 10"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926771735f8e6f3a9.png" alt="Ruuhu OrthoAlign pillow compared with regular pillows" /></button>
-            <button type="button" class="pb-hero-thumb" data-index="10" aria-label="Product image 11"><img src="https://e-assets.beeketing.net/10690/10690847/themes/17892677467261c1806a.png" alt="Model holding the OrthoAlign pillow" /></button>
+            <button type="button" class="pb-hero-thumb" data-index="7" aria-label="Product image 8"><img src="https://e-assets.beeketing.net/10690/10690847/themes/1789267670afe084cdcb.png" alt="RestArch Pillow ergonomic feature callouts" /></button>
+            <button type="button" class="pb-hero-thumb" data-index="8" aria-label="Product image 9"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926769325a4d20d28.png" alt="Chiropractor RestArch Pillow recommendation" /></button>
+            <button type="button" class="pb-hero-thumb" data-index="9" aria-label="Product image 10"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926771735f8e6f3a9.png" alt="RestArch Pillow compared with regular pillows" /></button>
+            <button type="button" class="pb-hero-thumb" data-index="10" aria-label="Product image 11"><img src="https://e-assets.beeketing.net/10690/10690847/themes/17892677467261c1806a.png" alt="Model holding the RestArch Pillow" /></button>
           </div>
 
           <button type="button" class="pb-hero-nav-arrow pb-hero-nav-arrow--next" id="pb-hero-nav-next" aria-label="Scroll thumbnails down">
@@ -1306,17 +1343,17 @@ section:has(#pb-prod-sec-hero),
 
         <!-- Right 1:1 Square Featured Media Stage -->
         <div class="pb-hero-stage-wrap" id="pb-hero-stage-wrap" role="region" aria-label="Product Image Gallery">
-          <img id="pb-slide-img-0" class="pb-hero-slide is-active" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267483ad01c077dd.png" alt="Ruuhu OrthoAlign Pillow #1 Best Seller" data-index="0" />
-          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926751800b5511e60.png" alt="OrthoAlign pillow six-zone support diagram" data-index="1" />
-          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267545abb5ce3e53.png" alt="OrthoAlign pillow supporting a sleeping model" data-index="2" />
-          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926756321e94f92a1.png" alt="OrthoAlign Regular and High pillow size guide" data-index="3" />
-          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267579fc98524819.png" alt="OrthoAlign pillow colour collection" data-index="4" />
-          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926760210b7ed0a5e.png" alt="OrthoAlign pillow in four sleeping positions" data-index="5" />
+          <img id="pb-slide-img-0" class="pb-hero-slide is-active" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267483ad01c077dd.png" alt="RestArch Pillow #1 Best Seller" data-index="0" />
+          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926751800b5511e60.png" alt="RestArch Pillow six-zone support diagram" data-index="1" />
+          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267545abb5ce3e53.png" alt="RestArch Pillow supporting a sleeping model" data-index="2" />
+          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926756321e94f92a1.png" alt="RestArch Pillow Regular and High size guide" data-index="3" />
+          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267579fc98524819.png" alt="RestArch Pillow colour collection" data-index="4" />
+          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926760210b7ed0a5e.png" alt="RestArch Pillow in four sleeping positions" data-index="5" />
           <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/17892676474dfdecad19.png" alt="Removable cooling pillow cover" data-index="6" />
-          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267670afe084cdcb.png" alt="OrthoAlign pillow ergonomic feature callouts" data-index="7" />
-          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926769325a4d20d28.png" alt="Chiropractor OrthoAlign pillow recommendation" data-index="8" />
-          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926771735f8e6f3a9.png" alt="Ruuhu OrthoAlign pillow compared with regular pillows" data-index="9" />
-          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/17892677467261c1806a.png" alt="Model holding the OrthoAlign pillow" data-index="10" />
+          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267670afe084cdcb.png" alt="RestArch Pillow ergonomic feature callouts" data-index="7" />
+          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926769325a4d20d28.png" alt="Chiropractor RestArch Pillow recommendation" data-index="8" />
+          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926771735f8e6f3a9.png" alt="RestArch Pillow compared with regular pillows" data-index="9" />
+          <img class="pb-hero-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/17892677467261c1806a.png" alt="Model holding the RestArch Pillow" data-index="10" />
 
           <button type="button" class="pb-hero-stage-arrow pb-hero-stage-arrow--prev" id="pb-hero-stage-prev" aria-label="Previous image">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="m15 18-6-6 6-6"/></svg>
@@ -1364,7 +1401,7 @@ section:has(#pb-prod-sec-hero),
         <span>(42,093)</span>
       </a>
 
-      <h1>OrthoAlign&trade; Pillow</h1>
+      <h1>RestArch Pillow</h1>
 
       <div class="pb-price-row">
         <strong id="pb-hero-display-price">£49.99</strong>
@@ -1460,7 +1497,8 @@ section:has(#pb-prod-sec-hero),
         <!-- 2 Pillow Bundle (MOST POPULAR) -->
         <div class="pb-bundle-card selected" data-bundle="2" id="pb-bundle-card-2">
           <span class="pb-bundle-badge-popular">
-            <span>Most</span><br/><strong>Popular</strong>
+            <span>Most</span>
+            <strong>Popular</strong>
           </span>
           <button type="button" class="pb-bundle-choice" aria-label="2 Pillow Bundle">
             <span class="pb-radio-dot"></span>
@@ -1537,7 +1575,6 @@ section:has(#pb-prod-sec-hero),
             <span class="pb-bundle-copy">
               <span class="pb-bundle-title-line">
                 <strong>Family Bundle</strong>
-                <b>Best Value!</b>
               </span>
               <small>Save £248.01!</small>
             </span>
@@ -1664,7 +1701,7 @@ section:has(#pb-prod-sec-hero),
             <span class="pb-accordion-symbol" aria-hidden="true">+</span>
           </button>
           <div class="pb-accordion-content">
-            <p>Meet the OrthoAlign Pillow, crafted for deep, supported sleep in any position. The 3-zone contour design delivers targeted neck lift, pressure relief, and full-body alignment. Its dual-height system adapts to side, back, and stomach sleepers without bunching or constant flipping.</p>
+            <p>Meet the RestArch Pillow, crafted for deep, supported sleep in any position. The 3-zone contour design delivers targeted neck lift, pressure relief, and full-body alignment. Its dual-height system adapts to side, back, and stomach sleepers without bunching or constant flipping.</p>
           </div>
         </div>
 
@@ -1972,7 +2009,7 @@ section:has(#pb-prod-sec-hero),
       var src = getCurrentImageSrc(index);
       if (lightboxImg) {
         lightboxImg.src = src;
-        lightboxImg.alt = 'Expanded OrthoAlign Pillow View ' + (index + 1);
+        lightboxImg.alt = 'Expanded RestArch Pillow View ' + (index + 1);
       }
       if (lightboxCounter) {
         lightboxCounter.textContent = (index + 1) + ' / ' + slides.length;

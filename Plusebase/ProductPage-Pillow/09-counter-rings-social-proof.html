@@ -1,6 +1,6 @@
 <!-- ==========================================================================
   PLUSBASE CUSTOM HTML SECTION: 09 - COUNTER RINGS SOCIAL PROOF
-  Product: Ruuhu OrthoAlign™ Pillow
+  Product: RestArch Pillow
   Deployment: Copy & paste directly into a PlusBase Custom HTML section block.
 ========================================================================== -->
 
@@ -140,23 +140,9 @@ section:has(#pb-prod-sec-counter),
 #pb-prod-sec-counter .pb-cnt-progress {
   stroke: var(--pb-blue) !important;
   stroke-dasharray: 314.16 !important;
-  stroke-dashoffset: var(--pb-cnt-offset, 314.16px) !important;
+  stroke-dashoffset: 314.16 !important;
   stroke-linecap: round !important;
-  transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
-}
-
-/* Bulletproof CSS offsets when animated */
-#pb-prod-sec-counter .pb-cnt-ring[data-target="95"].is-animated .pb-cnt-progress {
-  --pb-cnt-offset: 15.71px !important;
-  stroke-dashoffset: 15.71px !important;
-}
-#pb-prod-sec-counter .pb-cnt-ring[data-target="98"].is-animated .pb-cnt-progress {
-  --pb-cnt-offset: 6.28px !important;
-  stroke-dashoffset: 6.28px !important;
-}
-#pb-prod-sec-counter .pb-cnt-ring[data-target="92"].is-animated .pb-cnt-progress {
-  --pb-cnt-offset: 25.13px !important;
-  stroke-dashoffset: 25.13px !important;
+  transition: none !important;
 }
 
 #pb-prod-sec-counter .pb-cnt-ring span {
@@ -236,7 +222,7 @@ section:has(#pb-prod-sec-counter),
           </svg>
           <span class="pb-cnt-number">0%</span>
         </div>
-        <p>of Ruuhu customers sleep at their ideal temperature</p>
+        <p>of RestArch customers sleep at their ideal temperature</p>
       </article>
 
       <!-- Ring 2: 98% -->
@@ -248,7 +234,7 @@ section:has(#pb-prod-sec-counter),
           </svg>
           <span class="pb-cnt-number">0%</span>
         </div>
-        <p>would recommend Ruuhu to family and friends</p>
+        <p>would recommend RestArch to family and friends</p>
       </article>
 
       <!-- Ring 3: 92% -->
@@ -260,7 +246,7 @@ section:has(#pb-prod-sec-counter),
           </svg>
           <span class="pb-cnt-number">0%</span>
         </div>
-        <p>of Ruuhu customers have left 5-star reviews</p>
+        <p>of RestArch customers have left 5-star reviews</p>
       </article>
     </div>
 
@@ -277,71 +263,62 @@ section:has(#pb-prod-sec-counter),
     root.dataset.initialized = 'true';
 
     var rings = root.querySelectorAll('.pb-cnt-ring');
-    var circumference = 314.16; // 2 * PI * 50
+    var circumference = 314.159; // 2 * Math.PI * 50
 
     function animateRing(ring) {
       if (ring.dataset.animated === 'true') return;
       ring.dataset.animated = 'true';
-      ring.classList.add('is-animated');
 
       var targetVal = parseInt(ring.dataset.target, 10) || 0;
       var circle = ring.querySelector('.pb-cnt-progress');
       var label = ring.querySelector('.pb-cnt-number');
 
-      var offset = circumference * (1 - targetVal / 100);
-      if (circle) {
-        circle.style.setProperty('--pb-cnt-offset', offset + 'px', 'important');
-        circle.style.setProperty('stroke-dashoffset', offset + 'px', 'important');
-        circle.setAttribute('stroke-dashoffset', offset);
-      }
-
       var startedAt = performance.now();
-      var duration = 1200;
+      var duration = 1100; // Exact Vercel countup timing
 
-      function updateNumber(now) {
+      function update(now) {
         var progress = Math.min((now - startedAt) / duration, 1);
+        // Exact Vercel Quartic Ease-Out curve
         var eased = 1 - Math.pow(1 - progress, 4);
-        var currentVal = Math.round(targetVal * eased);
+        var currentProgress = targetVal * eased;
+        var currentVal = Math.round(currentProgress);
+        var currentOffset = circumference * (1 - currentProgress / 100);
+
         if (label) label.textContent = currentVal + '%';
+        if (circle) {
+          circle.style.setProperty('stroke-dashoffset', currentOffset + 'px', 'important');
+          circle.setAttribute('stroke-dashoffset', currentOffset.toFixed(2));
+        }
+
         if (progress < 1) {
-          requestAnimationFrame(updateNumber);
+          requestAnimationFrame(update);
         } else {
           if (label) label.textContent = targetVal + '%';
+          var finalOffset = circumference * (1 - targetVal / 100);
+          if (circle) {
+            circle.style.setProperty('stroke-dashoffset', finalOffset + 'px', 'important');
+            circle.setAttribute('stroke-dashoffset', finalOffset.toFixed(2));
+          }
         }
       }
 
-      requestAnimationFrame(updateNumber);
-    }
-
-    function checkInView() {
-      rings.forEach(function(ring) {
-        if (ring.dataset.animated === 'true') return;
-        var rect = ring.getBoundingClientRect();
-        if (rect.top < window.innerHeight + 50 && rect.bottom > 0) {
-          animateRing(ring);
-        }
-      });
+      requestAnimationFrame(update);
     }
 
     if ('IntersectionObserver' in window && rings.length > 0) {
       var observer = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
-          if (!entry.isIntersecting) return;
-          animateRing(entry.target);
-          observer.unobserve(entry.target);
+          if (entry.isIntersecting) {
+            animateRing(entry.target);
+            observer.unobserve(entry.target);
+          }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      }, { threshold: 0.2 });
 
       rings.forEach(function(ring) { observer.observe(ring); });
-    }
-
-    window.addEventListener('scroll', checkInView, { passive: true });
-    window.addEventListener('resize', checkInView, { passive: true });
-    checkInView();
-
-    setTimeout(function() {
+    } else {
       rings.forEach(function(ring) { animateRing(ring); });
-    }, 2000);
+    }
   }
 
   if (document.readyState === 'loading') {

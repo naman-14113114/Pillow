@@ -1,6 +1,6 @@
 <!-- ==========================================================================
   PLUSBASE COMPLETE PRODUCT PAGE CUSTOM HTML (ALL SECTIONS COMBINED)
-  Product: Ruuhu OrthoAlign™ Pillow
+  Product: RestArch Pillow
   PlusBase Product ID: 1000000663256638
   Deployment: Copy & paste the entire contents of this file into a single 
               Full-Width Custom HTML section block in the PlusBase Web Builder.
@@ -672,18 +672,74 @@ section:has(#pb-product-page-root),
   box-shadow: 0 4px 18px rgba(7, 87, 217, 0.12) !important;
 }
 
-#pb-product-page-root .pb-bundle-card-badge {
+#pb-product-page-root .pb-bundle-badge-popular {
   position: absolute !important;
-  top: 0 !important;
-  right: 0 !important;
-  padding: 4px 12px !important;
-  border-bottom-left-radius: 8px !important;
+  top: -18px !important;
+  right: 20px !important;
+  display: grid !important;
+  width: 88px !important;
+  height: 40px !important;
+  place-content: center !important;
+  border: 1px solid #ffffff !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 0 1px var(--pb-blue) !important;
   background: var(--pb-blue) !important;
   color: #ffffff !important;
-  font-size: 10px !important;
+  font-family: Georgia, "Times New Roman", serif !important;
+  font-size: 11px !important;
   font-weight: 800 !important;
-  letter-spacing: 0.5px !important;
-  text-transform: uppercase !important;
+  text-align: center !important;
+  line-height: 0.85 !important;
+  transform: rotate(2deg) !important;
+  pointer-events: none !important;
+  z-index: 4 !important;
+}
+
+#pb-product-page-root .pb-bundle-badge-popular span {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+}
+
+#pb-product-page-root .pb-bundle-badge-popular strong {
+  font-size: 15px !important;
+  font-weight: 800 !important;
+}
+
+#pb-product-page-root .pb-bundle-badge-value {
+  position: absolute !important;
+  top: -11px !important;
+  right: 20px !important;
+  padding: 4px 12px !important;
+  border-radius: 4px !important;
+  background: var(--pb-blue) !important;
+  color: #ffffff !important;
+  font-size: 11.5px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  text-align: center !important;
+  pointer-events: none !important;
+  z-index: 4 !important;
+  box-shadow: 0 2px 6px rgba(7, 87, 217, 0.25) !important;
+}
+
+#pb-product-page-root .pb-bundle-badge-value::before,
+#pb-product-page-root .pb-bundle-badge-value::after {
+  position: absolute !important;
+  top: 0 !important;
+  width: 8px !important;
+  height: 100% !important;
+  background: var(--pb-blue) !important;
+  content: "" !important;
+}
+
+#pb-product-page-root .pb-bundle-badge-value::before {
+  left: -5px !important;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%) !important;
+}
+
+#pb-product-page-root .pb-bundle-badge-value::after {
+  right: -5px !important;
+  clip-path: polygon(0 0, 100% 100%, 0 100%) !important;
 }
 
 #pb-product-page-root .pb-bundle-choice {
@@ -1731,23 +1787,9 @@ section:has(#pb-product-page-root),
 #pb-product-page-root .pb-cnt-progress {
   stroke: var(--pb-blue) !important;
   stroke-dasharray: 314.16 !important;
-  stroke-dashoffset: var(--pb-cnt-offset, 314.16px) !important;
+  stroke-dashoffset: 314.16 !important;
   stroke-linecap: round !important;
-  transition: stroke-dashoffset 1.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
-}
-
-/* Bulletproof CSS offsets when animated */
-#pb-product-page-root .pb-cnt-ring[data-target="95"].is-animated .pb-cnt-progress {
-  --pb-cnt-offset: 15.71px !important;
-  stroke-dashoffset: 15.71px !important;
-}
-#pb-product-page-root .pb-cnt-ring[data-target="98"].is-animated .pb-cnt-progress {
-  --pb-cnt-offset: 6.28px !important;
-  stroke-dashoffset: 6.28px !important;
-}
-#pb-product-page-root .pb-cnt-ring[data-target="92"].is-animated .pb-cnt-progress {
-  --pb-cnt-offset: 25.13px !important;
-  stroke-dashoffset: 25.13px !important;
+  transition: none !important;
 }
 
 #pb-product-page-root .pb-cnt-ring span {
@@ -1903,7 +1945,7 @@ section:has(#pb-product-page-root),
         <span class="pb-announcement-item">90-NIGHT COMFORT TRIAL <b class="pb-announcement-dot"></b></span>
         <span class="pb-announcement-item">RATED 4.9/5 BY 42,000+ HAPPY SLEEPERS <b class="pb-announcement-dot"></b></span>
         <span class="pb-announcement-item">RECOMMENDED BY CHIROPRACTORS <b class="pb-announcement-dot"></b></span>
-        <span class="pb-announcement-item">DUAL-HEIGHT SWITCHFIT™ DESIGN <b class="pb-announcement-dot"></b></span>
+        <span class="pb-announcement-item">DUAL-HEIGHT SWITCHFIT DESIGN <b class="pb-announcement-dot"></b></span>
         <span class="pb-announcement-item">OEKO-TEX® HYPOALLERGENIC COVER <b class="pb-announcement-dot"></b></span>
       </div>
       <div class="pb-announcement-group" aria-hidden="true">
@@ -1911,7 +1953,7 @@ section:has(#pb-product-page-root),
         <span class="pb-announcement-item">90-NIGHT COMFORT TRIAL <b class="pb-announcement-dot"></b></span>
         <span class="pb-announcement-item">RATED 4.9/5 BY 42,000+ HAPPY SLEEPERS <b class="pb-announcement-dot"></b></span>
         <span class="pb-announcement-item">RECOMMENDED BY CHIROPRACTORS <b class="pb-announcement-dot"></b></span>
-        <span class="pb-announcement-item">DUAL-HEIGHT SWITCHFIT™ DESIGN <b class="pb-announcement-dot"></b></span>
+        <span class="pb-announcement-item">DUAL-HEIGHT SWITCHFIT DESIGN <b class="pb-announcement-dot"></b></span>
         <span class="pb-announcement-item">OEKO-TEX® HYPOALLERGENIC COVER <b class="pb-announcement-dot"></b></span>
       </div>
     </div>
@@ -1933,7 +1975,7 @@ section:has(#pb-product-page-root),
           </button>
           
           <div class="pb-hero-nav-track" id="pb-comb-thumb-strip">
-            <button type="button" class="pb-hero-thumb is-active" data-index="0" aria-label="Slide 1"><img src="https://e-assets.beeketing.net/10690/10690847/themes/1789267483ad01c077dd.png" alt="OrthoAlign Pillow White" /></button>
+            <button type="button" class="pb-hero-thumb is-active" data-index="0" aria-label="Slide 1"><img src="https://e-assets.beeketing.net/10690/10690847/themes/1789267483ad01c077dd.png" alt="RestArch Pillow White" /></button>
             <button type="button" class="pb-hero-thumb" data-index="1" aria-label="Slide 2"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926751800b5511e60.png" alt="6-Zone Support Diagram" /></button>
             <button type="button" class="pb-hero-thumb" data-index="2" aria-label="Slide 3"><img src="https://e-assets.beeketing.net/10690/10690847/themes/1789267545abb5ce3e53.png" alt="Ergonomic Sleeping Model" /></button>
             <button type="button" class="pb-hero-thumb" data-index="3" aria-label="Slide 4"><img src="https://e-assets.beeketing.net/10690/10690847/themes/178926756321e94f92a1.png" alt="Size Guide Dimensions" /></button>
@@ -1958,7 +2000,7 @@ section:has(#pb-product-page-root),
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="m15 18-6-6 6-6"/></svg>
             </button>
             
-            <img class="pb-hero-stage-slide is-active" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267483ad01c077dd.png" alt="OrthoAlign Pillow White" />
+            <img class="pb-hero-stage-slide is-active" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267483ad01c077dd.png" alt="RestArch Pillow White" />
             <img class="pb-hero-stage-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926751800b5511e60.png" alt="6-Zone Support Diagram" />
             <img class="pb-hero-stage-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/1789267545abb5ce3e53.png" alt="Ergonomic Sleeping Model" />
             <img class="pb-hero-stage-slide" src="https://e-assets.beeketing.net/10690/10690847/themes/178926756321e94f92a1.png" alt="Size Guide Dimensions" />
@@ -1994,8 +2036,8 @@ section:has(#pb-product-page-root),
       </div>
 
       <div class="pb-product-title">
-        <h1>Ruuhu OrthoAlign™ Pillow</h1>
-        <p>Chiropractor-designed ergonomic contour pillow with dual-height SwitchFit™ alignment.</p>
+        <h1>RestArch Pillow</h1>
+        <p>Chiropractor-designed ergonomic contour pillow with dual-height SwitchFit alignment.</p>
       </div>
 
       <div class="pb-hero-price-line">
@@ -2064,7 +2106,10 @@ section:has(#pb-product-page-root),
 
         <!-- 2 Pillows (Most Popular) -->
         <div class="pb-bundle-card selected" data-bundle="2">
-          <div class="pb-bundle-card-badge">Most Popular</div>
+          <span class="pb-bundle-badge pb-bundle-badge-popular">
+            <span>Most</span>
+            <strong>Popular</strong>
+          </span>
           <button type="button" class="pb-bundle-choice">
             <div class="pb-bundle-choice-left">
               <span class="pb-bundle-radio"></span>
@@ -2126,7 +2171,7 @@ section:has(#pb-product-page-root),
 
         <!-- 4 Pillows (Best Value) -->
         <div class="pb-bundle-card" data-bundle="4">
-          <div class="pb-bundle-card-badge">Best Value</div>
+          <span class="pb-bundle-badge-value">BEST VALUE</span>
           <button type="button" class="pb-bundle-choice">
             <div class="pb-bundle-choice-left">
               <span class="pb-bundle-radio"></span>
@@ -2249,7 +2294,7 @@ section:has(#pb-product-page-root),
             <span>+</span>
           </button>
           <div class="pb-accordion-content">
-            <p>The Ruuhu OrthoAlign™ Pillow is engineered with high-density pressure-relieving memory foam, contoured side wings for arm placement, and dual-height SwitchFit™ technology to support cervical spine alignment in all sleeping positions.</p>
+            <p>The RestArch Pillow is engineered with high-density pressure-relieving memory foam, contoured side wings for arm placement, and dual-height SwitchFit technology to support cervical spine alignment in all sleeping positions.</p>
           </div>
         </div>
 
@@ -2329,7 +2374,7 @@ section:has(#pb-product-page-root),
   <div class="pb-prod-section pb-prod-story-wrap">
     <div class="pb-story-container" id="story">
       <div class="pb-story-image">
-        <img src="https://pillow-sepia.vercel.app/assets/feature-zones.webp" alt="Ruuhu OrthoAlign pillow three-zone support breakdown" />
+        <img src="https://pillow-sepia.vercel.app/assets/feature-zones.webp" alt="RestArch Pillow three-zone support breakdown" />
       </div>
       <div class="pb-story-copy">
         <h2>One Pillow. Three Zones. Zero Compromises</h2>
@@ -2352,17 +2397,17 @@ section:has(#pb-product-page-root),
               <span class="pb-story-symbol" aria-hidden="true">+</span>
             </button>
             <div class="pb-story-content">
-              <p>Designed for deeper support and lift, this side suits side sleepers or anyone who needs extra neck height and pressure relief.</p>
+              <p>Flip to the firmer, higher contour when you need extra loft to keep your head and cervical spine level on firmer mattresses.</p>
             </div>
           </div>
 
           <div class="pb-story-item">
             <button type="button" class="pb-story-trigger" aria-expanded="false">
-              <span>Soft Side (SwitchFit Design)</span>
+              <span>Soft Side (Cradle Contour)</span>
               <span class="pb-story-symbol" aria-hidden="true">+</span>
             </button>
             <div class="pb-story-content">
-              <p>Softer and lower, this side works for back and stomach sleepers or anyone who prefers minimal elevation.</p>
+              <p>The lower contour gently cradles your head when back sleeping, supporting the natural curvature of your neck without pushing your chin forward.</p>
             </div>
           </div>
 
@@ -2372,7 +2417,7 @@ section:has(#pb-product-page-root),
               <span class="pb-story-symbol" aria-hidden="true">+</span>
             </button>
             <div class="pb-story-content">
-              <p>Every zone works together so your neck, spine, and shoulders remain supported, no matter how you sleep.</p>
+              <p>Every element works together: cooling ice-silk outer cover, CertiPUR-US® dynamic memory foam core, and precision ergonomic sculpting.</p>
             </div>
           </div>
         </div>
@@ -2383,16 +2428,16 @@ section:has(#pb-product-page-root),
   <!-- ========================================================================
        05. CUSTOMER REVIEWS
        ======================================================================== -->
-  <div class="pb-prod-section pb-prod-reviews-wrap" id="reviews">
-    <div class="pb-reviews-container">
-      <div class="pb-section-heading">
-        <p class="pb-eyebrow">Real Sleep Transformation</p>
-        <h2>Verified Customer Experiences</h2>
+  <div class="pb-prod-section pb-prod-reviews-wrap">
+    <div class="pb-reviews-container" id="reviews">
+      <div class="pb-reviews-heading">
+        <h2>Real Sleepers. Real Relief</h2>
+        <p>Verified customer reviews from people who upgraded their sleep quality.</p>
       </div>
 
       <div class="pb-reviews-toolbar">
-        <div class="pb-rating-breakdown">
-          <strong>4.8</strong>
+        <div class="pb-reviews-score">
+          <div class="pb-reviews-score-num">4.9</div>
           <div>
             <div class="pb-stars">
               <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -2401,13 +2446,8 @@ section:has(#pb-product-page-root),
               <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
               <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
-            <p>Based on 42,093 verified reviews</p>
+            <div class="pb-reviews-score-label">Based on 42,000+ reviews</div>
           </div>
-        </div>
-
-        <div class="pb-review-filter-tabs">
-          <button type="button" class="active">Product Reviews</button>
-          <button type="button">Store Reviews</button>
         </div>
       </div>
 
@@ -2415,9 +2455,9 @@ section:has(#pb-product-page-root),
         <div class="pb-review-card">
           <div class="pb-review-card-header">
             <div class="pb-reviewer-info">
-              <span class="pb-reviewer-avatar">ES</span>
+              <span class="pb-reviewer-avatar">EC</span>
               <div>
-                <span class="pb-reviewer-name">Emma S.</span>
+                <span class="pb-reviewer-name">Emma C.</span>
                 <span class="pb-verified-badge">✓ Verified Buyer</span>
               </div>
             </div>
@@ -2430,70 +2470,7 @@ section:has(#pb-product-page-root),
             </div>
           </div>
           <h3>Finally woke up without stiff neck pain!</h3>
-          <p>"I have tried so many pillows over the last 5 years. Within 3 nights on the OrthoAlign, my chronic morning shoulder numbness was completely gone. The wing shape makes sleeping on my side feel effortless."</p>
-        </div>
-
-        <div class="pb-review-card">
-          <div class="pb-review-card-header">
-            <div class="pb-reviewer-info">
-              <span class="pb-reviewer-avatar">DM</span>
-              <div>
-                <span class="pb-reviewer-name">David M.</span>
-                <span class="pb-verified-badge">✓ Verified Buyer</span>
-              </div>
-            </div>
-            <div class="pb-stars">
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-          </div>
-          <h3>The dual-height SwitchFit design is genius</h3>
-          <p>"Being able to switch between the 8.9cm and 10.9cm profile without buying two separate pillows made all the difference. High profile when sleeping on my side, regular when I roll to my back."</p>
-        </div>
-
-        <div class="pb-review-card">
-          <div class="pb-review-card-header">
-            <div class="pb-reviewer-info">
-              <span class="pb-reviewer-avatar">SL</span>
-              <div>
-                <span class="pb-reviewer-name">Sarah L.</span>
-                <span class="pb-verified-badge">✓ Verified Buyer</span>
-              </div>
-            </div>
-            <div class="pb-stars">
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-          </div>
-          <h3>Cool to the touch all night long</h3>
-          <p>"Added the cooling pillowcase bundle. The fabric genuinely stays cool even during warm summer nights. The memory foam is supportive yet soft enough that your ear doesn't ache."</p>
-        </div>
-
-        <div class="pb-review-card">
-          <div class="pb-review-card-header">
-            <div class="pb-reviewer-info">
-              <span class="pb-reviewer-avatar">RH</span>
-              <div>
-                <span class="pb-reviewer-name">Dr. Richard H.</span>
-                <span class="pb-verified-badge">✓ Verified Buyer</span>
-              </div>
-            </div>
-            <div class="pb-stars">
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-          </div>
-          <h3>As a physiotherapist, I recommend this to my patients</h3>
-          <p>"Cervical spine neutrality during sleep is critical for musculoskeletal recovery. The contoured central groove cradle combined with the lateral elevation wings provides optimal biomechanical alignment."</p>
+          <p>"I have tried so many pillows over the last 5 years. Within 3 nights on the RestArch Pillow, my chronic morning shoulder numbness was completely gone. The wing shape makes sleeping on my side feel effortless."</p>
         </div>
       </div>
     </div>
@@ -2508,7 +2485,7 @@ section:has(#pb-product-page-root),
         <video id="pb-comb-chiro-video" autoplay loop muted playsinline poster="https://pillow-sepia.vercel.app/assets/feature-zones.webp">
           <source src="https://pillow-sepia.vercel.app/assets/chiropractor-loop.mp4" type="video/mp4" />
         </video>
-        <span class="pb-video-watermark">Ruuhu OrthoAlign™</span>
+        <span class="pb-video-watermark">RestArch Pillow</span>
         <button type="button" class="pb-video-toggle-btn" id="pb-comb-video-toggle-btn" aria-label="Toggle Video Playback">
           <svg id="pb-comb-video-pause-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
           <svg id="pb-comb-video-play-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -2517,7 +2494,7 @@ section:has(#pb-product-page-root),
 
       <div class="pb-chiro-copy">
         <h2>Chiropractor-Designed For True Spine Alignment</h2>
-        <p>Traditional pillows bend your neck upward or allow it to sink downward, causing pinched nerves and morning stiffness. Ruuhu cradles your head while supporting your cervical spine in a neutral line.</p>
+        <p>Traditional pillows bend your neck upward or allow it to sink downward, causing pinched nerves and morning stiffness. RestArch cradles your head while supporting your cervical spine in a neutral line.</p>
 
         <div class="pb-story-accordions">
           <div class="pb-story-item">
@@ -2549,26 +2526,23 @@ section:has(#pb-product-page-root),
        ======================================================================== -->
   <div class="pb-prod-section pb-prod-support-wrap">
     <div class="pb-support-container">
-      <div class="pb-section-heading">
-        <p class="pb-eyebrow">Precision Engineering</p>
-        <h2>Designed Around Human Anatomy</h2>
+      <div class="pb-support-card">
+        <div class="pb-support-image">
+          <img src="https://pillow-sepia.vercel.app/assets/feature-wing.webp" alt="Side sleeper shoulder wing cutout design" />
+        </div>
+        <div class="pb-support-info">
+          <h3>Side Sleeper Wing</h3>
+          <p>Specifically contoured wings cradle your shoulders without pinning your arm, keeping your upper body relaxed all night.</p>
+        </div>
       </div>
 
-      <div class="pb-support-grid">
-        <div class="pb-support-card">
-          <img src="https://pillow-sepia.vercel.app/assets/feature-wing.webp" alt="Side Sleeper Wing" />
-          <div class="pb-support-card-content">
-            <h3>Side Sleeper Wing Contour</h3>
-            <p>Elevated lateral support prevents neck collapse when sleeping on your side, keeping airways unobstructed and posture balanced.</p>
-          </div>
+      <div class="pb-support-card">
+        <div class="pb-support-image">
+          <img src="https://pillow-sepia.vercel.app/assets/feature-switchfit.avif" alt="SwitchFit dual height contour" />
         </div>
-
-        <div class="pb-support-card">
-          <img src="https://pillow-sepia.vercel.app/assets/feature-switchfit.avif" alt="SwitchFit Dual Height" />
-          <div class="pb-support-card-content">
-            <h3>SwitchFit™ Dual-Height Profile</h3>
-            <p>Rotate 180° to choose between the 8.9cm Regular contour or 10.9cm High contour depending on your body frame and sleep posture.</p>
-          </div>
+        <div class="pb-support-info">
+          <h3>SwitchFit Design</h3>
+          <p>Rotate the pillow 180 degrees to easily transition between the 8.9cm low side and 10.9cm high side to find your custom elevation.</p>
         </div>
       </div>
     </div>
@@ -2577,51 +2551,51 @@ section:has(#pb-product-page-root),
   <!-- ========================================================================
        08. FAQ ACCORDION
        ======================================================================== -->
-  <div class="pb-prod-section pb-prod-faq-wrap" id="faq">
-    <div class="pb-faq-container">
-      <div class="pb-section-heading">
-        <p class="pb-eyebrow">Got Questions?</p>
+  <div class="pb-prod-section pb-prod-faq-wrap">
+    <div class="pb-faq-container" id="faq">
+      <div class="pb-faq-heading">
         <h2>Frequently Asked Questions</h2>
+        <p>Everything you need to know about the RestArch Pillow.</p>
       </div>
 
       <div class="pb-faq-list">
         <div class="pb-faq-item">
           <button type="button" class="pb-faq-trigger" aria-expanded="false">
-            <span>What if I don't like it? How does the 90-night trial work?</span>
-            <span class="pb-faq-symbol">+</span>
+            <span>What makes this pillow different from standard memory foam pillows?</span>
+            <span class="pb-faq-symbol" aria-hidden="true">+</span>
           </button>
           <div class="pb-faq-content">
-            <p>We want you to sleep on it with zero risk. You have 90 full nights from delivery to test the pillow. If you're not completely satisfied, simply contact support for a quick, hassle-free return and full refund.</p>
+            <p>Unlike flat or generic contour pillows, RestArch combines certified high-density memory foam with a dual-height SwitchFit design, cervical cradle, and dedicated side-sleeper arm wings for complete anatomical support.</p>
           </div>
         </div>
 
         <div class="pb-faq-item">
           <button type="button" class="pb-faq-trigger" aria-expanded="false">
-            <span>Which profile height should I choose?</span>
-            <span class="pb-faq-symbol">+</span>
+            <span>Is this suitable for back, side, and stomach sleepers?</span>
+            <span class="pb-faq-symbol" aria-hidden="true">+</span>
           </button>
           <div class="pb-faq-content">
-            <p>Choose <strong>Regular (8.9cm)</strong> if you have an average frame, sleep mostly on your back or alternate between back and side. Choose <strong>High (10.9cm)</strong> if you have broader shoulders, sleep primarily on your side, or prefer firmer elevation.</p>
+            <p>Yes. RestArch adapts to all three sleep styles by providing targeted lift and pressure relief where each position needs it.</p>
           </div>
         </div>
 
         <div class="pb-faq-item">
           <button type="button" class="pb-faq-trigger" aria-expanded="false">
-            <span>Is the pillow cover washable?</span>
-            <span class="pb-faq-symbol">+</span>
+            <span>Will this pillow flatten or lose its shape over time?</span>
+            <span class="pb-faq-symbol" aria-hidden="true">+</span>
           </button>
           <div class="pb-faq-content">
-            <p>Yes! The outer cooling ice-silk cover features a hidden zipper and is 100% machine washable on cold gentle cycle. The inner memory foam core should not be soaked; simply spot clean if necessary.</p>
+            <p>RestArch uses shape-retaining memory foam designed to maintain its contour and support night after night without sagging.</p>
           </div>
         </div>
 
         <div class="pb-faq-item">
           <button type="button" class="pb-faq-trigger" aria-expanded="false">
-            <span>How fast is delivery?</span>
-            <span class="pb-faq-symbol">+</span>
+            <span>How do I clean and wash the pillow?</span>
+            <span class="pb-faq-symbol" aria-hidden="true">+</span>
           </button>
           <div class="pb-faq-content">
-            <p>All UK orders include Free Royal Mail Tracked Delivery, arriving within 2–4 business days. You will receive a tracking link via email as soon as your order is dispatched.</p>
+            <p>Simply unzip the outer cooling cover and machine wash it on a cold, gentle cycle. Line dry or tumble dry low. Do not wash the foam core.</p>
           </div>
         </div>
       </div>
@@ -2647,7 +2621,7 @@ section:has(#pb-product-page-root),
             </svg>
             <span class="pb-cnt-number">0%</span>
           </div>
-          <p>of Ruuhu customers sleep at their ideal temperature</p>
+          <p>of RestArch customers sleep at their ideal temperature</p>
         </article>
 
         <article class="pb-cnt-card">
@@ -2658,7 +2632,7 @@ section:has(#pb-product-page-root),
             </svg>
             <span class="pb-cnt-number">0%</span>
           </div>
-          <p>would recommend Ruuhu to family and friends</p>
+          <p>would recommend RestArch to family and friends</p>
         </article>
 
         <article class="pb-cnt-card">
@@ -2669,7 +2643,7 @@ section:has(#pb-product-page-root),
             </svg>
             <span class="pb-cnt-number">0%</span>
           </div>
-          <p>of Ruuhu customers have left 5-star reviews</p>
+          <p>of RestArch customers have left 5-star reviews</p>
         </article>
       </div>
 
@@ -2683,9 +2657,9 @@ section:has(#pb-product-page-root),
   <div id="pb-comb-sticky-bar">
     <div class="pb-sticky-container">
       <div class="pb-sticky-product-meta">
-        <img class="pb-sticky-thumb" id="pb-comb-sticky-thumb" src="https://e-assets.beeketing.net/10690/10690847/themes/17892693643c6457e34f.jpeg" alt="Ruuhu OrthoAlign Pillow" />
+        <img class="pb-sticky-thumb" id="pb-comb-sticky-thumb" src="https://e-assets.beeketing.net/10690/10690847/themes/17892693643c6457e34f.jpeg" alt="RestArch Pillow" />
         <div class="pb-sticky-info">
-          <strong>Ruuhu OrthoAlign™ Pillow</strong>
+          <strong>RestArch Pillow</strong>
           <span id="pb-comb-sticky-sub">2 Pillow Bundle (White / Reg)</span>
         </div>
       </div>
@@ -3162,71 +3136,62 @@ section:has(#pb-product-page-root),
 
     // 7. COUNTER RINGS ANIMATION (BULLETPROOF MULTI-TIER ENGINE)
     var rings = root.querySelectorAll('.pb-cnt-ring');
-    var circumference = 314.16; // 2 * PI * 50
+    var circumference = 314.159; // 2 * Math.PI * 50
 
     function animateRing(ring) {
       if (ring.dataset.animated === 'true') return;
       ring.dataset.animated = 'true';
-      ring.classList.add('is-animated');
 
       var targetVal = parseInt(ring.dataset.target, 10) || 0;
       var circle = ring.querySelector('.pb-cnt-progress');
       var label = ring.querySelector('.pb-cnt-number');
 
-      var offset = circumference * (1 - targetVal / 100);
-      if (circle) {
-        circle.style.setProperty('--pb-cnt-offset', offset + 'px', 'important');
-        circle.style.setProperty('stroke-dashoffset', offset + 'px', 'important');
-        circle.setAttribute('stroke-dashoffset', offset);
-      }
-
       var startedAt = performance.now();
-      var duration = 1200;
+      var duration = 1100; // Exact Vercel countup timing
 
-      function updateNumber(now) {
+      function update(now) {
         var progress = Math.min((now - startedAt) / duration, 1);
+        // Exact Vercel Quartic Ease-Out curve
         var eased = 1 - Math.pow(1 - progress, 4);
-        var currentVal = Math.round(targetVal * eased);
+        var currentProgress = targetVal * eased;
+        var currentVal = Math.round(currentProgress);
+        var currentOffset = circumference * (1 - currentProgress / 100);
+
         if (label) label.textContent = currentVal + '%';
+        if (circle) {
+          circle.style.setProperty('stroke-dashoffset', currentOffset + 'px', 'important');
+          circle.setAttribute('stroke-dashoffset', currentOffset.toFixed(2));
+        }
+
         if (progress < 1) {
-          requestAnimationFrame(updateNumber);
+          requestAnimationFrame(update);
         } else {
           if (label) label.textContent = targetVal + '%';
+          var finalOffset = circumference * (1 - targetVal / 100);
+          if (circle) {
+            circle.style.setProperty('stroke-dashoffset', finalOffset + 'px', 'important');
+            circle.setAttribute('stroke-dashoffset', finalOffset.toFixed(2));
+          }
         }
       }
 
-      requestAnimationFrame(updateNumber);
-    }
-
-    function checkRingsInView() {
-      rings.forEach(function(ring) {
-        if (ring.dataset.animated === 'true') return;
-        var rect = ring.getBoundingClientRect();
-        if (rect.top < window.innerHeight + 50 && rect.bottom > 0) {
-          animateRing(ring);
-        }
-      });
+      requestAnimationFrame(update);
     }
 
     if ('IntersectionObserver' in window && rings.length > 0) {
       var countObserver = new IntersectionObserver(function(entries) {
         entries.forEach(function(entry) {
-          if (!entry.isIntersecting) return;
-          animateRing(entry.target);
-          countObserver.unobserve(entry.target);
+          if (entry.isIntersecting) {
+            animateRing(entry.target);
+            countObserver.unobserve(entry.target);
+          }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      }, { threshold: 0.2 });
 
-      rings.forEach(function(r) { countObserver.observe(r); });
+      rings.forEach(function(ring) { countObserver.observe(ring); });
+    } else {
+      rings.forEach(function(ring) { animateRing(ring); });
     }
-
-    window.addEventListener('scroll', checkRingsInView, { passive: true });
-    window.addEventListener('resize', checkRingsInView, { passive: true });
-    checkRingsInView();
-
-    setTimeout(function() {
-      rings.forEach(function(r) { animateRing(r); });
-    }, 2500);
 
     // 8. STICKY ATC BAR VISIBILITY
     var stickyBar = document.getElementById('pb-comb-sticky-bar');
