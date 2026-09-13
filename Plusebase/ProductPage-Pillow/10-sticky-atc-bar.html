@@ -1,12 +1,13 @@
 <!-- ==========================================================================
   PLUSBASE CUSTOM HTML SECTION: 10 - STICKY ADD TO CART BAR
-  Product: Juujo OrthoAlign™ Pillow
+  Product: Ruuhu OrthoAlign™ Pillow
   Deployment: Copy & paste directly into a PlusBase Custom HTML section block.
 ========================================================================== -->
 
 <style>
 /* PlusBase Builder Zero-Gutter Overrides */
-.wb-builder .pb-prod-sticky-wrap,
+.wb-builder #pb-prod-sec-sticky,
+.wb-builder .pb-stk-wrap,
 .wb-builder .wb-block-custom-html,
 .wb-builder .wb-section,
 .wb-builder .column-inner,
@@ -31,153 +32,157 @@
   --pb-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --pb-font-display: "Playfair Display", Georgia, "Times New Roman", serif;
 
-  position: fixed;
-  bottom: 18px;
-  left: 50%;
-  transform: translate(-50%, calc(100% + 40px));
-  z-index: 9999;
-  width: min(840px, calc(100% - 32px));
-  opacity: 0;
-  pointer-events: none;
-  transition: transform 320ms var(--pb-ease), opacity 260ms var(--pb-ease);
-  box-sizing: border-box;
-  font-family: var(--pb-font);
+  position: fixed !important;
+  bottom: 18px !important;
+  left: 50% !important;
+  transform: translate(-50%, calc(100% + 40px)) !important;
+  z-index: 999999 !important;
+  width: min(840px, calc(100% - 32px)) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transition: transform 320ms var(--pb-ease), opacity 260ms var(--pb-ease), visibility 260ms var(--pb-ease) !important;
+  box-sizing: border-box !important;
+  font-family: var(--pb-font) !important;
 }
 
 #pb-prod-sec-sticky.visible {
-  transform: translate(-50%, 0);
-  opacity: 1;
-  pointer-events: auto;
+  transform: translate(-50%, 0) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 #pb-prod-sec-sticky *,
 #pb-prod-sec-sticky *::before,
 #pb-prod-sec-sticky *::after {
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
-#pb-prod-sec-sticky .pb-sticky-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 10px 16px;
-  border: 1px solid var(--pb-line);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 16px 40px rgba(6, 23, 59, 0.16);
+#pb-prod-sec-sticky .pb-stk-card {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 10px 16px !important;
+  border: 1px solid var(--pb-line) !important;
+  border-radius: 12px !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 16px 40px rgba(6, 23, 59, 0.16) !important;
 }
 
-#pb-prod-sec-sticky .pb-sticky-product-summary {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
+#pb-prod-sec-sticky .pb-stk-summary {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  min-width: 0 !important;
 }
 
-#pb-prod-sec-sticky .pb-sticky-thumb {
-  width: 52px;
-  height: 52px;
-  border-radius: 8px;
-  object-fit: contain;
-  background: var(--pb-mist);
-  flex-shrink: 0;
-  border: 1px solid var(--pb-line);
+#pb-prod-sec-sticky .pb-stk-thumb {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 8px !important;
+  object-fit: contain !important;
+  background: var(--pb-mist) !important;
+  flex-shrink: 0 !important;
+  border: 1px solid var(--pb-line) !important;
 }
 
-#pb-prod-sec-sticky .pb-sticky-meta {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
+#pb-prod-sec-sticky .pb-stk-meta {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
 }
 
-#pb-prod-sec-sticky .pb-sticky-title {
-  font-size: 15px;
-  font-weight: 750;
-  color: var(--pb-ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+#pb-prod-sec-sticky .pb-stk-title {
+  font-size: 15px !important;
+  font-weight: 750 !important;
+  color: var(--pb-ink) !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-#pb-prod-sec-sticky .pb-sticky-subtitle {
-  font-size: 12px;
-  color: var(--pb-muted);
-  font-weight: 550;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+#pb-prod-sec-sticky .pb-stk-subtitle {
+  font-size: 12px !important;
+  color: var(--pb-muted) !important;
+  font-weight: 550 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
-#pb-prod-sec-sticky .pb-sticky-atc-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 46px;
-  padding: 0 24px;
-  border: 0;
-  border-radius: 8px;
-  background: var(--pb-blue);
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 750;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  box-shadow: 0 4px 14px rgba(7, 87, 217, 0.25);
-  transition: background 200ms ease, transform 200ms ease;
+#pb-prod-sec-sticky .pb-stk-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  height: 46px !important;
+  min-height: 46px !important;
+  padding: 0 24px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: var(--pb-blue) !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 750 !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 4px 14px rgba(7, 87, 217, 0.25) !important;
+  transition: background 200ms ease, transform 200ms ease !important;
 }
 
-#pb-prod-sec-sticky .pb-sticky-atc-btn:hover {
-  background: var(--pb-navy);
-  transform: translateY(-1px);
+#pb-prod-sec-sticky .pb-stk-btn:hover {
+  background: var(--pb-navy) !important;
+  transform: translateY(-1px) !important;
 }
 
-#pb-prod-sec-sticky .pb-sticky-atc-btn svg {
-  width: 17px;
-  height: 17px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
+#pb-prod-sec-sticky .pb-stk-btn svg {
+  width: 17px !important;
+  height: 17px !important;
+  fill: none !important;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
 }
 
 @media (max-width: 768px) {
   #pb-prod-sec-sticky {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    transform: translateY(110%);
-    border-radius: 0;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    transform: translateY(110%) !important;
+    border-radius: 0 !important;
   }
   #pb-prod-sec-sticky.visible {
-    transform: translateY(0);
+    transform: translateY(0) !important;
   }
-  #pb-prod-sec-sticky .pb-sticky-card {
-    border-radius: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 0;
-    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  #pb-prod-sec-sticky .pb-stk-card {
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    border-bottom: 0 !important;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)) !important;
   }
-  #pb-prod-sec-sticky .pb-sticky-atc-btn {
-    padding: 0 16px;
-    font-size: 13px;
+  #pb-prod-sec-sticky .pb-stk-btn {
+    padding: 0 16px !important;
+    font-size: 13px !important;
   }
 }
 </style>
 
-<div id="pb-prod-sec-sticky" class="pb-prod-section pb-prod-sticky-wrap" aria-hidden="true">
-  <div class="pb-sticky-card">
-    <div class="pb-sticky-product-summary">
-      <img id="pb-sticky-thumb" class="pb-sticky-thumb" src="https://pillow-sepia.vercel.app/assets/variants/white.webp" alt="Juujo OrthoAlign Pillow" />
-      <div class="pb-sticky-meta">
-        <strong class="pb-sticky-title">OrthoAlign&trade; Pillow</strong>
-        <span id="pb-sticky-subtitle" class="pb-sticky-subtitle">2 pillows</span>
+<div id="pb-prod-sec-sticky" class="pb-prod-section pb-stk-wrap" aria-hidden="true">
+  <div class="pb-stk-card">
+    <div class="pb-stk-summary">
+      <img id="pb-sticky-thumb" class="pb-stk-thumb" src="https://e-assets.beeketing.net/10690/10690847/themes/17892693643c6457e34f.jpeg" alt="Ruuhu OrthoAlign Pillow" />
+      <div class="pb-stk-meta">
+        <strong class="pb-stk-title">OrthoAlign&trade; Pillow</strong>
+        <span id="pb-sticky-subtitle" class="pb-stk-subtitle">2 pillows</span>
       </div>
     </div>
-    <button type="button" class="pb-sticky-atc-btn" id="pb-sticky-atc-btn">
+    <button type="button" class="pb-stk-btn" id="pb-sticky-atc-btn">
       <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
       <span>Add to cart - <strong id="pb-sticky-btn-price">£88.99</strong></span>
     </button>
@@ -186,12 +191,7 @@
 
 <script>
 (function() {
-  var variantThumbnails = {
-    'white': 'https://pillow-sepia.vercel.app/assets/variants/white.webp',
-    'grey':  'https://pillow-sepia.vercel.app/assets/variants/grey.webp',
-    'blue':  'https://pillow-sepia.vercel.app/assets/variants/baby-blue.webp',
-    'navy':  'https://pillow-sepia.vercel.app/assets/variants/navy.webp'
-  };
+  var defaultStickyThumb = 'https://e-assets.beeketing.net/10690/10690847/themes/17892693643c6457e34f.jpeg';
 
   function initSticky() {
     var bar = document.getElementById('pb-prod-sec-sticky');
@@ -207,8 +207,8 @@
       var state = window.juujoProductState;
       if (!state) return;
 
-      if (thumb && variantThumbnails[state.selectedColour]) {
-        thumb.src = variantThumbnails[state.selectedColour];
+      if (thumb) {
+        thumb.src = defaultStickyThumb;
       }
 
       if (subtitle) {
@@ -254,64 +254,66 @@
     syncState();
 
     // Sticky Add to Cart Click
-    atcBtn.addEventListener('click', function() {
-      var heroBtn = document.getElementById('hero-add-to-cart');
-      if (heroBtn) {
-        heroBtn.click();
-        return;
-      }
+    if (atcBtn) {
+      atcBtn.addEventListener('click', function() {
+        var heroBtn = document.getElementById('hero-add-to-cart');
+        if (heroBtn) {
+          heroBtn.click();
+          return;
+        }
 
-      var state = window.juujoProductState;
-      if (!state) return;
+        var state = window.juujoProductState;
+        if (!state) return;
 
-      var activePillows = state.pillows.slice(0, state.selectedBundle);
-      var items = activePillows.map(function(p, i) {
-        var variantKey = p.colour + '_' + p.height;
-        var varId = state.variantIds[variantKey] || '1000020655426746';
-        return {
-          id: varId,
-          variant_id: varId,
-          quantity: 1,
-          properties: {
-            'Pillow Position': (i + 1) + ' of ' + state.selectedBundle,
-            'Colour': state.colourNames[p.colour] || p.colour,
-            'Height': p.height.toUpperCase(),
-            'Cooling Cover': state.includeCovers ? 'Yes' : 'No'
-          }
-        };
-      });
-
-      if (state.includeCovers) {
-        items.push({
-          id: state.variantIds['cooling_cover'],
-          variant_id: state.variantIds['cooling_cover'],
-          quantity: state.selectedBundle,
-          properties: { 'Bundle Match': state.selectedBundle + ' Pillows' }
+        var activePillows = state.pillows.slice(0, state.selectedBundle);
+        var items = activePillows.map(function(p, i) {
+          var variantKey = p.colour + '_' + p.height;
+          var varId = state.variantIds[variantKey] || '1000020655426746';
+          return {
+            id: varId,
+            variant_id: varId,
+            quantity: 1,
+            properties: {
+              'Pillow Position': (i + 1) + ' of ' + state.selectedBundle,
+              'Colour': state.colourNames[p.colour] || p.colour,
+              'Height': p.height.toUpperCase(),
+              'Cooling Cover': state.includeCovers ? 'Yes' : 'No'
+            }
+          };
         });
-      }
 
-      var discountCode = state.discounts[state.selectedBundle] || '';
-      var checkoutUrl = '/checkout' + (discountCode ? ('?discount=' + encodeURIComponent(discountCode)) : '');
+        if (state.includeCovers) {
+          items.push({
+            id: state.variantIds['cooling_cover'],
+            variant_id: state.variantIds['cooling_cover'],
+            quantity: state.selectedBundle,
+            properties: { 'Bundle Match': state.selectedBundle + ' Pillows' }
+          });
+        }
 
-      if (window.sbsdk && window.sbsdk.cart && typeof window.sbsdk.cart.add === 'function') {
-        window.sbsdk.cart.add({ items: items }).then(function() {
+        var discountCode = state.discounts[state.selectedBundle] || '';
+        var checkoutUrl = '/checkout' + (discountCode ? ('?discount=' + encodeURIComponent(discountCode)) : '');
+
+        if (window.sbsdk && window.sbsdk.cart && typeof window.sbsdk.cart.add === 'function') {
+          window.sbsdk.cart.add({ items: items }).then(function() {
+            window.location.href = checkoutUrl;
+          }).catch(function() {
+            window.location.href = checkoutUrl;
+          });
+          return;
+        }
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ items: items })
+        }).then(function() {
           window.location.href = checkoutUrl;
         }).catch(function() {
           window.location.href = checkoutUrl;
         });
-        return;
-      }
-
-      fetch('/cart/add.js', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify({ items: items })
-      }).then(function() {
-        window.location.href = checkoutUrl;
-      }).catch(function() {
-        window.location.href = checkoutUrl;
       });
-    });
+    }
   }
 
   if (document.readyState === 'loading') {
