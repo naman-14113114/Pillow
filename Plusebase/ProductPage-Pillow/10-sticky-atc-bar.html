@@ -368,6 +368,25 @@ body.pb-atc-in-progress .mini-cart {
         window.location.href = cartUrl;
       });
     }
+    // Reset Sticky ATC Button State (BFCache Restoration when user navigates back from /cart)
+    function resetStickyAtcState() {
+      document.body.classList.remove('pb-atc-in-progress');
+      if (atcBtn) {
+        atcBtn.classList.remove('is-loading');
+        var state = window.juujoProductState;
+        var totalStr = (state && typeof state.getTotalCents === 'function') ? state.formatMoney(state.getTotalCents()) : '£88.99';
+        atcBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><span>Add to cart - <strong id="pb-sticky-btn-price">' + totalStr + '</strong></span>';
+        priceEl = document.getElementById('pb-sticky-btn-price');
+      }
+    }
+
+    window.addEventListener('pageshow', resetStickyAtcState);
+    window.addEventListener('popstate', resetStickyAtcState);
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') resetStickyAtcState();
+    });
+    window.addEventListener('focus', resetStickyAtcState);
+
     // Ensure header cart clicks work normally and clear any in-progress state
     document.addEventListener('click', function(e) {
       if (!e.target.closest('#hero-add-to-cart') && !e.target.closest('#pb-sticky-atc-btn') && !e.target.closest('#pb-comb-sticky-atc-btn')) {

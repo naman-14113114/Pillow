@@ -2560,6 +2560,24 @@ body.pb-atc-in-progress .mini-cart {
         p = p.parentElement;
       }
     } catch (e) {}
+    // Reset ATC Button State (BFCache Restoration when user navigates back from /cart)
+    function resetAtcState() {
+      document.body.classList.remove('pb-atc-in-progress');
+      if (heroAtcBtn) {
+        heroAtcBtn.classList.remove('is-loading');
+        var total = state.formatMoney(state.getTotalCents());
+        heroAtcBtn.innerHTML = 'Add to cart - <span id="pb-hero-btn-price">' + total + '</span>';
+        heroBtnPrice = root.querySelector('#pb-hero-btn-price');
+      }
+    }
+
+    window.addEventListener('pageshow', resetAtcState);
+    window.addEventListener('popstate', resetAtcState);
+    document.addEventListener('visibilitychange', function() {
+      if (document.visibilityState === 'visible') resetAtcState();
+    });
+    window.addEventListener('focus', resetAtcState);
+
     // Ensure header cart clicks work normally and clear any in-progress state
     document.addEventListener('click', function(e) {
       if (!e.target.closest('#hero-add-to-cart') && !e.target.closest('#pb-sticky-atc-btn') && !e.target.closest('#pb-comb-sticky-atc-btn')) {
