@@ -1,6 +1,6 @@
 <!-- ==========================================================================
   PLUSBASE CUSTOM HTML SECTION: 10 - STICKY ADD TO CART BAR
-  Product: RestArch Pillow
+  Product: RestAlign Pillow
   Deployment: Copy & paste directly into a PlusBase Custom HTML section block.
 ========================================================================== -->
 
@@ -170,9 +170,9 @@
 <div id="pb-prod-sec-sticky" class="pb-prod-section pb-stk-wrap" aria-hidden="true">
   <div class="pb-stk-card">
     <div class="pb-stk-summary">
-      <img id="pb-sticky-thumb" class="pb-stk-thumb" src="https://e-assets.beeketing.net/10690/10690847/themes/17892693643c6457e34f.jpeg" alt="RestArch Pillow" />
+      <img id="pb-sticky-thumb" class="pb-stk-thumb" src="https://e-assets.beeketing.net/10690/10690847/themes/17892693643c6457e34f.jpeg" alt="RestAlign Pillow" />
       <div class="pb-stk-meta">
-        <strong class="pb-stk-title">RestArch Pillow</strong>
+        <strong class="pb-stk-title">RestAlign Pillow</strong>
         <span id="pb-sticky-subtitle" class="pb-stk-subtitle">2 pillows</span>
       </div>
     </div>
@@ -262,9 +262,11 @@
         var activePillows = state.pillows.slice(0, state.selectedBundle);
         var items = activePillows.map(function(p, i) {
           var variantKey = p.colour + '_' + p.height;
-          var varId = state.variantIds[variantKey] || '1000020655426746';
+          var varId = state.variantIds[variantKey] || '1000020747722825';
+          var prodId = (p.height === 'high') ? (state.productIds && state.productIds['high'] || '1000000676452167') : (state.productIds && state.productIds['regular'] || '1000000676452166');
           return {
             id: varId,
+            product_id: prodId,
             variant_id: varId,
             quantity: 1,
             properties: {
@@ -286,13 +288,13 @@
         }
 
         var discountCode = state.discounts[state.selectedBundle] || '';
-        var checkoutUrl = '/checkout' + (discountCode ? ('?discount=' + encodeURIComponent(discountCode)) : '');
+        var cartUrl = '/cart' + (discountCode ? ('?discount=' + encodeURIComponent(discountCode)) : '');
 
         if (window.sbsdk && window.sbsdk.cart && typeof window.sbsdk.cart.add === 'function') {
           window.sbsdk.cart.add({ items: items }).then(function() {
-            window.location.href = checkoutUrl;
+            window.location.href = cartUrl;
           }).catch(function() {
-            window.location.href = checkoutUrl;
+            window.location.href = cartUrl;
           });
           return;
         }
@@ -302,9 +304,9 @@
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({ items: items })
         }).then(function() {
-          window.location.href = checkoutUrl;
+          window.location.href = cartUrl;
         }).catch(function() {
-          window.location.href = checkoutUrl;
+          window.location.href = cartUrl;
         });
       });
     }
