@@ -339,14 +339,15 @@
 
 <script>
 (function() {
+  var SUPABASE_CDN_BASE = 'https://ekzlchsgeakwcnqgaglq.supabase.co/storage/v1/object/public/ruuhu_pillow_reviews/videos/pillow-reviews';
   var videoData = [];
   for (var i = 1; i <= 30; i++) {
     var num = (i < 10 ? '0' : '') + i;
     videoData.push({
       id: 'pillow-review-' + num,
-      poster: '/videos/pillow-reviews/posters/pillow-review-' + num + '-poster.jpg',
-      clip: '/videos/pillow-reviews/clips/pillow-review-' + num + '-clip.mp4',
-      full: '/videos/pillow-reviews/pillow-review-' + num + '.mp4'
+      poster: SUPABASE_CDN_BASE + '/posters/pillow-review-' + num + '-poster.jpg',
+      clip: SUPABASE_CDN_BASE + '/clips/pillow-review-' + num + '-clip.mp4',
+      full: SUPABASE_CDN_BASE + '/pillow-review-' + num + '.mp4'
     });
   }
 

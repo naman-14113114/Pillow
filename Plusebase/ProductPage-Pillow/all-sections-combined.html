@@ -3819,14 +3819,15 @@ body.pb-atc-in-progress .mini-cart {
 
       if (!vrTrack) return;
 
+      var SUPABASE_CDN_BASE = 'https://ekzlchsgeakwcnqgaglq.supabase.co/storage/v1/object/public/ruuhu_pillow_reviews/videos/pillow-reviews';
       var vrVideos = [];
       for (var vi = 1; vi <= 30; vi++) {
         var vnum = (vi < 10 ? '0' : '') + vi;
         vrVideos.push({
           id: 'pillow-review-' + vnum,
-          poster: '/videos/pillow-reviews/posters/pillow-review-' + vnum + '-poster.jpg',
-          clip: '/videos/pillow-reviews/clips/pillow-review-' + vnum + '-clip.mp4',
-          full: '/videos/pillow-reviews/pillow-review-' + vnum + '.mp4'
+          poster: SUPABASE_CDN_BASE + '/posters/pillow-review-' + vnum + '-poster.jpg',
+          clip: SUPABASE_CDN_BASE + '/clips/pillow-review-' + vnum + '-clip.mp4',
+          full: SUPABASE_CDN_BASE + '/pillow-review-' + vnum + '.mp4'
         });
       }
 
