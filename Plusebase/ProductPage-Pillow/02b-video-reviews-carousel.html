@@ -1,0 +1,472 @@
+<!-- ==========================================================================
+  PLUSBASE CUSTOM HTML SECTION: 02b - REAL CUSTOMER REVIEWS VIDEO CAROUSEL
+  Product: RestAlign Pillow
+  Deployment: Copy & paste directly into a PlusBase Custom HTML section block.
+========================================================================== -->
+
+<style>
+/* PlusBase Wrapper Normalization (Scoped Strictly to this Custom Section via :has) */
+.wb-section:has(#pb-prod-sec-video-reviews),
+.column-inner:has(#pb-prod-sec-video-reviews),
+.custom-code:has(#pb-prod-sec-video-reviews),
+.custom-code__content:has(#pb-prod-sec-video-reviews) {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#pb-prod-sec-video-reviews {
+  --pb-navy: #06173b;
+  --pb-ink: #10223f;
+  --pb-blue: #0757d9;
+  --pb-line: #cbd9e8;
+  --pb-paper: #ffffff;
+  --pb-bg: #f8fafd;
+  --pb-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  display: block !important;
+  width: 100% !important;
+  background: var(--pb-bg) !important;
+  padding: 60px 0 50px !important;
+  overflow: hidden !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  border-top: 1px solid var(--pb-line) !important;
+  border-bottom: 1px solid var(--pb-line) !important;
+}
+
+#pb-prod-sec-video-reviews,
+#pb-prod-sec-video-reviews *,
+#pb-prod-sec-video-reviews *::before,
+#pb-prod-sec-video-reviews *::after {
+  box-sizing: border-box !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-header {
+  text-align: center !important;
+  margin-bottom: 30px !important;
+  padding: 0 20px !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-eyebrow {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1.5px !important;
+  color: var(--pb-blue) !important;
+  text-transform: uppercase !important;
+  margin: 0 0 8px !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-title {
+  font-size: clamp(24px, 4vw, 34px) !important;
+  font-weight: 600 !important;
+  color: var(--pb-navy) !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-italic {
+  font-style: italic !important;
+  color: var(--pb-blue) !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-carousel-wrap {
+  position: relative !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  padding: 10px 0 20px !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-track {
+  display: flex !important;
+  width: max-content !important;
+  gap: 18px !important;
+  animation: pb-vr-scroll 85s linear infinite !important;
+  will-change: transform !important;
+}
+
+#pb-prod-sec-video-reviews:hover .pb-vr-track,
+#pb-prod-sec-video-reviews .pb-vr-track:hover {
+  animation-play-state: paused !important;
+}
+
+@keyframes pb-vr-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+#pb-prod-sec-video-reviews .pb-vr-card {
+  position: relative !important;
+  width: 195px !important;
+  aspect-ratio: 9 / 16 !important;
+  flex-shrink: 0 !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  background: var(--pb-navy) !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 20px rgba(6, 23, 59, 0.08) !important;
+  transition: transform 280ms var(--pb-ease), box-shadow 280ms var(--pb-ease) !important;
+  user-select: none !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-card:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 16px 36px rgba(6, 23, 59, 0.16) !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-card video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-scrim {
+  position: absolute !important;
+  inset: auto 0 0 0 !important;
+  height: 80px !important;
+  background: linear-gradient(to top, rgba(6, 23, 59, 0.6) 0%, transparent 100%) !important;
+  pointer-events: none !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-play-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  opacity: 0 !important;
+  transition: opacity 250ms ease !important;
+  pointer-events: none !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-card:hover .pb-vr-play-overlay {
+  opacity: 1 !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-play-btn {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: var(--pb-navy) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 6px 20px rgba(6, 23, 59, 0.2) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.6) !important;
+  transition: transform 250ms var(--pb-ease) !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-card:hover .pb-vr-play-btn {
+  transform: scale(1.12) !important;
+}
+
+#pb-prod-sec-video-reviews .pb-vr-play-btn svg {
+  width: 22px !important;
+  height: 22px !important;
+  margin-left: 2px !important;
+}
+
+/* Lightbox Modal with Frosted Whitish Blur Backdrop */
+#pb-vr-modal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999999 !important;
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  opacity: 0 !important;
+  transition: opacity 250ms ease !important;
+}
+
+#pb-vr-modal.is-open {
+  display: flex !important;
+  opacity: 1 !important;
+}
+
+#pb-vr-modal .pb-vr-modal-inner {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  max-width: 100% !important;
+  max-height: 92vh !important;
+  transform: scale(0.95) !important;
+  transition: transform 280ms var(--pb-ease) !important;
+}
+
+#pb-vr-modal.is-open .pb-vr-modal-inner {
+  transform: scale(1) !important;
+}
+
+#pb-vr-modal .pb-vr-player-box {
+  position: relative !important;
+  max-width: min(440px, 90vw) !important;
+  max-height: 85vh !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  background: #000000 !important;
+  box-shadow: 0 24px 60px rgba(6, 23, 59, 0.25), 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  border: 1px solid rgba(6, 23, 59, 0.08) !important;
+}
+
+#pb-vr-modal video {
+  width: 100% !important;
+  max-height: 85vh !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+#pb-vr-modal .pb-vr-modal-close {
+  position: absolute !important;
+  top: -48px !important;
+  right: 0 !important;
+  width: 38px !important;
+  height: 38px !important;
+  min-height: 38px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  color: var(--pb-navy) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid var(--pb-line) !important;
+  box-shadow: 0 4px 14px rgba(6, 23, 59, 0.12) !important;
+  cursor: pointer !important;
+  font-size: 24px !important;
+  line-height: 1 !important;
+  transition: transform 200ms ease, background 200ms ease !important;
+  z-index: 20 !important;
+}
+
+#pb-vr-modal .pb-vr-modal-close:hover {
+  background: #f0f4f8 !important;
+  transform: scale(1.08) !important;
+}
+
+#pb-vr-modal .pb-vr-modal-arrow {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 48px !important;
+  height: 48px !important;
+  min-height: 48px !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  color: var(--pb-navy) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 1px solid var(--pb-line) !important;
+  box-shadow: 0 6px 20px rgba(6, 23, 59, 0.14) !important;
+  cursor: pointer !important;
+  transition: transform 200ms var(--pb-ease), background 200ms ease !important;
+  z-index: 20 !important;
+}
+
+#pb-vr-modal .pb-vr-modal-arrow.is-prev { left: -68px !important; }
+#pb-vr-modal .pb-vr-modal-arrow.is-next { right: -68px !important; }
+
+#pb-vr-modal .pb-vr-modal-arrow:hover {
+  background: #f0f4f8 !important;
+  transform: translateY(-50%) scale(1.1) !important;
+}
+
+#pb-vr-modal .pb-vr-modal-arrow svg {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+@media (max-width: 768px) {
+  #pb-prod-sec-video-reviews {
+    padding: 44px 0 36px !important;
+  }
+  #pb-prod-sec-video-reviews .pb-vr-header {
+    margin-bottom: 22px !important;
+  }
+  #pb-prod-sec-video-reviews .pb-vr-card {
+    width: 155px !important;
+    border-radius: 14px !important;
+  }
+  #pb-vr-modal .pb-vr-modal-close {
+    top: 16px !important;
+    right: 16px !important;
+    position: fixed !important;
+  }
+  #pb-vr-modal .pb-vr-modal-arrow {
+    display: none !important;
+  }
+}
+</style>
+
+<div id="pb-prod-sec-video-reviews" class="pb-prod-section pb-prod-video-reviews" role="region" aria-label="Customer Video Reviews">
+  <div class="pb-vr-header">
+    <span class="pb-vr-eyebrow">REAL SLEEPERS</span>
+    <h2 class="pb-vr-title">Real customer <span class="pb-vr-italic">video reviews</span> & results</h2>
+  </div>
+
+  <div class="pb-vr-carousel-wrap">
+    <div class="pb-vr-track" id="pb-vr-track">
+      <!-- Generated 30 Video Cards will be populated and duplicated dynamically by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- Modal Popup with Frosted Whitish Blur Backdrop -->
+<div id="pb-vr-modal" role="dialog" aria-modal="true" aria-label="Customer Video Review Lightbox">
+  <div class="pb-vr-modal-inner" id="pb-vr-modal-inner">
+    <button type="button" class="pb-vr-modal-arrow is-prev" id="pb-vr-prev" aria-label="Previous video">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button type="button" class="pb-vr-modal-close" id="pb-vr-close" aria-label="Close video">&times;</button>
+    <div class="pb-vr-player-box">
+      <video id="pb-vr-modal-video" controls playsinline></video>
+    </div>
+    <button type="button" class="pb-vr-modal-arrow is-next" id="pb-vr-next" aria-label="Next video">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var videoData = [];
+  for (var i = 1; i <= 30; i++) {
+    var num = (i < 10 ? '0' : '') + i;
+    videoData.push({
+      id: 'pillow-review-' + num,
+      poster: '/videos/pillow-reviews/posters/pillow-review-' + num + '-poster.jpg',
+      clip: '/videos/pillow-reviews/clips/pillow-review-' + num + '-clip.mp4',
+      full: '/videos/pillow-reviews/pillow-review-' + num + '.mp4'
+    });
+  }
+
+  var track = document.getElementById('pb-vr-track');
+  var modal = document.getElementById('pb-vr-modal');
+  var modalVideo = document.getElementById('pb-vr-modal-video');
+  var modalInner = document.getElementById('pb-vr-modal-inner');
+  var closeBtn = document.getElementById('pb-vr-close');
+  var prevBtn = document.getElementById('pb-vr-prev');
+  var nextBtn = document.getElementById('pb-vr-next');
+
+  if (!track) return;
+
+  var currentIndex = 0;
+
+  function renderCards() {
+    var html = '';
+    // Duplicate 2x for seamless infinite marquee loop
+    var allItems = videoData.concat(videoData);
+    for (var j = 0; j < allItems.length; j++) {
+      var item = allItems[j];
+      var origIdx = j % videoData.length;
+      html += '<div class="pb-vr-card" data-video-index="' + origIdx + '" role="button" tabindex="0" aria-label="Customer review video ' + (origIdx + 1) + '">';
+      html += '<video src="' + item.clip + '" poster="' + item.poster + '" loop muted playsinline preload="auto"></video>';
+      html += '<div class="pb-vr-scrim"></div>';
+      html += '<div class="pb-vr-play-overlay"><div class="pb-vr-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd" /></svg></div></div>';
+      html += '</div>';
+    }
+    track.innerHTML = html;
+
+    var cards = track.querySelectorAll('.pb-vr-card');
+    cards.forEach(function(card) {
+      var v = card.querySelector('video');
+      card.addEventListener('mouseenter', function() {
+        if (v) { v.play().catch(function() {}); }
+      });
+      card.addEventListener('mouseleave', function() {
+        if (v) { v.pause(); }
+      });
+      card.addEventListener('click', function() {
+        var idx = parseInt(card.getAttribute('data-video-index'), 10);
+        openModal(idx);
+      });
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          var idx = parseInt(card.getAttribute('data-video-index'), 10);
+          openModal(idx);
+        }
+      });
+    });
+  }
+
+  function openModal(index) {
+    if (!modal || !modalVideo) return;
+    currentIndex = index;
+    var item = videoData[currentIndex];
+    modalVideo.src = item.full;
+    modalVideo.poster = item.poster;
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+    modalVideo.play().catch(function() {});
+  }
+
+  function closeModal() {
+    if (!modal || !modalVideo) return;
+    modal.classList.remove('is-open');
+    modalVideo.pause();
+    modalVideo.src = '';
+    document.body.style.overflow = '';
+  }
+
+  function prevVideo() {
+    currentIndex = (currentIndex > 0) ? currentIndex - 1 : videoData.length - 1;
+    openModal(currentIndex);
+  }
+
+  function nextVideo() {
+    currentIndex = (currentIndex < videoData.length - 1) ? currentIndex + 1 : 0;
+    openModal(currentIndex);
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (prevBtn) prevBtn.addEventListener('click', function(e) { e.stopPropagation(); prevVideo(); });
+  if (nextBtn) nextBtn.addEventListener('click', function(e) { e.stopPropagation(); nextVideo(); });
+
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  // Touch Swipe for Mobile
+  var touchStartX = null;
+  if (modal) {
+    modal.addEventListener('touchstart', function(e) {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    modal.addEventListener('touchend', function(e) {
+      if (touchStartX === null) return;
+      var touchEndX = e.changedTouches[0].clientX;
+      var diff = touchStartX - touchEndX;
+      if (diff > 50) {
+        nextVideo();
+      } else if (diff < -50) {
+        prevVideo();
+      }
+      touchStartX = null;
+    }, { passive: true });
+  }
+
+  // Keyboard Navigation
+  document.addEventListener('keydown', function(e) {
+    if (!modal || !modal.classList.contains('is-open')) return;
+    if (e.key === 'Escape') closeModal();
+    else if (e.key === 'ArrowLeft') prevVideo();
+    else if (e.key === 'ArrowRight') nextVideo();
+  });
+
+  renderCards();
+})();
+</script>

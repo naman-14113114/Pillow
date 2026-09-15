@@ -18,6 +18,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useCart, type PillowChoice } from "@/components/CartProvider";
 import { ReviewMedia } from "@/components/ReviewMedia";
+import { VideoReviews } from "@/components/VideoReviews";
 import {
   formatMoney,
   getBundle,
@@ -917,6 +918,8 @@ export function ProductPage() {
           <ProductQuote mobile />
         </div>
       </section>
+
+      <VideoReviews />
 
       <section
         className="press-marquee"
