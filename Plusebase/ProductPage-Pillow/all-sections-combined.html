@@ -1299,8 +1299,7 @@ body.pb-atc-in-progress .mini-cart {
   will-change: transform !important;
 }
 
-#pb-product-page-root:hover .pb-vr-track,
-#pb-product-page-root .pb-vr-track:hover {
+#pb-product-page-root .pb-vr-track:has(.pb-vr-card:hover) {
   animation-play-state: paused !important;
 }
 
@@ -3836,7 +3835,7 @@ body.pb-atc-in-progress .mini-cart {
         var vItem = allVrItems[vj];
         var origVj = vj % vrVideos.length;
         vrHtml += '<div class="pb-vr-card" data-vr-idx="' + origVj + '" role="button" tabindex="0" aria-label="Customer review video ' + (origVj + 1) + '">';
-        vrHtml += '<video src="' + vItem.clip + '" poster="' + vItem.poster + '" loop muted playsinline preload="auto"></video>';
+        vrHtml += '<video src="' + vItem.clip + '" poster="' + vItem.poster + '" autoplay loop muted playsinline webkit-playsinline preload="auto" disablepictureinpicture></video>';
         vrHtml += '<div class="pb-vr-scrim"></div>';
         vrHtml += '<div class="pb-vr-play-overlay"><div class="pb-vr-play-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd" /></svg></div></div>';
         vrHtml += '</div>';
@@ -3846,11 +3845,26 @@ body.pb-atc-in-progress .mini-cart {
       var vrCards = vrTrack.querySelectorAll('.pb-vr-card');
       vrCards.forEach(function(card) {
         var vEl = card.querySelector('video');
+        if (vEl) {
+          vEl.muted = true;
+          vEl.defaultMuted = true;
+          vEl.playsInline = true;
+          vEl.loop = true;
+          var playVid = function() {
+            if (vEl.paused) {
+              vEl.play().catch(function() {});
+            }
+          };
+          playVid();
+          vEl.addEventListener('canplay', playVid, { once: true });
+          vEl.addEventListener('loadeddata', playVid, { once: true });
+        }
         card.addEventListener('mouseenter', function() {
-          if (vEl) vEl.play().catch(function() {});
+          vrTrack.style.animationPlayState = 'paused';
+          if (vEl && vEl.paused) { vEl.play().catch(function() {}); }
         });
         card.addEventListener('mouseleave', function() {
-          if (vEl) vEl.pause();
+          vrTrack.style.animationPlayState = 'running';
         });
         card.addEventListener('click', function() {
           var idx = parseInt(card.getAttribute('data-vr-idx'), 10);
@@ -3864,6 +3878,20 @@ body.pb-atc-in-progress .mini-cart {
           }
         });
       });
+
+      // Autoplay fallback kickstarter on scroll, touchstart, click
+      function kickstartAutoplay() {
+        var allVideos = vrTrack.querySelectorAll('video');
+        allVideos.forEach(function(v) {
+          if (v.paused) {
+            v.muted = true;
+            v.play().catch(function() {});
+          }
+        });
+      }
+      window.addEventListener('scroll', kickstartAutoplay, { passive: true, once: true });
+      window.addEventListener('touchstart', kickstartAutoplay, { passive: true, once: true });
+      window.addEventListener('click', kickstartAutoplay, { once: true });
 
       function openVrModal(idx) {
         if (!vrModal || !vrModalVideo) return;

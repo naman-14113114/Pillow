@@ -7142,7 +7142,7 @@ header.store-site-header.store-site-header--cart > .wordmark {
   will-change: transform;
 }
 
-.pillow-vr-track:hover {
+.pillow-vr-track:has(.pillow-vr-card:hover) {
   animation-play-state: paused;
 }
 
