@@ -139,8 +139,7 @@ video {
   background: var(--sky);
 }
 
-.announcement:hover .announcement-track,
-.press-marquee:hover .press-track {
+.announcement:hover .announcement-track {
   animation-play-state: paused;
 }
 
